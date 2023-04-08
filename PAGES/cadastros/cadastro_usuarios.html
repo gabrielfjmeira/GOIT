@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GO🐐IT | A Social Adventure</title>
+</head>
+<body>
+    <form id="formCadastroUsuarios" name="formCadastroUsuarios" action="cadastroUsuariosPHP.php" method="post" onsubmit=" return formCadastroUsuariosOnSubmit();">
+        <h1>Cadastro de Usuários</h1>
+        
+    </form>
+    <script>
+        function formCadastroUsuariosOnSubmit(){
+                let txtEmail = document.getElementById('txtEmail');
+                let txtSenha = document.getElementById('txtSenha');
+
+                const reEmail = /^[a-z]\w*@\w{4}.*\.\w{2,4}$/;               
+              
+                if (txtEmail.value.length == 0){
+                    alert('Preencha o campo de Email!');
+                    txtEmail.focus();
+                    return false;
+                }
+                
+                if (!reEmail.test(txtEmail.value)) {
+                    alert('Digite um Email válido!');
+                    txtEmail.focus();
+                    return false;
+                }
+                
+                if (txtSenha.value.length == 0){
+                    alert('Preencha o campo de Senha!');
+                    txtSenha.focus();
+                    return false;
+                }
+
+                if (txtSenha.value.length < 7 || txtSenha.value.length > 20){
+                    alert('Senha deve possuir no mínimo 7 e no máximo 20 caracteres!');
+                    txtSenha.focus();
+                    return false;
+                }
+                
+                return true;
+            };
+    </script>
+</body>
+</html>
