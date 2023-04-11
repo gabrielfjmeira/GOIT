@@ -17,14 +17,14 @@
     <section class="header">
         <center>                        
             <h1>GO🐐IT | A Social Adventure</h1>
-            <button onclick="window.location.href = '../../index.html'">
+            <button onclick="window.location.href = '../../index.php'">
                 Voltar ⬅
             </button>            
         </center>
     </section>
 
     <section>
-        <form id="formCadastroUsuarios" name="formCadastroUsuarios" action="cadastro_usuarioPHP.php" method="post">
+        <form id="formCadastroUsuarios" name="formCadastroUsuarios" action="redirecionar_usuarioPHP.php" method="post">
             <center>
                 <h1>Cadastro</h1>
                 <label>Selecione o seu tipo de usuário:</label>
@@ -33,9 +33,10 @@
                     <?php                
                         while($tipoUsuario = mysqli_fetch_array($resultTipoUsuarios)){
                             $tipusu_Codigo = $tipoUsuario['TIPUSU_Codigo'];
-                            $tipusu_Descricao = $tipoUsuario['TIPUSU_Descricao'];  
+                            $tipusu_Descricao = $tipoUsuario['TIPUSU_Descricao'];
+                            $tipusu_Administrador = $tipoUsuario['TIPUSU_Administrador'];  
 
-                            if ($tipusu_Descricao != "Administrador"){
+                            if ($tipusu_Administrador != 1){
                                 echo "<option value='".$tipusu_Codigo."'>". $tipusu_Descricao."</option>";                                       
                             }                                                                          
                         }
