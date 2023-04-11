@@ -75,18 +75,38 @@
             </center>
         </form>
 
+        <!--Script-->
         <script>
-            //Verificações do formulário
-            function formCadastroPraticanteOnSubmit(){         
-                var dataNascimento = document.getElementById('dataNascimento');
-                var dtDOB = new Date(dataNascimento);
-                var dtCurrent = new Date();                
-                var txtEmail = document.getElementById('txtEmail');
-                var txtSenha = document.getElementById('txtSenha');
-                var txtSenhaConfirmada = document.getElementById('txtSenhaConfirmada');
+            //Validação do Cadastro do Praticante
+            function formCadastroPraticanteOnSubmit(){   
+                let txtNome = document.getElementById('txtNome');
+                let txtApelido = document.getElementById('txtApelido');
+                let dataNascimento = document.getElementById('dataNascimento');
+                let dtDOB = new Date(dataNascimento);
+                let dtCurrent = new Date();                
+                let txtEmail = document.getElementById('txtEmail');
+                let txtSenha = document.getElementById('txtSenha');
+                let txtSenhaConfirmada = document.getElementById('txtSenhaConfirmada');
 
-                const reEmail = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/;          
-                                                   
+                let reEmail = /^[a-z.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/; 
+                let reSenha= /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/;         
+                        
+                if(txtNome < 8 || txtNome > 100){
+                    txtNome.setCustomValidity("Nome deve possuir no mínimo 8 e no máximo 100 caracteres");
+                    txtNome.reportValidity();
+                    return false;
+                }else{
+                    txtNome.setCustomValidity("");
+                }
+
+                if(txtApelido < 8 || txtNome > 30){
+                    txtApelido.setCustomValidity("Apelido deve possuir no mínimo 8 e no máximo 100 caracteres");
+                    txtApelido.reportValidity();
+                    return false;
+                }else{
+                    txtApelido.setCustomValidity("");
+                }
+
                 if (dtDOB - dtCurrent < 0){                    
                     dataNascimento.setCustomValidity("Data de Nascimento inválida!");
                     dataNascimento.reportValidity();
@@ -101,13 +121,21 @@
                     return false;
                 }else{
                     txtEmail.setCustomValidity("");
-                }     
+                }         
                 
-                if (txtSenha.value.length < 7 || txtSenha.value.length > 20){
-                    alert('Senha deve possuir no mínimo 7 e no máximo 20 caracteres!');
-                    txtSenha.focus();
+                if (txtSenha.value.length < 8 || txtSenha.value.length > 20){   
+                    txtSenha.setCustomValidity("Senha deve possuir no mínimo 8 e no máximo 20 caracteres!");
+                    txtSenha.reportValidity();        
                     return false;
-                } 
+                }else{
+                    if (!reSenha.test(txtSenha.value)) {
+                        txtSenha.setCustomValidity("Sua senha deve possuir no mínimo: 1 símbolo, 1 letra maísucula, 1 letra minúscula e 1 dígito.");
+                        txtSenha.reportValidity();
+                        return false;
+                    }else{
+                        txtSenha.setCustomValidity("");
+                    }
+                }
                 
                 if (txtSenha.value != txtSenhaConfirmada.value) {
                     txtSenhaConfirmada.setCustomValidity("Senhas diferentes!");
@@ -120,21 +148,8 @@
                 return true;
             }
 
-            //Função de Mostrar/Ocultar Senha
-            function mostrarSenha(){
-                var txtSenha = document.getElementById('txtSenha');
-                var txtSenhaConfirmada = document.getElementById('txtSenhaConfirmada');
-                
-                if (txtSenha.type == "password"){
-                    txtSenha.type = "text";
-                    txtSenhaConfirmada.type = "text";
-                } else {
-                    txtSenha.type = "password";
-                    txtSenhaConfirmada.type = "password";
-                }              
-            }
-            
         </script>
+        
     </section>
 </body>
 </html>

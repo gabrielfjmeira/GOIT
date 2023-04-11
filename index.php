@@ -60,28 +60,8 @@
         ?>
     </section>
 
-    <script>
-        //Validação do Formulário
-        function formLoginOnSubmit(){
-                var txtEmail = document.getElementById('txtEmail');
-                var txtSenha = document.getElementById('txtSenha');
-
-                const reEmail = /^[a-z]\w*@\w{4}.*\.\w{2,4}$/;             
-                                              
-                if (!reEmail.test(txtEmail.value)) {
-                    alert('Digite um Email válido!');
-                    txtEmail.focus();
-                    return false;
-                }            
-                
-                if (txtSenha.value.length < 7 || txtSenha.value.length > 20){
-                    alert('Senha deve possuir no mínimo 7 e no máximo 20 caracteres!');
-                    txtSenha.focus();
-                    return false;
-                }                
-                
-                return true;
-            };
-    </script>
+    <!--Script-->
+    <script type="text/javascript" src="./JAVASCRIPT/functions.js"></script>
+   
 </body>
 </html>
