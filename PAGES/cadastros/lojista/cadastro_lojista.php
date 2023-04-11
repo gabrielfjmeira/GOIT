@@ -36,7 +36,7 @@
                 <input type="text" id="txtRazaoSocial" name="txtRazaoSocial" placeholder="Razão Social" class="input" required/><br><br>
                 
                 <label>Fantasia: </label>
-                <input type="text" id="txtFantasia" name="txtFantasia" placeholder="Fantasia" class="input" required/>
+                <input type="text" id="txtFantasia" name="txtFantasia" placeholder="Fantasia" class="input" required/><br><br>
                 
                 <label>CNPJ: </label>
                 <input type="text" id="CNPJ" name="CNPJ" placeholder="CNPJ" onkeypress="MascaraParaCNPJ(this);" class="input" required/><br><br>                

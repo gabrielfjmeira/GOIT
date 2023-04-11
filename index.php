@@ -42,7 +42,7 @@
                 <p> Não tem cadastro? <a href="./PAGES/cadastros/selecao_tipoUsuario.php">Cadastre-se</a></p> 
                 <?php
                     if (isset($_GET['cadastrado'])){
-                        $cadastrado = $_GET['cadastrado'];
+                        $cadastrado = $_GET['cadastrado'];                        
                         if ($cadastrado == 1){                    
                             echo "<h4 class='advice'>Cadastro realizado com sucesso!</h4>";
                         }else{
@@ -50,10 +50,12 @@
                         }
                     } else if (isset($_GET['error'])){
                         $error = $_GET['error'];
-                        if ($error == 1){
+                        if ($error == 001){
                             echo "<h4 class='error'>Email não cadastrado!</h4>";
-                        }else if($error == 2) {
+                        }else if($error == 002) {
                             echo "<h4 class='error'>Senha incorreta!</h4>";
+                        }else if($error == 003) {
+                            echo "<h4 class='error'>Cadastro em análise</h4>";
                         }else{
                             echo "<h4 class='error'></h4>";
                         }

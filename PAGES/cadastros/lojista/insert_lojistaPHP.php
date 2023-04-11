@@ -21,10 +21,10 @@
     $usuario = $querySelectUsuario->fetch_assoc();
     $codigoUsuario = $usuario['TABUSU_Codigo'];
 
-    $insertLojista = "INSERT INTO TABLOJ (TABUSU_Codigo, TABLOJ_RazaoSocial, TABLOJ_Fantasia, TABLOJ_CNPJ, TABLOJ_Verificado) VALUES ($codigoUsuario, '$razaoSocial', '$fantasia', '$cnpj', 0)";
+    $insertLojista = "INSERT INTO TABLOJ (TABUSU_Codigo, TABLOJ_RazaoSocial, TABLOJ_Fantasia, TABLOJ_CNPJ, TABLOJ_Verificado) VALUES ($codigoUsuario, '$razaoSocial', '$fantasia', $cnpj, 0)";
     $queryInsertLojista = $mysqli->query($insertLojista) or die("Falha na execução do código sql" . $mysqli->error);
     
     //Redireciona para o login
-    header("Location: ../../../index.php?cadastrado=1");    
+    header("Location: ../../../index.php?cadastrado=001");    
 
 ?>
