@@ -1,7 +1,8 @@
 <?php
-
+    //Incluí Conexão
     include('../../CONNECTIONS/connection.php');
 
+    //Rediriciona o Usuário para sua Página de Cadastro
     if(!isset($_POST['tipusu_Codigo'])){
         $tipo_usuario    = $_POST['tipoUsuario'];        
 

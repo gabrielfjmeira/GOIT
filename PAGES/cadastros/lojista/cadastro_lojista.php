@@ -28,35 +28,18 @@
 
     <!--Formulário-->
     <section class="form">
-        <form id="formCadastroPraticante" name="formCadastroPraticante" action="insert_praticantePHP.php" method="POST" onsubmit="return formCadastroPraticanteOnSubmit();">
+        <form id="formCadastroLojista" name="formCadastroLojista" action="insert_lojistaPHP.php" method="POST" onsubmit="return formCadastroLojistaOnSubmit();">
             <center>
-                <h1>Cadastro de Praticante</h1>
+                <h1>Cadastro de Lojista</h1>
                 
-                <label>Nome: </label>
-                <input type="text" id="txtNome" name="txtNome" placeholder="Nome" class="input" required/><br><br>
+                <label>Razão Social: </label>
+                <input type="text" id="txtRazaoSocial" name="txtRazaoSocial" placeholder="Razão Social" class="input" required/><br><br>
                 
-                <label>Apelido: </label>
-                <input type="text" id="txtApelido" name="txtApelido" placeholder="Apelido" class="input" required/>
-                <?php
-
-                    $error = $_GET['error'];
-
-                    if ($error == 001){
-                        echo "<p class='error'>Apelido já está sendo utilizado.</p><br>"; 
-                    }else{
-                        echo "<p class='error'></p><br>";
-                    }                
-                ?>
-                <label>Data de Nascimento: </label>
-                <input type="date" id="dataNascimento" name="dataNascimento" placeholder="Data de Nascimento" class="input" required/><br><br>
-
-                <label>Sexo:</label>
-                <input type="radio" id="sexo_m" name="sexo" value="0" required>
-                <label>Masculino</label>
-                <input type="radio" id="sexo_f" name="sexo" value="1" required>
-                <label>Feminino</label>
-                <input type="radio" id="sexo_o" name="sexo" value="2" required>
-                <label>Outro</label><br><br>
+                <label>Fantasia: </label>
+                <input type="text" id="txtFantasia" name="txtFantasia" placeholder="Fantasia" class="input" required/>
+                
+                <label>CNPJ: </label>
+                <input type="number" id="CNPJ" name="CNPJ" placeholder="CNPJ" onkeypress="MascaraParaCNPJ(this);" class="input" required/><br><br>                
 
                 <label>Email: </label>
                 <input type="text" id="txtEmail" name="txtEmail" placeholder="Email" class="input" required/><br><br>
@@ -66,9 +49,11 @@
 
                 <label>Confirme sua Senha: </label>
                 <input type="password" id="txtSenhaConfirmada" name="txtSenhaConfirmada" placeholder="Confirme sua Senha" class="input" required/><br><br>
-
-                <label>Mostrar senha</label>
-                <input type="checkbox" onclick="mostrarSenha();"><br><br>
+                
+                <p>
+                    <label>Mostrar senha</label>
+                    <input type="checkbox" onclick="mostrarSenha();"><br>
+                </p>                
 
                 <button type="submit"> Cadastrar </button>
                 <p> Já possuí Login? <a href="../../index.html">Realizar Login</a></p> 
@@ -77,37 +62,29 @@
 
         <script>
             //Verificações do formulário
-            function formCadastroPraticanteOnSubmit(){         
-                var dataNascimento = document.getElementById('dataNascimento');
-                var dtDOB = new Date(dataNascimento);
-                var dtCurrent = new Date();                
+            function formCadastroPraticanteOnSubmit(){
+                       
                 var txtEmail = document.getElementById('txtEmail');
                 var txtSenha = document.getElementById('txtSenha');
                 var txtSenhaConfirmada = document.getElementById('txtSenhaConfirmada');
 
-                const reEmail = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/;          
-                                                   
-                if (dtDOB - dtCurrent < 0){                    
-                    dataNascimento.setCustomValidity("Data de Nascimento inválida!");
-                    dataNascimento.reportValidity();
-                    return false;
-                }else{
-                    dataNascimento.setCustomValidity("");
-                }
-
+                const reEmail = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/;        
+                                                 
                 if (!reEmail.test(txtEmail.value)) {
                     txtEmail.setCustomValidity("Digite um E-Mail válido!");
                     txtEmail.reportValidity();
                     return false;
                 }else{
                     txtEmail.setCustomValidity("");
-                }     
+                }                       
                 
-                if (txtSenha.value.length < 7 || txtSenha.value.length > 20){
-                    alert('Senha deve possuir no mínimo 7 e no máximo 20 caracteres!');
-                    txtSenha.focus();
+                if (txtSenha.value.length < 7 || txtSenha.value.length > 20){                    
+                    txtSenha.setCustomValidity("Senha deve possuir no mínimo 7 e no máximo 20 caracteres!");
+                    txtSenha.reportValidity();
                     return false;
-                } 
+                }else{
+                    txtSenha.setCustomValidity("");
+                }
                 
                 if (txtSenha.value != txtSenhaConfirmada.value) {
                     txtSenhaConfirmada.setCustomValidity("Senhas diferentes!");
@@ -132,6 +109,24 @@
                     txtSenha.type = "password";
                     txtSenhaConfirmada.type = "password";
                 }              
+            }
+            
+            function MascaraParaCNPJ(valorDoTextBox) {
+                if (valorDoTextBox.length <= 14) {  
+
+                    //Coloca ponto entre o segundo e o terceiro dígitos
+                    valorDoTextBox = valorDoTextBox.replace(/^(\d{2})(\d)/, "$1.$2")
+
+                    //Coloca ponto entre o quinto e o sexto dígitos
+                    valorDoTextBox = valorDoTextBox.replace(/^(\d{2})\.(\d{3})(\d)/, "$1 $2 $3")
+
+                    //Coloca uma barra entre o oitavo e o nono dígitos
+                    valorDoTextBox = valorDoTextBox.replace(/\.(\d{3})(\d)/, ".$1/$2")
+
+                    //Coloca um hífen depois do bloco de quatro dígitos
+                    valorDoTextBox = valorDoTextBox.replace(/(\d{4})(\d)/, "$1-$2") 
+                } 
+                return valorDoTextBox
             }
             
         </script>

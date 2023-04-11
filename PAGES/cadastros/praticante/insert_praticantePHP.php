@@ -1,10 +1,11 @@
 <?php
-
+    //Incluí Conexão
     include('../../../CONNECTIONS/connection.php');
 
-    
+    //Define variável de Apelido
     $apelido = $_POST['txtApelido'];
     
+    //Verifica se o Apelido ja Está Cadastrado
     $apelidoPraticante = "SELECT * FROM TABPRA WHERE TABPRA_Apelido = '$apelido'";
     $apelidoPraticanteResultado = $mysqli->query($apelidoPraticante) or die("Falha na execução do código sql" . $mysqli->error);
     $qtdPraticanteResultado = $apelidoPraticanteResultado->num_rows;
