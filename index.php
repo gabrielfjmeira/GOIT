@@ -28,40 +28,46 @@
     <section class="form">
         <form id="formLogin" name="formLogin" action="./PAGES/login/loginPHP.php" method="POST" onsubmit="return formLoginOnSubmit();">
             <center>
-                <h1>Login</h1>
-                <input type="text"     name="txtEmail" id="txtEmail" placeholder="Email" class = "input" required/>
-                <input type="password" name="txtSenha" id="txtSenha" placeholder="Senha" class = "input" required/>
+                <h1>Login</h1>                
+                <label>E-Mail: </label>
+                <input type="text"     name="txtEmail" id="txtEmail" placeholder="E-Mail" class = "input" required/><br><br>
+                <label>Senha: </label>
+                <input type="password" name="txtSenha" id="txtSenha" placeholder="Senha" class = "input" required/><br><br>
+                <p>
+                    <label>Mostrar senha</label>                
+                    <input type="checkbox" onclick="mostrarSenhaLogin();"><br><br>
+                </p>
+                
                 <button type="submit"> Entrar </button>
                 <p> Não tem cadastro? <a href="./PAGES/cadastros/selecao_tipoUsuario.php">Cadastre-se</a></p> 
+                <?php
+                    if (isset($_GET['cadastrado'])){
+                        $cadastrado = $_GET['cadastrado'];
+                        if ($cadastrado == 1){                    
+                            echo "<h4 class='advice'>Cadastro realizado com sucesso!</h4>";
+                        }else{
+                            echo "<h4 class='advice'></h4>";
+                        }
+                    } else if (isset($_GET['error'])){
+                        $error = $_GET['error'];
+                        if ($error == 1){
+                            echo "<h4 class='error'>Email não cadastrado!</h4>";
+                        }else if($error == 2) {
+                            echo "<h4 class='error'>Senha incorreta!</h4>";
+                        }else{
+                            echo "<h4 class='error'></h4>";
+                        }
+                    }        
+                ?>
             </center>
         </form>
-    </section> 
+    </section>     
     
-    <!--Impressão de Erros Recebidos via GET-->
-    <section>
-        <?php
-            if (isset($_GET['cadastrado'])){
-                $cadastrado = $_GET['cadastrado'];
-                if ($cadastrado == 1){
-                    echo "<h4 class='advice'>Cadastro realizado com sucesso!</h4>";
-                }else{
-                    echo "<h4 class='advice'></h4>";
-                }
-            } else if (isset($_GET['error'])){
-                $error = $_GET['error'];
-                if ($error == 1){
-                    echo "<h4 class='error'>Email não cadastrado!</h4>";
-                }else if($error == 2) {
-                    echo "<h4 class='error'>Senha incorreta!</h4>";
-                }else{
-                    echo "<h4 class='error'></h4>";
-                }
-            }        
-        ?>
-    </section>
-
     <!--Script-->
-    <script type="text/javascript" src="./JAVASCRIPT/functions.js"></script>
+    <script type="text/javascript" src="JAVASCRIPT\functions.js"></script>
+    <script>
+        
+    </script>
    
 </body>
 </html>
