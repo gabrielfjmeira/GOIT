@@ -1,6 +1,8 @@
 <?php
+    //Incluí a Conexão
     include('../../CONNECTIONS/connection.php');  
    
+    //Verifica o Login
     if(isset($_POST['txtEmail']) || isset($_POST['txtSenha'])){
         
         $email = $mysqli->real_escape_string($_POST['txtEmail']);
@@ -36,7 +38,7 @@
                         $_SESSION['TIPO']   =  $tipoUsuario;
                         unset($_SESSION ['nao_autenticado']);
                         
-                        header("Location: ../home/home.html");
+                        header("Location: ../home/home.php");
                     } else{
                         header("Location: ../../index.php?error=003");
                         $_SESSION ['nao_autenticado'] = true;
@@ -60,7 +62,7 @@
                         $_SESSION['TIPO']   = $tipoUsuario;
                         unset($_SESSION ['nao_autenticado']);
                         
-                        header("Location: ../home/home.html");
+                        header("Location: ../home/home.php");
                     } else{
                         header("Location: ../../index.php?error=003");
                         $_SESSION ['nao_autenticado'] = true;
@@ -72,7 +74,7 @@
                     $_SESSION['TIPO']   = $tipoUsuario;
                     unset($_SESSION ['nao_autenticado']);
                     
-                    header("Location: ../home/home.html");
+                    header("Location: ../home/home.php");
                 }
                 
             }else{

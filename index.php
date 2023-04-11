@@ -66,10 +66,7 @@
     </section>     
     
     <!--Script-->
-    <script type="text/javascript" src="JAVASCRIPT\functions.js"></script>
-    <script>
-        
-    </script>
+    <script type="text/javascript" src="JAVASCRIPT\functions.js"></script>    
    
 </body>
 </html>

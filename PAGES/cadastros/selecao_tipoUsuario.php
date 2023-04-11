@@ -1,19 +1,24 @@
 <?php
+    //Incluí a Conexão
     include('../../CONNECTIONS/connection.php');
     
+    //Carrega os Registros dos Tipos de Usuários
     $sqlTipoUsuarios = "SELECT * FROM TIPUSU";
     $resultTipoUsuarios = $mysqli->query($sqlTipoUsuarios) or die(mysql_error());
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <!--Configurações-->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Título da Página-->
     <title>GO🐐IT | A Social Adventure</title>
 </head>
 <body>
-
+    <!--Cabeçalho-->
     <section class="header">
         <center>                        
             <h1>GO🐐IT | A Social Adventure</h1>
@@ -23,6 +28,7 @@
         </center>
     </section>
 
+    <!--Seleção do Tipo de Usuário-->
     <section>
         <form id="formCadastroUsuarios" name="formCadastroUsuarios" action="redirecionar_usuarioPHP.php" method="post">
             <center>
