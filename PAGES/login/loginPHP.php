@@ -53,11 +53,8 @@
 
                     $verificado = $lojista['TABLOJ_Verificado'];
 
-                    if($verificado == 1){
-                        if(!isset($_SESSION)){
-                            session_start();
-                        }
-        
+                    if($verificado == 1){                       
+                        
                         $_SESSION['CODIGO'] = $codigoUsuario;            
                         $_SESSION['TIPO']   = $tipoUsuario;
                         unset($_SESSION ['nao_autenticado']);
@@ -69,7 +66,7 @@
                     }
 
                 } else{ //Redireciona demais usuários
-
+                    
                     $_SESSION['CODIGO'] = $codigoUsuario;            
                     $_SESSION['TIPO']   = $tipoUsuario;
                     unset($_SESSION ['nao_autenticado']);
