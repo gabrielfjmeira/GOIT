@@ -1,6 +1,8 @@
 <?php
     //Incluí conexão
-    include('./CONNECTIONS/connection.php');        
+    include('./CONNECTIONS/connection.php');     
+    
+    session_start();
 ?>
 
 <!DOCTYPE html>
@@ -65,6 +67,8 @@
                         echo "<h4 class='error'>Senha incorreta!</h4>";
                     }else if($error == 003) {
                         echo "<h4 class='error'>Cadastro em análise</h4>";
+                    }else if(){
+                        echo "<h4 class='error'>Realize o login para acessar a plataforma</h4>";
                     }else{
                         echo "<h4 class='error'></h4>";
                     }

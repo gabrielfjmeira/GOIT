@@ -1,3 +1,13 @@
+<?php
+
+    include('../../CONNECTIONS/connection.php');
+
+    if (!$_SESSION['LOGGED']){
+        header ("Location: ../../index.php?error=4");
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
