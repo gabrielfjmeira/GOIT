@@ -1,13 +1,3 @@
-<?php
-    //Incluí a conexão
-    include('./CONNECTIONS/connection.php');
-
-    //Verifica se o usuário está logado
-    if(!isset($_SESSION['CODIGO'])){
-        header("Location: ../../CONNECTIONS/logout.php");
-    }
-?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>

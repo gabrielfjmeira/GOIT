@@ -1,0 +1,75 @@
+:root {
+    --brown: #211211;
+    --white: #FFFFFF;
+    --light-gray: #898989;
+    --blue: #0066FF;
+}
+
+body {
+    background: var(--brown);
+    width: 100vw;
+    padding: 1.6rem 3.2rem;
+}
+
+a {
+    color: var(--blue);
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .8rem;
+
+    color: var(--white);
+}
+
+.logo {
+    width: 8rem;
+}
+
+.form {
+    color: var(--light-gray);
+    margin-top: 5.6rem;
+}
+
+#formLogin {
+    display: grid;
+    gap: 3.2rem;
+}
+
+.input-wrapper {
+    display: grid;
+    gap: .4rem;
+
+}
+
+input {
+    background: transparent;
+    border: 1px solid var(--white);
+    border-radius: .8rem;
+
+    width: 100%;
+    padding: 1.6rem 1.2rem ;
+}
+
+#forget-password{
+    color: var(--white);
+    margin-top: .8rem;
+}
+
+button {
+    font-weight: 700;
+    font-size: 2rem;
+    line-height: 2rem;
+    color: var(--brown);
+    height: 4.8rem;
+    border-radius: 1rem;
+}
+
+.wrapper-cadastrar {
+    display: grid;
+    gap: .8rem;
+    text-align: center;
+}

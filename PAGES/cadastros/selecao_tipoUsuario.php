@@ -1,11 +1,10 @@
 <?php
-    //Incluí a Conexão
     include('../../CONNECTIONS/connection.php');
     
-    //Carrega os Registros dos Tipos de Usuários
     $sqlTipoUsuarios = "SELECT * FROM TIPUSU";
     $resultTipoUsuarios = $mysqli->query($sqlTipoUsuarios) or die(mysql_error());
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>

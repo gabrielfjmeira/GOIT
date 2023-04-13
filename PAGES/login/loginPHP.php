@@ -1,5 +1,4 @@
 <?php
-    //Incluí a Conexão
     include('../../CONNECTIONS/connection.php');  
    
     //Verifica o Login
@@ -11,6 +10,7 @@
         $login = "SELECT * FROM TABUSU WHERE TABUSU_Email = '$email'";
         $existeLogin = $mysqli->query($login) or die("Falha na execução do código sql" . $mysqli->error);
         
+        //Verifica se o registro existe no banco
         if($existeLogin->num_rows == 1){
             
             $usuario = $existeLogin->fetch_assoc();
