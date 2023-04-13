@@ -35,7 +35,7 @@
                     if($verificado == 1){                      
                                               
                         $_SESSION['CODIGO'] =  $codigoUsuario;            
-                        $_SESSION['TIPO']   =  $tipoUsuario;
+                        $_SESSION['TIPOUSUARIO']  = $tipoUsuario;
                         $_SESSION ['LOGGED'] = True;
                         
                         header("Location: ../home/home.php");
@@ -55,7 +55,7 @@
                     if($verificado == 1){                       
                         
                         $_SESSION['CODIGO'] = $codigoUsuario;            
-                        $_SESSION['TIPO']   = $tipoUsuario;
+                        $_SESSION['TIPOUSUARIO']  = $tipoUsuario;
                         $_SESSION ['LOGGED'] = True;
                         
                         header("Location: ../home/home.php");
@@ -66,7 +66,7 @@
                 } else{ //Redireciona demais usuários
                     
                     $_SESSION['CODIGO'] = $codigoUsuario;            
-                    $_SESSION['TIPO']   = $tipoUsuario;
+                    $_SESSION['TIPOUSUARIO']  = $tipoUsuario;
                     $_SESSION ['LOGGED'] = True;
                     
                     header("Location: ../home/home.php");

@@ -1,7 +1,8 @@
 <?php
-
+    //Incluí Conexão
     include('../../CONNECTIONS/connection.php');
 
+    //Verifica Login
     if (!$_SESSION['LOGGED']){
         header ("Location: ../../index.php?error=4");
     }
@@ -22,8 +23,14 @@
 <body>
     <!--Conteúdo-->    
     <h1>HOME</h1>
-    <button onclick="window.location.href = '../../CONNECTIONS/logout.php';">
-        LogOut ❌
-    </button>
+    <?php
+        if ($_SESSION['TIPOUSUARIO'] == 1){
+            include('../templates/headers/header_adm.html');
+        } else{
+            include('../templates/headers/header_users.html');
+        }       
+
+    ?>
+    
 </body>
 </html>
