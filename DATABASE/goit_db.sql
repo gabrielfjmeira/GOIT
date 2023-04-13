@@ -110,3 +110,9 @@ CREATE TABLE PARATV(
   	FOREIGN KEY(TABATV_Codigo) REFERENCES TABATV(TABATV_Codigo),
     FOREIGN KEY(TABUSU_Codigo) REFERENCES TABUSU(TABUSU_Codigo)
 );
+
+/*Inserção de Tipos de Usuários*/
+INSERT INTO TIPUSU (TIPUSU_Codigo, TIPUSU_Descricao, TIPUSU_Administrador) VALUES (NULL, 'Administrador', 1);
+INSERT INTO TIPUSU (TIPUSU_Codigo, TIPUSU_Descricao, TIPUSU_Administrador) VALUES (NULL, 'Praticante', 0);
+INSERT INTO TIPUSU (TIPUSU_Codigo, TIPUSU_Descricao, TIPUSU_Administrador) VALUES (NULL, 'Instrutor', 0);
+INSERT INTO TIPUSU (TIPUSU_Codigo, TIPUSU_Descricao, TIPUSU_Administrador) VALUES (NULL, 'Lojista', 0);
