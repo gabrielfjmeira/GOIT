@@ -9,6 +9,10 @@
 }
 
 :root {
+    --brown: #211211;
+    --white: #FFFFFF;
+    --light-gray: #898989;
+    --blue: #0066FF;
     font-size: 62.5%;
     font-family: 'Rubik' , sans-serif;
 }

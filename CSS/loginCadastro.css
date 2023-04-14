@@ -1,0 +1,63 @@
+body {
+    background: var(--brown);
+    width: 100vw;
+    padding: 1.6rem 3.2rem;
+}
+
+#buttonBack {
+    background: transparent;
+    border: none;
+}
+
+#headerCadastro {
+    margin-top: -4rem;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .8rem;
+
+    color: var(--white);
+}
+
+.form {
+    color: var(--light-gray);
+    margin-top: 5.6rem;
+}
+
+#formCadastroUsuarios {
+    display: grid;
+    gap: 8.8rem;
+}
+
+
+
+.input-wrapper select {
+    padding: 1.6rem .8rem;
+    border-radius: .8rem;
+    appearance: none;
+    -webkit-appearance: none;
+    background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png) no-repeat right var(--white);
+}
+
+.input-wrapper select > option {
+    font-weight: 400;
+    opacity: 0.6;
+}
+
+.form button {
+    font-weight: 700;
+    font-size: 2rem;
+    line-height: 2rem;
+    color: var(--brown);
+    height: 4.8rem;
+    border-radius: 1rem;
+}
+
+.input-wrapper {
+    display: grid;
+    gap:    .4rem;
+}
