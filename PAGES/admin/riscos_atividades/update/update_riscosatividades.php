@@ -18,8 +18,8 @@
         
         $riscoAtividade = "SELECT * FROM TABRIS WHERE TABRIS_Codigo = $codigo";
         $queryRiscoAtividade = $mysqli->query($riscoAtividade) or die("Falha na execução do código sql" . $mysqli->error);
-        if ($queryRiscoAtividade == 1){
-            $riscoAtividade_data = mysqli_fetch_assoc($queryRiscoAtividade);
+        if ($queryRiscoAtividade->num_rows == 1){
+            $riscoAtividade_data = mysqli_fetch_assoc($queryRiscoAtividade);            
             $descricao = $riscoAtividade_data['TABRIS_Descricao'];
             $minimo = $riscoAtividade_data['TABRIS_Minimo'];
             $maximo = $riscoAtividade_data['TABRIS_Maximo'];
@@ -62,16 +62,16 @@
             <center>
                 <h1>Alterar Risco de Atividade: <?php echo $codigo . " - " . $descricao;?></h1>
                 
-                <input type="hidden" id="nbrCodigo" name="nbrCodigo" value="<?php $codigo;?>">
+                <input type="hidden" id="nbrCodigo" name="nbrCodigo" value=<?php echo $codigo;?>>
 
                 <label>Descrição: </label>
                 <input type="text" id="txtDescricao" name="txtDescricao" placeholder="Descricao" value="<?php echo $descricao;?>" class="input" required/><br><br>
                 
                 <label>Mínimo: </label>
-                <input type="number" id="nbrMinimo" name="nbrMinimo" placeholder="Mínimo" value="<?php echo $minimo;?>" class="input" required/><br><br>
+                <input type="number" id="nbrMinimo" name="nbrMinimo" placeholder="Mínimo" value=<?php echo $minimo;?> class="input" required/><br><br>
 
                 <label>Máximo: </label>
-                <input type="number" id="nbrMaximo" name="nbrMaximo" placeholder="Máximo" value="<?php echo $maximo;?>" class="input" required/><br><br>
+                <input type="number" id="nbrMaximo" name="nbrMaximo" placeholder="Máximo" value=<?php echo $maximo;?> class="input" required/><br><br>
                 
                 <label>Recomenda-se instrutor? </label>
                 <select id="selInstrutor" name="selInstrutor">
