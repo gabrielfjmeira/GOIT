@@ -267,3 +267,95 @@ function MascaraParaCNPJ(valorDoTextBox) {
     } 
     return valorDoTextBox
 }
+
+//Função da Inserção de um Novo Risco de Atividade
+function formInsertRiscosAtividadesOnSubmit(){
+    let txtDescricao = document.getElementById('txtDescricao');
+    let nbrMinimo = document.getElementById('nbrMinimo').value;
+    let nbrMaximo = document.getElementById('nbrMaximo').value;
+
+    if (txtDescricao.value.length > 30){
+        txtDescricao.setCustomValidity("Descrição não pode passar de 30 caracteres");
+        txtDescricao.reportValidity();
+        return false;
+    }else{
+        txtDescricao.setCustomValidity("");
+    }
+
+    if (nbrMinimo < 0 || nbrMinimo > 10){
+        nbrMinimo.setCustomValidity("Valor mínimo deve estar entre 0-10");
+        nbrMinimo.reportValidity();
+        return false;
+    }else{
+        nbrMinimo.setCustomValidity("");
+    }
+
+    if (nbrMaximo < 0 || nbrMaximo > 10){
+        nbrMaximo.setCustomValidity("Valor máximo deve estar entre 0-10");
+        nbrMaximo.reportValidity();
+        return false;
+    }else{
+        nbrMaximo.setCustomValidity("");
+    }
+
+    if (nbrMinimo > nbrMaximo){
+        nbrMinimo.setCustomValidity("Valor mínimo deverá ser menor ou igual ao valor máximo");
+        nbrMinimo.reportValidity();
+        return false;
+    }else if(nbrMaximo < nbrMinimo){
+        nbrMinimo.setCustomValidity("Valor máximo deverá ser maior ou igual ao valor mínimo");
+        nbrMinimo.reportValidity();
+        return false;
+    }else{
+        nbrMinimo.setCustomValidity("");
+        nbrMaximo.setCustomValidity("");
+    }
+
+    return true;
+}
+
+//Função da Alteração de um Risco de Atividade
+function formAlterarRiscosAtividadesOnSubmit(){
+    let txtDescricao = document.getElementById('txtDescricao');
+    let nbrMinimo = document.getElementById('nbrMinimo').value;
+    let nbrMaximo = document.getElementById('nbrMaximo').value;
+
+    if (txtDescricao.value.length > 30){
+        txtDescricao.setCustomValidity("Descrição não pode passar de 30 caracteres");
+        txtDescricao.reportValidity();
+        return false;
+    }else{
+        txtDescricao.setCustomValidity("");
+    }
+
+    if (nbrMinimo < 0 || nbrMinimo > 10){
+        nbrMinimo.setCustomValidity("Valor mínimo deve estar entre 0-10");
+        nbrMinimo.reportValidity();
+        return false;
+    }else{
+        nbrMinimo.setCustomValidity("");
+    }
+
+    if (nbrMaximo < 0 || nbrMaximo > 10){
+        nbrMaximo.setCustomValidity("Valor máximo deve estar entre 0-10");
+        nbrMaximo.reportValidity();
+        return false;
+    }else{
+        nbrMaximo.setCustomValidity("");
+    }
+
+    if (nbrMinimo > nbrMaximo){
+        nbrMinimo.setCustomValidity("Valor mínimo deverá ser menor ou igual ao valor máximo");
+        nbrMinimo.reportValidity();
+        return false;
+    }else if(nbrMaximo < nbrMinimo){
+        nbrMinimo.setCustomValidity("Valor máximo deverá ser maior ou igual ao valor mínimo");
+        nbrMinimo.reportValidity();
+        return false;
+    }else{
+        nbrMinimo.setCustomValidity("");
+        nbrMaximo.setCustomValidity("");
+    }
+
+    return true;
+}

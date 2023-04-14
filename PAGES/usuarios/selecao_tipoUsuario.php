@@ -1,8 +1,13 @@
 <?php
-    //Incluí Conexão
+    //Incluí a Conexão
     include('../../CONNECTIONS/connection.php');
     
-    //Carrega os Registros de Tipos de Usuários
+    //Verifica se o Usuário está Logado
+    if ($_SESSION['LOGGED'] == True){
+        header ("Location: ../PAGES/home/home.php");
+    }
+
+    //Retornar todos os Registros de Tipos de Usuários
     $sqlTipoUsuarios = "SELECT * FROM TIPUSU";
     $resultTipoUsuarios = $mysqli->query($sqlTipoUsuarios) or die(mysql_error());
 ?>

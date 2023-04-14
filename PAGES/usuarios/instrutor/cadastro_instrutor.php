@@ -1,6 +1,11 @@
 <?php
     //Incluí conexão
     include('../../../CONNECTIONS/connection.php');     
+
+    //Verifica se o Usuário está Logado
+    if ($_SESSION['LOGGED'] == True){
+        header ("Location: ../../home/home.php");
+    }
 ?>
 
 <!DOCTYPE html>

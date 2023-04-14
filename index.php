@@ -1,6 +1,12 @@
 <?php
     //Incluí conexão
-    include('./CONNECTIONS/connection.php');        
+    include('./CONNECTIONS/connection.php');     
+    
+    //Verifica se o Usuário está Logado
+    if ($_SESSION['LOGGED'] == True){
+        header ("Location: ./PAGES/home/home.php");
+    }
+    
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +54,7 @@
             <button type="submit"> Entrar </button>
             <div class="wrapper-cadastrar">
                 <p> Não possui login ainda?</p>
-                <a href="./PAGES/cadastros/selecao_tipoUsuario.php">Cadastre-se aqui</a>
+                <a href="./PAGES/usuarios/selecao_tipoUsuario.php">Cadastre-se aqui</a>
             </div>
             <?php
                 if (isset($_GET['cadastrado'])){
@@ -66,6 +72,8 @@
                         echo "<h4 class='error'>Senha incorreta!</h4>";
                     }else if($error == 003) {
                         echo "<h4 class='error'>Cadastro em análise</h4>";
+                    }else if($error == 004){
+                        echo "<h4 class='error'>Realize o login para acessar a plataforma</h4>";
                     }else{
                         echo "<h4 class='error'></h4>";
                     }
@@ -76,10 +84,7 @@
     </section>     
     
     <!--Script-->
-    <script type="text/javascript" src="JAVASCRIPT\functions.js"></script>
-    <script>
-        
-    </script>
+    <script type="text/javascript" src="JAVASCRIPT\functions.js"></script>    
    
 </body>
 </html>

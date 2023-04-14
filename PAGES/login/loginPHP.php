@@ -1,7 +1,9 @@
 <?php
-    //Incluí conexão
     include('../../CONNECTIONS/connection.php');  
-   
+       
+    $_SESSION ['LOGGED'] = $_SESSION ['LOGGED'] || False;
+
+
     //Verifica o Login
     if(isset($_POST['txtEmail']) || isset($_POST['txtSenha'])){
         
@@ -30,19 +32,15 @@
 
                     $verificado = $instrutor['TABINS_Verificado'];
 
-                    if($verificado == 1){
-                        if(!isset($_SESSION)){
-                            session_start();
-                        }
-        
+                    if($verificado == 1){                      
+                                              
                         $_SESSION['CODIGO'] =  $codigoUsuario;            
-                        $_SESSION['TIPO']   =  $tipoUsuario;
-                        unset($_SESSION ['nao_autenticado']);
+                        $_SESSION['TIPOUSUARIO']  = $tipoUsuario;
+                        $_SESSION ['LOGGED'] = True;
                         
                         header("Location: ../home/home.php");
                     } else{
-                        header("Location: ../../index.php?error=003");
-                        $_SESSION ['nao_autenticado'] = true;
+                        header("Location: ../../index.php?error=003");                        
                     }
                     
                 } else if($tipoUsuario == 4){ //Verifica se o Lojista tem acesso na plataforma
@@ -54,38 +52,32 @@
 
                     $verificado = $lojista['TABLOJ_Verificado'];
 
-                    if($verificado == 1){
-                        if(!isset($_SESSION)){
-                            session_start();
-                        }
-        
+                    if($verificado == 1){                       
+                        
                         $_SESSION['CODIGO'] = $codigoUsuario;            
-                        $_SESSION['TIPO']   = $tipoUsuario;
-                        unset($_SESSION ['nao_autenticado']);
+                        $_SESSION['TIPOUSUARIO']  = $tipoUsuario;
+                        $_SESSION ['LOGGED'] = True;
                         
                         header("Location: ../home/home.php");
                     } else{
-                        header("Location: ../../index.php?error=003");
-                        $_SESSION ['nao_autenticado'] = true;
+                        header("Location: ../../index.php?error=003");                        
                     }
 
                 } else{ //Redireciona demais usuários
-
+                    
                     $_SESSION['CODIGO'] = $codigoUsuario;            
-                    $_SESSION['TIPO']   = $tipoUsuario;
-                    unset($_SESSION ['nao_autenticado']);
+                    $_SESSION['TIPOUSUARIO']  = $tipoUsuario;
+                    $_SESSION ['LOGGED'] = True;
                     
                     header("Location: ../home/home.php");
                 }
                 
             }else{
-                header("Location: ../../index.php?error=002");
-                $_SESSION ['nao_autenticado'] = true;
+                header("Location: ../../index.php?error=002");                
             }       
             
         }else{
-            header("Location: ../../index.php?error=001");
-            $_SESSION ['nao_autenticado'] = true;
+            header("Location: ../../index.php?error=001");            
         }              
     }    
 ?>
