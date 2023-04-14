@@ -14,28 +14,32 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../CSS/style.css">
+    <link rel="stylesheet" href="../../CSS/loginCadastro.css">
 
     <!--Título da Página-->
     <title>GO🐐IT | A Social Adventure</title>
 </head>
 <body>
+    
+    <button onclick="window.location.href = '../../index.php'" id = "buttonBack">
+        <img src="../../ASSETS/backWhite.svg" alt="Back button" >
+    </button>
+    
     <!--Cabeçalho-->
-    <section class="header">
-        <center>                        
-            <h1>GO🐐IT | A Social Adventure</h1>
-            <button onclick="window.location.href = '../../index.php'">
-                Voltar ⬅
-            </button>            
-        </center>
-    </section>
+    <header id = "headerCadastro">
+        <img src="../../ASSETS/logoWhite.png" alt="Logo Go It">
+        <h1>Cadastro</h1>
+    </header>
 
     <!--Seleção do Tipo de Usuário-->
-    <section>
+    <section class = "form">
         <form id="formCadastroUsuarios" name="formCadastroUsuarios" action="redirecionar_usuarioPHP.php" method="post">
-            <center>
-                <h1>Cadastro</h1>
+            
+            <div class="input-wrapper">
                 <label>Selecione o seu tipo de usuário:</label>
                 <select name="tipoUsuario" required>
+        
                     <option value="" selected disabled="disabled" hidden>Escolha uma opção</option>
                     <?php                
                         while($tipoUsuario = mysqli_fetch_array($resultTipoUsuarios)){
@@ -49,8 +53,8 @@
                         }
                     ?>                                                           
                 </select>
-                <button type="submit">Continuar</button>
-            </center>                       
+            </div>
+            <button type="submit">Próximo</button>
         </form>
     </section>           
 </body>

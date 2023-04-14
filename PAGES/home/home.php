@@ -3,10 +3,10 @@
     include('../../CONNECTIONS/connection.php');     
 
     //Verifica se o Usuário está logado
-    if(!isset($_SESSION['CODIGO'])){
-        header("Location: ../../CONNECTIONS/logout.php");
-        echo "não logado";
-    }    
+    // if(!isset($_SESSION['CODIGO'])){
+    //     header("Location: ../../CONNECTIONS/logout.php");
+    //     echo "não logado";
+    // }    
 ?>
 
 <!DOCTYPE html>
