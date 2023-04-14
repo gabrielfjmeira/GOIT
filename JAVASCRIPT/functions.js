@@ -249,25 +249,6 @@ function mostrarSenhaLogin(){
     }
 }
 
-//Função de Mascara para CNPJ
-function MascaraParaCNPJ(valorDoTextBox) {
-    if (valorDoTextBox.length <= 14) {  
-
-        //Coloca ponto entre o segundo e o terceiro dígitos
-        valorDoTextBox = valorDoTextBox.replace(/^(\d{2})(\d)/, "$1.$2")
-
-        //Coloca ponto entre o quinto e o sexto dígitos
-        valorDoTextBox = valorDoTextBox.replace(/^(\d{2})\.(\d{3})(\d)/, "$1 $2 $3")
-
-        //Coloca uma barra entre o oitavo e o nono dígitos
-        valorDoTextBox = valorDoTextBox.replace(/\.(\d{3})(\d)/, ".$1/$2")
-
-        //Coloca um hífen depois do bloco de quatro dígitos
-        valorDoTextBox = valorDoTextBox.replace(/(\d{4})(\d)/, "$1-$2") 
-    } 
-    return valorDoTextBox
-}
-
 //Função da Inserção de um Novo Risco de Atividade
 function formInsertRiscosAtividadesOnSubmit(){
     let txtDescricao = document.getElementById('txtDescricao');

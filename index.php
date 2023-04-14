@@ -33,7 +33,7 @@
 
     <!--Formulário de Login-->
     <section class="form">
-        <form id="formLogin" name="formLogin" action="./PAGES/login/loginPHP.php" method="POST" onsubmit="return formLoginOnSubmit();">
+        <form id="formLogin" name="formLogin" action="./CONFIG/login/loginPHP.php" method="POST" onsubmit="return formLoginOnSubmit();">
         
             <div class="input-wrapper">
                 <label>Usuário/e-mail: </label>         

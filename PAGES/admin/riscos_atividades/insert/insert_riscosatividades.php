@@ -61,7 +61,7 @@
         </form>
 
         <!--Script-->        
-        <script type="text/javascript" src="../../../../JAVASCRIPT/functions.js"></script>
+        <script type="text/javascript" src="../../../../../JAVASCRIPT/functions.js"></script>
     
 </body>
 </html>
