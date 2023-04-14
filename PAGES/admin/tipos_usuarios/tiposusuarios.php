@@ -30,15 +30,13 @@
 </head>
 <body>
     
-    <!--Cabeçalho-->    
-    <header>        
-        <h1>GERENCIAR TIPOS DE USUÁRIOS</h1>        
-        <button onclick="window.location.href = '../admin.php';">
-            Voltar ⬅
-        </button>
-    </header>
+    <center>
+        <!--Cabeçalho-->    
+        <header>        
+            <h1>GERENCIAR TIPOS DE USUÁRIOS</h1>              
+        </header>
 
-
-    
+       
+    </center>
 </body>
 </html>
