@@ -53,31 +53,37 @@
                     <?php
                         if($queryRiscosAtividades->num_rows > 0){                  
                             while($riscosAtividades_data = mysqli_fetch_assoc($queryRiscosAtividades)){                           
-                                $codigo = $riscosAtividades_data['TABRIS_Codigo'];
-                                echo "<tr>";
-                                echo "<td hidden>".$riscosAtividades_data['TABRIS_Codigo']."</td>";
-                                echo "<td align='center' width='200px'>".$riscosAtividades_data['TABRIS_Descricao']."</td>";
-                                echo "<td align='center' width='100px'>".$riscosAtividades_data['TABRIS_Minimo']."</td>";
-                                echo "<td align='center' width='100px'>".$riscosAtividades_data['TABRIS_Maximo']."</td>";
-                                if ($riscosAtividades_data['TABRIS_Instrutor'] == 1){
-                                    echo "<td align='center' width='200px'>Sim</td>";
-                                }else{
-                                    echo "<td align='center' width='200px'>Não</td>";
-                                }                           
-                                echo "<td align='center' width='270px'>
-                                        <a href='./update/update_riscosatividades.php?codigo='".$codigo."'>
-                                            <input type='button' class='button-alterar' value='Alterar'>
+                                $codigo = $riscosAtividades_data['TABRIS_Codigo'];?>
+
+                                <tr>
+                                    <td hidden><?php echo $riscosAtividades_data['TABRIS_Codigo']?></td>
+                                    <td align="center" width="200px"><?php echo $riscosAtividades_data['TABRIS_Descricao']?></td>
+                                    <td align="center" width="100px"><?php echo $riscosAtividades_data['TABRIS_Minimo']?></td>
+                                    <td align="center" width="100px"><?php echo $riscosAtividades_data['TABRIS_Maximo']?></td>
+                                    <?php
+                                    if ($riscosAtividades_data['TABRIS_Instrutor'] == 1){?>
+                                        <td align="center" width="200px">Sim</td>
+                                    <?php    
+                                    }else{?>
+                                        <td align="center" width="200px">Não</td>
+                                    <?php
+                                    }?>
+                                    <td align="center" width="270px">
+                                        <a href="./update/update_riscosatividades.php?codigo=<?php echo $codigo?>">
+                                            <input type="button" class="button-alterar" value="Alterar">
                                         </a>                                        
-                                        <a href='./delete/riscosatividades_del_PHP.php?codigo='".$riscosAtividades_data['TABRIS_Codigo']."'>
-                                            <input type='button' value='Excluir'>
+                                        <a href="./delete/riscosatividades_del_PHP.php?codigo=<?php echo $riscosAtividades_data['TABRIS_Codigo']?>">
+                                            <input type="button" value="Excluir">
                                         </a>                                    
-                                    </td>";
-                                echo "</tr>";
+                                    </td>
+                                </tr>
+                            <?php
                             }
-                        }else{
-                            echo "<tr>";
-                            echo "<td class='font' colspan='5' align='center'> Sem registros no banco! </td>";
-                            echo "</tr>";
+                        }else{?>
+                            <tr>
+                                <td class="font" colspan="5" align="center"> Sem registros no banco! </td>;
+                            </tr>";
+                        <?php
                         }
                     ?>
                 </tbody>             

@@ -58,7 +58,7 @@
 
     <!--Formulário-->    
     <section class="form">
-        <form id="formAlterarRiscosAtividades" name="formAlterarRiscosAtividades" action="update_riscosatividadesPHP.php" method="POST" onsubmit="return formAlterarRiscosAtividadesOnSubmit();">
+        <form id="formAlterarRiscosAtividades" name="formAlterarRiscosAtividades" action="./update_riscosatividadesPHP.php" method="POST" onsubmit="return formAlterarRiscosAtividadesOnSubmit();">
             <center>
                 <h1>Alterar Risco de Atividade: <?php echo $codigo . " - " . $descricao;?></h1>
                 

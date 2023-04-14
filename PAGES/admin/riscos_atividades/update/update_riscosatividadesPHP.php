@@ -1,15 +1,15 @@
 <?php
     //Incluí Conexão
-    include('../../../CONNECTIONS/connection.php');
+    include('../../../../CONNECTIONS/connection.php');
 
     //Verifica Login
     if (!$_SESSION['LOGGED']){
-        header ("Location: ../../../index.php?error=4");
+        header ("Location: ../../../../index.php?error=4");
     }
 
     //Verifica se é um Admin
     if ($_SESSION['TIPOUSUARIO'] != 1){
-        header ("Location: ../../home/home.php");
+        header ("Location: ../../../home/home.php");
     }
 
     //Definição de Variáveis
@@ -21,9 +21,9 @@
 
     //Update no Banco de Dados
     $updateRiscoAtividade = "UPDATE TABRIS SET TABRIS_Descricao=' $descricao', TABRIS_Minimo = $minimo, TABRIS_Maximo = $maximo, TABRIS_Instrutor = $instrutor
-                             WHERE TABRIS_Codigo = $codigo";
+                             WHERE TABRIS_Codigo = $codigo;";
 
-    $queryUpdateRiscoAtividade = $mysqli->query($sqlUpdate) or die("Falha na execução do código sql" . $mysqli->error);
+    $queryUpdateRiscoAtividade = $mysqli->query($updateRiscoAtividade) or die("Falha na execução do código sql" . $mysqli->error);
 
     //Redireciona para a Página de Gerenciamento de Riscos de Atividades
     header("Location: ../riscosatividades.php?alterado=1");
