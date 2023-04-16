@@ -370,3 +370,33 @@ function formAlterarTiposUsuariosOnSubmit(){
     
     return true;
 }
+
+//Função da Inserção de uma Nova Categoria de Atividade ao Ar Livre
+function formInsertCategoriasAtividadesOnSubmit(){
+    let txtDescricao = document.getElementById('txtDescricao');    
+
+    if (txtDescricao.value.length > 30){
+        txtDescricao.setCustomValidity("Descrição não pode passar de 30 caracteres");
+        txtDescricao.reportValidity();
+        return false;
+    }else{
+        txtDescricao.setCustomValidity("");
+    }
+    
+    return true;
+}
+
+//Função da Alteração de uma Categoria de Atividade ao Ar Livre
+function formAlterarCategoriasAtividadesOnSubmit(){
+    let txtDescricao = document.getElementById('txtDescricao');    
+
+    if (txtDescricao.value.length > 30){
+        txtDescricao.setCustomValidity("Descrição não pode passar de 30 caracteres");
+        txtDescricao.reportValidity();
+        return false;
+    }else{
+        txtDescricao.setCustomValidity("");
+    }
+    
+    return true;
+}

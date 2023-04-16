@@ -15,13 +15,13 @@
     //Definição de Variáveis
     $codigo = $_POST['nbrCodigo'];
     $descricao = $_POST['txtDescricao'];
-    $admin = $_POST['selAdmin'];    
+    $risco = $_POST['riscoAtividade'];    
 
     //Update no Banco de Dados
-    $updateTipoUsuario = "UPDATE TIPUSU SET TIPUSU_Descricao='$descricao', TIPUSU_Administrador = $admin WHERE TIPUSU_Codigo = $codigo;";
-    $queryUpdateTipoUsuario = $mysqli->query($updateTipoUsuario) or die("Falha na execução do código sql" . $mysqli->error); 
+    $updateCategoriaAtividade = "UPDATE CATATV SET CATATV_Descricao='$descricao', TABRIS_Codigo = $risco WHERE CATATV_Codigo = $codigo;";
+    $queryUpdateCategoriaAtividade = $mysqli->query($updateCategoriaAtividade) or die("Falha na execução do código sql" . $mysqli->error); 
 
-    //Redireciona para a Página de Gerenciamento de Tipos de Usuários
-    header("Location: ../tiposusuarios.php?alterado=1");
+    //Redireciona para a Página de Gerenciamento de Categorias de Atividaes
+    header("Location: ../categoriasatividades.php?alterado=1");
 
 ?>

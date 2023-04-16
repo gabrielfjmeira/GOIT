@@ -16,19 +16,26 @@
     if (isset($_GET['codigo'])){
         $codigo = $_GET['codigo'];
         
-        $riscoAtividade = "SELECT * FROM TABRIS WHERE TABRIS_Codigo = $codigo";
-        $queryRiscoAtividade = $mysqli->query($riscoAtividade) or die("Falha na execução do código sql" . $mysqli->error);
+        //Verifica se Tem Categorias de Atividades ao Ar Livre com Este Risco
+        $categoriasRisco = "SELECT * FROM CATATV WHERE TABRIS_Codigo = $codigo";
+        $queryCategoriasRisco = $mysqli->query($categoriasRisco) or die("Falha na execução do código sql" . $mysqli->error);
 
-        if ($queryRiscoAtividade->num_rows == 1){
+        if ($queryCategoriasRisco->num_rows == 0){
+            $riscoAtividade = "SELECT * FROM TABRIS WHERE TABRIS_Codigo = $codigo";
+            $queryRiscoAtividade = $mysqli->query($riscoAtividade) or die("Falha na execução do código sql" . $mysqli->error);
 
-            $deleteRiscoAtividade = "DELETE FROM TABRIS WHERE TABRIS_Codigo = $codigo";
-            $queryDeleteRiscoAtividade = $mysqli->query($deleteRiscoAtividade) or die("Falha na execução do código sql" . $mysqli->error);
-            header ("Location: ../riscosatividades.php?excluido=1");
+            if ($queryRiscoAtividade->num_rows == 1){
 
+                $deleteRiscoAtividade = "DELETE FROM TABRIS WHERE TABRIS_Codigo = $codigo";
+                $queryDeleteRiscoAtividade = $mysqli->query($deleteRiscoAtividade) or die("Falha na execução do código sql" . $mysqli->error);
+                header ("Location: ../riscosatividades.php?excluido=1");
+
+            }else{
+                header ("Location: ../riscosatividades.php");
+            }
         }else{
-            header ("Location: ../riscosatividades.php");
-        }
-        
+            header ("Location: ../riscosatividades.php?error=1");
+        }    
     }else{
         header ("Location: ../riscosatividades.php");
     }    

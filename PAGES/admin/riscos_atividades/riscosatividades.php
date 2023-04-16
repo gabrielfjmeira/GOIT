@@ -33,7 +33,7 @@
     <center>
         <!--Cabeçalho-->    
         <header>        
-            <h1>GERENCIAR RISCOS DE ATIVIDADES</h1>              
+            <h1>GERENCIAR RISCOS DE ATIVIDADES AO AR LIVRE</h1>              
         </header>
 
         <!--Registros do Banco-->
@@ -128,6 +128,16 @@
                     $excluido = $_GET['excluido'];                        
                     if ($excluido == 1){                    
                         echo "<h4 class='advice'>Risco de atividade excluído com sucesso!</h4>";
+                    }else{
+                        echo "<h4 class='advice'></h4>";
+                    }
+                }
+
+                //Mensagem de Erro
+                if (isset($_GET['error'])){
+                    $error = $_GET['error'];                        
+                    if ($error == 1){                    
+                        echo "<h4 class='advice'>Existem categorias de atividades ao ar livre cadastradas com este risco, impossível continuar!</h4>";
                     }else{
                         echo "<h4 class='advice'></h4>";
                     }
