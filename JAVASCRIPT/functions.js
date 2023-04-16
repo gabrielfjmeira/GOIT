@@ -340,3 +340,33 @@ function formAlterarRiscosAtividadesOnSubmit(){
 
     return true;
 }
+
+//Função da Inserção de um Novo Tipo de Usuário
+function formInsertTiposUsuariosOnSubmit(){
+    let txtDescricao = document.getElementById('txtDescricao');    
+
+    if (txtDescricao.value.length > 13){
+        txtDescricao.setCustomValidity("Descrição não pode passar de 13 caracteres");
+        txtDescricao.reportValidity();
+        return false;
+    }else{
+        txtDescricao.setCustomValidity("");
+    }
+    
+    return true;
+}
+
+//Função da Alteração de um Tipo de Usuário
+function formAlterarTiposUsuariosOnSubmit(){
+    let txtDescricao = document.getElementById('txtDescricao');    
+
+    if (txtDescricao.value.length > 13){
+        txtDescricao.setCustomValidity("Descrição não pode passar de 13 caracteres");
+        txtDescricao.reportValidity();
+        return false;
+    }else{
+        txtDescricao.setCustomValidity("");
+    }
+    
+    return true;
+}
