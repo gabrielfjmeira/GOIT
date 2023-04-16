@@ -400,3 +400,45 @@ function formAlterarCategoriasAtividadesOnSubmit(){
     
     return true;
 }
+
+//Função da Inserção de uma Atividade ao Ar Livre
+function formInsertAtividadesOnSubmit(){
+    let txtTitulo = document.getElementById('txtTitulo');    
+    let txtDescricao = document.getElementById('txtDescricao');    
+    let txtLocalizacao = document.getElementById('txtLocalizacao');  
+    let txtReferencia = document.getElementById('txtReferencia');  
+
+    if (txtTitulo.value.length > 50){
+        txtTitulo.setCustomValidity("Título não pode passar de 50 caracteres");
+        txtTitulo.reportValidity();
+        return false;
+    }else{
+        txtTitulo.setCustomValidity("");
+    }
+
+    if (txtDescricao.value.length > 65535){
+        txtDescricao.setCustomValidity("Descrição está muito longa!");
+        txtDescricao.reportValidity();
+        return false;
+    }else{
+        txtDescricao.setCustomValidity("");
+    }
+
+    if (txtLocalizacao.value.length > 100){
+        txtLocalizacao.setCustomValidity("Localização não pode passar de 100 caracteres");
+        txtLocalizacao.reportValidity();
+        return false;
+    }else{
+        txtLocalizacao.setCustomValidity("");
+    }
+
+    if (txtReferencia.value.length > 50){
+        txtReferencia.setCustomValidity("Referência não pode passar de 50 caracteres");
+        txtReferencia.reportValidity();
+        return false;
+    }else{
+        txtReferencia.setCustomValidity("");
+    }
+    
+    return true;
+}
