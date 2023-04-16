@@ -44,8 +44,11 @@
                     <h5>Atividade Criada Por <?php
                     
                         //Carrega o apelido/fantasia do Criador da Atividade ao Ar Livre
-                        $usuario = $_SESSION['CODIGO'];
-                        $tipousuario = $_SESSION['TIPOUSUARIO'];
+                        $usuario = $atividade['TABUSU_Codigo'];
+                        $registroUsuario = "SELECT * FROM TABUSU WHERE TABUSU_Codigo = $usuario";                       
+                        $queryRegistroUsuario = $mysqli->query($registroUsuario) or die(mysql_error());
+                        $usuario_data = mysqli_fetch_array($queryRegistroUsuario);
+                        $tipousuario = $usuario_data['TIPUSU_Codigo'];
     
                         switch($tipousuario){
                             //Administrador
