@@ -38,7 +38,7 @@
                 <h1>Criar Atividade ao Ar Livre</h1>
                 
                 <label>Título: </label>
-                <input type="text" id="txtTitulo" name="txtTitulo" placeholder="Título" class="input" required/><br><br>
+                <input type="text" id="txtTitulo" name="txtTitulo" placeholder="Título" class="input"  required/><br><br>
 
                 <label>Descrição: </label>
                 <textarea id="txtDescricao" name="txtDescricao" placeholder="Descrição" class="input" required></textarea><br><br>               
@@ -76,7 +76,7 @@
         </form>
 
         <!--Script-->        
-        <script type="text/javascript" src="../../../../JAVASCRIPT/functions.js"></script>
+        <script type="text/javascript" src="../../../JAVASCRIPT/functions.js"></script>
     
 </body>
 </html>

@@ -6,6 +6,12 @@
     if (!$_SESSION['LOGGED']){
         header ("Location: ../../index.php?error=4");
     }   
+
+    if(isset($_GET['categoriafiltrada'])){
+        $categoriafiltrada = $_GET['categoriafiltrada'];
+    }else{
+        header ("Location: ../home/home.php");
+    }
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +44,7 @@
         <?php
 
         //Imprime Atividades ao Ar Livre         
-        $atividades = "SELECT * FROM TABATV ORDER BY TABATV_Data ASC";                    
+        $atividades = "SELECT * FROM TABATV WHERE CATATV_Codigo=$categoriafiltrada ORDER BY TABATV_Data ASC";                    
         $queryAtividades = $mysqli->query($atividades) or die(mysql_error());
 
         if ($queryAtividades->num_rows > 0){
