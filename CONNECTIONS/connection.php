@@ -4,7 +4,7 @@
     $usuario = 'root';
     $senha = '';
     $database = 'goit_db';
-    $host = 'localhost:3306';
+    $host = 'localhost:3312';
 
     $mysqli = new mysqli($host, $usuario, $senha, $database);
 
@@ -13,7 +13,7 @@
     }
 
     //Oculta os Erros do PHP
-    //error_reporting(0);
+    error_reporting(0);
 
     //Inicia Sessão
     session_start();

@@ -249,25 +249,6 @@ function mostrarSenhaLogin(){
     }
 }
 
-//Função de Mascara para CNPJ
-function MascaraParaCNPJ(valorDoTextBox) {
-    if (valorDoTextBox.length <= 14) {  
-
-        //Coloca ponto entre o segundo e o terceiro dígitos
-        valorDoTextBox = valorDoTextBox.replace(/^(\d{2})(\d)/, "$1.$2")
-
-        //Coloca ponto entre o quinto e o sexto dígitos
-        valorDoTextBox = valorDoTextBox.replace(/^(\d{2})\.(\d{3})(\d)/, "$1 $2 $3")
-
-        //Coloca uma barra entre o oitavo e o nono dígitos
-        valorDoTextBox = valorDoTextBox.replace(/\.(\d{3})(\d)/, ".$1/$2")
-
-        //Coloca um hífen depois do bloco de quatro dígitos
-        valorDoTextBox = valorDoTextBox.replace(/(\d{4})(\d)/, "$1-$2") 
-    } 
-    return valorDoTextBox
-}
-
 //Função da Inserção de um Novo Risco de Atividade
 function formInsertRiscosAtividadesOnSubmit(){
     let txtDescricao = document.getElementById('txtDescricao');
@@ -357,5 +338,149 @@ function formAlterarRiscosAtividadesOnSubmit(){
         nbrMaximo.setCustomValidity("");
     }
 
+    return true;
+}
+
+//Função da Inserção de um Novo Tipo de Usuário
+function formInsertTiposUsuariosOnSubmit(){
+    let txtDescricao = document.getElementById('txtDescricao');    
+
+    if (txtDescricao.value.length > 13){
+        txtDescricao.setCustomValidity("Descrição não pode passar de 13 caracteres");
+        txtDescricao.reportValidity();
+        return false;
+    }else{
+        txtDescricao.setCustomValidity("");
+    }
+    
+    return true;
+}
+
+//Função da Alteração de um Tipo de Usuário
+function formAlterarTiposUsuariosOnSubmit(){
+    let txtDescricao = document.getElementById('txtDescricao');    
+
+    if (txtDescricao.value.length > 13){
+        txtDescricao.setCustomValidity("Descrição não pode passar de 13 caracteres");
+        txtDescricao.reportValidity();
+        return false;
+    }else{
+        txtDescricao.setCustomValidity("");
+    }
+    
+    return true;
+}
+
+//Função da Inserção de uma Nova Categoria de Atividade ao Ar Livre
+function formInsertCategoriasAtividadesOnSubmit(){
+    let txtDescricao = document.getElementById('txtDescricao');    
+
+    if (txtDescricao.value.length > 30){
+        txtDescricao.setCustomValidity("Descrição não pode passar de 30 caracteres");
+        txtDescricao.reportValidity();
+        return false;
+    }else{
+        txtDescricao.setCustomValidity("");
+    }
+    
+    return true;
+}
+
+//Função da Alteração de uma Categoria de Atividade ao Ar Livre
+function formAlterarCategoriasAtividadesOnSubmit(){
+    let txtDescricao = document.getElementById('txtDescricao');    
+
+    if (txtDescricao.value.length > 30){
+        txtDescricao.setCustomValidity("Descrição não pode passar de 30 caracteres");
+        txtDescricao.reportValidity();
+        return false;
+    }else{
+        txtDescricao.setCustomValidity("");
+    }
+    
+    return true;
+}
+
+//Função da Inserção de uma Atividade ao Ar Livre
+function formInsertAtividadesOnSubmit(){
+    let txtTitulo = document.getElementById('txtTitulo');    
+    let txtDescricao = document.getElementById('txtDescricao');    
+    let txtLocalizacao = document.getElementById('txtLocalizacao');  
+    let txtReferencia = document.getElementById('txtReferencia');  
+
+    if (txtTitulo.value.length > 50){
+        txtTitulo.setCustomValidity("Título não pode passar de 50 caracteres");
+        txtTitulo.reportValidity();
+        return false;
+    }else{
+        txtTitulo.setCustomValidity("");
+    }
+
+    if (txtDescricao.value.length > 65535){
+        txtDescricao.setCustomValidity("Descrição está muito longa!");
+        txtDescricao.reportValidity();
+        return false;
+    }else{
+        txtDescricao.setCustomValidity("");
+    }
+
+    if (txtLocalizacao.value.length > 100){
+        txtLocalizacao.setCustomValidity("Localização não pode passar de 100 caracteres");
+        txtLocalizacao.reportValidity();
+        return false;
+    }else{
+        txtLocalizacao.setCustomValidity("");
+    }
+
+    if (txtReferencia.value.length > 50){
+        txtReferencia.setCustomValidity("Referência não pode passar de 50 caracteres");
+        txtReferencia.reportValidity();
+        return false;
+    }else{
+        txtReferencia.setCustomValidity("");
+    }
+    
+    return true;
+}
+
+//Função da Alteração de uma Atividade ao Ar Livre
+function formAlterarAtividadeOnSubmit(){
+    let txtTitulo = document.getElementById('txtTitulo');    
+    let txtDescricao = document.getElementById('txtDescricao');    
+    let txtLocalizacao = document.getElementById('txtLocalizacao');  
+    let txtReferencia = document.getElementById('txtReferencia');  
+
+    if (txtTitulo.value.length > 50){
+        txtTitulo.setCustomValidity("Título não pode passar de 50 caracteres");
+        txtTitulo.reportValidity();
+        return false;
+    }else{
+        txtTitulo.setCustomValidity("");
+    }
+
+    if (txtDescricao.value.length > 65535){
+        txtDescricao.setCustomValidity("Descrição está muito longa!");
+        txtDescricao.reportValidity();
+        return false;
+    }else{
+        txtDescricao.setCustomValidity("");
+    }
+
+    if (txtLocalizacao.value.length > 100){
+        txtLocalizacao.setCustomValidity("Localização não pode passar de 100 caracteres");
+        txtLocalizacao.reportValidity();
+        return false;
+    }else{
+        txtLocalizacao.setCustomValidity("");
+    }
+
+    if (txtReferencia.value.length > 50){
+        txtReferencia.setCustomValidity("Referência não pode passar de 50 caracteres");
+        txtReferencia.reportValidity();
+        return false;
+    }else{
+        txtReferencia.setCustomValidity("");
+    }
+    
     return true;
 }

@@ -33,7 +33,7 @@
     <center>
         <!--Cabeçalho-->    
         <header>        
-            <h1>GERENCIAR RISCOS DE ATIVIDADES</h1>              
+            <h1>GERENCIAR RISCOS DE ATIVIDADES AO AR LIVRE</h1>              
         </header>
 
         <!--Registros do Banco-->
@@ -72,7 +72,7 @@
                                         <a href="./update/update_riscosatividades.php?codigo=<?php echo $codigo?>">
                                             <input type="button" class="button-alterar" value="Alterar">
                                         </a>                                        
-                                        <a href="./delete/riscosatividades_del_PHP.php?codigo=<?php echo $riscosAtividades_data['TABRIS_Codigo']?>">
+                                        <a href="./delete/delete_riscosatividadesPHP.php?codigo=<?php echo $codigo?>">
                                             <input type="button" value="Excluir">
                                         </a>                                    
                                     </td>
@@ -118,6 +118,26 @@
                     $alterado = $_GET['alterado'];                        
                     if ($alterado == 1){                    
                         echo "<h4 class='advice'>Risco de atividade alterado com sucesso!</h4>";
+                    }else{
+                        echo "<h4 class='advice'></h4>";
+                    }
+                }
+
+                //Mensagem de Exclusão
+                if (isset($_GET['excluido'])){
+                    $excluido = $_GET['excluido'];                        
+                    if ($excluido == 1){                    
+                        echo "<h4 class='advice'>Risco de atividade excluído com sucesso!</h4>";
+                    }else{
+                        echo "<h4 class='advice'></h4>";
+                    }
+                }
+
+                //Mensagem de Erro
+                if (isset($_GET['error'])){
+                    $error = $_GET['error'];                        
+                    if ($error == 1){                    
+                        echo "<h4 class='advice'>Existem categorias de atividades ao ar livre cadastradas com este risco, impossível continuar!</h4>";
                     }else{
                         echo "<h4 class='advice'></h4>";
                     }

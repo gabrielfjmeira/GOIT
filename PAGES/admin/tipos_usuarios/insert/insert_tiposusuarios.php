@@ -29,7 +29,7 @@
     <section class="header">
         <center>
             <h1>GO🐐IT | A Social Adventure</h1>
-            <button onclick="window.location.href = '../riscosatividades.php'">
+            <button onclick="window.location.href = '../tiposusuarios.php'">
                 Voltar ⬅
             </button> 
         </center>
@@ -37,23 +37,17 @@
 
     <!--Formulário-->    
     <section class="form">
-        <form id="formInsertRiscosAtividades" name="formInsertRiscosAtividades" action="insert_riscosatividadesPHP.php" method="POST" onsubmit="return formInsertRiscosAtividadesOnSubmit();">
+        <form id="formInsertTiposUsuarios" name="formInsertTiposUsuarios" action="insert_tiposusuariosPHP.php" method="POST" onsubmit="return formInsertTiposUsuariosOnSubmit();">
             <center>
-                <h1>Inserir Risco de Atividade</h1>
+                <h1>Inserir Tipo de Usuário</h1>
                 
                 <label>Descrição: </label>
-                <input type="text" id="txtDescricao" name="txtDescricao" placeholder="Descricao" class="input" required/><br><br>
-                
-                <label>Mínimo: </label>
-                <input type="number" id="nbrMinimo" name="nbrMinimo" placeholder="Mínimo" class="input" required/><br><br>
-
-                <label>Máximo: </label>
-                <input type="number" id="nbrMaximo" name="nbrMaximo" placeholder="Máximo" class="input" required/><br><br>
-                
-                <label>Recomenda-se instrutor? </label>
-                <select id="selInstrutor" name="selInstrutor" required>
-                    <option value = 1 selected>Sim</option>
-                    <option value = 0>Não</option>
+                <input type="text" id="txtDescricao" name="txtDescricao" placeholder="Descricao" class="input" required/><br><br>                
+                                
+                <label>Administrador? </label>
+                <select id="selAdmin" name="selAdmin" required>
+                    <option value = 1>Sim</option>
+                    <option value = 0 selected>Não</option>
                 </select><br><br>
 
                 <button type="submit">Inserir</button>                

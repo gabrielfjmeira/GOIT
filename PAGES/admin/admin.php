@@ -43,8 +43,12 @@
         </button>
         
         <button onclick="window.location.href = './riscos_atividades/riscosatividades.php';">
-            Riscos de Atividades
+            Riscos de Atividades ao Ar Livre
         </button>                
+
+        <button onclick="window.location.href = './categorias_atividades/categoriasatividades.php';">
+            Categorias de Atividades ao Ar Livre
+        </button> 
     </div>
 
     

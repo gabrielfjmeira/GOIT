@@ -29,7 +29,7 @@
     <section class="header">
         <center>
             <h1>GO🐐IT | A Social Adventure</h1>
-            <button onclick="window.location.href = '../riscosatividades.php'">
+            <button onclick="window.location.href = '../categoriasatividades.php'">
                 Voltar ⬅
             </button> 
         </center>
@@ -37,25 +37,29 @@
 
     <!--Formulário-->    
     <section class="form">
-        <form id="formInsertRiscosAtividades" name="formInsertRiscosAtividades" action="insert_riscosatividadesPHP.php" method="POST" onsubmit="return formInsertRiscosAtividadesOnSubmit();">
+        <form id="formInsertCategoriasAtividades" name="formInsertCategoriasAtividades" action="insert_categoriasatividadesPHP.php" method="POST" onsubmit="return formInsertCategoriasAtividadesOnSubmit();">
             <center>
-                <h1>Inserir Risco de Atividade</h1>
+                <h1>Inserir Categoria de Atividade ao Ar Livre</h1>
                 
                 <label>Descrição: </label>
                 <input type="text" id="txtDescricao" name="txtDescricao" placeholder="Descricao" class="input" required/><br><br>
                 
-                <label>Mínimo: </label>
-                <input type="number" id="nbrMinimo" name="nbrMinimo" placeholder="Mínimo" class="input" required/><br><br>
+                <label>Risco de Atividade: </label>
+                <select name="riscoAtividade" required>        
+                    <option value="" selected disabled="disabled" hidden>Escolha uma opção</option>
+                    <?php          
+                        $riscosAtividades = "SELECT * FROM TABRIS ORDER BY TABRIS_Codigo ASC";      
+                        $queryRiscosAtividades = $mysqli->query($riscosAtividades) or die(mysql_error());
 
-                <label>Máximo: </label>
-                <input type="number" id="nbrMaximo" name="nbrMaximo" placeholder="Máximo" class="input" required/><br><br>
-                
-                <label>Recomenda-se instrutor? </label>
-                <select id="selInstrutor" name="selInstrutor" required>
-                    <option value = 1 selected>Sim</option>
-                    <option value = 0>Não</option>
+                        while($riscoAtividade = mysqli_fetch_array($queryRiscosAtividades)){
+                            $tabris_codigo = $riscoAtividade['TABRIS_Codigo'];
+                            $tabris_descricao = $riscoAtividade['TABRIS_Descricao'];
+                            
+                            echo "<option value='".$tabris_codigo."'>". $tabris_descricao."</option>";                                                                   
+                        }
+                    ?>                                                           
                 </select><br><br>
-
+                
                 <button type="submit">Inserir</button>                
             </center>
         </form>

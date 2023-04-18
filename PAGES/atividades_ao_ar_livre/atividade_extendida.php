@@ -5,7 +5,7 @@
     //Verifica Login
     if (!$_SESSION['LOGGED']){
         header ("Location: ../../index.php?error=4");
-    }   
+    }
 ?>
 
 <!DOCTYPE html>
@@ -19,44 +19,48 @@
     <!--Título da Página-->
     <title>GO🐐IT | A Social Adventure</title>
 </head>
-<body>
-    <!--Conteúdo-->    
-    <h1>HOME</h1>    
-
+<body>     
+    <!--Cabeçalho-->
+    <section class="header">
+        <center>
+            <h1>GO🐐IT | A Social Adventure</h1>
+            <button onclick="window.location.href = '../home/home.php'">
+                Voltar ⬅
+            </button> 
+        </center>
+    </section>
+             
     <?php
-        if ($_SESSION['TIPOUSUARIO'] == 1){
-            include('../templates/headers/header_adm.html');
-        } else{
-            include('../templates/headers/header_users.html');
-        }
 
-        //Imprime as Categorias para Filtrar a Aplicação
-        include('../templates/categorias.php');
-        ?>
-        <h1>PUBLICAÇÕES:</h1>
+    if(isset($_GET['atividade'])){            
+        
+        $codigo = $_GET['atividade'];
 
-        <?php
+        //Imprime Atividade ao Ar Livre
+        $atividade = "SELECT * FROM TABATV WHERE TABATV_Codigo = $codigo";      
+        $queryAtividade = $mysqli->query($atividade) or die(mysql_error());
+        $atividade_data = mysqli_fetch_array($queryAtividade);
 
-        //Imprime Atividades ao Ar Livre         
-        $atividades = "SELECT * FROM TABATV ORDER BY TABATV_Data ASC";                    
-        $queryAtividades = $mysqli->query($atividades) or die(mysql_error());
-
-        if ($queryAtividades->num_rows > 0){
-            while($atividade = mysqli_fetch_array($queryAtividades)){?>
-                <div class="publicacao">
-                    <h3><?php echo $atividade['TABATV_Titulo'];?></h3>                      
-                    <h4>Data: <?php echo $atividade['TABATV_Data'];?></h4>
-                    <h4>Hora: <?php echo $atividade['TABATV_Hora'];?></h4>
-                    <h4>Localização: <?php echo $atividade['TABATV_Localizacao'];?></h4>                    
-                    <h5>Atividade Criada Por <?php
+        if ($queryAtividade->num_rows == 1){?>
+            <center>
+                <div class="publicacao_extendida">
+                    <h1><?php echo $atividade_data['TABATV_Titulo'];?></h1>  
+                    <h2>Data: <?php echo $atividade_data['TABATV_Data'];?> &nbsp;&nbsp;&nbsp; Hora: <?php echo $atividade_data['TABATV_Hora'];?></h2>
+                    <h2>Localização: <?php echo $atividade_data['TABATV_Localizacao'];?></h2>                    
+                    <h2>Referência: <?php echo $atividade_data['TABATV_Referencia'];?></h2>                        
+                    <h2>Descrição: </h2>                    
+                    <h3><?php echo $atividade_data['TABATV_Descricao'];?></h3>                        
+                    
+                    
+                    <h2>Atividade Criada Por <?php
                     
                         //Carrega o apelido/fantasia do Criador da Atividade ao Ar Livre
-                        $usuario = $atividade['TABUSU_Codigo'];
+                        $usuario = $atividade_data['TABUSU_Codigo'];
                         $registroUsuario = "SELECT * FROM TABUSU WHERE TABUSU_Codigo = $usuario";                       
                         $queryRegistroUsuario = $mysqli->query($registroUsuario) or die(mysql_error());
                         $usuario_data = mysqli_fetch_array($queryRegistroUsuario);
                         $tipousuario = $usuario_data['TIPUSU_Codigo'];
-    
+
                         switch($tipousuario){
                             //Administrador
                             case 1:
@@ -85,28 +89,17 @@
                                 break;                        
                         }
                     
-                    ?></h5>
-                    <h5>
-                        <a href="../atividades_ao_ar_livre/atividade_extendida.php?atividade=<?php echo $atividade['TABATV_Codigo'];?>">Ver Detalhes</a>  
-                        <?php
-                        if($_SESSION['CODIGO'] == $atividade['TABUSU_Codigo']){?>                            
-                            &nbsp;&nbsp;&nbsp;
-                            <a href="../atividades_ao_ar_livre/update/update_atividade.php?codigo=<?php echo $atividade['TABATV_Codigo'];?>">Editar Atividade</a>
-                            &nbsp;&nbsp;&nbsp;
-                            <a href="../atividades_ao_ar_livre/delete/delete_atividadePHP.php?codigo=<?php echo $atividade['TABATV_Codigo'];?>">Excluir Atividade</a>
-                        <?php
-                        }
-                        ?>
-                        
-                    </h5>          
-                </div><?php               
-            }                       
-        }else{?>
-            <div>
-                <h3>Sem Atividades Ao Ar Livre Cadastradas!</h3>
-            </div>            
-        <?php 
-        }?>                                                   
+                    ?></h2>
+                </div>   
+            </center>
+        <?php
+        }else{
+            header ("Location: ../home/home.php");
+        }       
+    
+    }else{
+        header ("Location: ../home/home.php");
+    }?>                                                   
 
 </body>
 </html>

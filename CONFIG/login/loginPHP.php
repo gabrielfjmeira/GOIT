@@ -38,7 +38,7 @@
                         $_SESSION['TIPOUSUARIO']  = $tipoUsuario;
                         $_SESSION ['LOGGED'] = True;
                         
-                        header("Location: ../home/home.php");
+                        header("Location: ../../PAGES/home/home.php");
                     } else{
                         header("Location: ../../index.php?error=003");                        
                     }
@@ -58,7 +58,7 @@
                         $_SESSION['TIPOUSUARIO']  = $tipoUsuario;
                         $_SESSION ['LOGGED'] = True;
                         
-                        header("Location: ../home/home.php");
+                        header("Location: ../../PAGES/home/home.php");
                     } else{
                         header("Location: ../../index.php?error=003");                        
                     }
@@ -69,7 +69,7 @@
                     $_SESSION['TIPOUSUARIO']  = $tipoUsuario;
                     $_SESSION ['LOGGED'] = True;
                     
-                    header("Location: ../home/home.php");
+                    header("Location: ../../PAGES/home/home.php");
                 }
                 
             }else{

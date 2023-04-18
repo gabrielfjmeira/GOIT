@@ -33,7 +33,7 @@
 
     <!--Formulário de Login-->
     <section class="form">
-        <form id="formLogin" name="formLogin" action="./PAGES/login/loginPHP.php" method="POST" onsubmit="return formLoginOnSubmit();">
+        <form id="formLogin" class = "form" name="formLogin" action="./CONFIG/login/loginPHP.php" method="POST" onsubmit="return formLoginOnSubmit();">
         
             <div class="input-wrapper">
                 <label>Usuário/e-mail: </label>         
@@ -52,7 +52,7 @@
             </p> -->
             
             <button type="submit"> Entrar </button>
-            <div class="wrapper-cadastrar">
+            <div class="wrapper-cadastrar-login">
                 <p> Não possui login ainda?</p>
                 <a href="./PAGES/usuarios/selecao_tipoUsuario.php">Cadastre-se aqui</a>
             </div>

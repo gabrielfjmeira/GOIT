@@ -1,4 +1,11 @@
+a {
+    color: var(--blue);
+}
+
 body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background: var(--brown);
     width: 100vw;
     padding: 1.6rem 3.2rem;
@@ -24,16 +31,28 @@ header {
 }
 
 .form {
+    display: grid;
+    gap: 2.4rem;
     color: var(--light-gray);
     margin-top: 5.6rem;
+    width: 100%;
+
+    max-width: 500px;
 }
 
-#formCadastroUsuarios {
-    display: grid;
+#formCadastroTipoUsuarios {
     gap: 8.8rem;
 }
 
+input {
+    background: transparent;
+    border: 1px solid var(--white);
+    color: var(--white);
+    border-radius: .8rem;
 
+    width: 100%;
+    padding: 1.6rem 1.2rem ;
+}
 
 .input-wrapper select {
     padding: 1.6rem .8rem;
@@ -60,4 +79,10 @@ header {
 .input-wrapper {
     display: grid;
     gap:    .4rem;
+}
+
+.wrapper-cadastrar-login {
+    display: grid;
+    gap: .8rem;
+    text-align: center;
 }

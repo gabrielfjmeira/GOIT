@@ -13,8 +13,8 @@
     }
 
     //Carrega os Registros da Tabela de Tipos de Usuários
-    $tiposUsuarios = "SELECT * FROM TIPUSU ORDER BY TIPUSU_Codigo ASC";
-    $queryTiposUsuarios = $mysqli->query($tiposUsuarios) or die("Falha na execução do código sql" . $mysqli->error);
+    $categoriasAtividades = "SELECT * FROM CATATV ORDER BY CATATV_Codigo ASC";
+    $queryCategoriasAtividades = $mysqli->query($categoriasAtividades) or die("Falha na execução do código sql" . $mysqli->error);
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +33,7 @@
     <center>
         <!--Cabeçalho-->    
         <header>        
-            <h1>GERENCIAR TIPOS DE USUÁRIOS</h1>              
+            <h1>GERENCIAR CATEGORIAS DE ATIVIDADES AO AR LIVRE</h1>              
         </header>
 
         <!--Registros do Banco-->
@@ -43,32 +43,35 @@
                     <tr>
                         <th scope="col" hidden>#</th>
                         <th scope="col"   width="200px">Descrição</th> 
-                        <th scope="col"   width="100px">Administrador</th>
+                        <th scope="col"   width="100px">Risco de Atividade ao Ar Livre</th>
                         <th width='270px' width="270px">Ações</th>
                     </tr>                
                 </thead>   
                 <tbody>
                     <?php
-                        if($queryTiposUsuarios->num_rows > 0){                  
-                            while($tiposUsuarios_data = mysqli_fetch_assoc($queryTiposUsuarios)){                           
-                                $codigo = $tiposUsuarios_data['TIPUSU_Codigo'];?>
+                        if($queryCategoriasAtividades->num_rows > 0){                  
+                            while($categoriasatv_data = mysqli_fetch_assoc($queryCategoriasAtividades)){                           
+                                $codigo = $categoriasatv_data['CATATV_Codigo'];
+                                $codigo_risco = $categoriasatv_data['TABRIS_Codigo'];?>
 
                                 <tr>
                                     <td hidden><?php echo $codigo;?></td>
-                                    <td align="center" width="200px"><?php echo $tiposUsuarios_data['TIPUSU_Descricao'];?></td>                                    
-                                    <?php
-                                    if ($tiposUsuarios_data['TIPUSU_Administrador'] == 1){?>
-                                        <td align="center" width="200px">Sim</td>
-                                    <?php    
-                                    }else{?>
-                                        <td align="center" width="200px">Não</td>
-                                    <?php
-                                    }?>
+                                    <td align="center" width="200px"><?php echo $categoriasatv_data['CATATV_Descricao'];?></td>                                    
+                                    <?php                                    
+                                        //Carrega a Descrição do Risco de Atividade ao Ar Livre
+                                        $riscoAtividade = "SELECT * FROM TABRIS WHERE TABRIS_Codigo = $codigo_risco";
+                                        $queryRiscoAtividade = $mysqli->query($riscoAtividade) or die("Falha na execução do código sql" . $mysqli->error);  
+                                        if($queryRiscoAtividade->num_rows == 1){
+                                            $riscoatv_data = mysqli_fetch_assoc($queryRiscoAtividade);
+                                            $descricao_riscoatv = $riscoatv_data['TABRIS_Descricao'];
+                                        }                                                                           
+                                    ?>
+                                    <td align="center" width="200px"><?php echo $descricao_riscoatv;?></td>
                                     <td align="center" width="270px">
-                                        <a href="./update/update_tiposusuarios.php?codigo=<?php echo $codigo?>">
+                                        <a href="./update/update_categoriasatividades.php?codigo=<?php echo $codigo?>">
                                             <input type="button" class="button-alterar" value="Alterar">
                                         </a>                                        
-                                        <a href="./delete/delete_tiposusuariosPHP.php?codigo=<?php echo $codigo?>">
+                                        <a href="./delete/delete_categoriasatividadesPHP.php?codigo=<?php echo $codigo?>">
                                             <input type="button" value="Excluir">
                                         </a>                                    
                                     </td>
@@ -87,9 +90,9 @@
         </div>  
 
         <div>
-            <!--Inserir Novo Risco de Atividade-->
-            <button type="button" class='button' onclick="location.href='./insert/insert_tiposusuarios.php'">
-                Inserir Tipo de Usuário
+            <!--Inserir Novo Categorias de Atividades ao Ar Livre-->
+            <button type="button" class='button' onclick="location.href='./insert/insert_categoriasatividades.php'">
+                Inserir Categoria de Atividade ao Ar Livre
             </button>
             
             <button onclick="window.location.href = '../admin.php';">
@@ -103,7 +106,7 @@
                 if (isset($_GET['inserido'])){
                     $inserido = $_GET['inserido'];                        
                     if ($inserido == 1){                    
-                        echo "<h4 class='advice'>Tipo de usuário inserido com sucesso!</h4>";
+                        echo "<h4 class='advice'>Categoria de atividade inserida com sucesso!</h4>";
                     }else{
                         echo "<h4 class='advice'></h4>";
                     }
@@ -113,7 +116,7 @@
                 if (isset($_GET['alterado'])){
                     $alterado = $_GET['alterado'];                        
                     if ($alterado == 1){                    
-                        echo "<h4 class='advice'>Tipo de usuário alterado com sucesso!</h4>";
+                        echo "<h4 class='advice'>Categoria de atividade alterada com sucesso!</h4>";
                     }else{
                         echo "<h4 class='advice'></h4>";
                     }
@@ -123,7 +126,7 @@
                 if (isset($_GET['excluido'])){
                     $excluido = $_GET['excluido'];                        
                     if ($excluido == 1){                    
-                        echo "<h4 class='advice'>Tipo de usuário excluído com sucesso!</h4>";
+                        echo "<h4 class='advice'>Categoria de atividade excluída com sucesso!</h4>";
                     }else{
                         echo "<h4 class='advice'></h4>";
                     }
@@ -133,11 +136,12 @@
                 if (isset($_GET['error'])){
                     $error = $_GET['error'];                        
                     if ($error == 1){                    
-                        echo "<h4 class='advice'>Existem usuários cadastrados com este tipo de usuário, impossível continuar!</h4>";
+                        echo "<h4 class='advice'>Existem atividades ao ar livre cadastradas com esta categoria, impossível continuar!</h4>";
                     }else{
                         echo "<h4 class='advice'></h4>";
                     }
                 }
+
             ?>
         </div>
        

@@ -16,75 +16,100 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../CSS/style.css">
+    <link rel="stylesheet" href="../../../CSS/loginCadastro.css">
+    <link rel="stylesheet" href="../../../CSS/cadastro.css">
+
 
     <!--Título da Página-->
     <title>GO🐐IT | A Social Adventure</title>
 </head>
 <body>
     <!--Cabeçalho-->
-    <section class="header">
-        <center>
-            <h1>GO🐐IT | A Social Adventure</h1>
-            <button onclick="window.location.href = '../selecao_tipoUsuario.php'">
-                Voltar ⬅
-            </button> 
-        </center>
-    </section>
+    <header>
+        <img src="../../../ASSETS/logoWhite.png" class = "logo" alt="Logo Go It">
+        <h1>Cadastro</h1> 
+    </header>
 
     <!--Formulário-->
-    <section class="form">
-        <form id="formCadastroPraticante" name="formCadastroPraticante" action="insert_praticantePHP.php" method="POST" onsubmit="return formCadastroPraticanteOnSubmit();">
-            <center>
-                <h1>Cadastro de Praticante</h1>
-                
-                <label>Nome: </label>
-                <input type="text" id="txtNome" name="txtNome" placeholder="Nome" class="input" required/><br><br>
-                
-                <label>Apelido: </label>
-                <input type="text" id="txtApelido" name="txtApelido" placeholder="Apelido" class="input" required/>
-                <?php
+    <form id="formCadastroPraticante" class ="form" name="formCadastroPraticante" action="insert_praticantePHP.php" method="POST" onsubmit="return formCadastroPraticanteOnSubmit();">
+            
+        <div class="input-wrapper">
+            <label>Nome: </label>
+            <input type="text" id="txtNome" name="txtNome" placeholder="Nome" class="input" required/>
+        </div>
 
-                    $error = $_GET['error'];
+        <div class="input-wrapper">
+            <label>Apelido: </label>
+            <input type="text" id="txtApelido" name="txtApelido" placeholder="Apelido" class="input" required/>
+        </div>
 
-                    if ($error == 001){
-                        echo "<p class='error'>Apelido já está sendo utilizado.</p><br>"; 
-                    }else{
-                        echo "<p class='error'></p><br>";
-                    }                
-                ?>
-                <label>Data de Nascimento: </label>
-                <input type="date" id="dataNascimento" name="dataNascimento" placeholder="Data de Nascimento" class="input" required/><br><br>
+        <?php
 
-                <label>Sexo:</label>
-                <input type="radio" id="sexo_m" name="sexo" value="0" required>
-                <label>Masculino</label>
-                <input type="radio" id="sexo_f" name="sexo" value="1" required>
-                <label>Feminino</label>
-                <input type="radio" id="sexo_o" name="sexo" value="2" required>
-                <label>Outro</label><br><br>
+            $error = $_GET['error'];
 
-                <label>Email: </label>
-                <input type="text" id="txtEmail" name="txtEmail" placeholder="Email" class="input" required/><br><br>
+            if ($error == 001){
+                echo "<p class='error'>Apelido já está sendo utilizado.</p><br>"; 
+            }
+            // else{
+            //     echo "<p class='error'></p>";
+            // }                
+        ?>
+        <div class="input-wrapper">
+            <label>Data de Nascimento: </label>
+            <input type="date" id="dataNascimento" name="dataNascimento" placeholder="Data de Nascimento" class="input" required/>
+        </div>
+        
+        <div class="input-wrapper">
+            <label>Sexo:</label>
+                <div class = "input-sexo">
+                    <div class="input-radio">
+                        <input type="radio" id="sexo_m" name="sexo" value="0" required>
+                        <label>Masculino</label>
+                    </div>
 
-                <label>Senha: </label>
-                <input type="password" id="txtSenha" name="txtSenha" placeholder="Senha" class="input" required/><br><br>
+                    <div class="input-radio">
+                        <input type="radio" id="sexo_f" name="sexo" value="1" required>
+                        <label>Feminino</label>
+                    </div>
 
-                <label>Confirme sua Senha: </label>
-                <input type="password" id="txtSenhaConfirmada" name="txtSenhaConfirmada" placeholder="Confirme sua Senha" class="input" required/><br><br>
+                    <div class="input-radio">
+                        <input type="radio" id="sexo_o" name="sexo" value="2" required>
+                        <label>Outro</label>
+                    </div>
+                </div>
+        </div>
 
-                <p>
-                    <label>Mostrar senha</label>                
-                    <input type="checkbox" onclick="mostrarSenha();"><br><br>
-                </p>
+        <div class="input-wrapper">
+            <label>Email: </label>
+            <input type="text" id="txtEmail" name="txtEmail" placeholder="Email" class="input" required/>
+        </div>
 
-                <button type="submit"> Cadastrar </button>
-                <p> Já possuí Login? <a href="../../index.html">Realizar Login</a></p> 
-            </center>
-        </form>
+        <div class="input-wrapper">
+            <label>Senha: </label>
+            <input type="password" id="txtSenha" name="txtSenha" placeholder="Senha" class="input" required/>
+        </div>
+
+        <div class="input-wrapper">
+            <label>Confirme sua Senha: </label>
+            <input type="password" id="txtSenhaConfirmada" name="txtSenhaConfirmada" placeholder="Confirme sua Senha" class="input" required/>
+        </div>
+
+        <div class = "show-password">
+            <label>Mostrar senha</label>                
+            <input type="checkbox" onclick="mostrarSenha();">
+        </div>
+
+        <button type="submit"> Cadastrar </button>
+
+        <div class="wrapper-cadastrar-login">
+            <p>Já possui cadastro?</p>
+            <a href="../../../index.php">Login aqui</a>
+        </div>
+
+    </form>
 
         <!--Script-->        
         <script type="text/javascript" src="../../../JAVASCRIPT/functions.js"></script>
         
-    </section>
 </body>
 </html>
