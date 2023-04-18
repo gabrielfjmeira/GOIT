@@ -6,12 +6,7 @@
     if (!$_SESSION['LOGGED']){
         header ("Location: ../../../index.php?error=4");
     }
-
-    //Verifica se é um Admin
-    if ($_SESSION['TIPOUSUARIO'] != 1){
-        header ("Location: ../../home/home.php");
-    }
-
+    
     //Excluí a Atividade se Receber seu Código
     if (isset($_GET['codigo'])){
         $codigo = $_GET['codigo'];               

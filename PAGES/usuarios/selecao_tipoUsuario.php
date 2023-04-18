@@ -38,29 +38,27 @@
     </header>
 
     <!--Seleção do Tipo de Usuário-->
-    <section class = "form">
-        <form id="formCadastroUsuarios" name="formCadastroUsuarios" action="redirecionar_usuarioPHP.php" method="post">
-            
-            <div class="input-wrapper">
-                <label>Selecione o seu tipo de usuário:</label>
-                <select name="tipoUsuario" required>
+    <form id="formCadastroTipoUsuarios" name="formCadastroUsuarios" action="redirecionar_usuarioPHP.php" method="post" class="form">
         
-                    <option value="" selected disabled="disabled" hidden>Escolha uma opção</option>
-                    <?php                
-                        while($tipoUsuario = mysqli_fetch_array($resultTipoUsuarios)){
-                            $tipusu_Codigo = $tipoUsuario['TIPUSU_Codigo'];
-                            $tipusu_Descricao = $tipoUsuario['TIPUSU_Descricao'];
-                            $tipusu_Administrador = $tipoUsuario['TIPUSU_Administrador'];  
+        <div class="input-wrapper">
+            <label>Selecione o seu tipo de usuário:</label>
+            <select name="tipoUsuario" required>
+    
+                <option value="" selected disabled="disabled" hidden>Escolha uma opção</option>
+                <?php                
+                    while($tipoUsuario = mysqli_fetch_array($resultTipoUsuarios)){
+                        $tipusu_Codigo = $tipoUsuario['TIPUSU_Codigo'];
+                        $tipusu_Descricao = $tipoUsuario['TIPUSU_Descricao'];
+                        $tipusu_Administrador = $tipoUsuario['TIPUSU_Administrador'];  
 
-                            if ($tipusu_Administrador != 1){
-                                echo "<option value='".$tipusu_Codigo."'>". $tipusu_Descricao."</option>";                                       
-                            }                                                                          
-                        }
-                    ?>                                                           
-                </select>
-            </div>
-            <button type="submit">Próximo</button>
-        </form>
-    </section>           
+                        if ($tipusu_Administrador != 1){
+                            echo "<option value='".$tipusu_Codigo."'>". $tipusu_Descricao."</option>";                                       
+                        }                                                                          
+                    }
+                ?>                                                           
+            </select>
+        </div>
+        <button type="submit">Próximo</button>
+    </form>           
 </body>
 </html>

@@ -6,12 +6,7 @@
     if (!$_SESSION['LOGGED']){
         header ("Location: ../../../index.php?error=4");
     }
-
-    //Verifica se é um Admin
-    if ($_SESSION['TIPOUSUARIO'] != 1){
-        header ("Location: ../../home/home.php");
-    }
-
+    
     //Carrega o Registro do Banco
     if (isset($_GET['codigo'])){
         $codigo = $_GET['codigo'];
@@ -72,7 +67,7 @@
                 <input type="text" id="txtTitulo" name="txtTitulo" placeholder="Título" value="<?php echo $titulo;?>" class="input" required/><br><br>
 
                 <label>Descrição: </label>
-                <input type="text" id="txtDescricao" name="txtDescricao" placeholder="Descricao" value="<?php echo $descricao;?>" class="input" required/><br><br>
+                <textarea type="text" id="txtDescricao" name="txtDescricao" placeholder="Descricao" class="input" required><?php echo $descricao;?></textarea><br><br>
                 
                 <label>Categoria da Atividade ao Ar Livre: </label>
                 <select name="categoriaAtividade" required>                            
