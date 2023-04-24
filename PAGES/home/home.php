@@ -139,7 +139,7 @@
                             </h5> -->
 
                             
-                            <a onclick="modalPostView(`<?php $atividade['TABATV_Titulo'];?>` , `<?php $atividade['TABATV_Data']; ?>` , `<?php $atividade['TABATV_Hora']; ?>` , `<?php $atividade['TABATV_Localizacao']?>`);">Saiba mais</a>  
+                            <a onclick="modalPostView('<?php echo $atividade['TABATV_Titulo'];?>', '<?php echo $atividade['TABATV_Data']; ?>', '<?php echo $atividade['TABATV_Hora']; ?>', '<?php echo $atividade['TABATV_Localizacao']?>');">Saiba mais</a>  
                             <?php
                             if($_SESSION['CODIGO'] == $atividade['TABUSU_Codigo']){?>                            
                                 
@@ -164,7 +164,7 @@
         
         <footer>
             <nav class="flex">
-                <button><img src="../../ASSETS/buttonChats.svg" alt=""></button>
+                <button><img src="../../ASSETS/logOut.svg" alt="" onclick="location.href= '../../CONFIG/login/logout.php;' "></button>
                 <button><img src="../../ASSETS/buttonNewPubli.svg" alt="" onclick="location.href ='../atividades_ao_ar_livre/insert/insert_atividade.php';"></button>
                 <button><img src="../../ASSETS/buttonPerfil.svg" alt=""></button>
             </nav>
