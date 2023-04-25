@@ -4,11 +4,10 @@
     $queryCategorias = $mysqli->query($categorias) or die(mysql_error());    
 
     while($categoria = mysqli_fetch_array($queryCategorias)){
+        
         $catatv_codigo = $categoria['CATATV_Codigo'];
         $catatv_descricao = $categoria['CATATV_Descricao'];?>
-        <div>
-            <h3><a href="../categorias/categorias_home.php?categoriafiltrada=<?php echo $catatv_codigo;?>"><?php echo $catatv_descricao;?></a></h3>
-        </div>                                                                                          
+        <button onclick="location.href ='../categorias/categorias_home.php?categoriafiltrada=<?php echo $catatv_codigo;?>';"><?php echo $catatv_descricao;?></button>                                                                                        
     <?php    
     }
 ?>
