@@ -20,99 +20,225 @@
     <!--Configurações-->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    
+    <link rel="stylesheet" href="../../CSS/home.css">
 
     <!--Título da Página-->
     <title>GO🐐IT | A Social Adventure</title>
 </head>
 <body>
-    <!--Conteúdo-->    
-    <h1>HOME</h1>    
+    
+    <div class="background-blur" style="display: none;" onclick="exitModal();">
 
-    <?php
-        if ($_SESSION['TIPOUSUARIO'] == 1){
-            include('../templates/headers/header_adm.html');
-        } else{
-            include('../templates/headers/header_users.html');
+        <div class="modal-post" style="display: none;">
+
+            <div class="title-post">
+                <ion-icon name="calendar-clear"></ion-icon>
+                <h3>Escalada no pico pão de Loth, localizado  em Quatro Barras</h3>
+                <p>10/04/2023</p>
+            </div>
+
+            <img src="../../ASSETS/paisagem.png" alt="post-image">
+
+            <div class="time-wrapper wrapper">
+                <h2>Horário <ion-icon name="time-outline"></ion-icon> </h2>
+                <p>13:40</p>
+            </div>
+
+            <div class="localization-wrapper wrapper">
+                <h2>Local do Evento <ion-icon name="location-sharp"></ion-icon> </h2>
+                <p>Rua José da Silva Guedes 345, Atuba, Curitiba</p>
+            </div>
+
+            <div class="instructor-wrapper wrapper">
+                <h2>Instrutor responsável <ion-icon name="man"></ion-icon> </h2>
+                <div class="instructor">
+                    <img src="./assets/bibo.png" alt="instrutor image">
+                    <a href="#">Gabriel Felipe Jess Meira</a>
+                </div>
+            </div>
+
+            <button>Participar</button>
+
+        </div>
+
+    </div>
+
+    <div id="app">
+        <img onclick="location.href= '../home/home.php'" src="../../ASSETS/Logo.png" alt="Logo go it" id="logo-header" style="cursor: pointer;">
+        
+        <!-- <?php
+        // if ($_SESSION['TIPOUSUARIO'] == 1){
+        //     include('../templates/headers/header_adm.html');
+        // } else{
+        //     include('../templates/headers/header_users.html');
+        // }
+        ?> -->
+
+        <!-- //Imprime as Categorias para Filtrar a Aplicação -->
+        <header class="activities-list flex">
+        <?php
+            //Imprime as Categorias para Filtrar a Aplicação
+            $categorias = "SELECT * FROM CATATV ORDER BY CATATV_Descricao ASC"; 
+            $queryCategorias = $mysqli->query($categorias) or die(mysql_error());    
+
+            while($categoria = mysqli_fetch_array($queryCategorias)){
+                
+                $catatv_codigo = $categoria['CATATV_Codigo'];
+                $catatv_descricao = $categoria['CATATV_Descricao'];?>
+                <?php if($catatv_codigo == $categoriafiltrada){?>
+                    <button class="onPage" onclick="location.href ='../categorias/categorias_home.php?categoriafiltrada=<?php echo $catatv_codigo;?>';"><?php echo $catatv_descricao;?></button>                                                                                        
+                <?php
+                }else{?>
+                    <button onclick="location.href ='../categorias/categorias_home.php?categoriafiltrada=<?php echo $catatv_codigo;?>';"><?php echo $catatv_descricao;?></button>                                                                                        
+                <?php   
+                }               
+            }
+        ?>
+        </header>
+    
+        <main>
+            <div class="search-wrapper flex">
+                <ion-icon name="search-outline"></ion-icon>
+                <input type="text" id="search-input" placeholder="Search">
+            </div>
+
+            <section class="eventsAndGroups flex">
+
+                <?php
+                //Imprime Atividades ao Ar Livre         
+                $atividades = "SELECT * FROM TABATV WHERE CATATV_Codigo=$categoriafiltrada ORDER BY TABATV_Data ASC";                    
+                $queryAtividades = $mysqli->query($atividades) or die(mysql_error());
+
+                if ($queryAtividades->num_rows > 0){
+                    while($atividade = mysqli_fetch_array($queryAtividades)){?>
+                        <div class="event">
+                            <p class="date-event"><?php echo $atividade['TABATV_Data'];?></p>
+                            <div class="title-post">
+                                <h5><?php echo $atividade['TABATV_Titulo'];?></h5>
+                                <ion-icon name="calendar-clear"></ion-icon>
+                            </div>
+                
+                            <!-- <h5>Atividade Criada Por <?php
+                            
+                                //Carrega o apelido/fantasia do Criador da Atividade ao Ar Livre
+                                $usuario = $atividade['TABUSU_Codigo'];
+                                $registroUsuario = "SELECT * FROM TABUSU WHERE TABUSU_Codigo = $usuario";                       
+                                $queryRegistroUsuario = $mysqli->query($registroUsuario) or die(mysql_error());
+                                $usuario_data = mysqli_fetch_array($queryRegistroUsuario);
+                                $tipousuario = $usuario_data['TIPUSU_Codigo'];
+            
+                                switch($tipousuario){
+                                    //Administrador
+                                    case 1:
+                                        echo "Administrador";
+                                        break;                        
+                                    //Praticante
+                                    case 2:
+                                        $praticante = "SELECT * FROM TABPRA WHERE TABUSU_Codigo = $usuario";
+                                        $queryPraticante = $mysqli->query($praticante) or die(mysql_error());
+                                        $praticante_data = mysqli_fetch_array($queryPraticante);
+                                        echo $praticante_data['TABPRA_Apelido'];
+                                        break;                        
+                                    //Instrutor                        
+                                    case 3:
+                                        $instrutor = "SELECT * FROM TABINS WHERE TABUSU_Codigo = $usuario";
+                                        $queryInstrutor = $mysqli->query($instrutor) or die(mysql_error());
+                                        $instrutor_data = mysqli_fetch_array($queryInstrutor);
+                                        echo $instrutor_data['TABINS_Apelido'];
+                                        break;                        
+                                    //Lojista
+                                    case 4:
+                                        $lojista = "SELECT * FROM TABLOJ WHERE TABUSU_Codigo = $usuario";
+                                        $queryLojista = $mysqli->query($lojista) or die(mysql_error());
+                                        $lojista_data = mysqli_fetch_array($queryLojista);
+                                        echo $lojista_data['TABLOJ_Fantasia'];
+                                        break;                        
+                                }
+                            
+                            ?>
+                            </h5> -->
+
+                            
+                            <a onclick="modalPostView('<?php echo $atividade['TABATV_Titulo'];?>', '<?php echo $atividade['TABATV_Data']; ?>', '<?php echo $atividade['TABATV_Hora']; ?>', '<?php echo $atividade['TABATV_Localizacao']?>');">Saiba mais</a>  
+                            <?php
+                            if($_SESSION['CODIGO'] == $atividade['TABUSU_Codigo']){?>                            
+                                
+                                <a href="../atividades_ao_ar_livre/update/update_atividade.php?codigo=<?php echo $atividade['TABATV_Codigo'];?>">Editar Atividade</a>
+                                
+                                <a href="../atividades_ao_ar_livre/delete/delete_atividadePHP.php?codigo=<?php echo $atividade['TABATV_Codigo'];?>">Excluir Atividade</a>
+                            <?php
+                            }
+                            ?>
+                                          
+                        </div><?php               
+                    }                       
+                }else{ ?>
+            
+                    <h3>Sem Atividades Ao Ar Livre Cadastradas!</h3>
+       
+                <?php 
+                }
+                ?>
+            </section>
+        </main>
+        
+        <footer>
+            <nav class="flex">
+                <button><img src="../../ASSETS/logOut.svg" alt="" onclick="location.href= '../../CONFIG/login/logout.php' "></button>
+                <?php 
+                //Verifica se é um Admin
+                if ($_SESSION['TIPOUSUARIO'] == 1){?>
+                    <button><img src="../../ASSETS/admin.svg" alt="" onclick="location.href= '../admin/admin.php' "></button>   
+                <?php 
+                }?>                
+                <button><img src="../../ASSETS/buttonNewPubli.svg" alt="" onclick="location.href ='../atividades_ao_ar_livre/insert/insert_atividade.php';"></button>
+                <button><img src="../../ASSETS/buttonPerfil.svg" alt=""></button>
+            </nav>
+        </footer>
+    </div>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <script>
+        bgblur = document.querySelector(".background-blur")
+        modalProduct = document.querySelector(".modal-product")
+        modalPost = document.querySelector(".modal-post")
+
+        function modalProductView() {
+            bgblur.setAttribute("style" , "display: ")
+            modalProduct.setAttribute("style" , "display: ")
         }
 
-        //Imprime as Categorias para Filtrar a Aplicação
-        include('../templates/categorias.php');
-        ?>
-        <h1>PUBLICAÇÕES:</h1>
+        function modalPostView(titulo, data, hora, local) {
+            var title = document.querySelector(".title-post h3")
+            title.innerHTML = titulo
+            var date = document.querySelector(".title-post p")
+            date.innerHTML = data
+            var time = document.querySelector(".time-wrapper p")
+            time.innerHTML = hora
+            var localization = document.querySelector(".localization-wrapper p")
+            localization.innerHTML = local
 
-        <?php
+            bgblur.setAttribute("style" , "display: ")
+            modalPost.setAttribute("style" , "display: ")
+        }
 
-        //Imprime Atividades ao Ar Livre         
-        $atividades = "SELECT * FROM TABATV WHERE CATATV_Codigo=$categoriafiltrada ORDER BY TABATV_Data ASC";                    
-        $queryAtividades = $mysqli->query($atividades) or die(mysql_error());
-
-        if ($queryAtividades->num_rows > 0){
-            while($atividade = mysqli_fetch_array($queryAtividades)){?>
-                <div class="publicacao">
-                    <h3><?php echo $atividade['TABATV_Titulo'];?></h3>                      
-                    <h4>Data: <?php echo $atividade['TABATV_Data'];?></h4>
-                    <h4>Hora: <?php echo $atividade['TABATV_Hora'];?></h4>
-                    <h4>Localização: <?php echo $atividade['TABATV_Localizacao'];?></h4>                    
-                    <h5>Atividade Criada Por <?php
-                    
-                        //Carrega o apelido/fantasia do Criador da Atividade ao Ar Livre
-                        $usuario = $atividade['TABUSU_Codigo'];
-                        $registroUsuario = "SELECT * FROM TABUSU WHERE TABUSU_Codigo = $usuario";                       
-                        $queryRegistroUsuario = $mysqli->query($registroUsuario) or die(mysql_error());
-                        $usuario_data = mysqli_fetch_array($queryRegistroUsuario);
-                        $tipousuario = $usuario_data['TIPUSU_Codigo'];
-    
-                        switch($tipousuario){
-                            //Administrador
-                            case 1:
-                                echo "Administrador";
-                                break;                        
-                            //Praticante
-                            case 2:
-                                $praticante = "SELECT * FROM TABPRA WHERE TABUSU_Codigo = $usuario";
-                                $queryPraticante = $mysqli->query($praticante) or die(mysql_error());
-                                $praticante_data = mysqli_fetch_array($queryPraticante);
-                                echo $praticante_data['TABPRA_Apelido'];
-                                break;                        
-                            //Instrutor                        
-                            case 3:
-                                $instrutor = "SELECT * FROM TABINS WHERE TABUSU_Codigo = $usuario";
-                                $queryInstrutor = $mysqli->query($instrutor) or die(mysql_error());
-                                $instrutor_data = mysqli_fetch_array($queryInstrutor);
-                                echo $instrutor_data['TABINS_Apelido'];
-                                break;                        
-                            //Lojista
-                            case 4:
-                                $lojista = "SELECT * FROM TABLOJ WHERE TABUSU_Codigo = $usuario";
-                                $queryLojista = $mysqli->query($lojista) or die(mysql_error());
-                                $lojista_data = mysqli_fetch_array($queryLojista);
-                                echo $lojista_data['TABLOJ_Fantasia'];
-                                break;                        
-                        }
-                    
-                    ?></h5>
-                    <h5>
-                        <a href="../atividades_ao_ar_livre/atividade_extendida.php?atividade=<?php echo $atividade['TABATV_Codigo'];?>">Ver Detalhes</a>  
-                        <?php
-                        if($_SESSION['CODIGO'] == $atividade['TABUSU_Codigo']){?>                            
-                            &nbsp;&nbsp;&nbsp;
-                            <a href="../atividades_ao_ar_livre/update/update_atividade.php?codigo=<?php echo $atividade['TABATV_Codigo'];?>">Editar Atividade</a>
-                            &nbsp;&nbsp;&nbsp;
-                            <a href="../atividades_ao_ar_livre/delete/delete_atividadePHP.php?codigo=<?php echo $atividade['TABATV_Codigo'];?>">Excluir Atividade</a>
-                        <?php
-                        }
-                        ?>
-                        
-                    </h5>          
-                </div><?php               
-            }                       
-        }else{?>
-            <div>
-                <h3>Sem Atividades Ao Ar Livre Cadastradas!</h3>
-            </div>            
-        <?php 
-        }?>                                                   
-
+        function exitModal(){
+            bgblur.addEventListener("click", function(event){
+                
+                if(event.target.closest(".modal-product") || event.target.closest(".modal-post")){
+                    return
+                }
+                else {
+                    bgblur.setAttribute("style", "display: none;" )
+                    modalProduct.setAttribute("style", "display: none;")
+                    modalPost.setAttribute("style", "display: none;")
+                }
+            }); 
+        }
+    </script>
 </body>
 </html>

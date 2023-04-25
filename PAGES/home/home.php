@@ -46,10 +46,10 @@
             </div>
 
             <div class="instructor-wrapper wrapper">
-                <h2>Instrutor responsável <ion-icon name="man"></ion-icon> </h2>
+                <h2>Responsável <ion-icon name="man"></ion-icon> </h2>
                 <div class="instructor">
                     <img src="./assets/bibo.png" alt="instrutor image">
-                    <a href="#">Gabriel Felipe Jess Meira</a>
+                    <a href="#" class="user">Gabriel Felipe Jess Meira</a>
                 </div>
             </div>
 
@@ -60,7 +60,7 @@
     </div>
 
     <div id="app">
-        <img src="../../ASSETS/Logo.png" alt="Logo go it" id="logo-header">
+        <img onclick="location.href= './home.php'" src="../../ASSETS/Logo.png" alt="Logo go it" id="logo-header" style="cursor: pointer;">
         
         <!-- <?php
         // if ($_SESSION['TIPOUSUARIO'] == 1){
@@ -110,36 +110,35 @@
                                 switch($tipousuario){
                                     //Administrador
                                     case 1:
-                                        echo "Administrador";
+                                        $apelido = "Admin";
                                         break;                        
                                     //Praticante
                                     case 2:
                                         $praticante = "SELECT * FROM TABPRA WHERE TABUSU_Codigo = $usuario";
-                                        $queryPraticante = $mysqli->query($praticante) or die(mysql_error());
+                                        $queryPraticante = $mysqli->query($praticante) or die(mysql_error());                                       
                                         $praticante_data = mysqli_fetch_array($queryPraticante);
-                                        echo $praticante_data['TABPRA_Apelido'];
+                                        $apelido = $praticante_data['TABPRA_Apelido'];                                        
                                         break;                        
                                     //Instrutor                        
                                     case 3:
                                         $instrutor = "SELECT * FROM TABINS WHERE TABUSU_Codigo = $usuario";
                                         $queryInstrutor = $mysqli->query($instrutor) or die(mysql_error());
                                         $instrutor_data = mysqli_fetch_array($queryInstrutor);
-                                        echo $instrutor_data['TABINS_Apelido'];
+                                        $apelido = $instrutor_data['TABINS_Apelido'];
                                         break;                        
                                     //Lojista
                                     case 4:
                                         $lojista = "SELECT * FROM TABLOJ WHERE TABUSU_Codigo = $usuario";
                                         $queryLojista = $mysqli->query($lojista) or die(mysql_error());
                                         $lojista_data = mysqli_fetch_array($queryLojista);
-                                        echo $lojista_data['TABLOJ_Fantasia'];
+                                        $apelido = $lojista_data['TABLOJ_Fantasia'];
                                         break;                        
                                 }
                             
                             ?>
                             </h5> -->
-
-                            
-                            <a onclick="modalPostView('<?php echo $atividade['TABATV_Titulo'];?>', '<?php echo $atividade['TABATV_Data']; ?>', '<?php echo $atividade['TABATV_Hora']; ?>', '<?php echo $atividade['TABATV_Localizacao']?>');">Saiba mais</a>  
+                           
+                            <a onclick="modalPostView('<?php echo $atividade['TABATV_Titulo'];?>', '<?php echo $atividade['TABATV_Data']; ?>', '<?php echo $atividade['TABATV_Hora']; ?>', '<?php echo $atividade['TABATV_Localizacao']?>', '<?php echo $apelido?>');">Saiba mais</a>  
                             <?php
                             if($_SESSION['CODIGO'] == $atividade['TABUSU_Codigo']){?>                            
                                 
@@ -164,7 +163,13 @@
         
         <footer>
             <nav class="flex">
-                <button><img src="../../ASSETS/logOut.svg" alt="" onclick="location.href= '../../CONFIG/login/logout.php;' "></button>
+                <button><img src="../../ASSETS/logOut.svg" alt="" onclick="location.href= '../../CONFIG/login/logout.php' "></button>
+                <?php 
+                //Verifica se é um Admin
+                if ($_SESSION['TIPOUSUARIO'] == 1){?>
+                    <button><img src="../../ASSETS/admin.svg" alt="" onclick="location.href= '../admin/admin.php' "></button>   
+                <?php 
+                }?>                
                 <button><img src="../../ASSETS/buttonNewPubli.svg" alt="" onclick="location.href ='../atividades_ao_ar_livre/insert/insert_atividade.php';"></button>
                 <button><img src="../../ASSETS/buttonPerfil.svg" alt=""></button>
             </nav>
@@ -184,7 +189,7 @@
             modalProduct.setAttribute("style" , "display: ")
         }
 
-        function modalPostView(titulo, data, hora, local) {
+        function modalPostView(titulo, data, hora, local, usuario) {
             var title = document.querySelector(".title-post h3")
             title.innerHTML = titulo
             var date = document.querySelector(".title-post p")
@@ -193,6 +198,8 @@
             time.innerHTML = hora
             var localization = document.querySelector(".localization-wrapper p")
             localization.innerHTML = local
+            var user = document.querySelector(".user")
+            user.innerHTML = usuario
 
             bgblur.setAttribute("style" , "display: ")
             modalPost.setAttribute("style" , "display: ")
