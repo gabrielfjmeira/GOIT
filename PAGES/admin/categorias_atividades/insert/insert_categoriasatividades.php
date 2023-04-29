@@ -42,7 +42,9 @@
                 <h1>Inserir Categoria de Atividade ao Ar Livre</h1>
                 
                 <label>Descrição: </label>
-                <input type="text" id="txtDescricao" name="txtDescricao" placeholder="Descricao" class="input" required/><br><br>
+                <input type="text" id="txtDescricao" name="txtDescricao" placeholder="Descricao" class="input" 
+                pattern="^.{5,30}"
+                title="Descrição deve ter no mínimo 5 e no máximo 30 caracteres!" required/><br><br>
                 
                 <label>Risco de Atividade: </label>
                 <select name="riscoAtividade" required>        

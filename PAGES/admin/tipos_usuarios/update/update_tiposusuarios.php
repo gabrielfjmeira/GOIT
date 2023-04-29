@@ -63,7 +63,9 @@
                 <input type="hidden" id="nbrCodigo" name="nbrCodigo" value=<?php echo $codigo;?>>
 
                 <label>Descrição: </label>
-                <input type="text" id="txtDescricao" name="txtDescricao" placeholder="Descricao" value="<?php echo $descricao;?>" class="input" required/><br><br>               
+                <input type="text" id="txtDescricao" name="txtDescricao" placeholder="Descricao" value="<?php echo $descricao;?>" class="input"
+                pattern="^.{5,13}"
+                title="Descrição deve ter no mínimo 5 e no máximo 13 caracteres!" required/><br><br>               
                                 
                 <label>Administrador? </label>
                 <select id="selAdmin" name="selAdmin" required>
@@ -82,9 +84,7 @@
                 <button type="submit">Alterar</button>                
             </center>
         </form>
-
-        <!--Script-->        
-        <script type="text/javascript" src="../../../../JAVASCRIPT/functions.js"></script>
+    </section>        
     
 </body>
 </html>

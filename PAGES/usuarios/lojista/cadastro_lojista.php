@@ -35,32 +35,44 @@
         
         <div class="input-wrapper">
             <label>Razão Social: </label>
-            <input type="text" id="txtRazaoSocial" name="txtRazaoSocial" placeholder="Razão Social" class="input" required/>
+            <input type="text" id="txtRazaoSocial" name="txtRazaoSocial" placeholder="Razão Social" class="input" 
+            pattern="^.{8,}$" 
+            title="Razão Social deve possuir no mínimo 8 caracteres e no máximo 100 caracteres!" required/>
         </div>
 
         <div class="input-wrapper">    
             <label>Fantasia: </label>
-            <input type="text" id="txtFantasia" name="txtFantasia" placeholder="Fantasia" class="input" required/>
+            <input type="text" id="txtFantasia" name="txtFantasia" placeholder="Fantasia" class="input" 
+            pattern="^.{4,30}$" 
+            title="Fantasia deve possuir no mínimo 4 caracteres e no máximo 30 caracteres!" required/>
         </div>
 
         <div class="input-wrapper">
             <label>CNPJ: </label>
-            <input type="text" id="CNPJ" name="CNPJ" placeholder="CNPJ" onkeypress="MascaraParaCNPJ(this);" class="input" required/>               
+            <input type="text" id="CNPJ" name="CNPJ" placeholder="CNPJ" class="input" 
+            pattern="^[0-9]{14}$" 
+            title="CNPJ deve possuir 14 dígitos: ##############" required/>               
         </div>
 
         <div class="input-wrapper">    
             <label>Email: </label>
-            <input type="text" id="txtEmail" name="txtEmail" placeholder="Email" class="input" required/>
+            <input type="text" id="txtEmail" name="txtEmail" placeholder="Email" class="input" 
+            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" 
+            title="Digite um email válido! Exemplo: email@email.com" required/>
         </div>
         
         <div class="input-wrapper">
             <label>Senha: </label>
-            <input type="password" id="txtSenha" name="txtSenha" placeholder="Senha" class="input" required/>
+            <input type="password" id="txtSenha" name="txtSenha" placeholder="Senha" class="input" 
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}" 
+            title="Deve conter ao menos um número, uma letra maiúscula, uma letra minúscula, um caracter especial, e possuir no mínimo 8 caracteres e no máximo 20 caracteres" required/>
         </div>
 
         <div class="input-wrapper">
             <label>Confirme sua Senha: </label>
-            <input type="password" id="txtSenhaConfirmada" name="txtSenhaConfirmada" placeholder="Confirme sua Senha" class="input" required/>
+            <input type="password" id="txtSenhaConfirmada" name="txtSenhaConfirmada" placeholder="Confirme sua Senha" class="input" 
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}" 
+            title="Deve conter ao menos um número, uma letra maiúscula, uma letra minúscula, um caracter especial, e possuir no mínimo 8 caracteres e no máximo 20 caracteres" required/>
         </div>
 
         <div class = "show-password">
@@ -78,6 +90,38 @@
     </form>
 
         <!--Script-->
-        <script type="text/javascript" src="../../../JAVASCRIPT/functions.js"></script>
+        <script type="text/javascript">
+            //Verificações do Cadastro de Lojista
+            function formCadastroLojistaOnSubmit(){                
+                let txtSenha = document.getElementById('txtSenha');
+                let txtSenhaConfirmada = document.getElementById('txtSenhaConfirmada');
+                
+                //let reSenha= /(?=^.{8,}$)((?=.*\d)(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;                                                                     
+                
+                if (txtSenha.value != txtSenhaConfirmada.value) {
+                    txtSenhaConfirmada.setCustomValidity("Senhas informadas não coincidem!");
+                    txtSenhaConfirmada.reportValidity();
+                    return false;
+                } else {
+                    txtSenhaConfirmada.setCustomValidity("");                    
+                }
+                
+                return true;
+            }
+
+            //Função de Mostrar/Ocultar Senha
+            function mostrarSenha(){
+                let txtSenha = document.getElementById('txtSenha');
+                let txtSenhaConfirmada = document.getElementById('txtSenhaConfirmada');
+                
+                if (txtSenha.type == "password"){
+                    txtSenha.type = "text";
+                    txtSenhaConfirmada.type = "text";
+                } else {
+                    txtSenha.type = "password";
+                    txtSenhaConfirmada.type = "password";
+                }              
+            }
+        </script>
 </body>
 </html>

@@ -42,7 +42,9 @@
                 <h1>Inserir Tipo de Usuário</h1>
                 
                 <label>Descrição: </label>
-                <input type="text" id="txtDescricao" name="txtDescricao" placeholder="Descricao" class="input" required/><br><br>                
+                <input type="text" id="txtDescricao" name="txtDescricao" placeholder="Descricao" class="input" 
+                pattern="^.{5,13}"
+                title="Descrição deve ter no mínimo 5 e no máximo 13 caracteres!" required/><br><br>                
                                 
                 <label>Administrador? </label>
                 <select id="selAdmin" name="selAdmin" required>
@@ -53,9 +55,7 @@
                 <button type="submit">Inserir</button>                
             </center>
         </form>
-
-        <!--Script-->        
-        <script type="text/javascript" src="../../../../JAVASCRIPT/functions.js"></script>
+    </section>        
     
 </body>
 </html>

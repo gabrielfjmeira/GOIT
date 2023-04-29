@@ -28,9 +28,11 @@
 <body>
     
     <button onclick="window.location.href = '../../index.php'" id = "buttonBack">
-        <img src="../../ASSETS/backWhite.svg" alt="Back button" >
-    </button>
+        <img src="../../ASSETS/backWhite.svg" alt="Back button" style="cursor: pointer;">
+    </button>    
     
+    <br><br>
+
     <!--Cabeçalho-->
     <header id = "headerCadastro">
         <img src="../../ASSETS/logoWhite.png" alt="Logo Go It">
