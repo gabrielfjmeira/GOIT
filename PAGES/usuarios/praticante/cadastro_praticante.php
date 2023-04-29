@@ -61,7 +61,7 @@
         <div class="input-wrapper">
             <label>Data de Nascimento: </label>
             <input type="date" id="dataNascimento" name="dataNascimento" placeholder="Data de Nascimento" class="input" 
-            title="dd/mm/aaaa" required/>
+            title="dd/mm/aaaa" onchange="verificar()"  required />
         </div>
         
         <div class="input-wrapper">
@@ -87,7 +87,7 @@
         <div class="input-wrapper">
             <label>Email: </label>
             <input type="text" id="txtEmail" name="txtEmail" placeholder="Email" class="input" 
-            pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" 
+            pattern="^[\w*\.]+@([\w-]+\.)+[\w-]{2,4}$" 
             title="Digite um email válido! Exemplo: email@email.com" required/> 
         </div>
 
@@ -124,14 +124,14 @@
             //Validação do Cadastro do Praticante
             function formCadastroPraticanteOnSubmit(){                                  
                 let dataNascimento = document.getElementById('dataNascimento');
-                let dtDOB = new Date(dataNascimento);
+                let dtDOB = new Date(dataNascimento.value);
                 let dtCurrent = new Date();                                
                 let txtSenha = document.getElementById('txtSenha');
                 let txtSenhaConfirmada = document.getElementById('txtSenhaConfirmada');
                 
                 //let reSenha=  /(?=^.{8,}$)((?=.*\d)(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;    
                 
-                if (dtDOB - dtCurrent < 0){                    
+                if (dtCurrent - dtDOB  < 0){                    
                     dataNascimento.setCustomValidity("Data de Nascimento inválida!");
                     dataNascimento.reportValidity();
                     return false;
