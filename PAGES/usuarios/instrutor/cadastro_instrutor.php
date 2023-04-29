@@ -127,14 +127,14 @@
             //Validação do Cadastro do Instrutor
             function formCadastroInstrutorOnSubmit(){                   
                 let dataNascimento = document.getElementById('dataNascimento');
-                let dtDOB = new Date(dataNascimento);
+                let dtDOB = new Date(dataNascimento.value);
                 let dtCurrent = new Date();                                                
                 let txtSenha = document.getElementById('txtSenha');
                 let txtSenhaConfirmada = document.getElementById('txtSenhaConfirmada');
 
                 //let reEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;                
                 
-                if (dtDOB - dtCurrent < 0){                    
+                if (dtCurrent - dtDOB  < 0){                    
                     dataNascimento.setCustomValidity("Data de Nascimento inválida!");
                     dataNascimento.reportValidity();
                     return false;
@@ -152,6 +152,7 @@
                 
                 return true;
             }
+    
 
             //Função de Mostrar/Ocultar Senha
             function mostrarSenha(){
