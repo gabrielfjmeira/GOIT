@@ -56,8 +56,9 @@
             }
             // else{
             //     echo "<p class='error'></p>";
-            // }                
+            // }      
         ?>
+
         <div class="input-wrapper">
             <label>Data de Nascimento: </label>
             <input type="date" id="dataNascimento" name="dataNascimento" placeholder="Data de Nascimento" class="input" 
@@ -87,7 +88,9 @@
         <div class="input-wrapper">
             <label>Email: </label>
             <input type="text" id="txtEmail" name="txtEmail" placeholder="Email" class="input" 
+
             pattern="^[\w*\.]+@([\w-]+\.)+[\w-]{2,4}$" 
+
             title="Digite um email válido! Exemplo: email@email.com" required/> 
         </div>
 
@@ -125,6 +128,7 @@
             function formCadastroPraticanteOnSubmit(){                                  
                 let dataNascimento = document.getElementById('dataNascimento');
                 let dtDOB = new Date(dataNascimento.value);
+
                 let dtCurrent = new Date();                                
                 let txtSenha = document.getElementById('txtSenha');
                 let txtSenhaConfirmada = document.getElementById('txtSenhaConfirmada');
@@ -142,7 +146,6 @@
                 if (txtSenha.value != txtSenhaConfirmada.value) {
                     txtSenhaConfirmada.setCustomValidity("Senhas informadas não coincidem!");
                     txtSenhaConfirmada.reportValidity();
-                    return false;
                 } else {
                     txtSenhaConfirmada.setCustomValidity("");                    
                 }
@@ -158,6 +161,7 @@
                 if (txtSenha.type == "password"){
                     txtSenha.type = "text";
                     txtSenhaConfirmada.type = "text";
+
                 } else {
                     txtSenha.type = "password";
                     txtSenhaConfirmada.type = "password";
