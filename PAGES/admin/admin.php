@@ -38,6 +38,10 @@
 
     <!--Menu de Tabelas para o Administrador Gerenciar-->
     <div>    
+        <button onclick="window.location.href = './delegar_acesso/delegaracesso.php';">
+            Delegar Acesso
+        </button> 
+
         <button onclick="window.location.href = './tipos_usuarios/tiposusuarios.php';">
             Tipos de Usuários
         </button>
@@ -48,9 +52,8 @@
 
         <button onclick="window.location.href = './categorias_atividades/categoriasatividades.php';">
             Categorias de Atividades ao Ar Livre
-        </button> 
+        </button>         
     </div>
-
     
 </body>
 </html>
