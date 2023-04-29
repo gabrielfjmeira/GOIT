@@ -82,15 +82,15 @@
 
         <div class="input-wrapper">
             <label>Cadastur: </label>
-            <input type="text" id="txtCadastur" name="txtCadastur" placeholder="CCNNNNNNNNCCCC" class="input" 
+            <input type="text" id="txtCadastur" name="txtCadastur" placeholder="Formato: XX########XXXX" class="input" 
             pattern="^[A-Z]{2}[0-9]{8}[A-Z]{4}$" 
-            title="Cadastur inválido! Formato: CCNNNNNNNNCCCC" required/>
+            title="Cadastur inválido! Formato: XX########XXXX" required/>
         </div>
 
         <div class="input-wrapper">
             <label>Email: </label>
             <input type="text" id="txtEmail" name="txtEmail" placeholder="email@email.com" class="input" 
-            pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" 
+            pattern="^[\w*\.]+@([\w-]+\.)+[\w-]{2,4}$" 
             title="Digite um email válido! Exemplo: email@email.com" required/>
         </div>
 
@@ -106,6 +106,7 @@
             <input type="password" id="txtSenhaConfirmada" name="txtSenhaConfirmada" placeholder="Confirme sua Senha" class="input" 
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}" 
             title="Deve conter ao menos um número, uma letra maiúscula, uma letra minúscula, um caracter especial, e possuir no mínimo 8 caracteres e no máximo 20 caracteres" required/>
+            <small id="errorSenhas" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>
         </div>
 
         <p>
@@ -122,54 +123,8 @@
         
     </form>
 
-        <!--Script-->        
-        <script type="text/javascript">
-            //Validação do Cadastro do Instrutor
-            function formCadastroInstrutorOnSubmit(){                   
+    <!--Script-->        
+    <script type="text/javascript" src="../../../JAVASCRIPT/functions.js"></script>
 
-                let dataNascimento = document.getElementById('dataNascimento');
-                let dtDOB = new Date(dataNascimento.value);
-
-                let dtCurrent = new Date();                                                
-                let txtSenha = document.getElementById('txtSenha');
-                let txtSenhaConfirmada = document.getElementById('txtSenhaConfirmada');
-
-                //let reEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;                
-                
-                if (dtCurrent - dtDOB  < 0){                    
-                    dataNascimento.setCustomValidity("Data de Nascimento inválida!");
-                    dataNascimento.reportValidity();
-                    return false;
-                }else{
-                    dataNascimento.setCustomValidity("");                    
-                }                                                      
-                                                
-                if (txtSenha.value != txtSenhaConfirmada.value) {
-                    txtSenhaConfirmada.setCustomValidity("Senhas informadas não coincidem!");
-                    txtSenhaConfirmada.reportValidity();
-                    return false;
-                } else {
-                    txtSenhaConfirmada.setCustomValidity("");                    
-                }
-                
-                return true;
-            }
-    
-
-            //Função de Mostrar/Ocultar Senha
-            function mostrarSenha(){
-                let txtSenha = document.getElementById('txtSenha');
-                let txtSenhaConfirmada = document.getElementById('txtSenhaConfirmada');
-                
-                if (txtSenha.type == "password"){
-                    txtSenha.type = "text";
-                    txtSenhaConfirmada.type = "text";
-                } else {
-                    txtSenha.type = "password";
-                    txtSenhaConfirmada.type = "password";
-                }              
-            }
-        </script>
-        
 </body>
 </html>

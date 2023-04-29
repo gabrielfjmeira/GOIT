@@ -49,7 +49,7 @@
 
         <div class="input-wrapper">
             <label>CNPJ: </label>
-            <input type="text" id="CNPJ" name="CNPJ" placeholder="CNPJ" class="input" 
+            <input type="text" id="CNPJ" name="CNPJ" placeholder="Formato: ##############" class="input" 
             pattern="^[0-9]{14}$" 
             title="CNPJ deve possuir 14 dígitos: ##############" required/>               
         </div>
@@ -57,7 +57,7 @@
         <div class="input-wrapper">    
             <label>Email: </label>
             <input type="text" id="txtEmail" name="txtEmail" placeholder="Email" class="input" 
-            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" 
+            pattern="^[\w*\.]+@([\w-]+\.)+[\w-]{2,4}$" 
             title="Digite um email válido! Exemplo: email@email.com" required/>
         </div>
         
@@ -73,6 +73,7 @@
             <input type="password" id="txtSenhaConfirmada" name="txtSenhaConfirmada" placeholder="Confirme sua Senha" class="input" 
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}" 
             title="Deve conter ao menos um número, uma letra maiúscula, uma letra minúscula, um caracter especial, e possuir no mínimo 8 caracteres e no máximo 20 caracteres" required/>
+            <small id="errorSenhas" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>
         </div>
 
         <div class = "show-password">
@@ -90,38 +91,6 @@
     </form>
 
         <!--Script-->
-        <script type="text/javascript">
-            //Verificações do Cadastro de Lojista
-            function formCadastroLojistaOnSubmit(){                
-                let txtSenha = document.getElementById('txtSenha');
-                let txtSenhaConfirmada = document.getElementById('txtSenhaConfirmada');
-                
-                //let reSenha= /(?=^.{8,}$)((?=.*\d)(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;                                                                     
-                
-                if (txtSenha.value != txtSenhaConfirmada.value) {
-                    txtSenhaConfirmada.setCustomValidity("Senhas informadas não coincidem!");
-                    txtSenhaConfirmada.reportValidity();
-                    return false;
-                } else {
-                    txtSenhaConfirmada.setCustomValidity("");                    
-                }
-                
-                return true;
-            }
-
-            //Função de Mostrar/Ocultar Senha
-            function mostrarSenha(){
-                let txtSenha = document.getElementById('txtSenha');
-                let txtSenhaConfirmada = document.getElementById('txtSenhaConfirmada');
-                
-                if (txtSenha.type == "password"){
-                    txtSenha.type = "text";
-                    txtSenhaConfirmada.type = "text";
-                } else {
-                    txtSenha.type = "password";
-                    txtSenhaConfirmada.type = "password";
-                }              
-            }
-        </script>
+        <script type="text/javascript" src="../../../JAVASCRIPT/functions.js"></script>
 </body>
 </html>

@@ -64,23 +64,25 @@
                 if (isset($_GET['cadastrado'])){
                     $cadastrado = $_GET['cadastrado'];                        
                     if ($cadastrado == 1){                    
-                        echo "<h4 class='advice'>Cadastro realizado com sucesso!</h4>";
-                    }else{
-                        echo "<h4 class='advice'></h4>";
+                        echo "<center><h4 class='advice'>Cadastro realizado com sucesso!</h4></center>";
                     }
                 } else if (isset($_GET['error'])){
                     $error = $_GET['error'];
-                    if ($error == 001){
-                        echo "<h4 class='error'>Email não cadastrado!</h4>";
-                    }else if($error == 002) {
-                        echo "<h4 class='error'>Senha incorreta!</h4>";
-                    }else if($error == 003) {
-                        echo "<h4 class='error'>Cadastro em análise</h4>";
-                    }else if($error == 004){
-                        echo "<h4 class='error'>Realize o login para acessar a plataforma</h4>";
-                    }else{
-                        echo "<h4 class='error'></h4>";
-                    }
+
+                    switch($error){                     
+                        case 001:
+                            echo "<center><h4 class='error'>Email não cadastrado!</h4></center>";
+                            break;
+                        case 002:
+                            echo "<center><h4 class='error'>Senha incorreta!</h4></center>";
+                            break;
+                        case 003:
+                            echo "<center><h4 class='error'>Cadastro em análise</h4></center>";
+                            break;
+                        case 004:
+                            echo "<center><h4 class='error'>Realize o login para acessar a plataforma</h4></center>";
+                            break;
+                    }                    
                 }        
             ?>
         
@@ -88,18 +90,7 @@
     </section>     
     
     <!--Script-->
-    <script type="text/javascript">
-        //Função de Mostrar/Ocultar Senha do Login
-        function mostrarSenhaLogin(){
-            let txtSenha = document.getElementById('txtSenha');    
-            
-            if (txtSenha.type == "password"){
-                txtSenha.type = "text";        
-            } else {
-                txtSenha.type = "password";       
-            }
-        }
-    </script>    
+    <script type="text/javascript" src="./JAVASCRIPT/functions.js"></script>    
    
 </body>
 </html>

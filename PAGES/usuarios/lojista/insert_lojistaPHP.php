@@ -13,7 +13,7 @@
     $senhaCriptografada = password_hash($senha, PASSWORD_DEFAULT);
 
     //insere no banco de dados
-    $insertLojista = "INSERT INTO TABUSU (TABUSU_Email, TABUSU_Senha, TIPUSU_Codigo) VALUES ('$email', '$senhaCriptografada', 4)";
+    $insertLojista = "INSERT INTO TABUSU (TABUSU_Email, TABUSU_Senha, TIPUSU_Codigo, TABUSU_Created) VALUES ('$email', '$senhaCriptografada', 4, now())";
     $queryInsertLojista = $mysqli->query($insertLojista) or die("Falha na execução do código sql" . $mysqli->error);            
 
     $selectUsuario = "SELECT * FROM TABUSU WHERE TABUSU_Email = '$email'";

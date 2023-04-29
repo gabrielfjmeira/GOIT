@@ -32,7 +32,7 @@
         $senhaCriptografada = password_hash($senha, PASSWORD_DEFAULT);
 
         //insere no banco de dados
-        $insertUsuario = "INSERT INTO TABUSU (TABUSU_Email, TABUSU_Senha, TIPUSU_Codigo) VALUES ('$email', '$senhaCriptografada', 3)";
+        $insertUsuario = "INSERT INTO TABUSU (TABUSU_Email, TABUSU_Senha, TIPUSU_Codigo, TABUSU_Created) VALUES ('$email', '$senhaCriptografada', 3, now())";
         $queryInsertUsuario = $mysqli->query($insertUsuario) or die("Falha na execução do código sql" . $mysqli->error);            
 
         $selectUsuario = "SELECT * FROM TABUSU WHERE TABUSU_Email = '$email'";
@@ -40,7 +40,7 @@
         $usuario = $querySelectUsuario->fetch_assoc();
         $codigoUsuario = $usuario['TABUSU_Codigo'];
 
-        $insertInstrutor = "INSERT INTO TABINS (TABUSU_Codigo, TABINS_Nome, TABINS_Apelido, TABINS_DataNascimento, TABINS_Sexo, TABINS_Cadastur, TABINS_Verificado) VALUES ($codigoUsuario, '$nome', '$apelido', '$dataNascimento', $sexo, $cadastur, 0)";
+        $insertInstrutor = "INSERT INTO TABINS (TABUSU_Codigo, TABINS_Nome, TABINS_Apelido, TABINS_DataNascimento, TABINS_Sexo, TABINS_Cadastur, TABINS_Verificado) VALUES ($codigoUsuario, '$nome', '$apelido', '$dataNascimento', $sexo, '$cadastur', 0)";
         $queryInsertInstrutor = $mysqli->query($insertInstrutor) or die("Falha na execução do código sql" . $mysqli->error);
        
         //Redireciona para o login

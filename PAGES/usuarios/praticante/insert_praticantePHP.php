@@ -31,7 +31,7 @@
         $senhaCriptografada = password_hash($senha, PASSWORD_DEFAULT);
 
         //insere no banco de dados
-        $insertUsuario = "INSERT INTO TABUSU (TABUSU_Email, TABUSU_Senha, TIPUSU_Codigo) VALUES ('$email', '$senhaCriptografada', 2)";
+        $insertUsuario = "INSERT INTO TABUSU (TABUSU_Email, TABUSU_Senha, TIPUSU_Codigo, TABUSU_Created) VALUES ('$email', '$senhaCriptografada', 2, now())";
         $queryInsertUsuario = $mysqli->query($insertUsuario) or die("Falha na execução do código sql" . $mysqli->error);            
 
         $selectUsuario = "SELECT * FROM TABUSU WHERE TABUSU_Email = '$email'";
