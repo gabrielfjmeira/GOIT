@@ -47,7 +47,9 @@
             <div class="input-wrapper">
                 <label for="title-post">Título</label>
                 <div class="title-input-wrapper">
-                    <input type="text" id="txtTitulo" name="txtTitulo" placeholder="Título" required>
+                    <input type="text" id="txtTitulo" name="txtTitulo" placeholder="Título" 
+                    pattern="^.{5, 100}$" 
+                    title="Título deve possuir no mínimo 5 caracteres e no máximo 100 caracteres!" required/>
                     <p>0/100</p>
                 </div>
             </div>
@@ -71,7 +73,7 @@
             </div>
 
             <div class="input-wrapper">
-                <label for="">Descrição do evento</label>
+                <label for="">Descrição</label>
                 <div class="desc-input-wrapper">
                     <textarea id="txtDescricao" name="txtDescricao" placeholder="Ex: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eget ligula aliquet, iaculis est eu, ornare velit. Cras vestibulum venenatis blandit." required></textarea>
                     <p>0/600</p>
@@ -79,9 +81,11 @@
             </div>
 
             <div class="input-wrapper">
-                <label for="">Localização do evento</label>
+                <label for="">Endereço</label>
                 <div class="local-input-wrapper">
-                    <input type="text" name="txtLocalizacao" placeholder="Ex: Rua José das cruzes 112, Pinhais" required>
+                    <input type="text" name="txtLocalizacao" placeholder="Ex: Rua José das cruzes 112, Pinhais" 
+                    pattern="^.{, 100}$" 
+                    title="Endereço deve possuir no máximo 100 caracteres!" required/>
                     <ion-icon name="location-sharp"></ion-icon>
                 </div>
             </div>
@@ -89,13 +93,15 @@
             <div class="input-wrapper">
                 <label for="">Referência</label>
                 <div class="local-input-wrapper">
-                    <input type="text" name="" id="" placeholder="Ex: Próximo ao supermercado Condor" >
+                    <input type="text" name="" id="" placeholder="Ex: Próximo ao supermercado Condor" 
+                    pattern="^.{, 50}$" 
+                    title="Referência deve possuir no máximo 50 caracteres!"/>
                     <ion-icon name="pin-outline"></ion-icon>
                 </div>
             </div>
             
             <div class="input-wrapper">
-                <label for="">Data do evento</label>
+                <label for="">Data</label>
                 <div class="local-input-wrapper">
                     <input type="date" id="dataAtividade" name="dataAtividade" placeholder="dd/mm/yyyy" required>
                     <ion-icon name="calendar-clear-outline"></ion-icon>
@@ -103,7 +109,7 @@
             </div>
 
             <div class="input-wrapper">
-                <label for="">Horário do evento</label>
+                <label for="">Horário</label>
                 <div class="time-input-wrapper">
                     <input type="time" id="horaAtividade" name="horaAtividade" placeholder="--:--" >
                     <ion-icon name="time-outline"></ion-icon>
@@ -116,16 +122,13 @@
         <footer>
             <?php 
                 $assets_path = '../../../ASSETS';
-                include '../../templates/footers/navBar.php' 
+                include '../../templates/footers/navBarAddPub.php' 
             ?>
         </footer>
     </div>
         
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
-    <!--Script-->        
-    <script type="text/javascript" src="../../../JAVASCRIPT/functions.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>   
     
 </body>
 </html>

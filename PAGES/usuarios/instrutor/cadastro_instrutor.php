@@ -33,12 +33,16 @@
     <form id="formCadastroInstrutor" name="formCadastroInstrutor" class="form" action="insert_instrutorPHP.php" method="POST" onsubmit="return formCadastroInstrutorOnSubmit();">
         <div class="input-wrapper">
             <label>Nome: </label>
-            <input type="text" id="txtNome" name="txtNome" placeholder="Nome" class="input" required/>
+            <input type="text" id="txtNome" name="txtNome" placeholder="Nome" class="input" 
+            pattern="^.{8,}$" 
+            title="Nome deve possuir no mínimo 8 caracteres e no máximo 100 caracteres!" required/>
         </div>
 
         <div class="input-wrapper">
             <label>Apelido: </label>
-            <input type="text" id="txtApelido" name="txtApelido" placeholder="Apelido" class="input" required/>
+            <input type="text" id="txtApelido" name="txtApelido" placeholder="Apelido" class="input" 
+            pattern="^.{4,30}$" 
+            title="Apelido deve possuir no mínimo 4 caracteres e no máximo 30 caracteres!" required/>
         </div> 
 
             <?php
@@ -52,7 +56,8 @@
 
         <div class="input-wrapper">
             <label>Data de Nascimento: </label>
-            <input type="date" id="dataNascimento" name="dataNascimento" placeholder="Data de Nascimento" class="input" required/>
+            <input type="date" id="dataNascimento" name="dataNascimento" placeholder="dd/mm/aaaa" class="input" 
+            title="dd/mm/aaaa" required/>
         </div>
         
         <div class="input-wrapper">
@@ -77,22 +82,30 @@
 
         <div class="input-wrapper">
             <label>Cadastur: </label>
-            <input type="text" id="txtCadastur" name="txtCadastur" placeholder="Cadastur" class="input" required/>
+            <input type="text" id="txtCadastur" name="txtCadastur" placeholder="CCNNNNNNNNCCCC" class="input" 
+            pattern="^[A-Z]{2}[0-9]{8}[A-Z]{4}$" 
+            title="Cadastur inválido! Formato: CCNNNNNNNNCCCC" required/>
         </div>
 
         <div class="input-wrapper">
             <label>Email: </label>
-            <input type="text" id="txtEmail" name="txtEmail" placeholder="Email" class="input" required/>
+            <input type="text" id="txtEmail" name="txtEmail" placeholder="email@email.com" class="input" 
+            pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" 
+            title="Digite um email válido! Exemplo: email@email.com" required/>
         </div>
 
         <div class="input-wrapper">
             <label>Senha: </label>
-            <input type="password" id="txtSenha" name="txtSenha" placeholder="Senha" class="input" required/>
+            <input type="password" id="txtSenha" name="txtSenha" placeholder="Senha" class="input"
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}" 
+            title="Deve conter ao menos um número, uma letra maiúscula, uma letra minúscula, um caracter especial, e possuir no mínimo 8 caracteres e no máximo 20 caracteres" required/>
         </div>
 
         <div class="input-wrapper">
             <label>Confirme sua Senha: </label>
-            <input type="password" id="txtSenhaConfirmada" name="txtSenhaConfirmada" placeholder="Confirme sua Senha" class="input" required/>
+            <input type="password" id="txtSenhaConfirmada" name="txtSenhaConfirmada" placeholder="Confirme sua Senha" class="input" 
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}" 
+            title="Deve conter ao menos um número, uma letra maiúscula, uma letra minúscula, um caracter especial, e possuir no mínimo 8 caracteres e no máximo 20 caracteres" required/>
         </div>
 
         <p>
@@ -110,7 +123,50 @@
     </form>
 
         <!--Script-->        
-        <script type="text/javascript" src="../../../JAVASCRIPT/functions.js"></script>
+        <script type="text/javascript">
+            //Validação do Cadastro do Instrutor
+            function formCadastroInstrutorOnSubmit(){                   
+                let dataNascimento = document.getElementById('dataNascimento');
+                let dtDOB = new Date(dataNascimento);
+                let dtCurrent = new Date();                                                
+                let txtSenha = document.getElementById('txtSenha');
+                let txtSenhaConfirmada = document.getElementById('txtSenhaConfirmada');
+
+                //let reEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;                
+                
+                if (dtDOB - dtCurrent < 0){                    
+                    dataNascimento.setCustomValidity("Data de Nascimento inválida!");
+                    dataNascimento.reportValidity();
+                    return false;
+                }else{
+                    dataNascimento.setCustomValidity("");                    
+                }                                                      
+                                                
+                if (txtSenha.value != txtSenhaConfirmada.value) {
+                    txtSenhaConfirmada.setCustomValidity("Senhas informadas não coincidem!");
+                    txtSenhaConfirmada.reportValidity();
+                    return false;
+                } else {
+                    txtSenhaConfirmada.setCustomValidity("");                    
+                }
+                
+                return true;
+            }
+
+            //Função de Mostrar/Ocultar Senha
+            function mostrarSenha(){
+                let txtSenha = document.getElementById('txtSenha');
+                let txtSenhaConfirmada = document.getElementById('txtSenhaConfirmada');
+                
+                if (txtSenha.type == "password"){
+                    txtSenha.type = "text";
+                    txtSenhaConfirmada.type = "text";
+                } else {
+                    txtSenha.type = "password";
+                    txtSenhaConfirmada.type = "password";
+                }              
+            }
+        </script>
         
 </body>
 </html>

@@ -37,12 +37,16 @@
         
             <div class="input-wrapper">
                 <label>Usuário/e-mail: </label>         
-                <input type="text"     name="txtEmail" id="txtEmail" placeholder="E-Mail" class = "input" required/>
+                <input type="text"     name="txtEmail" id="txtEmail" placeholder="E-Mail" class="input" 
+                pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" 
+                title="Digite um email válido! Exemplo: email@email.com" required/>
             </div>
 
             <div class="input-wrapper">
                 <label>Senha: </label>
-                <input type="password" name="txtSenha" id="txtSenha" placeholder="Senha" class = "input" required/>
+                <input type="password" name="txtSenha" id="txtSenha" placeholder="Senha" class="input"
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}" 
+                title="Deve conter ao menos um número, uma letra maiúscula, uma letra minúscula, um caracter especial, e possuir no mínimo 8 caracteres e no máximo 20 caracteres" required/>
                 <a href="#" id = "forget-password">Esqueci a senha</a>
             </div>
 
@@ -84,7 +88,18 @@
     </section>     
     
     <!--Script-->
-    <script type="text/javascript" src="JAVASCRIPT\functions.js"></script>    
+    <script type="text/javascript">
+        //Função de Mostrar/Ocultar Senha do Login
+        function mostrarSenhaLogin(){
+            let txtSenha = document.getElementById('txtSenha');    
+            
+            if (txtSenha.type == "password"){
+                txtSenha.type = "text";        
+            } else {
+                txtSenha.type = "password";       
+            }
+        }
+    </script>    
    
 </body>
 </html>
