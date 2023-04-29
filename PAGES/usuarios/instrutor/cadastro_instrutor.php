@@ -126,7 +126,7 @@
         <script type="text/javascript">
             //Validação do Cadastro do Instrutor
             function formCadastroInstrutorOnSubmit(){                   
-                let dataNascimento = document.getElementById('dataNascimento');
+                let dtDOB = document.getElementById('dataNascimento');
                 let dtDOB = new Date(dataNascimento);
                 let dtCurrent = new Date();                                                
                 let txtSenha = document.getElementById('txtSenha');
