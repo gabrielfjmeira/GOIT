@@ -44,27 +44,15 @@
             <label>Apelido: </label>
             <input type="text" id="txtApelido" name="txtApelido" placeholder="Apelido" class="input" 
             pattern="^.{4,30}$" 
-            title="Apelido deve possuir no mínimo 4 caracteres e no máximo 30 caracteres!" required/>            
+            title="Apelido deve possuir no mínimo 4 caracteres e no máximo 30 caracteres!" required/> 
+            <small id="errorApelido" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>           
         </div>
-
-        <?php
-
-            $error = $_GET['error'];
-
-            if ($error == 001){
-                echo "<p class='error'>Apelido já está sendo utilizado.</p><br>"; 
-            }
-            // else{
-            //     echo "<p class='error'></p>";
-            // }      
-        ?>
 
         <div class="input-wrapper">
             <label>Data de Nascimento: </label>
             <input type="date" id="dataNascimento" name="dataNascimento" placeholder="Data de Nascimento" class="input" 
             pattern="^[0-9]{2}-[0-9]{2}-[0-9]{4}$"
-            title="dd/mm/aaaa" onchange=""  required />
-            <small id="errordataNascimento" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>
+            title="dd/mm/aaaa" onchange=""  required />            
         </div>
         
         <div class="input-wrapper">
@@ -92,7 +80,42 @@
             <input type="text" id="txtEmail" name="txtEmail" placeholder="Email" class="input" 
             pattern="^[\w*\.]+@([\w-]+\.)+[\w-]{2,4}$" 
             title="Digite um email válido! Exemplo: email@email.com" required/> 
+            <small id="errorEmail" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>
         </div>
+
+         <!--Imprime Erros se Houver-->
+         <?php
+            if(isset($_GET['error'])){
+                $error = $_GET['error'];
+                switch ($error){
+                    case 001:?>
+                        <script type="text/javascript">
+                            //Cria Variáveis
+                            let txtApelido = document.getElementById('txtApelido');                            
+                            let errorApelido = document.getElementById('errorApelido');                                                                                                                  
+                            
+                            txtApelido.style.border = "1px solid #DB5A5A";                            
+                            errorApelido.innerHTML = "Apelido já cadastrado!";   
+                            txtApelido.focus();                                                                        
+                        </script>
+                        <?php
+                        break;                    
+                    case 002:?>
+                        <script type="text/javascript">
+                            //Cria Variáveis
+                            let txtEmail = document.getElementById('txtEmail');                            
+                            let errorEmail = document.getElementById('errorEmail');                                                                                                                  
+                            
+                            txtEmail.style.border = "1px solid #DB5A5A";                            
+                            errorEmail.innerHTML = "Email já cadastrado!";                                                                       
+                            txtEmail.focus();    
+                        </script>
+                        <?php
+                        break;                            
+                                    
+                }
+            }
+        ?>        
 
         <div class="input-wrapper">
             <label>Senha: </label>

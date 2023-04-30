@@ -26,13 +26,11 @@
             $queryUpdateLojistaNaoVerificado = $mysqli->query($updateLojistaNaoVerificado) or die("Falha na execução do código sql" . $mysqli->error); 
         }
 
-        //Redireciona para a Página de Gerenciamento de Categorias de Atividaes
+        //Redireciona para a Página de Gerenciamento de Acesso
         header("Location: ./delegaracesso.php?delegado=1");
     } else{
-        //Redireciona para a Página de Gerenciamento de Categorias de Atividaes
-        header("Location: ../admin.php");
-    }
+        //Redireciona para a Página de Gerenciamento de Acesso
+        header("Location: ./delegaracesso.php");
+    }   
     
-    
-
 ?>
