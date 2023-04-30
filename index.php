@@ -36,9 +36,9 @@
         <form id="formLogin" class = "form" name="formLogin" action="./CONFIG/login/loginPHP.php" method="POST" onsubmit="return formLoginOnSubmit();">
         
             <div class="input-wrapper">
-                <label>Usuário/e-mail: </label>         
+                <label>E-mail: </label>         
                 <input type="text"     name="txtEmail" id="txtEmail" placeholder="E-Mail" class="input" 
-                pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" 
+                pattern="^[\w*\.]+@([\w-]+\.)+[\w-]{2,4}$" 
                 title="Digite um email válido! Exemplo: email@email.com" required/>
             </div>
 
