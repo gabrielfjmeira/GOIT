@@ -26,8 +26,8 @@
     <div class="background-blur" style="display: none;" onclick="exitModal();">
 
         <div class="modal-post" style="display: none;">
-
-            <div class="title-post">
+        
+            <div class="title-post">                
                 <ion-icon name="calendar-clear"></ion-icon>
                 <h3>Escalada no pico pão de Loth, localizado  em Quatro Barras</h3>
                 <p>10/04/2023</p>
@@ -136,11 +136,12 @@
                                 }
                             
                             ?>
-                            </h5> -->
-                           
-                            <a onclick="modalPostView('<?php echo $atividade['TABATV_Titulo'];?>', '<?php echo $atividade['TABATV_Data']; ?>', '<?php echo $atividade['TABATV_Hora']; ?>', '<?php echo $atividade['TABATV_Localizacao']?>', '<?php echo $apelido?>');" style="cursor: pointer;">
-                                Saiba mais
-                            </a>  
+                            </h5> -->                            
+                                
+                            <a onclick="modalPostView('<?php echo $atividade['TABATV_Titulo'];?>', '<?php echo $atividade['TABATV_Imagem'];?>', '<?php echo $atividade['TABATV_Data']; ?>', '<?php echo $atividade['TABATV_Hora']; ?>', '<?php echo $atividade['TABATV_Localizacao']?>', '<?php echo $apelido?>');" style="cursor: pointer;">
+                                Saiba mais                                        
+                            </a>                                                                                          
+                                                                                    
                             <?php
                             if($_SESSION['CODIGO'] == $atividade['TABUSU_Codigo']){?>                            
                                 
@@ -175,6 +176,11 @@
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
     <script>
+
+        function submitform() {
+                document.saibamais.submit();
+        }
+
         bgblur = document.querySelector(".background-blur")
         modalProduct = document.querySelector(".modal-product")
         modalPost = document.querySelector(".modal-post")
@@ -182,11 +188,11 @@
         function modalProductView() {
             bgblur.setAttribute("style" , "display: ")
             modalProduct.setAttribute("style" , "display: ")
-        }
+        }        
 
-        function modalPostView(titulo, data, hora, local, usuario) {
+        function modalPostView(titulo, imagem, data, hora, local, usuario) {
             var title = document.querySelector(".title-post h3")
-            title.innerHTML = titulo
+            title.innerHTML = titulo            
             var date = document.querySelector(".title-post p")
             date.innerHTML = data
             var time = document.querySelector(".time-wrapper p")
