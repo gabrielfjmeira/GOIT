@@ -14,36 +14,51 @@
     $apelidoInstrutorResultado = $mysqli->query($apelidoInstrutor) or die("Falha na execução do código sql" . $mysqli->error);
     $qtdInstrutorResultado = $apelidoInstrutorResultado->num_rows;
 
-    $qtdApelidos = $qtdPraticanteResultado + $qtdInstrutorResultado;
+    $fantasiaLoja = "SELECT * FROM TABLOJ WHERE TABLOJ_Fantasia = '$apelido'";
+    $fantasiaLojaResultado = $mysqli->query($fantasiaLoja) or die("Falha na execução do código sql" . $mysqli->error);
+    $qtdLojaResultado = $fantasiaLojaResultado->num_rows;
 
-    if($qtdApelidos > 0){
-        header('Location: ./cadastro_praticante.php?error=001');
-    } else{
+    $qtdApelidos = $qtdPraticanteResultado + $qtdInstrutorResultado + $qtdLojaResultado;
+
+    if($qtdApelidos < 1){
         
-        //Cria variáveis
-        $email          = $_POST['txtEmail'];
-        $senha          = $_POST['txtSenha'];
-        $nome           = $_POST['txtNome'];            
-        $dataNascimento = $_POST['dataNascimento'];
-        $sexo           = $_POST['sexo'];
+        //Verifica se o email já está cadastrado
+        $email = $_POST['txtEmail'];
+        $emailResultado = "SELECT * FROM TABUSU WHERE TABUSU_Email = '$email'";
+        $queryEmailResultado = $mysqli->query($emailResultado) or die("Falha na execução do código sql" . $mysqli->error);
+        $qtdEmailResultado = $queryEmailResultado->num_rows;
 
-        //Criptografa a senha para popular no banco de dados
-        $senhaCriptografada = password_hash($senha, PASSWORD_DEFAULT);
+        if($qtdEmailResultado < 1){
+            //Cria variáveis        
+            $senha          = $_POST['txtSenha'];
+            $nome           = $_POST['txtNome'];            
+            $dataNascimento = $_POST['dataNascimento'];
+            $sexo           = $_POST['sexo'];
 
-        //insere no banco de dados
-        $insertUsuario = "INSERT INTO TABUSU (TABUSU_Email, TABUSU_Senha, TIPUSU_Codigo, TABUSU_Created) VALUES ('$email', '$senhaCriptografada', 2, now())";
-        $queryInsertUsuario = $mysqli->query($insertUsuario) or die("Falha na execução do código sql" . $mysqli->error);            
+            //Criptografa a senha para popular no banco de dados
+            $senhaCriptografada = password_hash($senha, PASSWORD_DEFAULT);
 
-        $selectUsuario = "SELECT * FROM TABUSU WHERE TABUSU_Email = '$email'";
-        $querySelectUsuario = $mysqli->query($selectUsuario) or die("Falha na execução do código sql" . $mysqli->error);
-        $usuario = $querySelectUsuario->fetch_assoc();
-        $codigoUsuario = $usuario['TABUSU_Codigo'];
+            //insere no banco de dados
+            $insertUsuario = "INSERT INTO TABUSU (TABUSU_Email, TABUSU_Senha, TIPUSU_Codigo, TABUSU_Created) VALUES ('$email', '$senhaCriptografada', 2, now())";
+            $queryInsertUsuario = $mysqli->query($insertUsuario) or die("Falha na execução do código sql" . $mysqli->error);            
 
-        $insertPraticante = "INSERT INTO TABPRA (TABUSU_Codigo, TABPRA_Nome, TABPRA_Apelido, TABPRA_DataNascimento, TABPRA_Sexo) VALUES ($codigoUsuario, '$nome', '$apelido', '$dataNascimento', $sexo)";
-        $queryInsertPraticante = $mysqli->query($insertPraticante) or die("Falha na execução do código sql" . $mysqli->error);
-       
-        //Redireciona para o login
-        header("Location: ../../../index.php?cadastrado=1");
+            $selectUsuario = "SELECT * FROM TABUSU WHERE TABUSU_Email = '$email'";
+            $querySelectUsuario = $mysqli->query($selectUsuario) or die("Falha na execução do código sql" . $mysqli->error);
+            $usuario = $querySelectUsuario->fetch_assoc();
+            $codigoUsuario = $usuario['TABUSU_Codigo'];
+
+            $insertPraticante = "INSERT INTO TABPRA (TABUSU_Codigo, TABPRA_Nome, TABPRA_Apelido, TABPRA_DataNascimento, TABPRA_Sexo) VALUES ($codigoUsuario, '$nome', '$apelido', '$dataNascimento', $sexo)";
+            $queryInsertPraticante = $mysqli->query($insertPraticante) or die("Falha na execução do código sql" . $mysqli->error);
+        
+            //Redireciona para o login
+            header("Location: ../../../index.php?cadastrado=1");
+        }else{
+            //Redireciona para o cadastramento de praticante com Erro
+            header('Location: ./cadastro_praticante.php?error=002'); 
+        }        
+    } else{
+        //Redireciona para o cadastramento de praticante com Erro
+        header('Location: ./cadastro_praticante.php?error=001');        
     }
 
 ?>

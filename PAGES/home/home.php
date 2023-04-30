@@ -138,13 +138,15 @@
                             ?>
                             </h5> -->
                            
-                            <a onclick="modalPostView('<?php echo $atividade['TABATV_Titulo'];?>', '<?php echo $atividade['TABATV_Data']; ?>', '<?php echo $atividade['TABATV_Hora']; ?>', '<?php echo $atividade['TABATV_Localizacao']?>', '<?php echo $apelido?>');">Saiba mais</a>  
+                            <a onclick="modalPostView('<?php echo $atividade['TABATV_Titulo'];?>', '<?php echo $atividade['TABATV_Data']; ?>', '<?php echo $atividade['TABATV_Hora']; ?>', '<?php echo $atividade['TABATV_Localizacao']?>', '<?php echo $apelido?>');" style="cursor: pointer;">
+                                Saiba mais
+                            </a>  
                             <?php
                             if($_SESSION['CODIGO'] == $atividade['TABUSU_Codigo']){?>                            
                                 
-                                <a href="../atividades_ao_ar_livre/update/update_atividade.php?codigo=<?php echo $atividade['TABATV_Codigo'];?>">Editar Atividade</a>
+                                <a href="../atividades_ao_ar_livre/update/update_atividade.php?codigo=<?php echo $atividade['TABATV_Codigo'];?>" style="cursor: pointer;">Editar Atividade</a>
                                 
-                                <a href="../atividades_ao_ar_livre/delete/delete_atividadePHP.php?codigo=<?php echo $atividade['TABATV_Codigo'];?>">Excluir Atividade</a>
+                                <a href="../atividades_ao_ar_livre/delete/delete_atividadePHP.php?codigo=<?php echo $atividade['TABATV_Codigo'];?>" style="cursor: pointer;">Excluir Atividade</a>
                             <?php
                             }
                             ?>
