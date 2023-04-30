@@ -24,10 +24,10 @@
 <body>
     
     <div class="background-blur" style="display: none;" onclick="exitModal();">
-
+        
         <div class="modal-post" style="display: none;">
-
-            <div class="title-post">
+            <form action="participar.php" medthod="POST"></form>
+            <div class="title-post">                
                 <ion-icon name="calendar-clear"></ion-icon>
                 <h3>Escalada no pico pão de Loth, localizado  em Quatro Barras</h3>
                 <p>10/04/2023</p>
@@ -53,7 +53,30 @@
                 </div>
             </div>
 
-            <button>Participar</button>
+            <?php
+                //Verifica se o usuário está participando da atividade ao ar livre selecionada                
+                $usuarioInscricao = $_SESSION['CODIGO'];
+                $usuarioAtividade = "SELECT * FROM PARATV WHERE TABUSU_Codigo = $usuarioInscricao AND TABATV_Codigo = 3";                
+                $queryUsuarioAtividade = $mysqli->query($usuarioAtividade) or die("Falha na execução do código sql" . $mysqli->error);
+                $qtdUsuarioAtividade = $queryUsuarioAtividade->num_rows;
+
+                if($qtdUsuarioAtividade->num_rows > 0){?>
+                    <form action="participar_atividadePHP.php" method="POST">
+                        <input id="atvCodigo" name="atvCodigo" type="number" value=03 hidden>
+                        <input id="usrCodigo" name="usrCodigo" type="number" value=<?php echo $_SESSION['CODIGO']?> hidden>
+                        <button type="submit" disabled>Inscrito</button>
+                    </form>
+                <?php
+                }else{?>
+                    <form action="participar_atividadePHP.php" method="POST">
+                        <input id="atvCodigo" name="atvCodigo" type="number" value=03 hidden>
+                        <input id="usrCodigo" name="usrCodigo" type="number" value=<?php echo $_SESSION['CODIGO']?> hidden>
+                        <button type="submit" style="cursor: pointer;">Inscrever-se</button>
+                    </form>
+                <?php
+                }
+            
+            ?>                        
 
         </div>
 
@@ -136,11 +159,12 @@
                                 }
                             
                             ?>
-                            </h5> -->
-                           
+                            </h5> -->                            
+                                
                             <a onclick="modalPostView('<?php echo $atividade['TABATV_Titulo'];?>', '<?php echo $atividade['TABATV_Data']; ?>', '<?php echo $atividade['TABATV_Hora']; ?>', '<?php echo $atividade['TABATV_Localizacao']?>', '<?php echo $apelido?>');" style="cursor: pointer;">
-                                Saiba mais
-                            </a>  
+                                Saiba mais                                        
+                            </a>                                                                                          
+                                                                                    
                             <?php
                             if($_SESSION['CODIGO'] == $atividade['TABUSU_Codigo']){?>                            
                                 
@@ -175,6 +199,11 @@
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
     <script>
+
+        function submitform() {
+                document.saibamais.submit();
+        }
+
         bgblur = document.querySelector(".background-blur")
         modalProduct = document.querySelector(".modal-product")
         modalPost = document.querySelector(".modal-post")
@@ -182,11 +211,11 @@
         function modalProductView() {
             bgblur.setAttribute("style" , "display: ")
             modalProduct.setAttribute("style" , "display: ")
-        }
+        }        
 
         function modalPostView(titulo, data, hora, local, usuario) {
             var title = document.querySelector(".title-post h3")
-            title.innerHTML = titulo
+            title.innerHTML = titulo            
             var date = document.querySelector(".title-post p")
             date.innerHTML = data
             var time = document.querySelector(".time-wrapper p")
