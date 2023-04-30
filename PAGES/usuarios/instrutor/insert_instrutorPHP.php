@@ -6,7 +6,7 @@
     $apelido = $_POST['txtApelido'];
     
     //Verifica se o Apelido ja Está Cadastrado
-    $apelidoPraticante = "SELECT * FROM TABINS WHERE TABINS_Apelido = '$apelido'";
+    $apelidoPraticante = "SELECT * FROM TABPRA WHERE TABPRA_Apelido = '$apelido'";
     $apelidoPraticanteResultado = $mysqli->query($apelidoPraticante) or die("Falha na execução do código sql" . $mysqli->error);
     $qtdPraticanteResultado = $apelidoPraticanteResultado->num_rows;
 
@@ -62,13 +62,13 @@
                 //Redireciona para o login
                 header("Location: ../../../index.php?cadastrado=1");
             }else{
-                header('Location: ./cadastro_praticante.php?error=003');  
+                header('Location: ./cadastro_instrutor.php?error=003');  
             }            
         }else{
-            header('Location: ./cadastro_praticante.php?error=002');  
+            header('Location: ./cadastro_instrutor.php?error=002');  
         }        
     } else{        
-        header('Location: ./cadastro_praticante.php?error=001');        
+        header('Location: ./cadastro_instrutor.php?error=001');        
     }
 
 ?>
