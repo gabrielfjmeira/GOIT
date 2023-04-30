@@ -24,9 +24,9 @@
 <body>
     
     <div class="background-blur" style="display: none;" onclick="exitModal();">
-
-        <div class="modal-post" style="display: none;">
         
+        <div class="modal-post" style="display: none;">
+            <form action="participar.php" medthod="POST"></form>
             <div class="title-post">                
                 <ion-icon name="calendar-clear"></ion-icon>
                 <h3>Escalada no pico pão de Loth, localizado  em Quatro Barras</h3>
@@ -53,7 +53,30 @@
                 </div>
             </div>
 
-            <button>Participar</button>
+            <?php
+                //Verifica se o usuário está participando da atividade ao ar livre selecionada                
+                $usuarioInscricao = $_SESSION['CODIGO'];
+                $usuarioAtividade = "SELECT * FROM PARATV WHERE TABUSU_Codigo = $usuarioInscricao AND TABATV_Codigo = 3";                
+                $queryUsuarioAtividade = $mysqli->query($usuarioAtividade) or die("Falha na execução do código sql" . $mysqli->error);
+                $qtdUsuarioAtividade = $queryUsuarioAtividade->num_rows;
+
+                if($qtdUsuarioAtividade->num_rows > 0){?>
+                    <form action="participar_atividadePHP.php" method="POST">
+                        <input id="atvCodigo" name="atvCodigo" type="number" value=03 hidden>
+                        <input id="usrCodigo" name="usrCodigo" type="number" value=<?php echo $_SESSION['CODIGO']?> hidden>
+                        <button type="submit" disabled>Inscrito</button>
+                    </form>
+                <?php
+                }else{?>
+                    <form action="participar_atividadePHP.php" method="POST">
+                        <input id="atvCodigo" name="atvCodigo" type="number" value=03 hidden>
+                        <input id="usrCodigo" name="usrCodigo" type="number" value=<?php echo $_SESSION['CODIGO']?> hidden>
+                        <button type="submit" style="cursor: pointer;">Inscrever-se</button>
+                    </form>
+                <?php
+                }
+            
+            ?>                        
 
         </div>
 
@@ -138,7 +161,7 @@
                             ?>
                             </h5> -->                            
                                 
-                            <a onclick="modalPostView('<?php echo $atividade['TABATV_Titulo'];?>', '<?php echo $atividade['TABATV_Imagem'];?>', '<?php echo $atividade['TABATV_Data']; ?>', '<?php echo $atividade['TABATV_Hora']; ?>', '<?php echo $atividade['TABATV_Localizacao']?>', '<?php echo $apelido?>');" style="cursor: pointer;">
+                            <a onclick="modalPostView('<?php echo $atividade['TABATV_Titulo'];?>', '<?php echo $atividade['TABATV_Data']; ?>', '<?php echo $atividade['TABATV_Hora']; ?>', '<?php echo $atividade['TABATV_Localizacao']?>', '<?php echo $apelido?>');" style="cursor: pointer;">
                                 Saiba mais                                        
                             </a>                                                                                          
                                                                                     
@@ -190,7 +213,7 @@
             modalProduct.setAttribute("style" , "display: ")
         }        
 
-        function modalPostView(titulo, imagem, data, hora, local, usuario) {
+        function modalPostView(titulo, data, hora, local, usuario) {
             var title = document.querySelector(".title-post h3")
             title.innerHTML = titulo            
             var date = document.querySelector(".title-post p")

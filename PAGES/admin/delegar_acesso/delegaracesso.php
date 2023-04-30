@@ -72,7 +72,7 @@
                                     <td align="center" width="100px"><?php echo $solicitado;?></td>
                                     <td align="center" width="270px">
                                         <a href="./delegar_acessoPHP.php?codigo=<?php echo $codigo?>&&tipo=1">
-                                            <input type="button" class="button-alterar" value="Delegar">
+                                            <input type="button" class="button-alterar" value="Permitir">
                                         </a>                                        
                                         <a href="./negar_acessoPHP.php?codigo=<?php echo $codigo?>&&tipo=1">
                                             <input type="button" value="Negar">
@@ -98,7 +98,7 @@
                                     <td align="center" width="100px"><?php echo $solicitado;?></td>
                                     <td align="center" width="270px">
                                         <a href="./delegar_acessoPHP.php?codigo=<?php echo $codigo?>&tipo=2">
-                                            <input type="button" class="button-alterar" value="Delegar">
+                                            <input type="button" class="button-alterar" value="Permitir">
                                         </a>                                        
                                         <a href="./negar_acessoPHP.php?codigo=<?php echo $codigo?>&tipo=2">
                                             <input type="button" value="Negar">

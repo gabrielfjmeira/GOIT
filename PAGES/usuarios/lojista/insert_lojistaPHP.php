@@ -6,11 +6,11 @@
     $fantasia = $_POST['txtFantasia'];
 
     //Verifica se a Fantasia ja Está Cadastrada
-    $apelidoPraticante = "SELECT * FROM TABPRA WHERE TABPRA_Apelido = '$apelido'";
+    $apelidoPraticante = "SELECT * FROM TABPRA WHERE TABPRA_Apelido = '$fantasia'";
     $apelidoPraticanteResultado = $mysqli->query($apelidoPraticante) or die("Falha na execução do código sql" . $mysqli->error);
     $qtdPraticanteResultado = $apelidoPraticanteResultado->num_rows;
 
-    $apelidoInstrutor = "SELECT * FROM TABINS WHERE TABINS_Apelido = '$apelido'";
+    $apelidoInstrutor = "SELECT * FROM TABINS WHERE TABINS_Apelido = '$fantasia'";
     $apelidoInstrutorResultado = $mysqli->query($apelidoInstrutor) or die("Falha na execução do código sql" . $mysqli->error);
     $qtdInstrutorResultado = $apelidoInstrutorResultado->num_rows;
 
