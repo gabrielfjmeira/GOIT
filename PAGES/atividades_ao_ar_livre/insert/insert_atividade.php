@@ -32,7 +32,6 @@
         
         <!--Formulário-->    
         <form id="formInsertAtividade" name="formInsertAtividade" action="insert_atividadePHP.php" method="POST" enctype="multipart/form-data" onsubmit="return formInsertAtividadeOnSubmit();">
-                
             <div class="type-publi">
                     <h3>Grupo</h3>
 
@@ -81,12 +80,12 @@
             </div>
 
             <div class="input-wrapper">
-                <label for="">Selecione Uma Imagem</label>
-                <div class="title-input-wrapper">                        
-                    <img id="imagemSelecionada" src="" style="width: 4rem; height: 4rem;"></img>
+                <label for="">Upload da Imagem do evento</label>
+                <label for="imgAtividade" class="uploadImage-input-wrapper">                        
+                    <img id="imagemSelecionada" src="../../../ASSETS/uploadIcon.svg" style="max-width: 8rem; max-height: 8rem;" class="uploadIcon">
                     <input type="hidden" name="MAX_FILE_SIZE" value="16777215" />
                     <input type="file" id="imgAtividade" name="imgAtividade" accept="imagem/*" onchange="validaImagem(this);"> 
-                </div>
+                </label>
             </div>
 
             <div class="input-wrapper">
@@ -102,8 +101,8 @@
             <div class="input-wrapper">
                 <label for="">Referência</label>
                 <div class="local-input-wrapper">
-                    <input type="text" name="" id="" placeholder="Ex: Próximo ao supermercado Condor" 
-                    pattern="^.{, 50}$" 
+                    <input type="text" name="txtReferencia" id="txtReferencia" placeholder="Ex: Próximo ao supermercado Condor" 
+                    pattern="^.{, 50}$"
                     title="Referência deve possuir no máximo 50 caracteres!"/>
                     <ion-icon name="pin-outline"></ion-icon>
                 </div>
