@@ -61,18 +61,18 @@
                 $qtdUsuarioAtividade = $queryUsuarioAtividade->num_rows;
 
                 if($qtdUsuarioAtividade->num_rows > 0){?>
-                    <form action="participar_atividadePHP.php" method="POST">
+                    <form action="participar_atividadePHP.php" method="POST" id=<?php echo $usuarioInscricao?>>
                         <input id="atvCodigo" name="atvCodigo" type="number" value=03 hidden>
                         <input id="usrCodigo" name="usrCodigo" type="number" value=<?php echo $_SESSION['CODIGO']?> hidden>
-                        <button type="submit" disabled>Inscrito</button>
                     </form>
+                    <button type="submit" form=<?php echo $usuarioInscricao ?> disabled>Inscrito</button>
                 <?php
                 }else{?>
-                    <form action="participar_atividadePHP.php" method="POST">
+                    <form action="participar_atividadePHP.php" method="POST" id=<?php echo $usuarioInscricao?> >
                         <input id="atvCodigo" name="atvCodigo" type="number" value=03 hidden>
                         <input id="usrCodigo" name="usrCodigo" type="number" value=<?php echo $_SESSION['CODIGO']?> hidden>
-                        <button type="submit" style="cursor: pointer;">Inscrever-se</button>
                     </form>
+                    <button type="submit" form=<?php echo $usuarioInscricao ?> style="cursor: pointer;">Inscrever-se</button>
                 <?php
                 }
             
@@ -84,14 +84,6 @@
 
     <div id="app">
         <img onclick="location.href= './home.php'" src="../../ASSETS/Logo.png" alt="Logo go it" id="logo-header" style="cursor: pointer;">
-        
-        <!-- <?php
-        // if ($_SESSION['TIPOUSUARIO'] == 1){
-        //     include('../templates/headers/header_adm.html');
-        // } else{
-        //     include('../templates/headers/header_users.html');
-        // }
-        ?> -->
 
         <!-- //Imprime as Categorias para Filtrar a Aplicação -->
         <header class="activities-list flex">
