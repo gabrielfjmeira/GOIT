@@ -36,15 +36,16 @@
         <div class="input-wrapper">
             <label>Nome: </label>
             <input type="text" id="txtNome" name="txtNome" placeholder="Nome" class="input" 
-            pattern="^.{8,}$" 
+            pattern="^[A-Z][a-z]+[\s]*(([A-Z]||[a-z])[a-z]{1,}[\s]*){0,}$" 
             title="Nome deve possuir no mínimo 8 caracteres e no máximo 100 caracteres!" required/>
+            <small id="errorNome" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>
         </div>
 
         <div class="input-wrapper">
             <label>Apelido: </label>
             <input type="text" id="txtApelido" name="txtApelido" placeholder="Apelido" class="input" 
-            pattern="^.{4,30}$" 
-            title="Apelido deve possuir no mínimo 4 caracteres e no máximo 30 caracteres!" required/> 
+            pattern="^[A-z]\w{3,29}$"
+            title="Apelido deve começar com uma letra e não pode conter símbolos, deve possuir no mínimo 4 caracteres e no máximo 30 caracteres!" required/> 
             <small id="errorApelido" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>           
         </div>
 
