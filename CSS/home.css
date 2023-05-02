@@ -31,10 +31,9 @@ a {
 }
 
 body {
-    /* padding-top: .4rem; */
     font-size: 1.6rem;
     background: var(--white);
-    height: 100vh;
+    /* height: 100vh; */
 
     /* Modal */
     position: relative;

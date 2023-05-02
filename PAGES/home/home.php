@@ -21,6 +21,7 @@
     <!--Título da Página-->
     <title>GO🐐IT | A Social Adventure</title>
 </head>
+
 <body>
     
     <div class="background-blur" style="display: none;" onclick="exitModal();">
@@ -61,14 +62,6 @@
 
     <div id="app">
         <img onclick="location.href= './home.php'" src="../../ASSETS/Logo.png" alt="Logo go it" id="logo-header" style="cursor: pointer;">
-        
-        <!-- <?php
-        // if ($_SESSION['TIPOUSUARIO'] == 1){
-        //     include('../templates/headers/header_adm.html');
-        // } else{
-        //     include('../templates/headers/header_users.html');
-        // }
-        ?> -->
 
         <!-- //Imprime as Categorias para Filtrar a Aplicação -->
         <header class="activities-list flex">
