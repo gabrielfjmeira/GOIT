@@ -18,6 +18,7 @@
             $codigo = $atividade_data['TABATV_Codigo'];
             $titulo = $atividade_data['TABATV_Titulo'];
             $descricao = $atividade_data['TABATV_Descricao'];
+            $imagem = $atividade_data['TABATV_Imagem'];
             $categoria = $atividade_data['CATRIS_Codigo'];
             $localizacao = $atividade_data['TABATV_Localizacao'];
             $referencia = $atividade_data['TABATV_Referencia'];
@@ -56,7 +57,7 @@
         
         <!--Formulário-->    
         <form id="formInsertAtividade" name="formInsertAtividade" action="update_atividadePHP.php" method="POST" onsubmit="return formInsertAtividadeOnSubmit();">
-                
+            <input type="number" id="nbrCodigo" name="nbrCodigo" value="<?php echo $codigo;?>" hidden>  
             <div class="type-publi">
                     <h3>Grupo</h3>
 
@@ -110,6 +111,15 @@
             </div>
 
             <div class="input-wrapper">
+                <label for="">Upload da Imagem do evento</label>
+                <label for="imgAtividade" class="uploadImage-input-wrapper">                        
+                    <img id="imagemSelecionada" src="<?php echo $imagem;?>" style="max-width: 8rem; max-height: 8rem;" class="uploadIcon">
+                    <input type="hidden" name="MAX_FILE_SIZE" value="16777215" />
+                    <input type="file" id="imgAtividade" name="imgAtividade" accept="imagem/*" onchange="validaImagem(this);"> 
+                </label>
+            </div>
+
+            <div class="input-wrapper">
                 <label for="">Endereço</label>
                 <div class="local-input-wrapper">
                     <input type="text" name="txtLocalizacao" placeholder="Ex: Rua José das cruzes 112, Pinhais" value="<?php echo $localizacao;?>"
@@ -158,6 +168,46 @@
         
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>   
-    
+    <script>
+        function validaImagem(input) {
+            var caminho = input.value;
+
+            if (caminho) {
+                var comecoCaminho = (caminho.indexOf('\\') >= 0 ? caminho.lastIndexOf('\\') : caminho.lastIndexOf('/'));
+                var nomeArquivo = caminho.substring(comecoCaminho);
+
+                if (nomeArquivo.indexOf('\\') === 0 || nomeArquivo.indexOf('/') === 0) {
+                    nomeArquivo = nomeArquivo.substring(1);
+                }
+
+                var extensaoArquivo = nomeArquivo.indexOf('.') < 1 ? '' : nomeArquivo.split('.').pop();
+
+                if (extensaoArquivo != 'png' &&
+                    extensaoArquivo != 'jpg' &&
+                    extensaoArquivo != 'jpeg') {
+                    input.value = '';
+                    alert("É preciso selecionar um arquivo de imagem (png, jpg ou jpeg)");
+                }
+            } else {
+                input.value = '';
+                alert("Selecione um caminho de arquivo válido");
+            }
+            if (input.files && input.files[0]) {
+                var arquivoTam = input.files[0].size / 1024 / 1024;
+                if (arquivoTam < 16) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        document.getElementById('imagemSelecionada').setAttribute('src', e.target.result);
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                } else {
+                    input.value = '';
+                    alert("O arquivo precisa ser uma imagem com menos de 16 MB");
+                }
+            } else{
+                document.getElementById('imagemSelecionada').setAttribute('src', '#');
+            }
+        }
+    </script>
 </body>
 </html>
