@@ -3,7 +3,6 @@
        
     $_SESSION ['LOGGED'] = $_SESSION ['LOGGED'] || False;
 
-
     //Verifica o Login
     if(isset($_POST['txtEmail']) || isset($_POST['txtSenha'])){
         
@@ -19,7 +18,7 @@
             $usuario = $existeLogin->fetch_assoc();
             if(password_verify($senha, $usuario['TABUSU_Senha'])){                
                 
-                $codigoUsuario = $usuario['TABUSU_Codigo'];
+                $codigoUsuario = $usuario['TABUSU_Codigo'];                
                 $tipoUsuario   = $usuario['TIPUSU_Codigo'];                
 
                 //Verifica se o Instrutor tem Acesso na Plataforma
@@ -37,6 +36,33 @@
                         $_SESSION['CODIGO'] =  $codigoUsuario;            
                         $_SESSION['TIPOUSUARIO']  = $tipoUsuario;
                         $_SESSION ['LOGGED'] = True;
+                        switch($_SESSION['TIPOUSUARIO']){
+                            //Administrador
+                            case 1:
+                                $_SESSION['Apelido'] = "Admin";
+                                break;                        
+                            //Praticante
+                            case 2:
+                                $praticante = "SELECT * FROM TABPRA WHERE TABUSU_Codigo = " . $_SESSION['CODIGO'];
+                                $queryPraticante = $mysqli->query($praticante) or die(mysql_error());                                       
+                                $praticante_data = mysqli_fetch_array($queryPraticante);
+                                $_SESSION['Apelido'] = $praticante_data['TABPRA_Apelido'];                                        
+                                break;                        
+                            //Instrutor                        
+                            case 3:
+                                $instrutor = "SELECT * FROM TABINS WHERE TABUSU_Codigo = " . $_SESSION['CODIGO'];
+                                $queryInstrutor = $mysqli->query($instrutor) or die(mysql_error());
+                                $instrutor_data = mysqli_fetch_array($queryInstrutor);
+                                $_SESSION['Apelido'] = $instrutor_data['TABINS_Apelido'];
+                                break;                        
+                            //Lojista
+                            case 4:
+                                $lojista = "SELECT * FROM TABLOJ WHERE TABUSU_Codigo = " . $_SESSION['CODIGO'];
+                                $queryLojista = $mysqli->query($lojista) or die(mysql_error());
+                                $lojista_data = mysqli_fetch_array($queryLojista);
+                                $_SESSION['Apelido'] = $lojista_data['TABLOJ_Fantasia'];
+                                break;                        
+                        }
                         
                         header("Location: ../../PAGES/home/home.php");
                     } else{
@@ -57,6 +83,33 @@
                         $_SESSION['CODIGO'] = $codigoUsuario;            
                         $_SESSION['TIPOUSUARIO']  = $tipoUsuario;
                         $_SESSION ['LOGGED'] = True;
+                        switch($_SESSION['TIPOUSUARIO']){
+                            //Administrador
+                            case 1:
+                                $_SESSION['Apelido'] = "Admin";
+                                break;                        
+                            //Praticante
+                            case 2:
+                                $praticante = "SELECT * FROM TABPRA WHERE TABUSU_Codigo = " . $_SESSION['CODIGO'];
+                                $queryPraticante = $mysqli->query($praticante) or die(mysql_error());                                       
+                                $praticante_data = mysqli_fetch_array($queryPraticante);
+                                $_SESSION['Apelido'] = $praticante_data['TABPRA_Apelido'];                                        
+                                break;                        
+                            //Instrutor                        
+                            case 3:
+                                $instrutor = "SELECT * FROM TABINS WHERE TABUSU_Codigo = " . $_SESSION['CODIGO'];
+                                $queryInstrutor = $mysqli->query($instrutor) or die(mysql_error());
+                                $instrutor_data = mysqli_fetch_array($queryInstrutor);
+                                $_SESSION['Apelido'] = $instrutor_data['TABINS_Apelido'];
+                                break;                        
+                            //Lojista
+                            case 4:
+                                $lojista = "SELECT * FROM TABLOJ WHERE TABUSU_Codigo = " . $_SESSION['CODIGO'];
+                                $queryLojista = $mysqli->query($lojista) or die(mysql_error());
+                                $lojista_data = mysqli_fetch_array($queryLojista);
+                                $_SESSION['Apelido'] = $lojista_data['TABLOJ_Fantasia'];
+                                break;                        
+                        }
                         
                         header("Location: ../../PAGES/home/home.php");
                     } else{
@@ -68,6 +121,33 @@
                     $_SESSION['CODIGO'] = $codigoUsuario;            
                     $_SESSION['TIPOUSUARIO']  = $tipoUsuario;
                     $_SESSION ['LOGGED'] = True;
+                    switch($_SESSION['TIPOUSUARIO']){
+                        //Administrador
+                        case 1:
+                            $_SESSION['Apelido'] = "Admin";
+                            break;                        
+                        //Praticante
+                        case 2:
+                            $praticante = "SELECT * FROM TABPRA WHERE TABUSU_Codigo = " . $_SESSION['CODIGO'];
+                            $queryPraticante = $mysqli->query($praticante) or die(mysql_error());                                       
+                            $praticante_data = mysqli_fetch_array($queryPraticante);
+                            $_SESSION['Apelido'] = $praticante_data['TABPRA_Apelido'];                                        
+                            break;                        
+                        //Instrutor                        
+                        case 3:
+                            $instrutor = "SELECT * FROM TABINS WHERE TABUSU_Codigo = " . $_SESSION['CODIGO'];
+                            $queryInstrutor = $mysqli->query($instrutor) or die(mysql_error());
+                            $instrutor_data = mysqli_fetch_array($queryInstrutor);
+                            $_SESSION['Apelido'] = $instrutor_data['TABINS_Apelido'];
+                            break;                        
+                        //Lojista
+                        case 4:
+                            $lojista = "SELECT * FROM TABLOJ WHERE TABUSU_Codigo = " . $_SESSION['CODIGO'];
+                            $queryLojista = $mysqli->query($lojista) or die(mysql_error());
+                            $lojista_data = mysqli_fetch_array($queryLojista);
+                            $_SESSION['Apelido'] = $lojista_data['TABLOJ_Fantasia'];
+                            break;                        
+                    }
                     
                     header("Location: ../../PAGES/home/home.php");
                 }
@@ -78,6 +158,9 @@
             
         }else{
             header("Location: ../../index.php?error=001");            
-        }              
-    }    
+        }               
+    
+    }   
+
+    
 ?>
