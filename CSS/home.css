@@ -28,17 +28,16 @@
 a {
     color: var(--blue);
     text-decoration: none;
+    cursor: pointer;
 }
 
 body {
     place-content: center;
     font-size: 1.6rem;
     background: var(--white);
-    height: 100vh;
 
     /* Modal */
     position: relative;
-
 
 }
 
@@ -197,6 +196,9 @@ footer {
     left: 0;
     width: 100%;   
 
+    background: var(--white-gray-bg-boxes);
+    box-shadow: 0rem -.1rem .9rem rgba(0, 0, 0, 0.25);
+
 }
 
 nav {
@@ -204,11 +206,13 @@ nav {
     justify-content: space-around;
     align-items: center;
 
-    background: var(--white-gray-bg-boxes);
-    box-shadow: 0rem -.1rem .9rem rgba(0, 0, 0, 0.25);
     border-radius: 2rem 2rem 0 0;
 
     padding: 1rem 0;
+}
+
+nav > :nth-child(1) {
+    display: none;
 }
 
 nav button {
@@ -445,20 +449,30 @@ section.eventsAndGroups {
 
     footer {
         top: 0;
-        width: 24.8rem;
+        width: 24rem;
+        border-radius: 0 2rem 2rem 0;
         
     }
     
     nav {
         flex-direction: column;
-        justify-content: space-around;
+        justify-content: normal;
         height: 100%;
 
-        border-radius: 0 2rem 2rem 0;
 
-        padding: 0 3.2rem 0 4rem;
+        /* padding: 0 3.2rem 0 4rem; */
 
         align-items: flex-start;
+    }
+
+    nav > :nth-child(1) {
+        display: block;
+        align-self: center;
+        margin-bottom: 8rem;
+    }
+
+    nav > :nth-child(5) {
+        margin-top: auto;
     }
 
     nav button p {

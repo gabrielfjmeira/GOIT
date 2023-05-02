@@ -21,6 +21,7 @@
     <!--Título da Página-->
     <title>GO🐐IT | A Social Adventure</title>
 </head>
+
 <body>
     
     <div class="background-blur" style="display: none;" onclick="exitModal();">
@@ -153,7 +154,7 @@
                             ?>
                             </h5> -->                            
                                 
-                            <a onclick="modalPostView('<?php echo $atividade['TABATV_Titulo'];?>', '<?php echo $atividade['TABATV_Data']; ?>', '<?php echo $atividade['TABATV_Hora']; ?>', '<?php echo $atividade['TABATV_Localizacao']?>', '<?php echo $apelido?>');" style="cursor: pointer;">
+                            <a style="cursor: pointer;" onclick="modalPostView('<?php echo $atividade['TABATV_Titulo'];?>', '<?php echo $atividade['TABATV_Data']; ?>', '<?php echo $atividade['TABATV_Hora']; ?>', '<?php echo $atividade['TABATV_Localizacao']?>', '<?php echo $apelido?>');" style="cursor: pointer;">
                                 Saiba mais                                        
                             </a>                                                                                          
                                                                                     
