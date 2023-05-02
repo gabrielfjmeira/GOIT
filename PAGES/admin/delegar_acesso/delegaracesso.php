@@ -19,7 +19,6 @@
     $lojistasNaoVerificados = "SELECT * FROM TABUSU INNER JOIN TABLOJ ON TABUSU.TABUSU_Codigo = TABLOJ.TABUSU_Codigo WHERE TABLOJ.TABLOJ_Verificado = 0 ORDER BY TABUSU.TABUSU_Codigo ASC";
     $queryLojistasNaoVerificados = $mysqli->query($lojistasNaoVerificados) or die("Falha na execução do código sql" . $mysqli->error);
 ?>
-?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -59,11 +58,11 @@
 
                             //Imprime instrutores que solicitaram o acesso para a plataforma         
                             while($intrutorNaoVerificado = mysqli_fetch_assoc($queryInstrutoresNaoVerificados)){                           
-                                $codigo = $intrutorNaoVerificado['TABUSU.TABUSU_Codigo'];
-                                $nome = $intrutorNaoVerificado['TABINS.TABINS_Nome'];
-                                $apelido = $intrutorNaoVerificado['TABINS.TABINS_Apelido'];
-                                $cadastur = $intrutorNaoVerificado['TABINS.TABINS_Cadastur'];
-                                $solicitado = $intrutorNaoVerificado['TABUSU.TABUSU_Created'];?>
+                                $codigo = $intrutorNaoVerificado['TABUSU_Codigo'];
+                                $nome = $intrutorNaoVerificado['TABINS_Nome'];
+                                $apelido = $intrutorNaoVerificado['TABINS_Apelido'];
+                                $cadastur = $intrutorNaoVerificado['TABINS_Cadastur'];
+                                $solicitado = $intrutorNaoVerificado['TABUSU_Created'];?>
 
                                 <tr>
                                     <td hidden><?php echo $codigo;?></td>
@@ -72,10 +71,10 @@
                                     <td align="center" width="200px"><?php echo $cadastur;?></td>
                                     <td align="center" width="100px"><?php echo $solicitado;?></td>
                                     <td align="center" width="270px">
-                                        <a href="./delegar_acessoPHP.php?codigo=<?php echo $codigo?>&tipo=1">
-                                            <input type="button" class="button-alterar" value="Delegar">
+                                        <a href="./delegar_acessoPHP.php?codigo=<?php echo $codigo?>&&tipo=1">
+                                            <input type="button" class="button-alterar" value="Permitir">
                                         </a>                                        
-                                        <a href="./negar_acessoPHP.php?codigo=<?php echo $codigo?>&tipo=1">
+                                        <a href="./negar_acessoPHP.php?codigo=<?php echo $codigo?>&&tipo=1">
                                             <input type="button" value="Negar">
                                         </a>                                    
                                     </td>
@@ -85,11 +84,11 @@
 
                             //Imprime lojistas que solicitaram o acesso para a plataforma
                             while($lojistaNaoVerificado = mysqli_fetch_assoc($queryLojistasNaoVerificados)){                           
-                                $codigo = $lojistaNaoVerificado['TABUSU.TABUSU_Codigo'];
-                                $razaosocial = $lojistaNaoVerificado['TABLOJ.TABLOJ_RazaoSocial'];
-                                $fantasia = $lojistaNaoVerificado['TABLOJ.TABLOJ_Fantasia'];
-                                $cnpj = $lojistaNaoVerificado['TABLOJ.TABLOJ_CNPJ'];
-                                $solicitado = $lojistaNaoVerificado['TABUSU.TABUSU_Created'];?>
+                                $codigo = $lojistaNaoVerificado['TABUSU_Codigo'];
+                                $razaosocial = $lojistaNaoVerificado['TABLOJ_RazaoSocial'];
+                                $fantasia = $lojistaNaoVerificado['TABLOJ_Fantasia'];
+                                $cnpj = $lojistaNaoVerificado['TABLOJ_CNPJ'];
+                                $solicitado = $lojistaNaoVerificado['TABUSU_Created'];?>
 
                                 <tr>
                                     <td hidden><?php echo $codigo;?></td>
@@ -99,7 +98,7 @@
                                     <td align="center" width="100px"><?php echo $solicitado;?></td>
                                     <td align="center" width="270px">
                                         <a href="./delegar_acessoPHP.php?codigo=<?php echo $codigo?>&tipo=2">
-                                            <input type="button" class="button-alterar" value="Delegar">
+                                            <input type="button" class="button-alterar" value="Permitir">
                                         </a>                                        
                                         <a href="./negar_acessoPHP.php?codigo=<?php echo $codigo?>&tipo=2">
                                             <input type="button" value="Negar">

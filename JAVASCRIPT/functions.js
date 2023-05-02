@@ -43,10 +43,21 @@ function mostrarSenhaLogin(){
 //Validação do Cadastro do Praticante
 function formCadastroPraticanteOnSubmit(){                   
     //Cria Variáveis
+    let txtNome = document.getElementById('txtNome');
+    let errorNome = document.getElementById('errorNome');
     let txtSenha = document.getElementById('txtSenha');
     let txtSenhaConfirmada = document.getElementById('txtSenhaConfirmada');      
     let errorSenhas = document.getElementById('errorSenhas');                                          
-                                                 
+    
+    if (txtNome.value.length > 100){
+        txtNome.style.border = "1px solid #DB5A5A";
+        errorNome.innerHTML = "Nome excede 100 caracteres!";
+        txtNome.focus();
+        return false;
+    }else{
+        errorNome.innerHTML = "";
+    }
+
     if (txtSenha.value != txtSenhaConfirmada.value) {
         txtSenha.style.border = "1px solid #DB5A5A";
         txtSenhaConfirmada.style.border = "1px solid #DB5A5A";
@@ -62,10 +73,21 @@ function formCadastroPraticanteOnSubmit(){
 //Validação do Cadastro do Instrutor
 function formCadastroInstrutorOnSubmit(){    
     //Cria Variáveis
+    let txtNome = document.getElementById('txtNome');
+    let errorNome = document.getElementById('errorNome');
     let txtSenha = document.getElementById('txtSenha');
     let txtSenhaConfirmada = document.getElementById('txtSenhaConfirmada');      
     let errorSenhas = document.getElementById('errorSenhas');                                          
                                                  
+    if (txtNome.value.length > 100){
+        txtNome.style.border = "1px solid #DB5A5A";
+        errorNome.innerHTML = "Nome excede 100 caracteres!";
+        txtNome.focus();
+        return false;
+    }else{
+        errorNome.innerHTML = "";
+    }
+
     if (txtSenha.value != txtSenhaConfirmada.value) {
         txtSenha.style.border = "1px solid #DB5A5A";
         txtSenhaConfirmada.style.border = "1px solid #DB5A5A";
@@ -79,11 +101,22 @@ function formCadastroInstrutorOnSubmit(){
 }    
 
 //Verificações do Cadastro de Lojista
-function formCadastroLojistaOnSubmit(){                
+function formCadastroLojistaOnSubmit(){     
     //Cria Variáveis
+    let txtRazaoSocial = document.getElementById('txtRazaoSocial');
+    let errorRazaoSocial = document.getElementById('errorRazaoSocial');
     let txtSenha = document.getElementById('txtSenha');
     let txtSenhaConfirmada = document.getElementById('txtSenhaConfirmada');      
-    let errorSenhas = document.getElementById('errorSenhas');                                          
+    let errorSenhas = document.getElementById('errorSenhas');   
+    
+    if (txtRazaoSocial.value.length > 100){
+        txtRazaoSocial.style.border = "1px solid #DB5A5A";
+        errorRazaoSocial.innerHTML = "Razão Social excede 100 caracteres!";
+        txtRazaoSocial.focus();
+        return false;
+    }else{
+        errorRazaoSocial.innerHTML = "";
+    }
                                                  
     if (txtSenha.value != txtSenhaConfirmada.value) {
         txtSenha.style.border = "1px solid #DB5A5A";

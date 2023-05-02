@@ -7,5 +7,5 @@
     <?php 
     }?>                
     <button><img src="<?php echo $assets_path ?>/buttonNewPubli.svg" alt="" onclick="location.href ='../atividades_ao_ar_livre/insert/insert_atividade.php';"></button>
-    <button><img src="<?php echo $assets_path ?>/ButtonPerfilFilled.svg" alt=""></button>
+    <button><img src="<?php echo $assets_path ?>/ButtonPerfilFilled.svg" alt=""><?php echo $_SESSION['Apelido'];?></button>
 </nav>
