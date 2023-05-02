@@ -43,7 +43,7 @@
                 
                 <label>Descrição: </label>
                 <input type="text" id="txtDescricao" name="txtDescricao" placeholder="Descricao" class="input" 
-                pattern="^.{5,30}"
+                pattern="^.{4,30}"
                 title="Descrição deve ter no mínimo 5 e no máximo 30 caracteres!" required/><br><br>
                 
                 <label>Mínimo: </label>
