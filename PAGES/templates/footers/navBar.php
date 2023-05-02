@@ -18,7 +18,7 @@
     </button>
     <button>
         <img src="<?php echo $assets_path ?>/buttonPerfil.svg" alt="">
-        <p style="display: ;">Perfil</p>
+        <p style="display: ;"><?php echo $_SESSION['Apelido'];?></p>
     </button>
 
 </nav>
