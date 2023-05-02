@@ -113,7 +113,7 @@
             <div class="input-wrapper">
                 <label for="">Upload da Imagem do evento</label>
                 <label for="imgAtividade" class="uploadImage-input-wrapper">                        
-                    <img id="imagemSelecionada" src="<?php echo $imagem ?>" style="max-width: 8rem; max-height: 8rem;" class="uploadIcon">
+                    <img id="imagemSelecionada" src="<?php echo $imagem;?>" style="max-width: 8rem; max-height: 8rem;" class="uploadIcon">
                     <input type="hidden" name="MAX_FILE_SIZE" value="16777215" />
                     <input type="file" id="imgAtividade" name="imgAtividade" accept="imagem/*" onchange="validaImagem(this);"> 
                 </label>
