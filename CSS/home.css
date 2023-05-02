@@ -287,7 +287,7 @@ section.eventsAndGroups {
 
     display: grid;
 
-    padding: 9.2rem 3.2rem  12.6rem;
+    padding: 9.2rem 3.2rem 12.6rem;
 
     background: rgba(73, 73, 73, 0.7);
     backdrop-filter: blur(0.35rem);
@@ -302,6 +302,8 @@ section.eventsAndGroups {
     justify-content: space-between;
 
     border-radius: 1.5rem;
+
+    max-width: 50rem;
 
     padding: 2.4rem 2.4rem 3.2rem;
 
@@ -433,6 +435,14 @@ section.eventsAndGroups {
 }
 
 @media (min-width: 600px) {
+    
+    .background-blur{
+    
+        padding: 9.2rem 10rem 12.6rem;
+
+        place-content: center;
+    }
+
     footer {
         top: 0;
         width: 24.8rem;
