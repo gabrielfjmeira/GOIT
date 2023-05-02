@@ -12,8 +12,8 @@
         </button>   
     <?php 
     }?>                
-    <button onclick="location.href ='../atividades_ao_ar_livre/insert/insert_atividade.php';">
-        <img src="<?php echo $assets_path ?>/buttonNewPubli.svg" alt="">
+    <button>
+        <img src="<?php echo $assets_path ?>/buttonNewPubliFilled.svg" alt="">
         <p style="display: ;">Publicar</p>
     </button>
     <button>

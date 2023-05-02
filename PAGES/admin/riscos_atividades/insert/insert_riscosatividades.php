@@ -42,13 +42,19 @@
                 <h1>Inserir Risco de Atividade</h1>
                 
                 <label>Descrição: </label>
-                <input type="text" id="txtDescricao" name="txtDescricao" placeholder="Descricao" class="input" required/><br><br>
+                <input type="text" id="txtDescricao" name="txtDescricao" placeholder="Descricao" class="input" 
+                pattern="^.{4,30}"
+                title="Descrição deve ter no mínimo 5 e no máximo 30 caracteres!" required/><br><br>
                 
                 <label>Mínimo: </label>
-                <input type="number" id="nbrMinimo" name="nbrMinimo" placeholder="Mínimo" class="input" required/><br><br>
+                <input type="number" id="nbrMinimo" name="nbrMinimo" placeholder="Mínimo" class="input"
+                pattern="^.[0-9]{1}?[0-9]{1}$"
+                title="Mínimo deve ser um número de 0-10" required/><br><br>
 
                 <label>Máximo: </label>
-                <input type="number" id="nbrMaximo" name="nbrMaximo" placeholder="Máximo" class="input" required/><br><br>
+                <input type="number" id="nbrMaximo" name="nbrMaximo" placeholder="Máximo" class="input" 
+                pattern="^.[0-9]{1}?[0-9]{1}$"
+                title="Máximo deve ser um número de 0-10" required/><br><br>
                 
                 <label>Recomenda-se instrutor? </label>
                 <select id="selInstrutor" name="selInstrutor" required>

@@ -7,10 +7,10 @@
         header ("Location: ../../../index.php?error=4");
     }
 
-    //Verifica se é um Admin
-    if ($_SESSION['TIPOUSUARIO'] != 1){
-        header ("Location: ../../home/home.php");
-    }
+    // //Verifica se é um Admin
+    // if ($_SESSION['TIPOUSUARIO'] != 1){
+    //     header ("Location: ../../home/home.php");
+    // }
 
     //Definição de Variáveis
     $codigo = $_POST['nbrCodigo'];

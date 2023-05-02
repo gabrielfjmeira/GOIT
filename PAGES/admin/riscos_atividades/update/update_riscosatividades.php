@@ -65,13 +65,19 @@
                 <input type="hidden" id="nbrCodigo" name="nbrCodigo" value=<?php echo $codigo;?>>
 
                 <label>Descrição: </label>
-                <input type="text" id="txtDescricao" name="txtDescricao" placeholder="Descricao" value="<?php echo $descricao;?>" class="input" required/><br><br>
+                <input type="text" id="txtDescricao" name="txtDescricao" placeholder="Descricao" value="<?php echo $descricao;?>" class="input" 
+                pattern="^.{4,30}"
+                title="Descrição deve ter no mínimo 5 e no máximo 30 caracteres!" required/><br><br>
                 
                 <label>Mínimo: </label>
-                <input type="number" id="nbrMinimo" name="nbrMinimo" placeholder="Mínimo" value=<?php echo $minimo;?> class="input" required/><br><br>
+                <input type="number" id="nbrMinimo" name="nbrMinimo" placeholder="Mínimo" value=<?php echo $minimo;?> class="input"
+                pattern="^.[0-9]{1}?[0-9]{1}$"
+                title="Mínimo deve ser um número de 0-10" required/><br><br>
 
                 <label>Máximo: </label>
-                <input type="number" id="nbrMaximo" name="nbrMaximo" placeholder="Máximo" value=<?php echo $maximo;?> class="input" required/><br><br>
+                <input type="number" id="nbrMaximo" name="nbrMaximo" placeholder="Máximo" value=<?php echo $maximo;?> class="input" 
+                pattern="^.[0-9]{1}?[0-9]{1}$"
+                title="Máximo deve ser um número de 0-10" required/><br><br>
                 
                 <label>Recomenda-se instrutor? </label>
                 <select id="selInstrutor" name="selInstrutor" required>

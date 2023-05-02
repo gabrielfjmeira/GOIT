@@ -33,26 +33,24 @@
     <form id="formCadastroInstrutor" name="formCadastroInstrutor" class="form" action="insert_instrutorPHP.php" method="POST" onsubmit="return formCadastroInstrutorOnSubmit();">
         <div class="input-wrapper">
             <label>Nome: </label>
-            <input type="text" id="txtNome" name="txtNome" placeholder="Nome" class="input" required/>
+            <input type="text" id="txtNome" name="txtNome" placeholder="Nome" class="input" 
+            pattern="^[A-Z][a-z]+[\s]*(([A-Z]||[a-z])[a-z]{1,}[\s]*){0,}$" 
+            title="Nome só deve conter letras e deve possuir no mínimo 3 caracteres e no máximo 100 caracteres!" required/>
+            <small id="errorNome" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>
         </div>
 
         <div class="input-wrapper">
             <label>Apelido: </label>
-            <input type="text" id="txtApelido" name="txtApelido" placeholder="Apelido" class="input" required/>
-        </div> 
-
-            <?php
-
-                $error = $_GET['error'];
-
-                if ($error == 001){
-                    echo "<p class='error'>Apelido já está sendo utilizado.</p>"; 
-                }              
-            ?>
+            <input type="text" id="txtApelido" name="txtApelido" placeholder="Apelido" class="input" 
+            pattern="^[A-z]\w{3,29}$" 
+            title="Apelido deve começar com uma letra e não pode conter símbolos, deve possuir no mínimo 4 caracteres e no máximo 30 caracteres!" required/>
+            <small id="errorApelido" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>
+        </div>         
 
         <div class="input-wrapper">
             <label>Data de Nascimento: </label>
-            <input type="date" id="dataNascimento" name="dataNascimento" placeholder="Data de Nascimento" class="input" required/>
+            <input type="date" id="dataNascimento" name="dataNascimento" placeholder="dd/mm/aaaa" class="input" 
+            title="dd/mm/aaaa" required/>
         </div>
         
         <div class="input-wrapper">
@@ -77,22 +75,79 @@
 
         <div class="input-wrapper">
             <label>Cadastur: </label>
-            <input type="text" id="txtCadastur" name="txtCadastur" placeholder="Cadastur" class="input" required/>
+            <input type="text" id="txtCadastur" name="txtCadastur" placeholder="Formato: XX########XXXX" class="input" 
+            pattern="^[A-Z]{2}[0-9]{8}[A-Z]{4}$" 
+            title="Cadastur inválido! Formato: XX########XXXX" required/>
+            <small id="errorCadastur" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>
         </div>
 
         <div class="input-wrapper">
             <label>Email: </label>
-            <input type="text" id="txtEmail" name="txtEmail" placeholder="Email" class="input" required/>
+            <input type="text" id="txtEmail" name="txtEmail" placeholder="email@email.com" class="input" 
+            pattern="^[\w*\.]+@([\w-]+\.)+[\w-]{2,4}$" 
+            title="Digite um email válido! Exemplo: email@email.com" required/>
+            <small id="errorEmail" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>
         </div>
+
+        <!--Imprime Erros se Houver-->
+        <?php
+            if(isset($_GET['error'])){
+                $error = $_GET['error'];
+                switch ($error){
+                    case 001:?>
+                        <script type="text/javascript">
+                            //Cria Variáveis
+                            let txtApelido = document.getElementById('txtApelido');                            
+                            let errorApelido = document.getElementById('errorApelido');                                                                                                                  
+                            
+                            txtApelido.style.border = "1px solid #DB5A5A";                            
+                            errorApelido.innerHTML = "Apelido já cadastrado!";   
+                            txtApelido.focus();                                                                        
+                        </script>
+                        <?php
+                        break;
+                    case 002:?>
+                        <script type="text/javascript">
+                            //Cria Variáveis
+                            let txtCadastur = document.getElementById('txtCadastur');                            
+                            let errorCadastur = document.getElementById('errorCadastur');                                                                                                                  
+                            
+                            txtCadastur.style.border = "1px solid #DB5A5A";                            
+                            errorCadastur.innerHTML = "Cadastur já cadastrado!";                                                                       
+                            txtCadastur.focus();    
+                        </script>
+                        <?php
+                        break;  
+                    case 003:?>
+                        <script type="text/javascript">
+                            //Cria Variáveis
+                            let txtEmail = document.getElementById('txtEmail');                            
+                            let errorEmail = document.getElementById('errorEmail');                                                                                                                  
+                            
+                            txtEmail.style.border = "1px solid #DB5A5A";                            
+                            errorEmail.innerHTML = "Email já cadastrado!";                                                                       
+                            txtEmail.focus();    
+                        </script>
+                        <?php
+                        break;                            
+                                    
+                }
+            }
+        ?>
 
         <div class="input-wrapper">
             <label>Senha: </label>
-            <input type="password" id="txtSenha" name="txtSenha" placeholder="Senha" class="input" required/>
+            <input type="password" id="txtSenha" name="txtSenha" placeholder="Senha" class="input"
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}" 
+            title="Deve conter ao menos um número, uma letra maiúscula, uma letra minúscula, um caracter especial, e possuir no mínimo 8 caracteres e no máximo 20 caracteres" required/>
         </div>
 
         <div class="input-wrapper">
             <label>Confirme sua Senha: </label>
-            <input type="password" id="txtSenhaConfirmada" name="txtSenhaConfirmada" placeholder="Confirme sua Senha" class="input" required/>
+            <input type="password" id="txtSenhaConfirmada" name="txtSenhaConfirmada" placeholder="Confirme sua Senha" class="input" 
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}" 
+            title="Deve conter ao menos um número, uma letra maiúscula, uma letra minúscula, um caracter especial, e possuir no mínimo 8 caracteres e no máximo 20 caracteres" required/>
+            <small id="errorSenhas" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>
         </div>
 
         <p>
@@ -109,8 +164,8 @@
         
     </form>
 
-        <!--Script-->        
-        <script type="text/javascript" src="../../../JAVASCRIPT/functions.js"></script>
-        
+    <!--Script-->        
+    <script type="text/javascript" src="../../../JAVASCRIPT/functions.js"></script>
+
 </body>
 </html>

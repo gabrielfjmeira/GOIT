@@ -185,17 +185,10 @@
         </main>
         
         <footer>
-            <nav class="flex">
-                <button><img src="../../ASSETS/logOut.svg" alt="" onclick="location.href= '../../CONFIG/login/logout.php' "></button>
-                <?php 
-                //Verifica se é um Admin
-                if ($_SESSION['TIPOUSUARIO'] == 1){?>
-                    <button><img src="../../ASSETS/admin.svg" alt="" onclick="location.href= '../admin/admin.php' "></button>   
-                <?php 
-                }?>                
-                <button><img src="../../ASSETS/buttonNewPubli.svg" alt="" onclick="location.href ='../atividades_ao_ar_livre/insert/insert_atividade.php';"></button>
-                <button><img src="../../ASSETS/buttonPerfil.svg" alt=""></button>
-            </nav>
+            <?php 
+                $assets_path = '../../ASSETS';
+                include '../templates/footers/navBar.php' 
+            ?>
         </footer>
     </div>
 

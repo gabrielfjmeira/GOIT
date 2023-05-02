@@ -63,7 +63,9 @@
                 <input type="hidden" id="nbrCodigo" name="nbrCodigo" value=<?php echo $codigo;?>>
 
                 <label>Descrição: </label>
-                <input type="text" id="txtDescricao" name="txtDescricao" placeholder="Descricao" value="<?php echo $descricao;?>" class="input" required/><br><br>               
+                <input type="text" id="txtDescricao" name="txtDescricao" placeholder="Descricao" value="<?php echo $descricao;?>" class="input" 
+                pattern="^.{5,30}"
+                title="Descrição deve ter no mínimo 5 e no máximo 30 caracteres!" required/><br><br>               
                                 
                 <label>Risco de Atividade: </label>
                 <select name="riscoAtividade" required>                            
