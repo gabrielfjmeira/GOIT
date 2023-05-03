@@ -17,17 +17,17 @@
     $data        = $_POST['dataAtividade'];
     $hora        = $_POST['horaAtividade'] ;       
 
-    if (isset($_FILES['imgAtividade'])){
-        $arquivo = $_FILES['imgAtividade'];            
-        
-        if($arquivo['error']){
-          //insere no banco de dados
-          $insertAtividade = "INSERT INTO TABATV (TABATV_Codigo, TABUSU_Codigo, TABATV_Titulo, TABATV_Descricao, CATATV_Codigo, TABATV_Localizacao, TABATV_Referencia, TABATV_Data, TABATV_Hora, TABATV_Created) VALUES (NULL, $usuario, '$titulo', '$descricao', $categoria, '$localizacao', '$referencia', '$data', '$hora', now())";
-          $queryInsertAtividade = $mysqli->query($insertAtividade) or die("Falha na execução do código sql" . $mysqli->error);
-        }
-        
+    if (isset($_FILES['imgAtividade']) && count($_FILES) > 0){        
+        $arquivo = $_FILES['imgAtividade'];                    
+                
         if($arquivo['size'] > 2097152){
             die("arquivo muito grande!! Max 2MB.");
+        }
+
+        if($arquivo['error']){
+            //insere no banco de dados
+            $insertAtividade = "INSERT INTO TABATV (TABATV_Codigo, TABUSU_Codigo, TABATV_Titulo, TABATV_Descricao, CATATV_Codigo, TABATV_Localizacao, TABATV_Referencia, TABATV_Data, TABATV_Hora, TABATV_Created) VALUES (NULL, $usuario, '$titulo', '$descricao', $categoria, '$localizacao', '$referencia', '$data', '$hora', now())";
+            $queryInsertAtividade = $mysqli->query($insertAtividade) or die("Falha na execução do código sql" . $mysqli->error);
         }
 
         $pasta = "../arquivos/";
@@ -42,7 +42,12 @@
             $queryInsertAtividade = $mysqli->query($insertAtividade) or die("Falha na execução do código sql" . $mysqli->error);
         }       
         
-    }    
+    }else{
+        //insere no banco de dados
+        $insertAtividade = "INSERT INTO TABATV (TABATV_Codigo, TABUSU_Codigo, TABATV_Titulo, TABATV_Descricao, CATATV_Codigo, TABATV_Localizacao, TABATV_Referencia, TABATV_Data, TABATV_Hora, TABATV_Created) VALUES (NULL, $usuario, '$titulo', '$descricao', $categoria, '$localizacao', '$referencia', '$data', '$hora', now())";
+        $queryInsertAtividade = $mysqli->query($insertAtividade) or die("Falha na execução do código sql" . $mysqli->error);
+    
+    }
       
     //Redireciona para a Página de Home
     header("Location: ../../home/home.php");

@@ -56,17 +56,17 @@
         </header>
         
         <!--Formulário-->    
-        <form id="formInsertAtividade" name="formInsertAtividade" action="update_atividadePHP.php" method="POST" onsubmit="return formInsertAtividadeOnSubmit();">
+        <form id="formInsertAtividade" name="formInsertAtividade" action="update_atividadePHP.php" method="POST" enctype="multipart/form-data" onsubmit="return formInsertAtividadeOnSubmit();">
             <input type="number" id="nbrCodigo" name="nbrCodigo" value="<?php echo $codigo;?>" hidden>  
             <div class="type-publi">
-                    <h3>Grupo</h3>
+                    <!--<h3>Grupo</h3>
 
                     <div id="switch" onclick="togglePubliType()">
                         <button></button>
                         <span></span>
-                    </div>
+                    </div>-->
 
-                    <h3 class="selected">Evento</h3>
+                    <h3 class="selected">Editar Atividade Ao Ar Livre</h3>
             </div>
 
             <div class="input-wrapper">
@@ -115,7 +115,7 @@
                 <label for="imgAtividade" class="uploadImage-input-wrapper">                        
                     <img id="imagemSelecionada" src="<?php echo $imagem;?>" style="max-width: 8rem; max-height: 8rem;" class="uploadIcon">
                     <input type="hidden" name="MAX_FILE_SIZE" value="16777215" />
-                    <input type="file" id="imgAtividade" name="imgAtividade" accept="imagem/*" onchange="validaImagem(this);"> 
+                    <input type="file" id="imgAtividade" name="imgAtividade" accept="image/*" onchange="validaImagem(this);"> 
                 </label>
             </div>
 
@@ -169,7 +169,8 @@
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>   
     <script>
-        function validaImagem(input) {
+         //Validação de Imagem
+         function validaImagem(input) {
             var caminho = input.value;
 
             if (caminho) {
