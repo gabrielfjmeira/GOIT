@@ -35,14 +35,14 @@
         <!--Formulário-->    
         <form id="formInsertAtividade" name="formInsertAtividade" action="insert_atividadePHP.php" method="POST" enctype="multipart/form-data" onsubmit="return formInsertAtividadeOnSubmit();">
             <div class="type-publi">
-                    <h3>Grupo</h3>
+                    <!--<h3>Grupo</h3>
 
                     <div id="switch" onclick="togglePubliType()">
                         <button></button>
                         <span></span>
-                    </div>
+                    </div>-->
 
-                    <h3 class="selected">Evento</h3>
+                    <h3 class="selected">Criar Atividade Ao Ar Livre</h3>
             </div>
 
             <div class="input-wrapper">
@@ -86,7 +86,7 @@
                 <label for="imgAtividade" class="uploadImage-input-wrapper">                        
                     <img id="imagemSelecionada" src="../../../ASSETS/uploadIcon.svg" style="max-width: 8rem; max-height: 8rem;" class="uploadIcon">
                     <input type="hidden" name="MAX_FILE_SIZE" value="16777215" />
-                    <input type="file" id="imgAtividade" name="imgAtividade" accept="imagem/*" onchange="validaImagem(this);"> 
+                    <input type="file" id="imgAtividade" name="imgAtividade" accept="image/*" onchange="validaImagem(this);"> 
                 </label>
             </div>
 
