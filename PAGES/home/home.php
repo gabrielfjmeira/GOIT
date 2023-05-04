@@ -163,9 +163,7 @@
                                     $nomeImagem = substr($atividade['TABATV_Imagem'], -17);
                                 }else{
                                     $nomeImagem = substr($atividade['TABATV_Imagem'], -18);
-                                };
-
-                                                                                            
+                                };                                                                                            
                             ?>
 
                             <a style="cursor: pointer;" onclick="modalPostView('<?php echo $atividade['TABATV_Titulo']; ?>','<?php echo $nomeImagem;?>', '<?php echo $atividade['TABATV_Descricao']; ?>','<?php echo $atividade['TABATV_Data']; ?>', '<?php echo $atividade['TABATV_Hora']; ?>', '<?php echo $atividade['TABATV_Localizacao']?>', '<?php echo $apelido?>');" style="cursor: pointer;">
@@ -226,7 +224,9 @@
             var image = document.querySelector(".modal-post img")
             if (imagem != ''){
                 image.setAttribute("src", "../atividades_ao_ar_livre/arquivos/"+imagem)
-            }            
+            }else{
+                image.setAttribute("src", "../../ASSETS/paisagem.png")
+            }           
             var description = document.querySelector(".desc-wrapper p")
             description.innerHTML = descricao
             var date = document.querySelector(".title-post p")

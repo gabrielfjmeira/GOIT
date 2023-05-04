@@ -307,6 +307,7 @@ section.eventsAndGroups {
 
     border-radius: 1.5rem;
 
+    min-width: 50rem;
     max-width: 50rem;
 
     padding: 2.4rem 2.4rem 3.2rem;
@@ -315,6 +316,7 @@ section.eventsAndGroups {
 } 
 
 .modal-product img {
+    
     width: 50%;
 }
 
@@ -403,7 +405,9 @@ section.eventsAndGroups {
 
 .modal-post > img {
     width: 100%;
-    height: 12.2rem;
+    height: 15.2rem;
+
+    object-fit: cover;
 
     border-radius: .8rem;
 }
