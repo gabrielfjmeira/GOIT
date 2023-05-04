@@ -5,10 +5,7 @@
     //Verifica Login
     if (!$_SESSION['LOGGED']){
         header ("Location: ../../../index.php?error=4");
-    }
-
-    
-   
+    }   
 ?>
 
 <!DOCTYPE html>

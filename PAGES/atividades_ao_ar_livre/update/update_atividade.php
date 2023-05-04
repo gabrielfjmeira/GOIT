@@ -51,7 +51,7 @@
     <!--Cabeçalho-->
     <div id="app">
         <header>
-            <button style="cursor: pointer;" onclick="window.location.href='../../home/home.php';"><img src="../../../ASSETS/backButtonDark.svg" alt="back-button"></button>
+            <button style="cursor: pointer;" onclick="window.history.back();"><img src="../../../ASSETS/backButtonDark.svg" alt="back-button"></button>
             <img src="../../../ASSETS/Logo.png" alt="logo" class="logo">
         </header>
         

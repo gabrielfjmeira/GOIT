@@ -1,24 +1,25 @@
 <nav>
-    <button onclick="location.href= '../../CONFIG/login/logout.php' ">
+    <img src="<?php echo $assets_path ?>/logoBlack.png" alt="Go It logotipo">
+    <button onclick="location.href= '../../../CONFIG/login/logout.php' ">
         <img src="<?php echo $assets_path ?>/logOut.svg" alt="" >
-        <p style="display: ;">LogOut</p>
+        <p>LogOut</p>
     </button>
     <?php 
     //Verifica se é um Admin
     if ($_SESSION['TIPOUSUARIO'] == 1){?>
-        <button onclick="location.href= '../admin/admin.php' ">
+        <button onclick="location.href= '../../admin/admin.php' ">
             <img src="<?php echo $assets_path ?>/admin.svg" alt="" >
-            <p style="display: ;">Painel do administrador</p>
+            <p>Painel do administrador</p>
         </button>   
     <?php 
     }?>                
-    <button>
+    <button onclick="">
         <img src="<?php echo $assets_path ?>/buttonNewPubliFilled.svg" alt="">
-        <p style="display: ;">Publicar</p>
+        <p>Publicar</p>
     </button>
-    <button>
+    <button onclick="">
         <img src="<?php echo $assets_path ?>/buttonPerfil.svg" alt="">
-        <p style="display: ;"><?php echo $_SESSION['Apelido'];?></p>
+        <p><?php echo $_SESSION['Apelido'];?></p>
     </button>
 
 </nav>
