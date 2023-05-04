@@ -1,0 +1,19 @@
+.formCadastro {
+    display: grid;
+    gap: 2.4rem;
+}
+
+.input-sexo {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+}
+
+.input-radio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 1.6rem;
+}
