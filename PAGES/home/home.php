@@ -36,6 +36,11 @@
 
             <img src="../../ASSETS/paisagem.png" alt="post-image">
 
+            <div class="desc-wrapper wrapper">
+                <h2>Descrição</h2>
+                <p>Descrição da Atividade</p>
+            </div>
+
             <div class="time-wrapper wrapper">
                 <h2>Horário <ion-icon name="time-outline"></ion-icon> </h2>
                 <p>13:40</p>
@@ -152,9 +157,18 @@
                                 }
                             
                             ?>
-                            </h5> -->                            
-                                
-                            <a style="cursor: pointer;" onclick="modalPostView('<?php echo $atividade['TABATV_Titulo'];?>', '<?php echo $atividade['TABATV_Data']; ?>', '<?php echo $atividade['TABATV_Hora']; ?>', '<?php echo $atividade['TABATV_Localizacao']?>', '<?php echo $apelido?>');" style="cursor: pointer;">
+                            </h5> -->                                                        
+                            <?php
+                                if(substr($atividade['TABATV_Imagem'], -4) == ".jpg" || substr($atividade['TABATV_Imagem'], -4) == ".png" ){
+                                    $nomeImagem = substr($atividade['TABATV_Imagem'], -17);
+                                }else{
+                                    $nomeImagem = substr($atividade['TABATV_Imagem'], -18);
+                                };
+
+                                                                                            
+                            ?>
+
+                            <a style="cursor: pointer;" onclick="modalPostView('<?php echo $atividade['TABATV_Titulo']; ?>','<?php echo $nomeImagem;?>', '<?php echo $atividade['TABATV_Descricao']; ?>','<?php echo $atividade['TABATV_Data']; ?>', '<?php echo $atividade['TABATV_Hora']; ?>', '<?php echo $atividade['TABATV_Localizacao']?>', '<?php echo $apelido?>');" style="cursor: pointer;">
                                 Saiba mais                                        
                             </a>                                                                                          
                                                                                     
@@ -183,7 +197,7 @@
         <footer>
             <?php 
                 $assets_path = '../../ASSETS';
-                include '../templates/footers/navBar.php' 
+                include '../templates/footers/navBar.php';                
             ?>
         </footer>
     </div>
@@ -206,9 +220,15 @@
             modalProduct.setAttribute("style" , "display: ")
         }        
 
-        function modalPostView(titulo, data, hora, local, usuario) {
+        function modalPostView(titulo, imagem, descricao, data, hora, local, usuario) {
             var title = document.querySelector(".title-post h3")
-            title.innerHTML = titulo            
+            title.innerHTML = titulo    
+            var image = document.querySelector(".modal-post img")
+            if (imagem != ''){
+                image.setAttribute("src", "../atividades_ao_ar_livre/arquivos/"+imagem)
+            }            
+            var description = document.querySelector(".desc-wrapper p")
+            description.innerHTML = descricao
             var date = document.querySelector(".title-post p")
             date.innerHTML = data
             var time = document.querySelector(".time-wrapper p")
