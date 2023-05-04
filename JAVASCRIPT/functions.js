@@ -1,76 +1,19 @@
-//Validação do Formulário de Login
-function formLoginOnSubmit(){
-    let txtEmail = document.getElementById('txtEmail');
-    let txtSenha = document.getElementById('txtSenha');
+//Seta a data máxima aceita na data de nascimento para a data atual
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth() + 1; //Janeiro é 0!
+var yyyy = today.getFullYear();
 
-    let reEmail = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/;   
-    let reSenha= /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/;          
-                                  
-    if (!reEmail.test(txtEmail.value)) {
-        alert('Digite um Email válido!');
-        txtEmail.focus();
-        return false;
-    }            
-    
-    if (txtSenha.value.length < 8 || txtSenha.value.length > 20){   
-        txtSenha.setCustomValidity("Senha deve possuir no mínimo 8 e no máximo 20 caracteres!");
-        txtSenha.reportValidity();        
-        return false;
-    }else{
-        if (!reSenha.test(txtSenha.value)) {
-            txtSenha.setCustomValidity("Sua senha deve possuir no mínimo: 1 símbolo, 1 letra maísucula, 1 letra minúscula e 1 dígito.");
-            txtSenha.reportValidity();
-            return false;
-        }else{
-            txtSenha.setCustomValidity("");
-        }
-    }               
-    
-    return true;
-};
-
-
-//Verificações do Cadastro de Lojista
-function formCadastroLojistaOnSubmit(){
-    let txtEmail = document.getElementById('txtEmail');
-    let txtSenha = document.getElementById('txtSenha');
-    let txtSenhaConfirmada = document.getElementById('txtSenhaConfirmada');
-
-    let reEmail = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/;   
-    let reSenha= /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/;     
-                                     
-    if (!reEmail.test(txtEmail.value)) {
-        txtEmail.setCustomValidity("Digite um E-Mail válido!");
-        txtEmail.reportValidity();
-        return false;
-    }else{
-        txtEmail.setCustomValidity("");
-    }                       
-    
-    if (txtSenha.value.length < 8 || txtSenha.value.length > 20){   
-        txtSenha.setCustomValidity("Senha deve possuir no mínimo 8 e no máximo 20 caracteres!");
-        txtSenha.reportValidity();        
-        return false;
-    }else{
-        if (!reSenha.test(txtSenha.value)) {
-            txtSenha.setCustomValidity("Sua senha deve possuir no mínimo: 1 símbolo, 1 letra maísucula, 1 letra minúscula e 1 dígito.");
-            txtSenha.reportValidity();
-            return false;
-        }else{
-            txtSenha.setCustomValidity("");
-        }
-    }
-    
-    if (txtSenha.value != txtSenhaConfirmada.value) {
-        txtSenhaConfirmada.setCustomValidity("Senhas diferentes!");
-        txtSenhaConfirmada.reportValidity();
-        return false;
-    } else {
-        txtSenhaConfirmada.setCustomValidity("");                    
-    }
-    
-    return true;
+if (dd < 10) {
+dd = '0' + dd;
 }
+
+if (mm < 10) {
+mm = '0' + mm;
+} 
+    
+today = yyyy + '-' + mm + '-' + dd;
+document.getElementById("dataNascimento").setAttribute("max", today);
 
 //Função de Mostrar/Ocultar Senha
 function mostrarSenha(){
@@ -86,21 +29,103 @@ function mostrarSenha(){
     }              
 }
 
-//Função de Marcara para CNPJ
-function MascaraParaCNPJ(valorDoTextBox) {
-    if (valorDoTextBox.length <= 14) {  
+//Função de Mostrar/Ocultar Senha do Login
+function mostrarSenhaLogin(){
+    let txtSenha = document.getElementById('txtSenha');    
+    
+    if (txtSenha.type == "password"){
+        txtSenha.type = "text";        
+    } else {
+        txtSenha.type = "password";       
+    }
+}
 
-        //Coloca ponto entre o segundo e o terceiro dígitos
-        valorDoTextBox = valorDoTextBox.replace(/^(\d{2})(\d)/, "$1.$2")
+//Validação do Cadastro do Praticante
+function formCadastroPraticanteOnSubmit(){                   
+    //Cria Variáveis
+    let txtNome = document.getElementById('txtNome');
+    let errorNome = document.getElementById('errorNome');
+    let txtSenha = document.getElementById('txtSenha');
+    let txtSenhaConfirmada = document.getElementById('txtSenhaConfirmada');      
+    let errorSenhas = document.getElementById('errorSenhas');                                          
+    
+    if (txtNome.value.length > 100){
+        txtNome.style.border = "1px solid #DB5A5A";
+        errorNome.innerHTML = "Nome excede 100 caracteres!";
+        txtNome.focus();
+        return false;
+    }else{
+        errorNome.innerHTML = "";
+    }
 
-        //Coloca ponto entre o quinto e o sexto dígitos
-        valorDoTextBox = valorDoTextBox.replace(/^(\d{2})\.(\d{3})(\d)/, "$1 $2 $3")
+    if (txtSenha.value != txtSenhaConfirmada.value) {
+        txtSenha.style.border = "1px solid #DB5A5A";
+        txtSenhaConfirmada.style.border = "1px solid #DB5A5A";
+        errorSenhas.innerHTML = "Senhas informadas não coincidem!";
+        return false;
+    }else{
+        errorSenhas.value = "";
+    }
+    
+    return true;
+}
 
-        //Coloca uma barra entre o oitavo e o nono dígitos
-        valorDoTextBox = valorDoTextBox.replace(/\.(\d{3})(\d)/, ".$1/$2")
+//Validação do Cadastro do Instrutor
+function formCadastroInstrutorOnSubmit(){    
+    //Cria Variáveis
+    let txtNome = document.getElementById('txtNome');
+    let errorNome = document.getElementById('errorNome');
+    let txtSenha = document.getElementById('txtSenha');
+    let txtSenhaConfirmada = document.getElementById('txtSenhaConfirmada');      
+    let errorSenhas = document.getElementById('errorSenhas');                                          
+                                                 
+    if (txtNome.value.length > 100){
+        txtNome.style.border = "1px solid #DB5A5A";
+        errorNome.innerHTML = "Nome excede 100 caracteres!";
+        txtNome.focus();
+        return false;
+    }else{
+        errorNome.innerHTML = "";
+    }
 
-        //Coloca um hífen depois do bloco de quatro dígitos
-        valorDoTextBox = valorDoTextBox.replace(/(\d{4})(\d)/, "$1-$2") 
-    } 
-    return valorDoTextBox
+    if (txtSenha.value != txtSenhaConfirmada.value) {
+        txtSenha.style.border = "1px solid #DB5A5A";
+        txtSenhaConfirmada.style.border = "1px solid #DB5A5A";
+        errorSenhas.innerHTML = "Senhas informadas não coincidem!";
+        return false;
+    }else{
+        errorSenhas.value = "";
+    }
+    
+    return true;
+}    
+
+//Verificações do Cadastro de Lojista
+function formCadastroLojistaOnSubmit(){     
+    //Cria Variáveis
+    let txtRazaoSocial = document.getElementById('txtRazaoSocial');
+    let errorRazaoSocial = document.getElementById('errorRazaoSocial');
+    let txtSenha = document.getElementById('txtSenha');
+    let txtSenhaConfirmada = document.getElementById('txtSenhaConfirmada');      
+    let errorSenhas = document.getElementById('errorSenhas');   
+    
+    if (txtRazaoSocial.value.length > 100){
+        txtRazaoSocial.style.border = "1px solid #DB5A5A";
+        errorRazaoSocial.innerHTML = "Razão Social excede 100 caracteres!";
+        txtRazaoSocial.focus();
+        return false;
+    }else{
+        errorRazaoSocial.innerHTML = "";
+    }
+                                                 
+    if (txtSenha.value != txtSenhaConfirmada.value) {
+        txtSenha.style.border = "1px solid #DB5A5A";
+        txtSenhaConfirmada.style.border = "1px solid #DB5A5A";
+        errorSenhas.innerHTML = "Senhas informadas não coincidem!";
+        return false;
+    }else{
+        errorSenhas.value = "";
+    }
+    
+    return true;
 }

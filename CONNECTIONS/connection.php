@@ -15,4 +15,7 @@
     //Oculta os Erros do PHP
     error_reporting(0);
 
+    //Inicia Sessão
+    session_start();
+
 ?>
