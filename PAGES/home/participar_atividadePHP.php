@@ -7,8 +7,8 @@
         header ("Location: ../../index.php?error=4");
     }
 
-    $atividade = $_POST['atvCodigo'];
-    $usuario   = $_POST['usrCodigo'];
+    $atividade = $_GET['atividade'];
+    $usuario   = $_SESSION['CODIGO'];
 
     //Inserção do usuário na atividade    
     $insertUsuarioAtividade = "INSERT INTO PARATV (TABATV_Codigo, TABUSU_Codigo, PARATV_Created) VALUES ($atividade, $usuario, now())";

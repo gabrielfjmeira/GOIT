@@ -51,6 +51,13 @@
                 <p>Rua José da Silva Guedes 345, Atuba, Curitiba</p>
             </div>
 
+            <div class="registered-wrapper wrapper">
+                <h2>Inscritos</h2>                
+                <p>
+                    Número de Inscritos
+                </p>
+            </div>
+
             <div class="instructor-wrapper wrapper">
                 <h2>Responsável <ion-icon name="man"></ion-icon> </h2>
                 <div class="instructor">
@@ -59,30 +66,32 @@
                 </div>
             </div>
 
+            <button type="button" onclick="location.reload();">Fechar</button>
+
             <?php
                 //Verifica se o usuário está participando da atividade ao ar livre selecionada                
-                $usuarioInscricao = $_SESSION['CODIGO'];
-                $usuarioAtividade = "SELECT * FROM PARATV WHERE TABUSU_Codigo = $usuarioInscricao AND TABATV_Codigo = 3";                
-                $queryUsuarioAtividade = $mysqli->query($usuarioAtividade) or die("Falha na execução do código sql" . $mysqli->error);
-                $qtdUsuarioAtividade = $queryUsuarioAtividade->num_rows;
+                //$usuarioInscricao = $_SESSION['CODIGO'];
+                //$usuarioAtividade = "SELECT * FROM PARATV WHERE TABUSU_Codigo = $usuarioInscricao AND TABATV_Codigo = 3";                
+                //$queryUsuarioAtividade = $mysqli->query($usuarioAtividade) or die("Falha na execução do código sql" . $mysqli->error);
+                //$qtdUsuarioAtividade = $queryUsuarioAtividade->num_rows;
 
-                if($qtdUsuarioAtividade->num_rows > 0){?>
-                    <form action="participar_atividadePHP.php" method="POST" id=<?php echo $usuarioInscricao?>>
+                //if($qtdUsuarioAtividade->num_rows > 0){?>
+                <!--    <form action="participar_atividadePHP.php" method="POST" id=<?php //echo $usuarioInscricao?>>
                         <input id="atvCodigo" name="atvCodigo" type="number" value=03 hidden>
-                        <input id="usrCodigo" name="usrCodigo" type="number" value=<?php echo $_SESSION['CODIGO']?> hidden>
+                        <input id="usrCodigo" name="usrCodigo" type="number" value=<?php //echo $_SESSION['CODIGO']?> hidden>
                     </form>
-                    <button type="submit" form=<?php echo $usuarioInscricao ?> disabled>Inscrito</button>
+                    <button type="submit" form=<?php //echo $usuarioInscricao ?> disabled>Inscrito</button>
                 <?php
-                }else{?>
-                    <form action="participar_atividadePHP.php" method="POST" id=<?php echo $usuarioInscricao?> >
+                //}else{?>
+                    <form action="participar_atividadePHP.php" method="POST" id=<?php //echo $usuarioInscricao?> >
                         <input id="atvCodigo" name="atvCodigo" type="number" value=03 hidden>
-                        <input id="usrCodigo" name="usrCodigo" type="number" value=<?php echo $_SESSION['CODIGO']?> hidden>
+                        <input id="usrCodigo" name="usrCodigo" type="number" value=<?php //echo $_SESSION['CODIGO']?> hidden>
                     </form>
-                    <button type="submit" form=<?php echo $usuarioInscricao ?> style="cursor: pointer;">Inscrever-se</button>
+                    <button type="submit" form=<?php //echo $usuarioInscricao ?> style="cursor: pointer;">Inscrever-se</button>
                 <?php
-                }
+                //}
             
-            ?>                        
+            ?>-->
 
         </div>
 
@@ -109,6 +118,7 @@
                 //Imprime Atividades ao Ar Livre         
                 $atividades = "SELECT * FROM TABATV ORDER BY TABATV_Data ASC";                    
                 $queryAtividades = $mysqli->query($atividades) or die(mysql_error());
+                $postagem = 0;
 
                 if ($queryAtividades->num_rows > 0){
                     while($atividade = mysqli_fetch_array($queryAtividades)){?>
@@ -119,8 +129,7 @@
                                 <ion-icon name="calendar-clear"></ion-icon>
                             </div>
                 
-                            <!-- <h5>Atividade Criada Por <?php
-                            
+                            <!-- <h5>Atividade Criada Por <?php                                
                                 //Carrega o apelido/fantasia do Criador da Atividade ao Ar Livre
                                 $usuario = $atividade['TABUSU_Codigo'];
                                 $registroUsuario = "SELECT * FROM TABUSU WHERE TABUSU_Codigo = $usuario";                       
@@ -157,7 +166,22 @@
                                 }
                             
                             ?>
-                            </h5> -->                                                        
+                            </h5> -->    
+                                                       
+                            <!--Carrega o número de inscritos para o modal-->
+                            <?php          
+                                $postagem += 1;                                                  
+                                $sqlNumeroInscritos = "SELECT * FROM PARATV WHERE TABATV_Codigo = " . $atividade['TABATV_Codigo'] . ";";
+                                $querySqlNumeroInscritos = $mysqli->query($sqlNumeroInscritos) or die(mysql_error());                                
+                                if($querySqlNumeroInscritos->num_rows > 0){
+                                    $numeroInscritos = $querySqlNumeroInscritos->num_rows + 1;
+                                }else{
+                                    $numeroInscritos = 1;
+                                }?>                                
+                                <input type="number" class="numeroInscritos<?php echo $postagem?>" value=<?php echo $numeroInscritos?> hidden/>
+                                <?php
+                            ?>
+
                             <?php
                                 if(substr($atividade['TABATV_Imagem'], -4) == ".jpg" || substr($atividade['TABATV_Imagem'], -4) == ".png" ){
                                     $nomeImagem = substr($atividade['TABATV_Imagem'], -17);
@@ -166,10 +190,36 @@
                                 };                                                                                            
                             ?>
 
-                            <a style="cursor: pointer;" onclick="modalPostView('<?php echo $atividade['TABATV_Titulo']; ?>','<?php echo $nomeImagem;?>', '<?php echo $atividade['TABATV_Descricao']; ?>','<?php echo $atividade['TABATV_Data']; ?>', '<?php echo $atividade['TABATV_Hora']; ?>', '<?php echo $atividade['TABATV_Localizacao']?>', '<?php echo $apelido?>');" style="cursor: pointer;">
+                            <a class="sm" style="cursor: pointer;" onclick="modalPostView('<?php echo $atividade['TABATV_Titulo']; ?>','<?php echo $nomeImagem;?>', '<?php echo $atividade['TABATV_Descricao']; ?>','<?php echo $atividade['TABATV_Data']; ?>', '<?php echo $atividade['TABATV_Hora']; ?>', '<?php echo $atividade['TABATV_Localizacao']?>', <?php echo $postagem;?>,'<?php echo $apelido?>');" style="cursor: pointer;">                            
                                 Saiba mais                                        
-                            </a>                                                                                          
-                                                                                    
+                            </a>
+
+                            <?php                               
+                                $sqlCriador = "SELECT * FROM TABATV WHERE TABATV_Codigo = ". $atividade['TABATV_Codigo']." AND TABUSU_Codigo = ". $_SESSION['CODIGO']. ";";
+                                $querySqlCriador = $mysqli->query($sqlCriador) or die(mysql_error());
+                                if($querySqlCriador->num_rows == 1){?>
+                                    <a onclick="alert('Para se desinscrever, apague a atividade!');">
+                                        Inscrito
+                                    </a>
+                                <?php
+                                }else{
+                                    $sqlInscrito = "SELECT * FROM PARATV WHERE TABATV_Codigo = ". $atividade['TABATV_Codigo']." AND TABUSU_Codigo = ". $_SESSION['CODIGO']. ";";
+                                    $querySqlInscrito = $mysqli->query($sqlInscrito) or die(mysql_error());
+                                    if($querySqlInscrito->num_rows == 1){
+                                    ?>
+                                        <a href="sair_atividadePHP.php?atividade=<?php echo $atividade['TABATV_Codigo']?>">
+                                            Cancelar Inscrição
+                                        </a>
+                                    <?php
+                                    }else{?>
+                                        <a href="participar_atividadePHP.php?atividade=<?php echo $atividade['TABATV_Codigo']?>">
+                                            Inscrever-Se
+                                        </a>
+                                    <?php
+                                    }
+                                }                            
+                            ?>                            
+
                             <?php
                             if($_SESSION['CODIGO'] == $atividade['TABUSU_Codigo']){?>                            
                                 
@@ -199,10 +249,9 @@
             ?>
         </footer>
     </div>
-
+    
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>        
     <script>
 
         function submitform() {
@@ -218,7 +267,7 @@
             modalProduct.setAttribute("style" , "display: ")
         }        
 
-        function modalPostView(titulo, imagem, descricao, data, hora, local, usuario) {
+        function modalPostView(titulo, imagem, descricao, data, hora, local, postagem, usuario) {
             var title = document.querySelector(".title-post h3")
             title.innerHTML = titulo    
             var image = document.querySelector(".modal-post img")
@@ -234,13 +283,15 @@
             var time = document.querySelector(".time-wrapper p")
             time.innerHTML = hora
             var localization = document.querySelector(".localization-wrapper p")
-            localization.innerHTML = local
+            localization.innerHTML = local                                                                                                                                                         
+            var numberRegistereds = document.querySelector(".numeroInscritos"+postagem).value;            
+            var registered = document.querySelector(".registered-wrapper p")
+            registered.innerHTML = numberRegistereds
             var user = document.querySelector(".user")
-            user.innerHTML = usuario
-
+            user.innerHTML = usuario          
             bgblur.setAttribute("style" , "display: ")
             modalPost.setAttribute("style" , "display: ")
-        }
+        }    
 
         function exitModal(){
             bgblur.addEventListener("click", function(event){
