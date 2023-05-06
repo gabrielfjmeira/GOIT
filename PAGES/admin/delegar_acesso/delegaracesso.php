@@ -13,10 +13,10 @@
     }
 
     //Carrega os Registros da Tabela de Instrutores e Lojistas que não estão verificados
-    $instrutoresNaoVerificados = "SELECT * FROM TABUSU INNER JOIN TABINS ON TABUSU.TABUSU_Codigo = TABINS.TABUSU_Codigo WHERE TABINS.TABINS_Verificado = 0 ORDER BY TABUSU.TABUSU_Codigo ASC";
+    $instrutoresNaoVerificados = "SELECT * FROM TABUSU INNER JOIN TABINS ON TABUSU.TABUSU_Codigo = TABINS.TABUSU_Codigo WHERE TABINS.TABINS_Verificado = 0 AND TABINS.TABINS_Negado = 0 ORDER BY TABUSU.TABUSU_Codigo ASC";
     $queryInstrutoresNaoVerificados = $mysqli->query($instrutoresNaoVerificados) or die("Falha na execução do código sql" . $mysqli->error);
 
-    $lojistasNaoVerificados = "SELECT * FROM TABUSU INNER JOIN TABLOJ ON TABUSU.TABUSU_Codigo = TABLOJ.TABUSU_Codigo WHERE TABLOJ.TABLOJ_Verificado = 0 ORDER BY TABUSU.TABUSU_Codigo ASC";
+    $lojistasNaoVerificados = "SELECT * FROM TABUSU INNER JOIN TABLOJ ON TABUSU.TABUSU_Codigo = TABLOJ.TABUSU_Codigo WHERE TABLOJ.TABLOJ_Verificado = 0 AND TABLOJ.TABLOJ_Negado = 0 ORDER BY TABUSU.TABUSU_Codigo ASC";
     $queryLojistasNaoVerificados = $mysqli->query($lojistasNaoVerificados) or die("Falha na execução do código sql" . $mysqli->error);
 ?>
 

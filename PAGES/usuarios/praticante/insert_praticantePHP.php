@@ -49,9 +49,13 @@
 
             $insertPraticante = "INSERT INTO TABPRA (TABUSU_Codigo, TABPRA_Nome, TABPRA_Apelido, TABPRA_DataNascimento, TABPRA_Sexo) VALUES ($codigoUsuario, '$nome', '$apelido', '$dataNascimento', $sexo)";
             $queryInsertPraticante = $mysqli->query($insertPraticante) or die("Falha na execução do código sql" . $mysqli->error);
-        
-            //Redireciona para o login
-            header("Location: ../../../index.php?cadastrado=1");
+            ?>
+            <script>
+                //Redireciona para o login
+                alert("Cadastro realizado com sucesso!")
+                location.href = "../../../index.php";
+            </script>
+            <?php
         }else{
             //Redireciona para o cadastramento de praticante com Erro
             header('Location: ./cadastro_praticante.php?error=002'); 

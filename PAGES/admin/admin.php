@@ -29,7 +29,7 @@
     <!--Cabeçalho-->    
     <header>        
         <h1>ADMINISTRAÇÃO</h1>        
-        <button onclick="window.history.back();">
+        <button onclick="location.href = '../home/home.php'">
             Voltar ⬅
         </button>
     </header>

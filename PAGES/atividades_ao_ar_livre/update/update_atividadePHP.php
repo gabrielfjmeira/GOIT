@@ -40,8 +40,8 @@
             if($arquivo['error']){
                 //Update no banco de dados
                 $updateAtividade = "UPDATE TABATV SET TABATV_Titulo='$titulo', TABATV_Descricao='$descricao', CATATV_Codigo = $categoria, TABATV_Localizacao = '$localizacao', TABATV_Referencia = '$referencia', TABATV_Inscritos = $inscritos, TABATV_Data='$data', TABATV_Hora='$hora' WHERE TABATV_Codigo = $codigo";        
-                $queryUpdateAtividade = $mysqli->query($updateAtividade) or die("Falha na execução do código sql" . $mysqli->error);           }       
-            }
+                $queryUpdateAtividade = $mysqli->query($updateAtividade) or die("Falha na execução do código sql" . $mysqli->error);           
+            }                   
     
             $pasta = "../arquivos/";
             $nomeDoArquivo = $arquivo['name'];
@@ -53,7 +53,7 @@
                 //Update no banco de dados
                 $updateAtividade = "UPDATE TABATV SET TABATV_Titulo='$titulo', TABATV_Descricao='$descricao', TABATV_Imagem = '$path', CATATV_Codigo = $categoria, TABATV_Localizacao = '$localizacao', TABATV_Referencia = '$referencia', TABATV_Inscritos = $inscritos, TABATV_Data='$data', TABATV_Hora='$hora' WHERE TABATV_Codigo = $codigo";        
                 $queryUpdateAtividade = $mysqli->query($updateAtividade) or die("Falha na execução do código sql" . $mysqli->error);       
-            
+            }
         }else{
             //Update no banco de dados
             $updateAtividade = "UPDATE TABATV SET TABATV_Titulo='$titulo', TABATV_Descricao='$descricao', CATATV_Codigo = $categoria, TABATV_Localizacao = '$localizacao', TABATV_Referencia = '$referencia', TABATV_Inscritos = $inscritos, TABATV_Data='$data', TABATV_Hora='$hora' WHERE TABATV_Codigo = $codigo";        
