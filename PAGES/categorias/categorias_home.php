@@ -27,19 +27,25 @@
     <!--Título da Página-->
     <title>GO🐐IT | A Social Adventure</title>
 </head>
+
 <body>
     
     <div class="background-blur" style="display: none;" onclick="exitModal();">
-
+        
         <div class="modal-post" style="display: none;">
-
-            <div class="title-post">
+            <form action="participar.php" medthod="POST"></form>
+            <div class="title-post">                
                 <ion-icon name="calendar-clear"></ion-icon>
                 <h3>Escalada no pico pão de Loth, localizado  em Quatro Barras</h3>
                 <p>10/04/2023</p>
             </div>
 
             <img src="../../ASSETS/paisagem.png" alt="post-image">
+
+            <div class="desc-wrapper wrapper">
+                <h2>Descrição</h2>
+                <p>Descrição da Atividade</p>
+            </div>
 
             <div class="time-wrapper wrapper">
                 <h2>Horário <ion-icon name="time-outline"></ion-icon> </h2>
@@ -51,38 +57,37 @@
                 <p>Rua José da Silva Guedes 345, Atuba, Curitiba</p>
             </div>
 
+            <div class="registered-wrapper wrapper">
+                <h2>Inscritos</h2>                
+                <p>
+                    Número de Inscritos
+                </p>
+            </div>
+
             <div class="instructor-wrapper wrapper">
-                <h2>Instrutor responsável <ion-icon name="man"></ion-icon> </h2>
+                <h2>Responsável <ion-icon name="man"></ion-icon> </h2>
                 <div class="instructor">
                     <img src="./assets/bibo.png" alt="instrutor image">
-                    <a href="#">Gabriel Felipe Jess Meira</a>
+                    <a href="#" class="user">Gabriel Felipe Jess Meira</a>
                 </div>
             </div>
 
-            <button>Participar</button>
-
+            <button type="button" onclick="location.reload();">Fechar</button>      
         </div>
 
     </div>
 
     <div id="app">
         <img onclick="location.href= '../home/home.php'" src="../../ASSETS/Logo.png" alt="Logo go it" id="logo-header" style="cursor: pointer;">
-        
-        <!-- <?php
-        // if ($_SESSION['TIPOUSUARIO'] == 1){
-        //     include('../templates/headers/header_adm.html');
-        // } else{
-        //     include('../templates/headers/header_users.html');
-        // }
-        ?> -->
 
         <!-- //Imprime as Categorias para Filtrar a Aplicação -->
         <header class="activities-list flex">
         <?php
             //Imprime as Categorias para Filtrar a Aplicação
             $categorias = "SELECT * FROM CATATV ORDER BY CATATV_Descricao ASC"; 
-            $queryCategorias = $mysqli->query($categorias) or die(mysql_error());    
-
+            $queryCategorias = $mysqli->query($categorias) or die(mysql_error());?>    
+            <button onclick="location.href ='../home/home.php';">Todas</button> 
+            <?php
             while($categoria = mysqli_fetch_array($queryCategorias)){
                 
                 $catatv_codigo = $categoria['CATATV_Codigo'];
@@ -99,17 +104,20 @@
         </header>
     
         <main>
+            <!--
             <div class="search-wrapper flex">
                 <ion-icon name="search-outline"></ion-icon>
                 <input type="text" id="search-input" placeholder="Search">
             </div>
+            -->
 
             <section class="eventsAndGroups flex">
 
                 <?php
                 //Imprime Atividades ao Ar Livre         
-                $atividades = "SELECT * FROM TABATV WHERE CATATV_Codigo=$categoriafiltrada ORDER BY TABATV_Data ASC";                    
+                $atividades = "SELECT * FROM TABATV WHERE CATATV_Codigo = $categoriafiltrada ORDER BY TABATV_Data ASC";                    
                 $queryAtividades = $mysqli->query($atividades) or die(mysql_error());
+                $postagem = 0;
 
                 if ($queryAtividades->num_rows > 0){
                     while($atividade = mysqli_fetch_array($queryAtividades)){?>
@@ -120,8 +128,7 @@
                                 <ion-icon name="calendar-clear"></ion-icon>
                             </div>
                 
-                            <!-- <h5>Atividade Criada Por <?php
-                            
+                            <!-- <h5>Atividade Criada Por <?php                                
                                 //Carrega o apelido/fantasia do Criador da Atividade ao Ar Livre
                                 $usuario = $atividade['TABUSU_Codigo'];
                                 $registroUsuario = "SELECT * FROM TABUSU WHERE TABUSU_Codigo = $usuario";                       
@@ -132,42 +139,104 @@
                                 switch($tipousuario){
                                     //Administrador
                                     case 1:
-                                        echo "Administrador";
+                                        $apelido = "Admin";
                                         break;                        
                                     //Praticante
                                     case 2:
                                         $praticante = "SELECT * FROM TABPRA WHERE TABUSU_Codigo = $usuario";
-                                        $queryPraticante = $mysqli->query($praticante) or die(mysql_error());
+                                        $queryPraticante = $mysqli->query($praticante) or die(mysql_error());                                       
                                         $praticante_data = mysqli_fetch_array($queryPraticante);
-                                        echo $praticante_data['TABPRA_Apelido'];
+                                        $apelido = $praticante_data['TABPRA_Apelido'];                                        
                                         break;                        
                                     //Instrutor                        
                                     case 3:
                                         $instrutor = "SELECT * FROM TABINS WHERE TABUSU_Codigo = $usuario";
                                         $queryInstrutor = $mysqli->query($instrutor) or die(mysql_error());
                                         $instrutor_data = mysqli_fetch_array($queryInstrutor);
-                                        echo $instrutor_data['TABINS_Apelido'];
+                                        $apelido = $instrutor_data['TABINS_Apelido'];
                                         break;                        
                                     //Lojista
                                     case 4:
                                         $lojista = "SELECT * FROM TABLOJ WHERE TABUSU_Codigo = $usuario";
                                         $queryLojista = $mysqli->query($lojista) or die(mysql_error());
                                         $lojista_data = mysqli_fetch_array($queryLojista);
-                                        echo $lojista_data['TABLOJ_Fantasia'];
+                                        $apelido = $lojista_data['TABLOJ_Fantasia'];
                                         break;                        
                                 }
                             
                             ?>
-                            </h5> -->
+                            </h5> -->    
+                                                       
+                            <!--Carrega o número de inscritos para o modal-->
+                            <?php          
+                                $postagem += 1;                                                  
+                                $sqlNumeroInscritos = "SELECT * FROM PARATV WHERE TABATV_Codigo = " . $atividade['TABATV_Codigo'] . ";";
+                                $querySqlNumeroInscritos = $mysqli->query($sqlNumeroInscritos) or die(mysql_error());                                
+                                if($querySqlNumeroInscritos->num_rows > 0){
+                                    $numeroInscritos = $querySqlNumeroInscritos->num_rows + 1;
+                                }else{
+                                    $numeroInscritos = 1;
+                                }?>                                
+                                <input type="number" class="numeroInscritos<?php echo $postagem?>" value=<?php echo $numeroInscritos?> hidden/>
+                                <?php                                
+                                $maximoInscritos = $atividade['TABATV_Inscritos'];?>
+                                
+                                <input type="number" class="maxInscritos<?php echo $postagem?>" value=<?php echo $maximoInscritos?> hidden/>                               
 
-                            
-                            <a onclick="modalPostView('<?php echo $atividade['TABATV_Titulo'];?>', '<?php echo $atividade['TABATV_Data']; ?>', '<?php echo $atividade['TABATV_Hora']; ?>', '<?php echo $atividade['TABATV_Localizacao']?>');">Saiba mais</a>  
+                            <?php
+                                if(substr($atividade['TABATV_Imagem'], -4) == ".jpg" || substr($atividade['TABATV_Imagem'], -4) == ".png" ){
+                                    $nomeImagem = substr($atividade['TABATV_Imagem'], -17);
+                                }else{
+                                    $nomeImagem = substr($atividade['TABATV_Imagem'], -18);
+                                };                                                                                            
+                            ?>
+
+                            <a class="sm" style="cursor: pointer;" onclick="modalPostView('<?php echo $atividade['TABATV_Titulo']; ?>','<?php echo $nomeImagem;?>', '<?php echo $atividade['TABATV_Descricao']; ?>','<?php echo $atividade['TABATV_Data']; ?>', '<?php echo $atividade['TABATV_Hora']; ?>', '<?php echo $atividade['TABATV_Localizacao']?>', <?php echo $postagem;?>,'<?php echo $apelido?>');" style="cursor: pointer;">                            
+                                Saiba mais                                        
+                            </a>
+
+                            <?php                               
+                                $sqlCriador = "SELECT * FROM TABATV WHERE TABATV_Codigo = ". $atividade['TABATV_Codigo']." AND TABUSU_Codigo = ". $_SESSION['CODIGO']. ";";
+                                $querySqlCriador = $mysqli->query($sqlCriador) or die(mysql_error());
+                                if($querySqlCriador->num_rows == 1){?>
+                                    <a onclick="alert('Como criador, para se desinscrever apague a atividade!');">
+                                        Inscrito
+                                    </a>
+                                <?php
+                                }else{
+                                    $sqlInscrito = "SELECT * FROM PARATV WHERE TABATV_Codigo = ". $atividade['TABATV_Codigo']." AND TABUSU_Codigo = ". $_SESSION['CODIGO']. ";";
+                                    $querySqlInscrito = $mysqli->query($sqlInscrito) or die(mysql_error());
+                                    if($querySqlInscrito->num_rows == 1){
+                                    ?>
+                                        <a href="sair_atividadePHP.php?atividade=<?php echo $atividade['TABATV_Codigo']?>">
+                                            Cancelar Inscrição
+                                        </a>
+                                    <?php
+                                    }else{
+                                        if($numeroInscritos == $maximoInscritos){?>
+                                            <a onclick="alert('Número máximo de inscritos atingido nesta atividade ao ar livre!')">
+                                                Número máximo de inscritos atingido!
+                                            </a>
+                                        <?php
+                                        }else{?>
+                                            <a href="participar_atividadePHP.php?atividade=<?php echo $atividade['TABATV_Codigo']?>">
+                                                Inscrever-Se
+                                            </a>
+                                        <?php
+                                        }
+                                        ?>
+                                        
+                                    <?php
+                                    }
+                                }                            
+                            ?>                           
+
                             <?php
                             if($_SESSION['CODIGO'] == $atividade['TABUSU_Codigo']){?>                            
                                 
-                                <a href="../atividades_ao_ar_livre/update/update_atividade.php?codigo=<?php echo $atividade['TABATV_Codigo'];?>">Editar Atividade</a>
+                                <a href="../atividades_ao_ar_livre/update/update_atividade.php?codigo=<?php echo $atividade['TABATV_Codigo'];?>" style="cursor: pointer;">Editar Atividade</a>
                                 
-                                <a href="../atividades_ao_ar_livre/delete/delete_atividadePHP.php?codigo=<?php echo $atividade['TABATV_Codigo'];?>">Excluir Atividade</a>
+                                <a href="../atividades_ao_ar_livre/delete/delete_atividadePHP.php?codigo=<?php echo $atividade['TABATV_Codigo'];?>" style="cursor: pointer;">Excluir Atividade</a>
                             <?php
                             }
                             ?>
@@ -176,7 +245,7 @@
                     }                       
                 }else{ ?>
             
-                    <h3>Sem Atividades Ao Ar Livre Cadastradas!</h3>
+                    <h3>Sem atividades ao ar livre cadastradas nesta categoria!</h3>
        
                 <?php 
                 }
@@ -187,15 +256,19 @@
         <footer>
             <?php 
                 $assets_path = '../../ASSETS';
-                include '../templates/footers/navBar.php' 
+                include '../templates/footers/navBar.php';                
             ?>
         </footer>
     </div>
-
+    
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>        
     <script>
+
+        function submitform() {
+                document.saibamais.submit();
+        }
+
         bgblur = document.querySelector(".background-blur")
         modalProduct = document.querySelector(".modal-product")
         modalPost = document.querySelector(".modal-post")
@@ -203,21 +276,34 @@
         function modalProductView() {
             bgblur.setAttribute("style" , "display: ")
             modalProduct.setAttribute("style" , "display: ")
-        }
+        }        
 
-        function modalPostView(titulo, data, hora, local) {
+        function modalPostView(titulo, imagem, descricao, data, hora, local, postagem, usuario) {
             var title = document.querySelector(".title-post h3")
-            title.innerHTML = titulo
+            title.innerHTML = titulo    
+            var image = document.querySelector(".modal-post img")
+            if (imagem != ''){
+                image.setAttribute("src", "../atividades_ao_ar_livre/arquivos/"+imagem)
+            }else{
+                image.setAttribute("src", "../../ASSETS/paisagem.png")
+            }           
+            var description = document.querySelector(".desc-wrapper p")
+            description.innerHTML = descricao
             var date = document.querySelector(".title-post p")
             date.innerHTML = data
             var time = document.querySelector(".time-wrapper p")
             time.innerHTML = hora
             var localization = document.querySelector(".localization-wrapper p")
-            localization.innerHTML = local
-
+            localization.innerHTML = local                                                                                                                                                         
+            var numberRegistereds = document.querySelector(".numeroInscritos"+postagem).value;            
+            var maxRegistereds = document.querySelector(".maxInscritos"+postagem).value; 
+            var registered = document.querySelector(".registered-wrapper p")
+            registered.innerHTML = numberRegistereds + "/" + maxRegistereds
+            var user = document.querySelector(".user")
+            user.innerHTML = usuario          
             bgblur.setAttribute("style" , "display: ")
             modalPost.setAttribute("style" , "display: ")
-        }
+        }    
 
         function exitModal(){
             bgblur.addEventListener("click", function(event){

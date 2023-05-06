@@ -12,12 +12,15 @@
             <p>Painel do administrador</p>
         </button>   
     <?php 
-    }?>                
+    }else{?>
+        <button hidden></button>
+    <?php
+    }?>                    
     <button onclick="location.href ='../atividades_ao_ar_livre/insert/insert_atividade.php';">
         <img src="<?php echo $assets_path ?>/buttonNewPubli.svg" alt="">
         <p>Publicar</p>
     </button>
-    <button>
+    <button onclick="">
         <img src="<?php echo $assets_path ?>/buttonPerfil.svg" alt="">
         <p><?php echo $_SESSION['Apelido'];?></p>
     </button>

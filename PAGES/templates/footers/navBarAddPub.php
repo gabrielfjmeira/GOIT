@@ -12,14 +12,24 @@
             <p>Painel do administrador</p>
         </button>   
     <?php 
-    }?>                
-    <button onclick="">
+    }else{?>
+        <button hidden></button>
+    <?php
+    }?>                 
+    <button onclick="limparFormulario()">
         <img src="<?php echo $assets_path ?>/buttonNewPubliFilled.svg" alt="">
         <p>Publicar</p>
     </button>
     <button onclick="">
         <img src="<?php echo $assets_path ?>/buttonPerfil.svg" alt="">
         <p><?php echo $_SESSION['Apelido'];?></p>
-    </button>
-
+    </button>   
+    <script>
+        function limparFormulario(){
+            let text = "Confirma limpar o formulário?";
+            if (confirm(text) == true) {
+                location.reload();
+            }            
+        }
+    </script>     
 </nav>

@@ -66,33 +66,7 @@
                 </div>
             </div>
 
-            <button type="button" onclick="location.reload();">Fechar</button>
-
-            <?php
-                //Verifica se o usuário está participando da atividade ao ar livre selecionada                
-                //$usuarioInscricao = $_SESSION['CODIGO'];
-                //$usuarioAtividade = "SELECT * FROM PARATV WHERE TABUSU_Codigo = $usuarioInscricao AND TABATV_Codigo = 3";                
-                //$queryUsuarioAtividade = $mysqli->query($usuarioAtividade) or die("Falha na execução do código sql" . $mysqli->error);
-                //$qtdUsuarioAtividade = $queryUsuarioAtividade->num_rows;
-
-                //if($qtdUsuarioAtividade->num_rows > 0){?>
-                <!--    <form action="participar_atividadePHP.php" method="POST" id=<?php //echo $usuarioInscricao?>>
-                        <input id="atvCodigo" name="atvCodigo" type="number" value=03 hidden>
-                        <input id="usrCodigo" name="usrCodigo" type="number" value=<?php //echo $_SESSION['CODIGO']?> hidden>
-                    </form>
-                    <button type="submit" form=<?php //echo $usuarioInscricao ?> disabled>Inscrito</button>
-                <?php
-                //}else{?>
-                    <form action="participar_atividadePHP.php" method="POST" id=<?php //echo $usuarioInscricao?> >
-                        <input id="atvCodigo" name="atvCodigo" type="number" value=03 hidden>
-                        <input id="usrCodigo" name="usrCodigo" type="number" value=<?php //echo $_SESSION['CODIGO']?> hidden>
-                    </form>
-                    <button type="submit" form=<?php //echo $usuarioInscricao ?> style="cursor: pointer;">Inscrever-se</button>
-                <?php
-                //}
-            
-            ?>-->
-
+            <button type="button" onclick="location.reload();">Fechar</button>      
         </div>
 
     </div>
@@ -107,10 +81,12 @@
         </header>
     
         <main>
+            <!--
             <div class="search-wrapper flex">
                 <ion-icon name="search-outline"></ion-icon>
                 <input type="text" id="search-input" placeholder="Search">
             </div>
+            -->
 
             <section class="eventsAndGroups flex">
 
@@ -179,8 +155,10 @@
                                     $numeroInscritos = 1;
                                 }?>                                
                                 <input type="number" class="numeroInscritos<?php echo $postagem?>" value=<?php echo $numeroInscritos?> hidden/>
-                                <?php
-                            ?>
+                                <?php                                
+                                $maximoInscritos = $atividade['TABATV_Inscritos'];?>
+                                
+                                <input type="number" class="maxInscritos<?php echo $postagem?>" value=<?php echo $maximoInscritos?> hidden/>                               
 
                             <?php
                                 if(substr($atividade['TABATV_Imagem'], -4) == ".jpg" || substr($atividade['TABATV_Imagem'], -4) == ".png" ){
@@ -198,7 +176,7 @@
                                 $sqlCriador = "SELECT * FROM TABATV WHERE TABATV_Codigo = ". $atividade['TABATV_Codigo']." AND TABUSU_Codigo = ". $_SESSION['CODIGO']. ";";
                                 $querySqlCriador = $mysqli->query($sqlCriador) or die(mysql_error());
                                 if($querySqlCriador->num_rows == 1){?>
-                                    <a onclick="alert('Para se desinscrever, apague a atividade!');">
+                                    <a onclick="alert('Como criador, para se desinscrever apague a atividade!');">
                                         Inscrito
                                     </a>
                                 <?php
@@ -207,14 +185,24 @@
                                     $querySqlInscrito = $mysqli->query($sqlInscrito) or die(mysql_error());
                                     if($querySqlInscrito->num_rows == 1){
                                     ?>
-                                        <a href="sair_atividadePHP.php?atividade=<?php echo $atividade['TABATV_Codigo']?>">
+                                        <a onclick="cancelarInscricao('<?php echo $atividade['TABATV_Titulo']?>', <?php echo $atividade['TABATV_Codigo']?>);">
                                             Cancelar Inscrição
                                         </a>
                                     <?php
-                                    }else{?>
-                                        <a href="participar_atividadePHP.php?atividade=<?php echo $atividade['TABATV_Codigo']?>">
-                                            Inscrever-Se
-                                        </a>
+                                    }else{
+                                        if($numeroInscritos == $maximoInscritos){?>
+                                            <a onclick="alert('Número máximo de inscritos atingido nesta atividade ao ar livre!')">
+                                                Número máximo de inscritos atingido!
+                                            </a>
+                                        <?php
+                                        }else{?>
+                                            <a href="participar_atividadePHP.php?atividade=<?php echo $atividade['TABATV_Codigo']?>">
+                                                Inscrever-Se
+                                            </a>
+                                        <?php
+                                        }
+                                        ?>
+                                        
                                     <?php
                                     }
                                 }                            
@@ -254,6 +242,13 @@
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>        
     <script>
 
+        function cancelarInscricao(titulo, codigo){
+            let text = "Confirma cancelar a incrição em " + titulo + "?";
+            if (confirm(text) == true) {
+                window.location.href = "./sair_atividadePHP.php?atividade="+codigo; 
+            }   
+        }
+
         function submitform() {
                 document.saibamais.submit();
         }
@@ -285,8 +280,9 @@
             var localization = document.querySelector(".localization-wrapper p")
             localization.innerHTML = local                                                                                                                                                         
             var numberRegistereds = document.querySelector(".numeroInscritos"+postagem).value;            
+            var maxRegistereds = document.querySelector(".maxInscritos"+postagem).value; 
             var registered = document.querySelector(".registered-wrapper p")
-            registered.innerHTML = numberRegistereds
+            registered.innerHTML = numberRegistereds + "/" + maxRegistereds
             var user = document.querySelector(".user")
             user.innerHTML = usuario          
             bgblur.setAttribute("style" , "display: ")

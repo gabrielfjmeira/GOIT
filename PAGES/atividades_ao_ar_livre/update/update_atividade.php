@@ -22,6 +22,7 @@
             $categoria = $atividade_data['CATRIS_Codigo'];
             $localizacao = $atividade_data['TABATV_Localizacao'];
             $referencia = $atividade_data['TABATV_Referencia'];
+            $inscritos = $atividade_data['TABATV_Inscritos'];
             $data = $atividade_data['TABATV_Data'];
             $hora = $atividade_data['TABATV_Hora'];
         }else{
@@ -70,7 +71,7 @@
             </div>
 
             <div class="input-wrapper">
-                <label for="title-post">Título</label>
+                <label for="title-post">Título*</label>
                 <div class="title-input-wrapper">
                     <input type="text" id="txtTitulo" name="txtTitulo" placeholder="Título" value="<?php echo $titulo;?>"
                     pattern="^.{5, 100}$" 
@@ -80,7 +81,7 @@
             </div>
 
             <div class="input-wrapper">
-                <label for="categoria">Categoria da atividade do evento</label>
+                <label for="categoria">Categoria da atividade do evento*</label>
                 <select name="categoriaAtividade" required>        
                     <option disabled="disabled" hidden>Escolha uma opção</option>
                     <?php          
@@ -101,7 +102,7 @@
             </div>
 
             <div class="input-wrapper">
-                <label for="">Descrição</label>
+                <label for="">Descrição*</label>
                 <div class="desc-input-wrapper">
                     <textarea id="txtDescricao" name="txtDescricao" placeholder="Ex: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eget ligula aliquet, iaculis est eu, ornare velit. Cras vestibulum venenatis blandit." required>
                         <?php echo $descricao;?>
@@ -113,14 +114,13 @@
             <div class="input-wrapper">
                 <label for="">Upload da Imagem do evento</label>
                 <label for="imgAtividade" class="uploadImage-input-wrapper">                        
-                    <img id="imagemSelecionada" src="<?php echo $imagem;?>" style="max-width: 8rem; max-height: 8rem;" class="uploadIcon">
-                    <input type="hidden" name="MAX_FILE_SIZE" value="16777215" />
+                    <img id="imagemSelecionada" src="../../../ASSETS/uploadIcon.svg" style="max-width: 8rem; max-height: 8rem;" class="uploadIcon">                    
                     <input type="file" id="imgAtividade" name="imgAtividade" accept="image/*" onchange="validaImagem(this);"> 
                 </label>
             </div>
 
             <div class="input-wrapper">
-                <label for="">Endereço</label>
+                <label for="">Endereço*</label>
                 <div class="local-input-wrapper">
                     <input type="text" name="txtLocalizacao" placeholder="Ex: Rua José das cruzes 112, Pinhais" value="<?php echo $localizacao;?>"
                     pattern="^.{, 100}$" 
@@ -136,6 +136,15 @@
                     pattern="^.{, 50}$" 
                     title="Referência deve possuir no máximo 50 caracteres!"/>
                     <ion-icon name="pin-outline"></ion-icon>
+                </div>
+            </div>
+
+            <div class="input-wrapper">
+                <label for="">Número máximo de inscritos*</label>
+                <div class="local-input-wrapper">
+                    <input type="number" name="nbrInscritos" id="nbrInscritos" placeholder="Ex: 50" value=<?php echo $inscritos;?>
+                    pattern="^[0-9]{1, 3}$"
+                    title="Número máximo de inscritos deve possuir no máximo 3 casas decimais!" required/>                    
                 </div>
             </div>
             

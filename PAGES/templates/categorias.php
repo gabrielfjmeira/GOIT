@@ -1,8 +1,9 @@
 <?php
     //Imprime as Categorias para Filtrar a Aplicação
     $categorias = "SELECT * FROM CATATV ORDER BY CATATV_Descricao ASC"; 
-    $queryCategorias = $mysqli->query($categorias) or die(mysql_error());    
-
+    $queryCategorias = $mysqli->query($categorias) or die(mysql_error());?>      
+    <button class="onPage" onclick="location.reload();">Todas</button> 
+    <?php
     while($categoria = mysqli_fetch_array($queryCategorias)){
         
         $catatv_codigo = $categoria['CATATV_Codigo'];

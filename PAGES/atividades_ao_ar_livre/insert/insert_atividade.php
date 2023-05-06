@@ -43,7 +43,7 @@
             </div>
 
             <div class="input-wrapper">
-                <label for="title-post">Título</label>
+                <label for="title-post">Título*</label>
                 <div class="title-input-wrapper">
                     <input type="text" id="txtTitulo" name="txtTitulo" placeholder="Título" 
                     pattern="^.{5, 100}$" 
@@ -53,8 +53,8 @@
             </div>
 
             <div class="input-wrapper">
-                <label for="categoria">Categoria da atividade do evento</label>
-                <select name="categoriaAtividade" required>        
+                <label for="categoria">Categoria da atividade do evento*</label>
+                <select id="categoriaAtividade" name="categoriaAtividade" required>        
                     <option selected disabled="disabled" hidden>Escolha uma opção</option>
                     <?php          
                         $categoriasAtividades = "SELECT * FROM CATATV ORDER BY CATATV_Codigo ASC";      
@@ -71,7 +71,7 @@
             </div>
 
             <div class="input-wrapper">
-                <label for="">Descrição</label>
+                <label for="">Descrição*</label>
                 <div class="desc-input-wrapper">
                     <textarea id="txtDescricao" name="txtDescricao" placeholder="Ex: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eget ligula aliquet, iaculis est eu, ornare velit. Cras vestibulum venenatis blandit." required></textarea>
                     <p>0/600</p>
@@ -81,16 +81,15 @@
             <div class="input-wrapper">
                 <label for="">Upload da Imagem do evento</label>
                 <label for="imgAtividade" class="uploadImage-input-wrapper">                        
-                    <img id="imagemSelecionada" src="../../../ASSETS/uploadIcon.svg" style="max-width: 8rem; max-height: 8rem;" class="uploadIcon">
-                    <input type="hidden" name="MAX_FILE_SIZE" value="16777215" />
+                    <img id="imagemSelecionada" src="../../../ASSETS/uploadIcon.svg" style="max-width: 8rem; max-height: 8rem;" class="uploadIcon">                    
                     <input type="file" id="imgAtividade" name="imgAtividade" accept="image/*" onchange="validaImagem(this);"> 
                 </label>
             </div>
 
             <div class="input-wrapper">
-                <label for="">Endereço</label>
+                <label for="">Endereço*</label>
                 <div class="local-input-wrapper">
-                    <input type="text" name="txtLocalizacao" placeholder="Ex: Rua José das cruzes 112, Pinhais" 
+                    <input type="text" id="txtLocalizacao" name="txtLocalizacao" placeholder="Ex: Rua José das cruzes 112, Pinhais" 
                     pattern="^.{, 100}$" 
                     title="Endereço deve possuir no máximo 100 caracteres!" required/>
                     <ion-icon name="location-sharp"></ion-icon>
@@ -100,15 +99,24 @@
             <div class="input-wrapper">
                 <label for="">Referência</label>
                 <div class="local-input-wrapper">
-                    <input type="text" name="txtReferencia" id="txtReferencia" placeholder="Ex: Próximo ao supermercado Condor" 
+                    <input type="text" id="txtReferencia" name="txtReferencia" placeholder="Ex: Próximo ao supermercado Condor" 
                     pattern="^.{, 50}$"
                     title="Referência deve possuir no máximo 50 caracteres!"/>
                     <ion-icon name="pin-outline"></ion-icon>
                 </div>
             </div>
+
+            <div class="input-wrapper">
+                <label for="">Número máximo de inscritos*</label>
+                <div class="local-input-wrapper">
+                    <input type="number" id="nbrInscritos" name="nbrInscritos" placeholder="Ex: 50" 
+                    pattern="^[0-9]{1, 3}$"
+                    title="Número máximo de inscritos deve possuir no máximo 3 casas decimais!" required/>                    
+                </div>
+            </div>
             
             <div class="input-wrapper">
-                <label for="">Data</label>
+                <label for="">Data*</label>
                 <div class="local-input-wrapper">
                     <input type="date" id="dataAtividade" name="dataAtividade" placeholder="dd/mm/yyyy" required>
                     <ion-icon name="calendar-clear-outline"></ion-icon>
@@ -116,7 +124,7 @@
             </div>
 
             <div class="input-wrapper">
-                <label for="">Horário</label>
+                <label for="">Horário*</label>
                 <div class="time-input-wrapper">
                     <input type="time" id="horaAtividade" name="horaAtividade" placeholder="--:--" >
                     <ion-icon name="time-outline"></ion-icon>
