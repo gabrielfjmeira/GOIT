@@ -30,6 +30,7 @@
                     $instrutor = $queryInstutorVerificado->fetch_assoc();
 
                     $verificado = $instrutor['TABINS_Verificado'];
+                    $negado = $instrutor['TABINS_Negado'];
 
                     if($verificado == 1){                      
                                               
@@ -44,7 +45,11 @@
                         
                         header("Location: ../../PAGES/home/home.php");
                     } else{
-                        header("Location: ../../index.php?error=003");                        
+                        if($negado == 1){
+                            header("Location: ../../index.php?error=005&codigousuario=".$codigoUsuario."&tipo=".$tipoUsuario);
+                        }else{
+                            header("Location: ../../index.php?error=003");
+                        }                                                
                     }
                     
                 } else if($tipoUsuario == 4){ //Verifica se o Lojista tem acesso na plataforma
@@ -55,6 +60,7 @@
                     $lojista = $queryLojistaVerificado->fetch_assoc();
 
                     $verificado = $lojista['TABLOJ_Verificado'];
+                    $negado = $lojista['TABLOJ_Negado'];
 
                     if($verificado == 1){                       
                         
@@ -69,7 +75,11 @@
                         
                         header("Location: ../../PAGES/home/home.php");
                     } else{
-                        header("Location: ../../index.php?error=003");                        
+                        if($negado == 1){
+                            header("Location: ../../index.php?error=005&codigousuario=".$codigoUsuario."&tipo=".$tipoUsuario);
+                        }else{
+                            header("Location: ../../index.php?error=003");
+                        }                        
                     }
 
                 } else{ //Redireciona demais usuários

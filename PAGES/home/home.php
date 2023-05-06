@@ -176,7 +176,7 @@
                                 $sqlCriador = "SELECT * FROM TABATV WHERE TABATV_Codigo = ". $atividade['TABATV_Codigo']." AND TABUSU_Codigo = ". $_SESSION['CODIGO']. ";";
                                 $querySqlCriador = $mysqli->query($sqlCriador) or die(mysql_error());
                                 if($querySqlCriador->num_rows == 1){?>
-                                    <a onclick="alert('Como criador, para se desinscrever apague a atividade!');">
+                                    <a onclick="alert('Como criador, para se desinscrever, apague a atividade!');">
                                         Inscrito
                                     </a>
                                 <?php

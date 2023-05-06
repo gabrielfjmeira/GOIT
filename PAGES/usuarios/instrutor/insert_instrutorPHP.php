@@ -56,11 +56,15 @@
                 $usuario = $querySelectUsuario->fetch_assoc();
                 $codigoUsuario = $usuario['TABUSU_Codigo'];
 
-                $insertInstrutor = "INSERT INTO TABINS (TABUSU_Codigo, TABINS_Nome, TABINS_Apelido, TABINS_DataNascimento, TABINS_Sexo, TABINS_Cadastur, TABINS_Verificado) VALUES ($codigoUsuario, '$nome', '$apelido', '$dataNascimento', $sexo, '$cadastur', 0)";
+                $insertInstrutor = "INSERT INTO TABINS (TABUSU_Codigo, TABINS_Nome, TABINS_Apelido, TABINS_DataNascimento, TABINS_Sexo, TABINS_Cadastur, TABINS_Verificado, TABINS_Negado) VALUES ($codigoUsuario, '$nome', '$apelido', '$dataNascimento', $sexo, '$cadastur', 0, 0)";
                 $queryInsertInstrutor = $mysqli->query($insertInstrutor) or die("Falha na execução do código sql" . $mysqli->error);
-            
-                //Redireciona para o login
-                header("Location: ../../../index.php?cadastrado=1");
+                ?>
+                <script>
+                    //Redireciona para o login
+                    alert("Cadastro realizado com sucesso!")
+                    location.href = "../../../index.php";
+                </script>
+                <?php                
             }else{
                 header('Location: ./cadastro_instrutor.php?error=003');  
             }            

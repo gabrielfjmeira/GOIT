@@ -53,11 +53,15 @@
                 $usuario = $querySelectUsuario->fetch_assoc();
                 $codigoUsuario = $usuario['TABUSU_Codigo'];
                
-                $insertLojista = "INSERT INTO TABLOJ (TABUSU_Codigo, TABLOJ_RazaoSocial, TABLOJ_Fantasia, TABLOJ_CNPJ, TABLOJ_Verificado) VALUES ($codigoUsuario, '$razaoSocial', '$fantasia', '$cnpj', 0)";                
-                $queryInsertLojista = $mysqli->query($insertLojista) or die("Falha na execução do código sql" . $mysqli->error);                 
-                
-                //Redireciona para o login
-                header("Location: ../../../index.php?cadastrado=001");    
+                $insertLojista = "INSERT INTO TABLOJ (TABUSU_Codigo, TABLOJ_RazaoSocial, TABLOJ_Fantasia, TABLOJ_CNPJ, TABLOJ_Verificado, TABLOJ_Negado) VALUES ($codigoUsuario, '$razaoSocial', '$fantasia', '$cnpj', 0, 0)";                
+                $queryInsertLojista = $mysqli->query($insertLojista) or die("Falha na execução do código sql" . $mysqli->error);                
+                ?>
+                <script>
+                    //Redireciona para o login
+                    alert("Cadastro realizado com sucesso!")
+                    location.href = "../../../index.php";
+                </script>
+                <?php    
             }else{
                 //Redireciona para o cadastramento de lojista com Erro
                 header("Location: ./cadastro_lojista.php?error=003");
