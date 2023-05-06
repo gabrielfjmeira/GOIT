@@ -14,7 +14,6 @@
     $deleteUsuarioAtividade = "DELETE FROM PARATV WHERE TABATV_Codigo = $atividade AND TABUSU_Codigo = $usuario";
     $queryDeleteUsuarioAtividade = $mysqli->query($deleteUsuarioAtividade) or die("Falha na execução do código sql" . $mysqli->error);    
     ?>
-    <script>
-        alert('Inscrição cancelada com sucesso!');
+    <script>        
         window.history.back();
     </script>
