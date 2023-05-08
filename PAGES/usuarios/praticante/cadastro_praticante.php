@@ -24,6 +24,11 @@
     <title>GO🐐IT | A Social Adventure</title>
 </head>
 <body>
+
+    <button onclick="window.history.back()" id = "buttonBack">
+        <img src="../../../ASSETS/backWhite.svg" alt="Back button" style="cursor: pointer;">
+    </button> 
+
     <!--Cabeçalho-->
     <header>
         <img src="../../../ASSETS/logoWhite.png" class = "logo" alt="Logo Go It">
@@ -34,7 +39,7 @@
     <form id="formCadastroPraticante" class ="form" name="formCadastroPraticante" action="insert_praticantePHP.php" method="POST" onsubmit="return formCadastroPraticanteOnSubmit();">
             
         <div class="input-wrapper">
-            <label>Nome: </label>
+            <label>Nome Completo*</label>
             <input type="text" id="txtNome" name="txtNome" placeholder="Nome" class="input" 
             pattern="^[A-Z][a-z]+[\s]*(([A-Z]||[a-z])[a-z]{1,}[\s]*){0,}$" 
             title="Nome deve possuir no mínimo 8 caracteres e no máximo 100 caracteres!" required/>
@@ -42,7 +47,7 @@
         </div>
 
         <div class="input-wrapper">
-            <label>Apelido: </label>
+            <label>Apelido*</label>
             <input type="text" id="txtApelido" name="txtApelido" placeholder="Apelido" class="input" 
             pattern="^[A-z]\w{3,29}$"
             title="Apelido deve começar com uma letra e não pode conter símbolos, deve possuir no mínimo 4 caracteres e no máximo 30 caracteres!" required/> 
@@ -50,14 +55,14 @@
         </div>
 
         <div class="input-wrapper">
-            <label>Data de Nascimento: </label>
+            <label>Data de Nascimento*</label>
             <input type="date" id="dataNascimento" name="dataNascimento" placeholder="Data de Nascimento" class="input" 
             pattern="^[0-9]{2}-[0-9]{2}-[0-9]{4}$"
             title="dd/mm/aaaa" onchange=""  required />            
         </div>
         
         <div class="input-wrapper">
-            <label>Sexo:</label>
+            <label>Sexo*</label>
                 <div class = "input-sexo">
                     <div class="input-radio">
                         <input type="radio" id="sexo_m" name="sexo" value="0" required>
@@ -77,7 +82,7 @@
         </div>
 
         <div class="input-wrapper">
-            <label>Email: </label>
+            <label>Email*</label>
             <input type="text" id="txtEmail" name="txtEmail" placeholder="Email" class="input" 
             pattern="^[\w*\.]+@([\w-]+\.)+[\w-]{2,4}$" 
             title="Digite um email válido! Exemplo: email@email.com" required/> 
@@ -119,14 +124,14 @@
         ?>        
 
         <div class="input-wrapper">
-            <label>Senha: </label>
+            <label>Senha*</label>
             <input type="password" id="txtSenha" name="txtSenha" placeholder="Senha" class="input" 
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}" 
             title="Deve conter ao menos um número, uma letra maiúscula, uma letra minúscula, um caracter especial, e possuir no mínimo 8 caracteres e no máximo 20 caracteres" required/>
         </div>
 
         <div class="input-wrapper">
-            <label>Confirme sua Senha: </label>
+            <label>Confirme sua Senha*</label>
             <input type="password" id="txtSenhaConfirmada" name="txtSenhaConfirmada" placeholder="Confirme sua Senha" class="input" 
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}" 
             title="Deve conter ao menos um número, uma letra maiúscula, uma letra minúscula, um caracter especial, e possuir no mínimo 8 caracteres e no máximo 20 caracteres" required/>

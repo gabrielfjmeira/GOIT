@@ -42,6 +42,7 @@
                 $senha          = $_POST['txtSenha'];
                 $nome           = $_POST['txtNome'];            
                 $dataNascimento = $_POST['dataNascimento'];
+                $catInstrutor   = $_POST['catInstrutor'];
                 $sexo           = $_POST['sexo'];
                         
                 //Criptografa a senha para popular no banco de dados
@@ -56,12 +57,12 @@
                 $usuario = $querySelectUsuario->fetch_assoc();
                 $codigoUsuario = $usuario['TABUSU_Codigo'];
 
-                $insertInstrutor = "INSERT INTO TABINS (TABUSU_Codigo, TABINS_Nome, TABINS_Apelido, TABINS_DataNascimento, TABINS_Sexo, TABINS_Cadastur, TABINS_Verificado, TABINS_Negado) VALUES ($codigoUsuario, '$nome', '$apelido', '$dataNascimento', $sexo, '$cadastur', 0, 0)";
+                $insertInstrutor = "INSERT INTO TABINS (TABUSU_Codigo, TABINS_Nome, TABINS_Apelido, TABINS_DataNascimento, TABINS_Sexo, TABINS_Cadastur, CATATV_Codigo, TABINS_Verificado, TABINS_Negado) VALUES ($codigoUsuario, '$nome', '$apelido', '$dataNascimento', $sexo, '$cadastur', $catInstrutor, 0, 0)";
                 $queryInsertInstrutor = $mysqli->query($insertInstrutor) or die("Falha na execução do código sql" . $mysqli->error);
                 ?>
                 <script>
                     //Redireciona para o login
-                    alert("Cadastro realizado com sucesso!")
+                    alert("Cadastro evniado para análise!")
                     location.href = "../../../index.php";
                 </script>
                 <?php                

@@ -36,7 +36,7 @@
         <form id="formLogin" class = "form" name="formLogin" action="./CONFIG/login/loginPHP.php" method="POST" onsubmit="return formLoginOnSubmit();">
         
             <div class="input-wrapper">
-                <label>E-mail: </label>         
+                <label>E-mail</label>         
                 <input type="text"     name="txtEmail" id="txtEmail" placeholder="E-Mail" class="input" 
                 pattern="^[\w*\.]+@([\w-]+\.)+[\w-]{2,4}$" 
                 title="Digite um email válido! Exemplo: email@email.com" required/>
@@ -44,7 +44,7 @@
             </div>
 
             <div class="input-wrapper">
-                <label>Senha: </label>
+                <label>Senha</label>
                 <input type="password" name="txtSenha" id="txtSenha" placeholder="Senha" class="input"
                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}" 
                 title="Deve conter ao menos um número, uma letra maiúscula, uma letra minúscula, um caracter especial, e possuir no mínimo 8 caracteres e no máximo 20 caracteres" required/>

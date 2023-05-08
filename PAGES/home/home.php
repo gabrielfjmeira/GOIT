@@ -61,7 +61,7 @@
             <div class="instructor-wrapper wrapper">
                 <h2>Responsável <ion-icon name="man"></ion-icon> </h2>
                 <div class="instructor">
-                    <img src="./assets/bibo.png" alt="instrutor image">
+                    <img src="../../assets/bibo.png" alt="instrutor image">
                     <a href="#" class="user">Gabriel Felipe Jess Meira</a>
                 </div>
             </div>
@@ -86,7 +86,7 @@
                 <ion-icon name="search-outline"></ion-icon>
                 <input type="text" id="search-input" placeholder="Search">
             </div>
-            -->
+            -->            
 
             <section class="eventsAndGroups flex">
 
@@ -94,8 +94,13 @@
                 //Imprime Atividades ao Ar Livre         
                 $atividades = "SELECT * FROM TABATV ORDER BY TABATV_Data ASC";                    
                 $queryAtividades = $mysqli->query($atividades) or die(mysql_error());
-                $postagem = 0;
+                $postagem = 0;?>
 
+                <div class="title-wrapper">
+                    <h2>Atividades ao Ar Livre(<?php echo $queryAtividades->num_rows;?>)</h2>
+                </div>
+
+                <?php
                 if ($queryAtividades->num_rows > 0){
                     while($atividade = mysqli_fetch_array($queryAtividades)){?>
                         <div class="event">
@@ -213,7 +218,7 @@
                                 
                                 <a href="../atividades_ao_ar_livre/update/update_atividade.php?codigo=<?php echo $atividade['TABATV_Codigo'];?>" style="cursor: pointer;">Editar Atividade</a>
                                 
-                                <a href="../atividades_ao_ar_livre/delete/delete_atividadePHP.php?codigo=<?php echo $atividade['TABATV_Codigo'];?>" style="cursor: pointer;">Excluir Atividade</a>
+                                <a onclick="apagarAtividade('<?php echo $atividade['TABATV_Titulo']?>', <?php echo $atividade['TABATV_Codigo']?>)" style="cursor: pointer;">Excluir Atividade</a>
                             <?php
                             }
                             ?>
@@ -249,6 +254,13 @@
             }   
         }
 
+        function apagarAtividade(titulo, codigo){
+            let text = "Confirma apagar a atividade " + titulo + "?";
+            if (confirm(text) == true) {
+                window.location.href = "../atividades_ao_ar_livre/delete/delete_atividadePHP.php?codigo="+codigo; 
+            }  
+        }
+
         function submitform() {
                 document.saibamais.submit();
         }
@@ -269,7 +281,7 @@
             if (imagem != ''){
                 image.setAttribute("src", "../atividades_ao_ar_livre/arquivos/"+imagem)
             }else{
-                image.setAttribute("src", "../../ASSETS/paisagem.png")
+                image.setAttribute("src", "../atividades_ao_ar_livre/arquivos/default.png")
             }           
             var description = document.querySelector(".desc-wrapper p")
             description.innerHTML = descricao

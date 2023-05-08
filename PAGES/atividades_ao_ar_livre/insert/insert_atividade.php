@@ -57,7 +57,7 @@
                 <select id="categoriaAtividade" name="categoriaAtividade" required>        
                     <option selected disabled="disabled" hidden>Escolha uma opção</option>
                     <?php          
-                        $categoriasAtividades = "SELECT * FROM CATATV ORDER BY CATATV_Codigo ASC";      
+                        $categoriasAtividades = "SELECT * FROM CATATV ORDER BY CATATV_Descricao ASC";      
                         $queryCategoriasAtividades = $mysqli->query($categoriasAtividades) or die(mysql_error());
 
                         while($categoriaAtividade = mysqli_fetch_array($queryCategoriasAtividades)){

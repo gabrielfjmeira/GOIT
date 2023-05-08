@@ -60,7 +60,8 @@
                 ?>                                                           
             </select>
         </div>
-        <button type="submit">Próximo</button>
+        <button type="submit">Próximo</button>        
+
     </form>           
 </body>
 </html>

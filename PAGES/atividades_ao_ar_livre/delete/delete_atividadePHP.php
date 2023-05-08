@@ -38,10 +38,4 @@
     }else{
         header ("Location: ../../home/home.php");
     }    
-?>                         
-
-    <!--Redireciona para a Página anterior-->
-    <script>
-        alert('Atividade ao ar livre apagada com sucesso!');
-        window.location.href = "../../home/home.php";        
-    </script>
+?>                             

@@ -20,9 +20,27 @@
         <img src="<?php echo $assets_path ?>/buttonNewPubliFilled.svg" alt="">
         <p>Publicar</p>
     </button>
-    <button onclick="">
-        <img src="<?php echo $assets_path ?>/buttonPerfil.svg" alt="">
-        <p><?php echo $_SESSION['Apelido'];?></p>
+    <button onclick="location.href ='../../perfil/perfil.php';">     
+    <?php        
+        $sqlUser = "SELECT * FROM TABUSU WHERE TABUSU_Codigo = " . $_SESSION['CODIGO'];            
+        $querySqlUser = $mysqli->query($sqlUser) or die("Falha na execução do código sql" . $mysqli->error);
+        $userData = mysqli_fetch_array($querySqlUser);
+        if(is_null($userData['TABUSU_Icon'])){?>
+            <img src="<?php echo $assets_path ?>/buttonPerfil.svg" alt="">
+            <p><?php echo $_SESSION['Apelido'];?></p>  
+        <?php
+        }else{
+            if(substr($userData['TABUSU_Icon'], -4) == ".jpg" || substr($userData['TABUSU_Icon'], -4) == ".png" ){
+                $nomeImagem = substr($userData['TABUSU_Icon'], -17);
+            }else{
+                $nomeImagem = substr($userData['TABUSU_Icon'], -18);
+            };  
+            ?>
+            <img src="../../perfil/arquivos/<?php echo $nomeImagem;?>" alt="">
+            <p><?php echo $_SESSION['Apelido'];?></p> 
+        <?php
+        }           
+        ?>                       
     </button>   
     <script>
         function limparFormulario(){

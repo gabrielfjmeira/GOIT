@@ -23,6 +23,11 @@
     <title>GO🐐IT | A Social Adventure</title>
 </head>
 <body>
+
+    <button onclick="window.history.back()" id = "buttonBack">
+        <img src="../../../ASSETS/backWhite.svg" alt="Back button" style="cursor: pointer;">
+    </button> 
+
     <!--Cabeçalho-->
     <header>
         <img src="../../../ASSETS/logoWhite.png" class = "logo" alt="Logo Go It">
@@ -32,7 +37,7 @@
     <!--Formulário-->
     <form id="formCadastroInstrutor" name="formCadastroInstrutor" class="form" action="insert_instrutorPHP.php" method="POST" onsubmit="return formCadastroInstrutorOnSubmit();">
         <div class="input-wrapper">
-            <label>Nome: </label>
+            <label>Nome completo*</label>
             <input type="text" id="txtNome" name="txtNome" placeholder="Nome" class="input" 
             pattern="^[A-Z][a-z]+[\s]*(([A-Z]||[a-z])[a-z]+[\s]*){0,}$" 
             title="Nome só deve conter letras e deve possuir no mínimo 3 caracteres e no máximo 100 caracteres!" required/>
@@ -40,7 +45,7 @@
         </div>
 
         <div class="input-wrapper">
-            <label>Apelido: </label>
+            <label>Apelido*</label>
             <input type="text" id="txtApelido" name="txtApelido" placeholder="Apelido" class="input" 
             pattern="^[A-z]\w{3,29}$" 
             title="Apelido deve começar com uma letra e não pode conter símbolos, deve possuir no mínimo 4 caracteres e no máximo 30 caracteres!" required/>
@@ -48,13 +53,13 @@
         </div>         
 
         <div class="input-wrapper">
-            <label>Data de Nascimento: </label>
+            <label>Data de Nascimento*</label>
             <input type="date" id="dataNascimento" name="dataNascimento" placeholder="dd/mm/aaaa" class="input" 
             title="dd/mm/aaaa" required/>
         </div>
         
         <div class="input-wrapper">
-            <label>Sexo:</label>
+            <label>Sexo*</label>
                 <div class = "input-sexo">
                     <div class="input-radio">
                         <input type="radio" id="sexo_m" name="sexo" value="0" required>
@@ -74,7 +79,7 @@
         </div>
 
         <div class="input-wrapper">
-            <label>Cadastur: </label>
+            <label>Cadastur*</label>
             <input type="text" id="txtCadastur" name="txtCadastur" placeholder="Formato: XX########XXXX" class="input" 
             pattern="^[A-Z]{2}[0-9]{8}[A-Z]{4}$" 
             title="Cadastur inválido! Formato: XX########XXXX" required/>
@@ -82,7 +87,25 @@
         </div>
 
         <div class="input-wrapper">
-            <label>Email: </label>
+            <label>Categoria em que atua*</label>
+            <select id="catInstrutor" name="catInstrutor" required>        
+                <option selected disabled="disabled" hidden>Escolha uma opção</option>
+                <?php          
+                    $categorias = "SELECT * FROM CATATV ORDER BY CATATV_Descricao ASC";      
+                    $queryCategorias = $mysqli->query($categorias) or die(mysql_error());
+
+                    while($categoria = mysqli_fetch_array($queryCategorias)){
+                        $catatv_codigo = $categoria['CATATV_Codigo'];
+                        $catatv_descricao = $categoria['CATATV_Descricao'];
+                        
+                        echo "<option value=".$catatv_codigo.">". $catatv_descricao."</option>";                                                                   
+                    }
+                ?>                                                           
+            </select>            
+        </div>
+
+        <div class="input-wrapper">
+            <label>Email*</label>
             <input type="text" id="txtEmail" name="txtEmail" placeholder="email@email.com" class="input" 
             pattern="^[\w*\.]+@([\w-]+\.)+[\w-]{2,4}$" 
             title="Digite um email válido! Exemplo: email@email.com" required/>
@@ -136,14 +159,14 @@
         ?>
 
         <div class="input-wrapper">
-            <label>Senha: </label>
+            <label>Senha*</label>
             <input type="password" id="txtSenha" name="txtSenha" placeholder="Senha" class="input"
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}" 
             title="Deve conter ao menos um número, uma letra maiúscula, uma letra minúscula, um caracter especial, e possuir no mínimo 8 caracteres e no máximo 20 caracteres" required/>
         </div>
 
         <div class="input-wrapper">
-            <label>Confirme sua Senha: </label>
+            <label>Confirme sua Senha*</label>
             <input type="password" id="txtSenhaConfirmada" name="txtSenhaConfirmada" placeholder="Confirme sua Senha" class="input" 
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}" 
             title="Deve conter ao menos um número, uma letra maiúscula, uma letra minúscula, um caracter especial, e possuir no mínimo 8 caracteres e no máximo 20 caracteres" required/>

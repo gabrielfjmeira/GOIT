@@ -43,11 +43,13 @@ CREATE TABLE TABINS(
     TABINS_DataNascimento DATE NOT NULL,
     TABINS_Sexo INT(1) NOT NULL,
     TABINS_Cadastur VARCHAR(14) UNIQUE NOT NULL,
+    CATATV_Codigo INT(3) NOT NULL,
     TABINS_Verificado BOOLEAN NOT NULL,
     TABINS_Negado BOOLEAN NOT NULL,
     
     PRIMARY KEY(TABUSU_Codigo),
-    FOREIGN KEY(TABUSU_Codigo) REFERENCES TABUSU(TABUSU_Codigo)
+    FOREIGN KEY(TABUSU_Codigo) REFERENCES TABUSU(TABUSU_Codigo),
+    FOREIGN KEY(CATATV_Codigo) REFERENCES CATATV(CATATV_Codigo)
 );
 
 /*Criação da Tabela de Lojistas*/
@@ -120,3 +122,22 @@ INSERT INTO TIPUSU (TIPUSU_Codigo, TIPUSU_Descricao, TIPUSU_Administrador) VALUE
 INSERT INTO TIPUSU (TIPUSU_Codigo, TIPUSU_Descricao, TIPUSU_Administrador) VALUES (NULL, 'Praticante', 0);
 INSERT INTO TIPUSU (TIPUSU_Codigo, TIPUSU_Descricao, TIPUSU_Administrador) VALUES (NULL, 'Instrutor', 0);
 INSERT INTO TIPUSU (TIPUSU_Codigo, TIPUSU_Descricao, TIPUSU_Administrador) VALUES (NULL, 'Lojista', 0);
+
+/*Inserção de Riscos de Atividades*/
+INSERT INTO TABRIS (TABRIS_Codigo, TABRIS_Descricao, TABRIS_Minimo, TABRIS_Maximo, TABRIS_Instrutor) VALUES (NULL, 'Sem Risco', 0, 1, 0);
+INSERT INTO TABRIS (TABRIS_Codigo, TABRIS_Descricao, TABRIS_Minimo, TABRIS_Maximo, TABRIS_Instrutor) VALUES (NULL, 'Leve', 2, 3, 0);
+INSERT INTO TABRIS (TABRIS_Codigo, TABRIS_Descricao, TABRIS_Minimo, TABRIS_Maximo, TABRIS_Instrutor) VALUES (NULL, 'Moderado', 4, 5, 0);
+INSERT INTO TABRIS (TABRIS_Codigo, TABRIS_Descricao, TABRIS_Minimo, TABRIS_Maximo, TABRIS_Instrutor) VALUES (NULL, 'Alto', 6, 8, 1);
+INSERT INTO TABRIS (TABRIS_Codigo, TABRIS_Descricao, TABRIS_Minimo, TABRIS_Maximo, TABRIS_Instrutor) VALUES (NULL, 'Muito Alto', 9, 10, 1);
+
+/*Inserção de Categorias de Atividades ao Ar Livre*/
+INSERT INTO CATATV (CATATV_Codigo, CATATV_Descricao, TABRIS_Codigo) VALUES (NULL, 'Caminhada', 1);
+INSERT INTO CATATV (CATATV_Codigo, CATATV_Descricao, TABRIS_Codigo) VALUES (NULL, 'Corrida de Rua', 2);
+INSERT INTO CATATV (CATATV_Codigo, CATATV_Descricao, TABRIS_Codigo) VALUES (NULL, 'Trilha', 3);
+INSERT INTO CATATV (CATATV_Codigo, CATATV_Descricao, TABRIS_Codigo) VALUES (NULL, 'Canoagem', 4);
+INSERT INTO CATATV (CATATV_Codigo, CATATV_Descricao, TABRIS_Codigo) VALUES (NULL, 'Escalada', 5);
+INSERT INTO CATATV (CATATV_Codigo, CATATV_Descricao, TABRIS_Codigo) VALUES (NULL, 'Yoga', 1);
+INSERT INTO CATATV (CATATV_Codigo, CATATV_Descricao, TABRIS_Codigo) VALUES (NULL, 'Ciclismo', 2);
+INSERT INTO CATATV (CATATV_Codigo, CATATV_Descricao, TABRIS_Codigo) VALUES (NULL, 'Raft', 5);
+INSERT INTO CATATV (CATATV_Codigo, CATATV_Descricao, TABRIS_Codigo) VALUES (NULL, 'Skate', 3);
+INSERT INTO CATATV (CATATV_Codigo, CATATV_Descricao, TABRIS_Codigo) VALUES (NULL, 'Patinação', 3);

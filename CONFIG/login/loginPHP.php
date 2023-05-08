@@ -19,7 +19,7 @@
             if(password_verify($senha, $usuario['TABUSU_Senha'])){                
                 
                 $codigoUsuario = $usuario['TABUSU_Codigo'];                
-                $tipoUsuario   = $usuario['TIPUSU_Codigo'];                
+                $tipoUsuario   = $usuario['TIPUSU_Codigo'];                             
 
                 //Verifica se o Instrutor tem Acesso na Plataforma
                 if ($tipoUsuario == 3){
@@ -35,7 +35,7 @@
                     if($verificado == 1){                      
                                               
                         $_SESSION['CODIGO'] =  $codigoUsuario;            
-                        $_SESSION['TIPOUSUARIO']  = $tipoUsuario;
+                        $_SESSION['TIPOUSUARIO']  = $tipoUsuario;                      
                         $_SESSION ['LOGGED'] = True;
                         
                         $instrutor = "SELECT * FROM TABINS WHERE TABUSU_Codigo = " . $_SESSION['CODIGO'];
@@ -65,7 +65,7 @@
                     if($verificado == 1){                       
                         
                         $_SESSION['CODIGO'] = $codigoUsuario;            
-                        $_SESSION['TIPOUSUARIO']  = $tipoUsuario;
+                        $_SESSION['TIPOUSUARIO']  = $tipoUsuario;                        
                         $_SESSION ['LOGGED'] = True;
                         
                         $lojista = "SELECT * FROM TABLOJ WHERE TABUSU_Codigo = " . $_SESSION['CODIGO'];
@@ -85,7 +85,7 @@
                 } else{ //Redireciona demais usuários
                     
                     $_SESSION['CODIGO'] = $codigoUsuario;            
-                    $_SESSION['TIPOUSUARIO']  = $tipoUsuario;
+                    $_SESSION['TIPOUSUARIO']  = $tipoUsuario;                    
                     $_SESSION ['LOGGED'] = True;
                     if($_SESSION['TIPOUSUARIO'] == 1){
                         //Administrador 
