@@ -35,6 +35,10 @@ body {
     display: flex;
     flex-direction: column;
 
+    max-width: 100rem;
+
+    margin: 0 7% 0 25% ;
+
     height: 100vh;
 
     position: relative;
@@ -184,6 +188,7 @@ form .time-input-wrapper {
     padding: .4rem .8rem;
 }
 
+
 form .title-input-wrapper p,
 form .desc-input-wrapper p {
     font-size: 1rem;
@@ -240,25 +245,127 @@ form #submitButton {
     margin-top: 1.6rem;
 }
 
+form .uploadImage-input-wrapper {
+    border: .1rem var(--gray) dashed;
+    border-radius: .8rem;   
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    padding: 2.4rem;    
+}
+
+form .uploadImage-input-wrapper #imgAtividade,
+form .uploadImage-input-wrapper .uploadIcon{
+    flex: 1;
+}
+
+form .uploadImage-input-wrapper input[type=file]::file-selector-button{    
+    background: var(--blue);
+    font-weight: 500;
+    color: var(--white);
+    border: 0;
+    border-radius: .4rem;
+
+    padding: .4rem .8rem;
+
+    margin-top: 2.4rem;
+}
+
+
 footer {
     position: fixed;
     bottom: 0;
     left: 0;
-    width: 100%;
-}
-
-nav {
-    justify-content: space-around;
-    align-items: center;
+    width: 100%;   
 
     background: var(--white-gray-bg-boxes);
     box-shadow: 0rem -.1rem .9rem rgba(0, 0, 0, 0.25);
+
+}
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
     border-radius: 2rem 2rem 0 0;
 
     padding: 1rem 0;
+}
+
+nav > :nth-child(1) {
+    display: none;
 }
 
 nav button {
     background: none;
     border: 0;
 }
+
+nav button:hover {
+    background: var(--medium-gray);
+}
+
+#imgAtividade{
+    display: none;
+}
+
+@media (min-width: 600px) {
+    
+    .background-blur{
+    
+        padding: 9.2rem 10rem 12.6rem;
+
+        place-content: center;
+    }
+
+    footer {
+        top: 0;
+        width: 24rem;
+        border-radius: 0 2rem 2rem 0;
+        
+    }
+    
+    nav {
+        flex-direction: column;
+        justify-content: normal;
+        height: 100%;
+
+
+        /* padding: 0 3.2rem 0 4rem; */
+
+        align-items: flex-start;
+    }
+
+    nav > :nth-child(1) {
+        display: block;
+        align-self: center;
+        margin-bottom: 8rem;
+    }
+
+    nav > :nth-child(5) {
+        margin-top: auto;
+    }
+
+    nav button p {
+        display: block;
+    }
+
+    nav button {
+        display: flex;
+        align-items: center;
+        gap: 1.6rem;
+        text-align: left;
+        width: 100%;
+
+        font-weight: 500;
+
+        padding: 1.6rem 2.4rem;
+        border-radius: 1.6rem;
+    }
+}
+

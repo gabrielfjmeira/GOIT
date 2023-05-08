@@ -18,9 +18,11 @@
             $codigo = $atividade_data['TABATV_Codigo'];
             $titulo = $atividade_data['TABATV_Titulo'];
             $descricao = $atividade_data['TABATV_Descricao'];
+            $imagem = $atividade_data['TABATV_Imagem'];
             $categoria = $atividade_data['CATRIS_Codigo'];
             $localizacao = $atividade_data['TABATV_Localizacao'];
             $referencia = $atividade_data['TABATV_Referencia'];
+            $inscritos = $atividade_data['TABATV_Inscritos'];
             $data = $atividade_data['TABATV_Data'];
             $hora = $atividade_data['TABATV_Hora'];
         }else{
@@ -50,26 +52,26 @@
     <!--Cabeçalho-->
     <div id="app">
         <header>
-            <button style="cursor: pointer;" onclick="window.location.href='../../home/home.php';"><img src="../../../ASSETS/backButtonDark.svg" alt="back-button"></button>
+            <button style="cursor: pointer;" onclick="window.history.back();"><img src="../../../ASSETS/backButtonDark.svg" alt="back-button"></button>
             <img src="../../../ASSETS/Logo.png" alt="logo" class="logo">
         </header>
         
         <!--Formulário-->    
-        <form id="formInsertAtividade" name="formInsertAtividade" action="update_atividadePHP.php" method="POST" onsubmit="return formInsertAtividadeOnSubmit();">
-                
+        <form id="formInsertAtividade" name="formInsertAtividade" action="update_atividadePHP.php" method="POST" enctype="multipart/form-data" onsubmit="return formInsertAtividadeOnSubmit();">
+            <input type="number" id="nbrCodigo" name="nbrCodigo" value="<?php echo $codigo;?>" hidden>  
             <div class="type-publi">
-                    <h3>Grupo</h3>
+                    <!--<h3>Grupo</h3>
 
                     <div id="switch" onclick="togglePubliType()">
                         <button></button>
                         <span></span>
-                    </div>
+                    </div>-->
 
-                    <h3 class="selected">Evento</h3>
+                    <h3 class="selected">Editar Atividade Ao Ar Livre</h3>
             </div>
 
             <div class="input-wrapper">
-                <label for="title-post">Título</label>
+                <label for="title-post">Título*</label>
                 <div class="title-input-wrapper">
                     <input type="text" id="txtTitulo" name="txtTitulo" placeholder="Título" value="<?php echo $titulo;?>"
                     pattern="^.{5, 100}$" 
@@ -79,7 +81,7 @@
             </div>
 
             <div class="input-wrapper">
-                <label for="categoria">Categoria da atividade do evento</label>
+                <label for="categoria">Categoria da atividade do evento*</label>
                 <select name="categoriaAtividade" required>        
                     <option disabled="disabled" hidden>Escolha uma opção</option>
                     <?php          
@@ -100,7 +102,7 @@
             </div>
 
             <div class="input-wrapper">
-                <label for="">Descrição</label>
+                <label for="">Descrição*</label>
                 <div class="desc-input-wrapper">
                     <textarea id="txtDescricao" name="txtDescricao" placeholder="Ex: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eget ligula aliquet, iaculis est eu, ornare velit. Cras vestibulum venenatis blandit." required>
                         <?php echo $descricao;?>
@@ -110,7 +112,15 @@
             </div>
 
             <div class="input-wrapper">
-                <label for="">Endereço</label>
+                <label for="">Upload da Imagem do evento</label>
+                <label for="imgAtividade" class="uploadImage-input-wrapper">                        
+                    <img id="imagemSelecionada" src="../../../ASSETS/uploadIcon.svg" style="max-width: 8rem; max-height: 8rem;" class="uploadIcon">                    
+                    <input type="file" id="imgAtividade" name="imgAtividade" accept="image/*" onchange="validaImagem(this);"> 
+                </label>
+            </div>
+
+            <div class="input-wrapper">
+                <label for="">Endereço*</label>
                 <div class="local-input-wrapper">
                     <input type="text" name="txtLocalizacao" placeholder="Ex: Rua José das cruzes 112, Pinhais" value="<?php echo $localizacao;?>"
                     pattern="^.{, 100}$" 
@@ -126,6 +136,15 @@
                     pattern="^.{, 50}$" 
                     title="Referência deve possuir no máximo 50 caracteres!"/>
                     <ion-icon name="pin-outline"></ion-icon>
+                </div>
+            </div>
+
+            <div class="input-wrapper">
+                <label for="">Número máximo de inscritos*</label>
+                <div class="local-input-wrapper">
+                    <input type="number" name="nbrInscritos" id="nbrInscritos" placeholder="Ex: 50" value=<?php echo $inscritos;?>
+                    pattern="^[0-9]{1, 3}$"
+                    title="Número máximo de inscritos deve possuir no máximo 3 casas decimais!" required/>                    
                 </div>
             </div>
             
@@ -158,6 +177,47 @@
         
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>   
-    
+    <script>
+         //Validação de Imagem
+         function validaImagem(input) {
+            var caminho = input.value;
+
+            if (caminho) {
+                var comecoCaminho = (caminho.indexOf('\\') >= 0 ? caminho.lastIndexOf('\\') : caminho.lastIndexOf('/'));
+                var nomeArquivo = caminho.substring(comecoCaminho);
+
+                if (nomeArquivo.indexOf('\\') === 0 || nomeArquivo.indexOf('/') === 0) {
+                    nomeArquivo = nomeArquivo.substring(1);
+                }
+
+                var extensaoArquivo = nomeArquivo.indexOf('.') < 1 ? '' : nomeArquivo.split('.').pop();
+
+                if (extensaoArquivo != 'png' &&
+                    extensaoArquivo != 'jpg' &&
+                    extensaoArquivo != 'jpeg') {
+                    input.value = '';
+                    alert("É preciso selecionar um arquivo de imagem (png, jpg ou jpeg)");
+                }
+            } else {
+                input.value = '';
+                alert("Selecione um caminho de arquivo válido");
+            }
+            if (input.files && input.files[0]) {
+                var arquivoTam = input.files[0].size / 1024 / 1024;
+                if (arquivoTam < 16) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        document.getElementById('imagemSelecionada').setAttribute('src', e.target.result);
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                } else {
+                    input.value = '';
+                    alert("O arquivo precisa ser uma imagem com menos de 16 MB");
+                }
+            } else{
+                document.getElementById('imagemSelecionada').setAttribute('src', '#');
+            }
+        }
+    </script>
 </body>
 </html>

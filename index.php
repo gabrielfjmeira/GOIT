@@ -36,19 +36,89 @@
         <form id="formLogin" class = "form" name="formLogin" action="./CONFIG/login/loginPHP.php" method="POST" onsubmit="return formLoginOnSubmit();">
         
             <div class="input-wrapper">
-                <label>Usuário/e-mail: </label>         
+                <label>E-mail</label>         
                 <input type="text"     name="txtEmail" id="txtEmail" placeholder="E-Mail" class="input" 
-                pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" 
+                pattern="^[\w*\.]+@([\w-]+\.)+[\w-]{2,4}$" 
                 title="Digite um email válido! Exemplo: email@email.com" required/>
+                <small id="errorEmail" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>
             </div>
 
             <div class="input-wrapper">
-                <label>Senha: </label>
+                <label>Senha</label>
                 <input type="password" name="txtSenha" id="txtSenha" placeholder="Senha" class="input"
                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}" 
                 title="Deve conter ao menos um número, uma letra maiúscula, uma letra minúscula, um caracter especial, e possuir no mínimo 8 caracteres e no máximo 20 caracteres" required/>
-                <a href="#" id = "forget-password">Esqueci a senha</a>
+                <small id="errorSenha" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>
+                <a href="#" id = "forget-password">Esqueci a senha</a>                
             </div>
+
+            <!--Imprime Erros se Houver-->
+        <?php
+            if(isset($_GET['error'])){                
+                $error = $_GET['error'];                
+                switch ($error){
+                    case 001:?>
+                        <script type="text/javascript">
+                            //Cria Variáveis
+                            let txtEmail = document.getElementById('txtEmail');                            
+                            let errorEmail = document.getElementById('errorEmail');                                                                                                                  
+                            
+                            txtEmail.style.border = "1px solid #DB5A5A"; 
+                            errorEmail.style.color = "#DB5A5A";                           
+                            errorEmail.innerHTML = "Email não cadastrado!";   
+                            txtEmail.focus();                                                                        
+                        </script>
+                        <?php
+                        break;
+                    case 002:?>
+                        <script type="text/javascript">
+                            //Cria Variáveis
+                            let txtSenha = document.getElementById('txtSenha');                            
+                            let errorSenha = document.getElementById('errorSenha');                                                                                                                  
+                            
+                            txtSenha.style.border = "1px solid #DB5A5A";  
+                            errorSenha.style.color = "#DB5A5A";                          
+                            errorSenha.innerHTML = "Senha incorreta!";                                                                       
+                            txtSenha.focus();    
+                        </script>
+                        <?php
+                        break;  
+                    case 003:?>
+                        <script type="text/javascript">
+                            //Cria Variáveis
+                            let txtEmail = document.getElementById('txtEmail');                                                        
+                            let txtSenha = document.getElementById('txtSenha');                            
+                            let errorSenha = document.getElementById('errorSenha');                                                                                                                 
+                            
+                            txtEmail.style.border = "1px solid #c29a17";                            
+                            txtSenha.style.border = "1px solid #c29a17";
+                            errorSenha.style.color = "#c29a17";
+                            errorSenha.innerHTML = "Cadastro em análise!";                                                                       
+                            txtEmail.focus();    
+                        </script>
+                        <?php
+                        break; 
+                    case 004:?>
+                        <script type="text/javascript">
+                            alert("Realize o login para acessar a plataforma!");                            
+                        </script>
+                        <?php
+                        break;
+                    case 005:
+                        $usuario = $_GET['codigousuario'];
+                        $tipoUsuario = $_GET['tipo'];
+                        ?>
+                        <script>
+                            let text = "Cadastro foi negado após análise.\nDeseja enviar o cadastro para uma nova análise?";
+                            if (confirm(text) == true) {
+                                location.href = "./solicitar_analisePHP.php?usuario="+<?php echo $usuario;?>+"&tipo="+<?php echo $tipoUsuario;?>;
+                            }  
+                        </script>
+                    <?php                                    
+                        break;
+                }
+            }
+        ?>
 
             <!-- <p>
                 <label>Mostrar senha</label>                
@@ -59,47 +129,13 @@
             <div class="wrapper-cadastrar-login">
                 <p> Não possui login ainda?</p>
                 <a href="./PAGES/usuarios/selecao_tipoUsuario.php">Cadastre-se aqui</a>
-            </div>
-            <?php
-                if (isset($_GET['cadastrado'])){
-                    $cadastrado = $_GET['cadastrado'];                        
-                    if ($cadastrado == 1){                    
-                        echo "<h4 class='advice'>Cadastro realizado com sucesso!</h4>";
-                    }else{
-                        echo "<h4 class='advice'></h4>";
-                    }
-                } else if (isset($_GET['error'])){
-                    $error = $_GET['error'];
-                    if ($error == 001){
-                        echo "<h4 class='error'>Email não cadastrado!</h4>";
-                    }else if($error == 002) {
-                        echo "<h4 class='error'>Senha incorreta!</h4>";
-                    }else if($error == 003) {
-                        echo "<h4 class='error'>Cadastro em análise</h4>";
-                    }else if($error == 004){
-                        echo "<h4 class='error'>Realize o login para acessar a plataforma</h4>";
-                    }else{
-                        echo "<h4 class='error'></h4>";
-                    }
-                }        
-            ?>
+            </div>                      
         
         </form>
     </section>     
     
     <!--Script-->
-    <script type="text/javascript">
-        //Função de Mostrar/Ocultar Senha do Login
-        function mostrarSenhaLogin(){
-            let txtSenha = document.getElementById('txtSenha');    
-            
-            if (txtSenha.type == "password"){
-                txtSenha.type = "text";        
-            } else {
-                txtSenha.type = "password";       
-            }
-        }
-    </script>    
+    <script type="text/javascript" src="./JAVASCRIPT/functions.js"></script>    
    
 </body>
 </html>

@@ -8,7 +8,7 @@
         
         $catatv_codigo = $categoria['CATATV_Codigo'];
         $catatv_descricao = $categoria['CATATV_Descricao'];?>
-        <button onclick="location.href ='../categorias/categorias_home.php?categoriafiltrada=<?php echo $catatv_codigo;?>';"><?php echo $catatv_descricao;?></button>                                                                                        
+        <button onclick="location.href ='../categorias/categorias_perfil.php?categoriafiltrada=<?php echo $catatv_codigo;?>&codperfil=<?php echo $_SESSION['CODIGO'];?>';"><?php echo $catatv_descricao;?></button>                                                                                        
     <?php    
     }
 ?>

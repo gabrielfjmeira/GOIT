@@ -6,12 +6,6 @@
     if (!$_SESSION['LOGGED']){
         header ("Location: ../../index.php?error=4");
     }   
-
-    if(isset($_GET['categoriafiltrada'])){
-        $categoriafiltrada = $_GET['categoriafiltrada'];
-    }else{
-        header ("Location: ../home/home.php");
-    }
 ?>
 
 <!DOCTYPE html>
@@ -67,7 +61,7 @@
             <div class="instructor-wrapper wrapper">
                 <h2>Responsável <ion-icon name="man"></ion-icon> </h2>
                 <div class="instructor">
-                    <img src="./assets/bibo.png" alt="instrutor image">
+                    <img src="../../assets/bibo.png" alt="instrutor image">
                     <a href="#" class="user">Gabriel Felipe Jess Meira</a>
                 </div>
             </div>
@@ -79,28 +73,58 @@
 
     <div id="app">
         <img onclick="location.href= '../home/home.php'" src="../../ASSETS/Logo.png" alt="Logo go it" id="logo-header" style="cursor: pointer;">
-
-        <!-- //Imprime as Categorias para Filtrar a Aplicação -->
-        <header class="activities-list flex">
-        <?php
-            //Imprime as Categorias para Filtrar a Aplicação
-            $categorias = "SELECT * FROM CATATV ORDER BY CATATV_Descricao ASC"; 
-            $queryCategorias = $mysqli->query($categorias) or die(mysql_error());?>    
-            <button onclick="location.href ='../home/home.php';">Todas</button> 
-            <?php
-            while($categoria = mysqli_fetch_array($queryCategorias)){
-                
-                $catatv_codigo = $categoria['CATATV_Codigo'];
-                $catatv_descricao = $categoria['CATATV_Descricao'];?>
-                <?php if($catatv_codigo == $categoriafiltrada){?>
-                    <button class="onPage" onclick="location.href ='../categorias/categorias_home.php?categoriafiltrada=<?php echo $catatv_codigo;?>';"><?php echo $catatv_descricao;?></button>                                                                                        
+        <!--Carrega imagem e apelido do perfil-->
+        <center>
+            <div id="info-perfil" style="margin-top: 4rem;">
                 <?php
-                }else{?>
-                    <button onclick="location.href ='../categorias/categorias_home.php?categoriafiltrada=<?php echo $catatv_codigo;?>';"><?php echo $catatv_descricao;?></button>                                                                                        
-                <?php   
-                }               
-            }
-        ?>
+                    $sqlUser = "SELECT * FROM TABUSU WHERE TABUSU_Codigo = " . $_SESSION['CODIGO'];            
+                    $querySqlUser = $mysqli->query($sqlUser) or die("Falha na execução do código sql" . $mysqli->error);
+                    $userData = mysqli_fetch_array($querySqlUser);
+                    if(is_null($userData['TABUSU_Icon'])){?>
+                        <img src="../../ASSETS/buttonPerfil.svg" alt="">
+                        
+                    <?php
+                    }else{
+                        if(substr($userData['TABUSU_Icon'], -4) == ".jpg" || substr($userData['TABUSU_Icon'], -4) == ".png" ){
+                            $nomeImagem = substr($userData['TABUSU_Icon'], -17);
+                        }else{
+                            $nomeImagem = substr($userData['TABUSU_Icon'], -18);
+                        };  
+                        ?>
+                        <img src="./arquivos/<?php echo $nomeImagem;?>" alt="">                        
+                    <?php
+                    }    
+                    
+                    switch($_SESSION['TIPOUSUARIO']){
+                        //Administrador
+                        case 1:
+                            $tipoUserDescricao = "Admin";
+                            break;                        
+                        //Praticante
+                        case 2:
+                            $tipoUserDescricao = "Praticante";
+                            break;                        
+                        //Instrutor                        
+                        case 3:
+                            $tipoUserDescricao = "Instrutor";
+                            break;                        
+                        //Lojista
+                        case 4:
+                            $tipoUserDescricao = "Lojista";
+                            break;                        
+                    }
+
+                ?>              
+                <p><?php echo $_SESSION['Apelido'];?></p> 
+
+                <small><?php echo $tipoUserDescricao;?></small>           
+            </div>
+        </center>
+        
+        <!-- //Imprime as Categorias para Filtrar a Aplicação -->
+        <header class="activities-list flex" style="margin-top: 3rem;">
+            <?php include('../templates/categorias_perfil.php');
+            ?>
         </header>
     
         <main>
@@ -109,18 +133,17 @@
                 <ion-icon name="search-outline"></ion-icon>
                 <input type="text" id="search-input" placeholder="Search">
             </div>
-            -->
+            -->            
 
-            <section class="eventsAndGroups flex">
-
+            <section class="eventsAndGroups flex" style="margin-top: -0.3rem;">
                 <?php
                 //Imprime Atividades ao Ar Livre         
-                $atividades = "SELECT * FROM TABATV WHERE CATATV_Codigo = $categoriafiltrada ORDER BY TABATV_Data ASC";                    
+                $atividades = "SELECT * FROM TABATV WHERE TABUSU_Codigo = ". $_SESSION['CODIGO']. " ORDER BY TABATV_Data ASC";                    
                 $queryAtividades = $mysqli->query($atividades) or die(mysql_error());
                 $postagem = 0;?>
 
                 <div class="title-wrapper">
-                    <h2>Atividades ao Ar Livre(<?php echo $queryAtividades->num_rows;?>)</h2>
+                    <h2>Minhas Atividades ao Ar Livre(<?php echo $queryAtividades->num_rows;?>)</h2>
                 </div>
 
                 <?php
@@ -204,7 +227,7 @@
                                 $sqlCriador = "SELECT * FROM TABATV WHERE TABATV_Codigo = ". $atividade['TABATV_Codigo']." AND TABUSU_Codigo = ". $_SESSION['CODIGO']. ";";
                                 $querySqlCriador = $mysqli->query($sqlCriador) or die(mysql_error());
                                 if($querySqlCriador->num_rows == 1){?>
-                                    <a onclick="alert('Como criador, para se desinscrever apague a atividade!');">
+                                    <a onclick="alert('Como criador, para se desinscrever, apague a atividade!');">
                                         Inscrito
                                     </a>
                                 <?php
@@ -213,7 +236,7 @@
                                     $querySqlInscrito = $mysqli->query($sqlInscrito) or die(mysql_error());
                                     if($querySqlInscrito->num_rows == 1){
                                     ?>
-                                        <a href="sair_atividadePHP.php?atividade=<?php echo $atividade['TABATV_Codigo']?>">
+                                        <a onclick="cancelarInscricao('<?php echo $atividade['TABATV_Titulo']?>', <?php echo $atividade['TABATV_Codigo']?>);">
                                             Cancelar Inscrição
                                         </a>
                                     <?php
@@ -234,14 +257,14 @@
                                     <?php
                                     }
                                 }                            
-                            ?>                           
+                            ?>                            
 
                             <?php
                             if($_SESSION['CODIGO'] == $atividade['TABUSU_Codigo']){?>                            
                                 
                                 <a href="../atividades_ao_ar_livre/update/update_atividade.php?codigo=<?php echo $atividade['TABATV_Codigo'];?>" style="cursor: pointer;">Editar Atividade</a>
                                 
-                                <a href="../atividades_ao_ar_livre/delete/delete_atividadePHP.php?codigo=<?php echo $atividade['TABATV_Codigo'];?>" style="cursor: pointer;">Excluir Atividade</a>
+                                <a onclick="apagarAtividade('<?php echo $atividade['TABATV_Titulo']?>', <?php echo $atividade['TABATV_Codigo']?>)" style="cursor: pointer;">Excluir Atividade</a>
                             <?php
                             }
                             ?>
@@ -250,7 +273,7 @@
                     }                       
                 }else{ ?>
             
-                    <h3>Sem atividades ao ar livre cadastradas nesta categoria!</h3>
+                    <h3>Sem Atividades Ao Ar Livre Cadastradas!</h3>
        
                 <?php 
                 }
@@ -261,7 +284,7 @@
         <footer>
             <?php 
                 $assets_path = '../../ASSETS';
-                include '../templates/footers/navBar.php';                
+                include '../templates/footers/navBarPerfil.php';                
             ?>
         </footer>
     </div>
@@ -269,6 +292,20 @@
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>        
     <script>
+
+        function cancelarInscricao(titulo, codigo){
+            let text = "Confirma cancelar a incrição em " + titulo + "?";
+            if (confirm(text) == true) {
+                window.location.href = "./sair_atividadePHP.php?atividade="+codigo; 
+            }   
+        }
+
+        function apagarAtividade(titulo, codigo){
+            let text = "Confirma apagar a atividade " + titulo + "?";
+            if (confirm(text) == true) {
+                window.location.href = "../atividades_ao_ar_livre/delete/delete_atividadePHP.php?codigo="+codigo; 
+            }  
+        }
 
         function submitform() {
                 document.saibamais.submit();
@@ -290,7 +327,7 @@
             if (imagem != ''){
                 image.setAttribute("src", "../atividades_ao_ar_livre/arquivos/"+imagem)
             }else{
-                image.setAttribute("src", "../../ASSETS/paisagem.png")
+                image.setAttribute("src", "../atividades_ao_ar_livre/arquivos/default.png")
             }           
             var description = document.querySelector(".desc-wrapper p")
             description.innerHTML = descricao
