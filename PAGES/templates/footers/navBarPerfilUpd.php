@@ -22,7 +22,7 @@
         </button>   
     <?php 
     }else{?>
-        <button hidden></button>
+        <button style="display: none;"></button>
     <?php
     }?>                 
     <button onclick="">

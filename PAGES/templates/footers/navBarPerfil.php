@@ -22,7 +22,7 @@
         </button>   
     <?php 
     }else{?>
-        <button hidden></button>
+        <button style="display: none;"></button>
     <?php
     }?>                 
     <button onclick="location.href = '../atividades_ao_ar_livre/insert/insert_atividade.php'">

@@ -88,6 +88,8 @@ form input {
     height: 100%;
     background: transparent;
     border: 0;
+    outline: none;
+
 }
 
 form input::placeholder {
@@ -107,6 +109,7 @@ form h3 {
 
 form textarea {
     width: 100%;
+    outline: none;
 }
 
 form .type-publi {
@@ -168,6 +171,14 @@ form .input-wrapper {
     flex-direction: column;
 
     gap: .4rem;
+
+}
+
+form .input-wrapper:focus-within label,
+form .input-wrapper:focus-within p,
+form .input-wrapper:focus-within input,
+form .input-wrapper:focus-within ion-icon{
+    color: var(--blue);
 }
 
 form .title-input-wrapper,
@@ -188,6 +199,13 @@ form .time-input-wrapper {
     padding: .4rem .8rem;
 }
 
+form .title-input-wrapper:focus-within,
+form .desc-input-wrapper:focus-within,
+form .local-input-wrapper:focus-within,
+form .data-input-wrapper:focus-within,
+form .time-input-wrapper:focus-within {
+    border: solid .1rem var(--blue);
+}
 
 form .title-input-wrapper p,
 form .desc-input-wrapper p {

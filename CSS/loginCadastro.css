@@ -58,12 +58,15 @@ input {
     transition: 0.5s;
 }
 
-.input-wrapper:focus-within {
+.input-wrapper:focus-within,
+.input-wrapper:hover {
     color: var(--blue);
+    transition: .5s;
 
 }
 
-input:focus {
+input:focus,
+input:hover {
     border: .1rem solid var(--blue);
 }
 
@@ -87,6 +90,14 @@ input:focus {
     color: var(--brown);
     height: 4.8rem;
     border-radius: 1rem;
+
+    background: var(--white);
+
+    transition: .25s;
+}
+
+.form button:hover {
+    opacity: 0.7;
 }
 
 .input-wrapper {
