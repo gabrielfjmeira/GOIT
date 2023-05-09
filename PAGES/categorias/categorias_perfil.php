@@ -98,7 +98,7 @@
                             $nomeImagem = substr($userData['TABUSU_Icon'], -18);
                         };  
                         ?>
-                        <img src="../perfil/arquivos/<?php echo $nomeImagem;?>" style="border-radius: 50%; width: 15rem; height: 15rem; border: 1.5px solid black" alt="">                        
+                        <img src="../perfil/arquivos/<?php echo $nomeImagem;?>" style="border-radius: 50%; width: 15rem; height: 15rem; border: 1.5px solid var(--dark-brown)" alt="">                        
                     <?php
                     }    
                     
@@ -128,7 +128,7 @@
                 <br>    
                 <?php
                 if($_SESSION['TIPOUSUARIO'] != 1){?>
-                    <button onclick="location.href = './update/update_perfil.php'">
+                    <button onclick="location.href = './update/update_perfil.php'" class="button-edit-profile">
                         Editar Perfil
                     </button>
                 <?php

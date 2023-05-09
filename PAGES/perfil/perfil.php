@@ -121,7 +121,7 @@
                 <br>    
                 <?php
                 if($_SESSION['TIPOUSUARIO'] != 1){?>
-                    <button onclick="location.href = './update/update_perfil.php'">
+                    <button onclick="location.href = './update/update_perfil.php'" class="button-edit-profile">
                         Editar Perfil
                     </button>
                 <?php
