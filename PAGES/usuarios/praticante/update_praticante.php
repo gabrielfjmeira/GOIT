@@ -65,15 +65,15 @@
 
             <div class="input-wrapper">
                 <label>Nome completo*</label>
-                <input type="text" id="txtNome" name="txtNome" placeholder="Nome" class="input" value="<?php echo $nome;?>"
-                pattern="^[A-Z]([a-z] || [ã] || [é] || [ô])+[\s]*(([A-Z]||[a-z])([a-z] || [ã] || [é] || [ô])+[\s]*){0,}$" 
+                <input type="text" id="txtNome" name="txtNome" placeholder="Nome" class="title-input-wrapper" value="<?php echo $nome;?>"
+                pattern="^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]{8,100}$" 
                 title="Nome só deve conter letras e deve possuir no mínimo 3 caracteres e no máximo 100 caracteres!" required/>
                 <small id="errorNome" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>
             </div>
 
             <div class="input-wrapper">
                 <label>Apelido*</label>
-                <input type="text" id="txtApelido" name="txtApelido" placeholder="Apelido" class="input" value="<?php echo $apelido;?>"
+                <input type="text" id="txtApelido" name="txtApelido" placeholder="Apelido" class="title-input-wrapper" value="<?php echo $apelido;?>"
                 pattern="^[A-z]\w{3,29}$" 
                 title="Apelido deve começar com uma letra e não pode conter símbolos, deve possuir no mínimo 4 caracteres e no máximo 30 caracteres!" required/>
                 <small id="errorApelido" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>
@@ -81,13 +81,13 @@
 
             <div class="input-wrapper">
                 <label>Data de Nascimento*</label>
-                <input type="date" id="dataNascimento" name="dataNascimento" placeholder="dd/mm/aaaa" class="input" 
+                <input type="date" id="dataNascimento" name="dataNascimento" placeholder="dd/mm/aaaa" class="title-input-wrapper" 
                 title="dd/mm/aaaa" value="<?php echo $dataNascimento;?>" required/>
             </div>
             
             <div class="input-wrapper">
                 <label>Email*</label>
-                <input type="text" id="txtEmail" name="txtEmail" placeholder="email@email.com" class="input" value="<?php echo $email;?>"
+                <input type="text" id="txtEmail" name="txtEmail" placeholder="email@email.com" class="title-input-wrapper" value="<?php echo $email;?>"
                 pattern="^[\w*\.]+@([\w-]+\.)+[\w-]{2,4}$" 
                 title="Digite um email válido! Exemplo: email@email.com" required/>
                 <small id="errorEmail" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>
@@ -132,6 +132,8 @@
                 <label for="">Upload da Imagem do Perfil</label>
                 <label for="imgPerfil" class="uploadImage-input-wrapper">  
                     <?php
+                        
+
                         if(is_null($user_data['TABUSU_Icon'])){?>
                             <img id="imagemSelecionada" src="../../../ASSETS/uploadIcon.svg" style="max-width: 8rem; max-height: 8rem;" class="uploadIcon">                    
                         <?php
@@ -142,7 +144,7 @@
                                 $nomeImagem = substr($user_data['TABUSU_Icon'], -18);
                             };  
                             ?>
-                            <img id="imagemSelecionada" src="../arquivos/<?php echo $nomeImagem;?>" style="max-width: 8rem; max-height: 8rem;" class="uploadIcon">                    
+                            <img id="imagemSelecionada" src="../../perfil/arquivos/<?php echo $nomeImagem;?>" style="max-width: 8rem; max-height: 8rem;" class="uploadIcon">                    
                         <?php
                         }                    
                     ?>                                          
@@ -150,10 +152,10 @@
                 </label>
             </div>
             
-            <button type="submit">Confirmar Alterações</button>
+            <button type="submit" id="submitButton">Confirmar Alterações</button>
 
             <div id="apagar-perfil">
-                <button type="button" onclick="apagarPerfil();">Apagar Perfil</button>               
+                <button type="button" onclick="apagarPerfil();" style="padding: .4rem .8rem; background: red; color: var(--white); border: none; border-radius: .4rem">Apagar Perfil</button>               
             </div>
             
         </form>

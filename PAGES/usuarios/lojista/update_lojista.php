@@ -63,7 +63,7 @@
             
             <div class="input-wrapper">
                 <label>Fantasia*</label>
-                <input type="text" id="txtFantasia" name="txtFantasia" placeholder="Fantasia" class="input" value="<?php echo $fantasia;?>"
+                <input type="text" id="txtFantasia" name="txtFantasia" placeholder="Fantasia" class="title-input-wrapper" value="<?php echo $fantasia;?>"
                 pattern="^[A-z]\w{3,29}$" 
                 title="Fantasia deve começar com uma letra e não pode conter símbolos, deve possuir no mínimo 4 caracteres e no máximo 30 caracteres!" required/>
                 <small id="errorFantasia" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>
@@ -71,7 +71,7 @@
                    
             <div class="input-wrapper">
                 <label>Email*</label>
-                <input type="text" id="txtEmail" name="txtEmail" placeholder="email@email.com" class="input" value="<?php echo $email;?>"
+                <input type="text" id="txtEmail" name="txtEmail" placeholder="email@email.com" class="title-input-wrapper" value="<?php echo $email;?>"
                 pattern="^[\w*\.]+@([\w-]+\.)+[\w-]{2,4}$" 
                 title="Digite um email válido! Exemplo: email@email.com" required/>
                 <small id="errorEmail" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>
@@ -126,7 +126,7 @@
                                 $nomeImagem = substr($user_data['TABUSU_Icon'], -18);
                             };  
                             ?>
-                            <img id="imagemSelecionada" src="../arquivos/<?php echo $nomeImagem;?>" style="max-width: 8rem; max-height: 8rem;" class="uploadIcon">                    
+                            <img id="imagemSelecionada" src="../../perfil/arquivos/<?php echo $nomeImagem;?>" style="max-width: 8rem; max-height: 8rem;" class="uploadIcon">                    
                         <?php
                         }                    
                     ?>                                          

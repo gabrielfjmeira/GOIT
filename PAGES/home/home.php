@@ -90,7 +90,8 @@
 
             <section class="eventsAndGroups flex">
 
-                <?php
+                <?php              
+                
                 //Imprime Atividades ao Ar Livre         
                 $atividades = "SELECT * FROM TABATV ORDER BY TABATV_Data ASC";                    
                 $queryAtividades = $mysqli->query($atividades) or die(mysql_error());
@@ -176,10 +177,10 @@
                                     $nomeImagem = substr($atividade['TABATV_Imagem'], -17);
                                 }else{
                                     $nomeImagem = substr($atividade['TABATV_Imagem'], -18);
-                                };                                                                                                                                                            
+                                };
                             ?>
 
-                            <a class="sm" style="cursor: pointer;" onclick="modalPostView('<?php echo $atividade['TABATV_Titulo']; ?>','<?php echo $nomeImagem;?>', '<?php echo $atividade['TABATV_Descricao']; ?>','<?php echo $atividade['TABATV_Data']; ?>', '<?php echo $atividade['TABATV_Hora']; ?>', '<?php echo $atividade['TABATV_Localizacao']?>', <?php echo $postagem;?>, '<?php echo $nomeIcon;?>','<?php echo $apelido?>');" style="cursor: pointer;">                            
+                            <a class="sm" style="cursor: pointer;" onclick="modalPostView('<?php echo $atividade['TABATV_Titulo']; ?>','<?php echo $nomeImagem;?>', '<?php echo rtrim($atividade['TABATV_Descricao'], $espaco); ?>','<?php echo $atividade['TABATV_Data']; ?>', '<?php echo $atividade['TABATV_Hora']; ?>', '<?php echo $atividade['TABATV_Localizacao']?>', <?php echo $postagem;?>, '<?php echo $nomeIcon;?>','<?php echo $apelido?>');" style="cursor: pointer;">                            
                                 Saiba mais                                        
                             </a>
 
@@ -267,10 +268,6 @@
             }  
         }
 
-        function submitform() {
-                document.saibamais.submit();
-        }
-
         bgblur = document.querySelector(".background-blur")
         modalProduct = document.querySelector(".modal-product")
         modalPost = document.querySelector(".modal-post")
@@ -280,7 +277,7 @@
             modalProduct.setAttribute("style" , "display: ")
         }        
 
-        function modalPostView(titulo, imagem, descricao, data, hora, local, postagem, imgIcon,usuario) {
+        function modalPostView(titulo, imagem, descricao, data, hora, local, postagem, imgIcon, usuario) {
             var title = document.querySelector(".title-post h3")
             title.innerHTML = titulo    
             var image = document.querySelector(".modal-post img")
