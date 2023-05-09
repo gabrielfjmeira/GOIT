@@ -8,7 +8,7 @@
 </style>
 
 <nav>
-    <img src="<?php echo $assets_path ?>/logoBlack.png" alt="Go It logotipo">
+    <img src="<?php echo $assets_path ?>/logoBlack.png" alt="Go It logotipo" onclick="location.href='../home/home.php' " style="cursor:pointer">
     <button onclick="location.href= '../../../CONFIG/login/logout.php' ">
         <img src="<?php echo $assets_path ?>/logOut.svg" alt="" >
         <p>LogOut</p>
@@ -22,7 +22,7 @@
         </button>   
     <?php 
     }else{?>
-        <button hidden></button>
+        <button style="display: none;"></button>
     <?php
     }?>                 
     <button onclick="limparFormulario()">

@@ -69,7 +69,7 @@ main {
 }
 
 .activities-list :first-child {
-    /* margin-left: 1.6rem; */
+    margin-left: 1.6rem;
 }
 
 .activities-list button {
@@ -229,6 +229,10 @@ nav button {
 
 nav button:hover {
     background: var(--medium-gray);
+}
+
+nav button p {
+    display: none;
 }
 
 section.eventsAndGroups {
@@ -463,6 +467,10 @@ section.eventsAndGroups {
 
     }
 
+    .activities-list :first-child {
+        margin-left: 0;
+    }
+
     footer {
         top: 0;
         width: 24rem;
@@ -474,9 +482,6 @@ section.eventsAndGroups {
         flex-direction: column;
         justify-content: normal;
         height: 100%;
-
-
-        /* padding: 0 3.2rem 0 4rem; */
 
         align-items: flex-start;
     }
