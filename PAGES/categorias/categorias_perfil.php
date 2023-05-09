@@ -80,8 +80,8 @@
 
     <div id="app">
         <img onclick="location.href= '../home/home.php'" src="../../ASSETS/Logo.png" alt="Logo go it" id="logo-header" style="cursor: pointer;">
-        <!--Carrega imagem e apelido do perfil-->
-        <center>
+       <!--Carrega imagem e apelido do perfil-->
+       <center>
             <div id="info-perfil" style="margin-top: 4rem;">
                 <?php
                     $sqlUser = "SELECT * FROM TABUSU WHERE TABUSU_Codigo = " . $_SESSION['CODIGO'];            
@@ -98,7 +98,7 @@
                             $nomeImagem = substr($userData['TABUSU_Icon'], -18);
                         };  
                         ?>
-                        <img src="./arquivos/<?php echo $nomeImagem;?>" alt="">                        
+                        <img src="../perfil/arquivos/<?php echo $nomeImagem;?>" style="border-radius: 50%; width: 15rem; height: 15rem; border: 1.5px solid black" alt="">                        
                     <?php
                     }    
                     
@@ -124,7 +124,16 @@
                 ?>              
                 <p><?php echo $_SESSION['Apelido'];?></p> 
 
-                <small><?php echo $tipoUserDescricao;?></small>           
+                <small><?php echo $tipoUserDescricao;?></small>   
+                <br>    
+                <?php
+                if($_SESSION['TIPOUSUARIO'] != 1){?>
+                    <button onclick="location.href = './update/update_perfil.php'">
+                        Editar Perfil
+                    </button>
+                <?php
+                }                
+                ?>                                            
             </div>
         </center>
         

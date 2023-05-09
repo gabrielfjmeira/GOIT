@@ -9,7 +9,7 @@
 
 <nav>
     <img src="<?php echo $assets_path ?>/logoBlack.png" alt="Go It logotipo">
-    <button onclick="location.href= '../../CONFIG/login/logout.php' ">
+    <button onclick="location.href= '../../../CONFIG/login/logout.php' ">
         <img src="<?php echo $assets_path ?>/logOut.svg" alt="" >
         <p>LogOut</p>
     </button>
@@ -24,18 +24,18 @@
     }else{?>
         <button hidden></button>
     <?php
-    }?>                    
-    <button onclick="location.href ='../atividades_ao_ar_livre/insert/insert_atividade.php';">
+    }?>                 
+    <button onclick="">
         <img src="<?php echo $assets_path ?>/buttonNewPubli.svg" alt="">
         <p>Publicar</p>
     </button>
-    <button onclick="location.href ='../perfil/perfil.php';">     
+    <button onclick="location.href ='../../perfil/perfil.php';">     
     <?php        
         $sqlUser = "SELECT * FROM TABUSU WHERE TABUSU_Codigo = " . $_SESSION['CODIGO'];            
         $querySqlUser = $mysqli->query($sqlUser) or die("Falha na execução do código sql" . $mysqli->error);
         $userData = mysqli_fetch_array($querySqlUser);
         if(is_null($userData['TABUSU_Icon'])){?>
-            <img src="<?php echo $assets_path ?>/buttonPerfil.svg" alt="">
+            <img src="<?php echo $assets_path ?>/buttonPerfilFilled.svg" alt="">
             <p><?php echo $_SESSION['Apelido'];?></p>  
         <?php
         }else{

@@ -17,8 +17,7 @@
             $atividade_data = mysqli_fetch_assoc($queryAtividade);
             $codigo = $atividade_data['TABATV_Codigo'];
             $titulo = $atividade_data['TABATV_Titulo'];
-            $descricao = $atividade_data['TABATV_Descricao'];
-            $imagem = $atividade_data['TABATV_Imagem'];
+            $descricao = $atividade_data['TABATV_Descricao'];            
             $categoria = $atividade_data['CATRIS_Codigo'];
             $localizacao = $atividade_data['TABATV_Localizacao'];
             $referencia = $atividade_data['TABATV_Referencia'];
@@ -113,8 +112,22 @@
 
             <div class="input-wrapper">
                 <label for="">Upload da Imagem do evento</label>
-                <label for="imgAtividade" class="uploadImage-input-wrapper">                        
-                    <img id="imagemSelecionada" src="../../../ASSETS/uploadIcon.svg" style="max-width: 8rem; max-height: 8rem;" class="uploadIcon">                    
+                <label for="imgAtividade" class="uploadImage-input-wrapper">  
+                    <?php
+                        if(is_null($atividade_data['TABATV_Imagem'])){?>
+                            <img id="imagemSelecionada" src="../../../ASSETS/uploadIcon.svg" style="max-width: 8rem; max-height: 8rem;" class="uploadIcon">                    
+                        <?php
+                        }else{
+                            if(substr($atividade_data['TABATV_Imagem'], -4) == ".jpg" || substr($atividade_data['TABATV_Imagem'], -4) == ".png" ){
+                                $nomeImagem = substr($atividade_data['TABATV_Imagem'], -17);
+                            }else{
+                                $nomeImagem = substr($atividade_data['TABATV_Imagem'], -18);
+                            };  
+                            ?>
+                            <img id="imagemSelecionada" src="../arquivos/<?php echo $nomeImagem;?>" style="max-width: 8rem; max-height: 8rem;" class="uploadIcon">                    
+                        <?php
+                        }                    
+                    ?>                                          
                     <input type="file" id="imgAtividade" name="imgAtividade" accept="image/*" onchange="validaImagem(this);"> 
                 </label>
             </div>

@@ -53,7 +53,7 @@
     $sqlUsuario = "SELECT * FROM TABUSU WHERE TABUSU_Codigo = $usuario";
     $querySqlUsuario = $mysqli->query($sqlUsuario) or die("Falha na execução do código sql" . $mysqli->error);           
     $usuarioData = mysqli_fetch_array($querySqlUsuario);  
-    $tipoUsuario = $usuarioData('TIPUSU_Codigo');        
+    $tipoUsuario = $usuarioData['TIPUSU_Codigo'];        
 
     $sqlCategoria = "SELECT * FROM CATATV WHERE CATATV_Codigo = $categoria";
     $querySqlCategoria = $mysqli->query($sqlCategoria) or die("Falha na execução do código sql" . $mysqli->error);    
