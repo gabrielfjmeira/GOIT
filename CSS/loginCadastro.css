@@ -45,6 +45,7 @@ header {
 }
 
 input {
+    outline: none;
     background: transparent;
     border: 1px solid var(--white);
     color: var(--white);
@@ -52,8 +53,19 @@ input {
 
     width: 100%;
     padding: 1.6rem 1.2rem ;
+
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
 }
 
+.input-wrapper:focus-within {
+    color: var(--blue);
+
+}
+
+input:focus {
+    border: .1rem solid var(--blue);
+}
 
 .input-wrapper select {
     padding: 1.6rem .8rem;

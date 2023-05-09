@@ -2,10 +2,10 @@
     //Incluí a Conexão
     include('../../CONNECTIONS/connection.php');
     
-    //Verifica se o Usuário está Logado
-    if ($_SESSION['LOGGED'] == True){
-        header ("Location: ../PAGES/home/home.php");
-    }
+    // //Verifica se o Usuário está Logado
+    // if ($_SESSION['LOGGED'] == True){
+    //     header ("Location: ../PAGES/home/home.php");
+    // }
 
     //Retornar todos os Registros de Tipos de Usuários
     $sqlTipoUsuarios = "SELECT * FROM TIPUSU";
