@@ -41,7 +41,7 @@
         <div class="input-wrapper">
             <label>Nome Completo*</label>
             <input type="text" id="txtNome" name="txtNome" placeholder="Nome" class="input" 
-            pattern="^[A-Z][a-z]+[\s]*(([A-Z]||[a-z])[a-z]{1,}[\s]*){0,}$" 
+            pattern="^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]{8,100}$" 
             title="Nome deve possuir no mínimo 8 caracteres e no máximo 100 caracteres!" required/>
             <small id="errorNome" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>
         </div>
