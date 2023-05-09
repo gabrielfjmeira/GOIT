@@ -117,6 +117,12 @@
                                 $queryRegistroUsuario = $mysqli->query($registroUsuario) or die(mysql_error());
                                 $usuario_data = mysqli_fetch_array($queryRegistroUsuario);
                                 $tipousuario = $usuario_data['TIPUSU_Codigo'];
+
+                                if(substr($usuario_data['TABUSU_Icon'], -4) == ".jpg" || substr($usuario_data['TABUSU_Icon'], -4) == ".png" ){
+                                    $nomeIcon = substr($usuario_data['TABUSU_Icon'], -17);
+                                }else{
+                                    $nomeIcon = substr($usuario_data['TABUSU_Icon'], -18);
+                                }; 
             
                                 switch($tipousuario){
                                     //Administrador
@@ -170,10 +176,10 @@
                                     $nomeImagem = substr($atividade['TABATV_Imagem'], -17);
                                 }else{
                                     $nomeImagem = substr($atividade['TABATV_Imagem'], -18);
-                                };                                                                                            
+                                };                                                                                                                                                            
                             ?>
 
-                            <a class="sm" style="cursor: pointer;" onclick="modalPostView('<?php echo $atividade['TABATV_Titulo']; ?>','<?php echo $nomeImagem;?>', '<?php echo $atividade['TABATV_Descricao']; ?>','<?php echo $atividade['TABATV_Data']; ?>', '<?php echo $atividade['TABATV_Hora']; ?>', '<?php echo $atividade['TABATV_Localizacao']?>', <?php echo $postagem;?>,'<?php echo $apelido?>');" style="cursor: pointer;">                            
+                            <a class="sm" style="cursor: pointer;" onclick="modalPostView('<?php echo $atividade['TABATV_Titulo']; ?>','<?php echo $nomeImagem;?>', '<?php echo $atividade['TABATV_Descricao']; ?>','<?php echo $atividade['TABATV_Data']; ?>', '<?php echo $atividade['TABATV_Hora']; ?>', '<?php echo $atividade['TABATV_Localizacao']?>', <?php echo $postagem;?>, '<?php echo $nomeIcon;?>','<?php echo $apelido?>');" style="cursor: pointer;">                            
                                 Saiba mais                                        
                             </a>
 
@@ -274,7 +280,7 @@
             modalProduct.setAttribute("style" , "display: ")
         }        
 
-        function modalPostView(titulo, imagem, descricao, data, hora, local, postagem, usuario) {
+        function modalPostView(titulo, imagem, descricao, data, hora, local, postagem, imgIcon,usuario) {
             var title = document.querySelector(".title-post h3")
             title.innerHTML = titulo    
             var image = document.querySelector(".modal-post img")
@@ -291,11 +297,17 @@
             time.innerHTML = hora
             var localization = document.querySelector(".localization-wrapper p")
             localization.innerHTML = local                                                                                                                                                         
-            var numberRegistereds = document.querySelector(".numeroInscritos"+postagem).value;            
-            var maxRegistereds = document.querySelector(".maxInscritos"+postagem).value; 
+            var numberRegistereds = document.querySelector(".numeroInscritos"+postagem).value
+            var maxRegistereds = document.querySelector(".maxInscritos"+postagem).value
             var registered = document.querySelector(".registered-wrapper p")
             registered.innerHTML = numberRegistereds + "/" + maxRegistereds
-            var user = document.querySelector(".user")
+            var icon = document.querySelector(".instructor-wrapper img")
+            if (imgIcon != ''){
+                icon.setAttribute("src", "../perfil/arquivos/"+imgIcon)
+            }else{
+                icon.setAttribute("src", "../../ASSETS/buttonPerfil.svg")
+            } 
+            var user = document.querySelector(".user")            
             user.innerHTML = usuario          
             bgblur.setAttribute("style" , "display: ")
             modalPost.setAttribute("style" , "display: ")

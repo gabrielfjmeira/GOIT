@@ -1,3 +1,12 @@
+<style>
+    #iconPerfil{        
+        border-radius: 50%;
+
+        width: 3.2rem;
+        height: 3.2rem;
+    }    
+</style>
+
 <nav>
     <img src="<?php echo $assets_path ?>/logoBlack.png" alt="Go It logotipo">
     <button onclick="location.href= '../../../CONFIG/login/logout.php' ">
@@ -20,7 +29,7 @@
         <img src="<?php echo $assets_path ?>/buttonNewPubliFilled.svg" alt="">
         <p>Publicar</p>
     </button>
-    <button onclick="location.href ='../../perfil/perfil.php';">     
+    <button onclick="location.href ='../perfil/perfil.php';">     
     <?php        
         $sqlUser = "SELECT * FROM TABUSU WHERE TABUSU_Codigo = " . $_SESSION['CODIGO'];            
         $querySqlUser = $mysqli->query($sqlUser) or die("Falha na execução do código sql" . $mysqli->error);
@@ -36,7 +45,7 @@
                 $nomeImagem = substr($userData['TABUSU_Icon'], -18);
             };  
             ?>
-            <img src="../../perfil/arquivos/<?php echo $nomeImagem;?>" alt="">
+            <img id="iconPerfil" src="../../perfil/arquivos/<?php echo $nomeImagem;?>" alt="">
             <p><?php echo $_SESSION['Apelido'];?></p> 
         <?php
         }           

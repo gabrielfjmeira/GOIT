@@ -52,7 +52,7 @@
                 <a href="#" id = "forget-password">Esqueci a senha</a>                
             </div>
 
-            <!--Imprime Erros se Houver-->
+        <!--Imprime Erros se Houver-->
         <?php
             if(isset($_GET['error'])){                
                 $error = $_GET['error'];                

@@ -101,7 +101,8 @@
                         echo "<option value=".$catatv_codigo.">". $catatv_descricao."</option>";                                                                   
                     }
                 ?>                                                           
-            </select>            
+            </select>
+            <small id="errorCategoria" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>            
         </div>
 
         <div class="input-wrapper">
@@ -152,7 +153,19 @@
                             txtEmail.focus();    
                         </script>
                         <?php
-                        break;                            
+                        break;  
+                    case 004:?>
+                        <script type="text/javascript">
+                            //Cria Variáveis
+                            let catInstrutor = document.getElementById('catInstrutor');                            
+                            let errorCategoria = document.getElementById('errorCategoria');                                                                                                                  
+                            
+                            catInstrutor.style.border = "1px solid #DB5A5A";                            
+                            errorCategoria.innerHTML = "Selecione uma Categoria!";                                                                       
+                            catInstrutor.focus();    
+                        </script>
+                        <?php
+                        break;                              
                                     
                 }
             }
