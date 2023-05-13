@@ -104,7 +104,7 @@
                 <label for="">Descrição*</label>
                 <div class="desc-input-wrapper">
                     <textarea id="txtDescricao" name="txtDescricao" placeholder="Ex: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eget ligula aliquet, iaculis est eu, ornare velit. Cras vestibulum venenatis blandit." required>
-                        <?php echo $descricao;?>
+                        <?php echo str_replace("<br />", "", $descricao);?>
                     </textarea>
                     <p>0/600</p>
                 </div>

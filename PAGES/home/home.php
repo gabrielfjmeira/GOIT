@@ -182,9 +182,12 @@
                                 }else{
                                     $nomeImagem = substr($atividade['TABATV_Imagem'], -18);
                                 };
+
+                                $descricao_bd = str_replace("\n", '', $atividade['TABATV_Descricao']);                                
+                                $descricao_sm = str_replace("\r", '', $descricao_bd);                                
                             ?>
 
-                            <a class="sm" style="cursor: pointer;" onclick="modalPostView('<?php echo $atividade['TABATV_Titulo']; ?>','<?php echo $nomeImagem;?>', '<?php echo rtrim($atividade['TABATV_Descricao'], $espaco); ?>','<?php echo $atividade['TABATV_Data']; ?>', '<?php echo $atividade['TABATV_Hora']; ?>', '<?php echo $atividade['TABATV_Localizacao']?>', <?php echo $postagem;?>, '<?php echo $nomeIcon;?>','<?php echo $apelido?>');" style="cursor: pointer;">                            
+                            <a class="sm" style="cursor: pointer;" onclick="modalPostView('<?php echo $atividade['TABATV_Titulo']; ?>','<?php echo $nomeImagem;?>', '<?php echo $descricao_sm; ?>','<?php echo $atividade['TABATV_Data']; ?>', '<?php echo $atividade['TABATV_Hora']; ?>', '<?php echo $atividade['TABATV_Localizacao']?>', <?php echo $postagem;?>, '<?php echo $nomeIcon;?>','<?php echo $apelido?>');" style="cursor: pointer;">                            
                                 Saiba mais                                        
                             </a>
 
