@@ -104,12 +104,11 @@
         </header>
     
         <main>
-            <!--
+
             <div class="search-wrapper flex">
                 <ion-icon name="search-outline"></ion-icon>
-                <input type="text" id="search-input" placeholder="Search">
+                <input type="text" id="search-input" placeholder="Search" onclick="searchDesenvolvimento()">
             </div>
-            -->
 
             <section class="eventsAndGroups flex">
 
@@ -200,41 +199,43 @@
                                 Saiba mais                                        
                             </a>
 
-                            <?php                               
-                                $sqlCriador = "SELECT * FROM TABATV WHERE TABATV_Codigo = ". $atividade['TABATV_Codigo']." AND TABUSU_Codigo = ". $_SESSION['CODIGO']. ";";
-                                $querySqlCriador = $mysqli->query($sqlCriador) or die(mysql_error());
-                                if($querySqlCriador->num_rows == 1){?>
-                                    <a onclick="alert('Como criador, para se desinscrever apague a atividade!');">
-                                        Inscrito
-                                    </a>
-                                <?php
-                                }else{
-                                    $sqlInscrito = "SELECT * FROM PARATV WHERE TABATV_Codigo = ". $atividade['TABATV_Codigo']." AND TABUSU_Codigo = ". $_SESSION['CODIGO']. ";";
-                                    $querySqlInscrito = $mysqli->query($sqlInscrito) or die(mysql_error());
-                                    if($querySqlInscrito->num_rows == 1){
-                                    ?>
-                                        <a href="sair_atividadePHP.php?atividade=<?php echo $atividade['TABATV_Codigo']?>">
-                                            Cancelar Inscrição
+                            <?php                            
+                                if($_SESSION['TIPOUSUARIO'] != 4){
+                                    $sqlCriador = "SELECT * FROM TABATV WHERE TABATV_Codigo = ". $atividade['TABATV_Codigo']." AND TABUSU_Codigo = ". $_SESSION['CODIGO']. ";";
+                                    $querySqlCriador = $mysqli->query($sqlCriador) or die(mysql_error());
+                                    if($querySqlCriador->num_rows == 1){?>
+                                        <a onclick="alert('Como criador, para se desinscrever, apague a atividade!');">
+                                            Inscrito
                                         </a>
                                     <?php
                                     }else{
-                                        if($numeroInscritos == $maximoInscritos){?>
-                                            <a onclick="alert('Número máximo de inscritos atingido nesta atividade ao ar livre!')">
-                                                Número máximo de inscritos atingido!
+                                        $sqlInscrito = "SELECT * FROM PARATV WHERE TABATV_Codigo = ". $atividade['TABATV_Codigo']." AND TABUSU_Codigo = ". $_SESSION['CODIGO']. ";";
+                                        $querySqlInscrito = $mysqli->query($sqlInscrito) or die(mysql_error());
+                                        if($querySqlInscrito->num_rows == 1){
+                                        ?>
+                                            <a onclick="cancelarInscricao('<?php echo $atividade['TABATV_Titulo']?>', <?php echo $atividade['TABATV_Codigo']?>);">
+                                                Cancelar Inscrição
                                             </a>
                                         <?php
-                                        }else{?>
-                                            <a href="participar_atividadePHP.php?atividade=<?php echo $atividade['TABATV_Codigo']?>">
-                                                Inscrever-Se
-                                            </a>
+                                        }else{
+                                            if($numeroInscritos == $maximoInscritos){?>
+                                                <a onclick="alert('Número máximo de inscritos atingido nesta atividade ao ar livre!')">
+                                                    Número máximo de inscritos atingido!
+                                                </a>
+                                            <?php
+                                            }else{?>
+                                                <a href="participar_atividadePHP.php?atividade=<?php echo $atividade['TABATV_Codigo']?>">
+                                                    Inscrever-Se
+                                                </a>
+                                            <?php
+                                            }
+                                            ?>
+                                            
                                         <?php
                                         }
-                                        ?>
-                                        
-                                    <?php
-                                    }
-                                }                            
-                            ?>                           
+                                    }                      
+                                }                                      
+                            ?>                                
 
                             <?php
                             if($_SESSION['CODIGO'] == $atividade['TABUSU_Codigo']){?>                            
@@ -322,6 +323,10 @@
                     modalPost.setAttribute("style", "display: none;")
                 }
             }); 
+        }
+        
+        function searchDesenvolvimento(){
+            document.getElementById('search-input').placeholder = "Esta funcionalidade segue em desenvolvimento";
         }
     </script>
 </body>

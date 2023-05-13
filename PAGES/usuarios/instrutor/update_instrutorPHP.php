@@ -87,7 +87,8 @@
                             $queryUpdateUsr = $mysqli->query($updateUsr) or die("Falha na execução do código sql" . $mysqli->error);           
                             $updateInstrutor = "UPDATE TABINS SET TABINS_Nome='$nome', TABINS_Apelido='$apelido', TABINS_DataNascimento='$dataNascimento', CATATV_Codigo = $categoria WHERE TABUSU_Codigo = $codigo";        
                             $queryUpdateInstrutor = $mysqli->query($updateInstrutor) or die("Falha na execução do código sql" . $mysqli->error); 
-                        }                              
+                        }        
+                        $_SESSION['Apelido'] = $apelido;                        
                         ?>
                         <script>
                             //Redireciona para o login

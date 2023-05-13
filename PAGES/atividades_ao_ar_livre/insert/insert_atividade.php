@@ -25,8 +25,18 @@
     <!--Cabeçalho-->
     <div id="app">
         <header>
-            <button style="cursor: pointer;" onclick="window.history.back();"><img src="../../../ASSETS/backButtonDark.svg" alt="back-button"></button>
-            <img src="../../../ASSETS/Logo.png" alt="logo" class="logo">
+            <button style="cursor: pointer;" onclick="window.history.back()"><img src="../../../ASSETS/backButtonDark.svg" alt="back-button"></button>
+            <img src="../../../ASSETS/Logo.png" alt="logo" class="logo" 
+            <?php
+                if($_SESSION['TIPOUSUARIO'] == 4){?>
+                    onclick="location.href='../../perfil/perfil.php'" 
+                <?php
+                }else{?>
+                    onclick="location.href='../../home/home.php'" 
+                <?php
+                }            
+            ?>   
+            style="cursor: pointer;">  
         </header>
         
         <!--Formulário-->    
@@ -38,8 +48,15 @@
                         <button></button>
                         <span></span>
                     </div>-->
-
-                    <h3 class="selected">Criar Atividade Ao Ar Livre</h3>
+                    <?php
+                        if($_SESSION['TIPOUSUARIO'] == 4){?>
+                            <h3 class="selected">Promover Evento</h3>
+                        <?php                            
+                        }else{?>
+                            <h3 class="selected">Criar Atividade Ao Ar Livre</h3>
+                        <?php
+                        }                        
+                    ?>                    
             </div>
 
             <div class="input-wrapper">
@@ -53,7 +70,15 @@
             </div>
 
             <div class="input-wrapper">
-                <label for="categoria">Categoria da atividade do evento*</label>
+                <?php
+                    if($_SESSION['TIPOUSUARIO'] == 4){?>
+                        <label for="categoria">Categoria do evento*</label>
+                    <?php                            
+                    }else{?>
+                        <label for="categoria">Categoria da atividade ao ar livre*</label>
+                    <?php
+                    }     
+                ?>                
                 <select id="categoriaAtividade" name="categoriaAtividade" required>        
                     <option selected disabled="disabled" hidden>Escolha uma opção</option>
                     <?php          
@@ -79,7 +104,15 @@
             </div>
 
             <div class="input-wrapper">
-                <label for="">Upload da Imagem do evento</label>
+                <?php
+                    if($_SESSION['TIPOUSUARIO'] == 4){?>
+                        <label for="">Upload da imagem do evento</label>
+                    <?php                            
+                    }else{?>
+                        <label for="">Upload da imagem da atividade ao ar livre</label>
+                    <?php
+                    }                        
+                ?>                
                 <label for="imgAtividade" class="uploadImage-input-wrapper">                        
                     <img id="imagemSelecionada" src="../../../ASSETS/uploadIcon.svg" style="max-width: 8rem; max-height: 8rem;" class="uploadIcon">                    
                     <input type="file" id="imgAtividade" name="imgAtividade" accept="image/*" onchange="validaImagem(this);"> 

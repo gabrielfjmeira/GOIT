@@ -8,7 +8,18 @@
 </style>
 
 <nav>
-    <img src="<?php echo $assets_path ?>/logoBlack.png" alt="Go It logotipo" onclick="location.href='../home/home.php' " style="cursor:pointer">
+    <img src="<?php echo $assets_path ?>/logoBlack.png" alt="Go It logotipo"
+    <?php
+        if($_SESSION['TIPOUSUARIO'] == 4){?>
+            onclick="location.href='../../perfil/perfil.php'" 
+        <?php
+        }else{?>
+            onclick="location.href='../../home/home.php'" 
+        <?php
+        }
+    ?>    
+    style="cursor:pointer">
+
     <button onclick="location.href= '../../../CONFIG/login/logout.php' ">
         <img src="<?php echo $assets_path ?>/logOut.svg" alt="" >
         <p>LogOut</p>
@@ -27,7 +38,15 @@
     }?>                 
     <button onclick="limparFormulario()">
         <img src="<?php echo $assets_path ?>/buttonNewPubliFilled.svg" alt="">
-        <p>Publicar</p>
+        <?php
+            if($_SESSION['TIPOUSUARIO'] == 4){?>
+                <p>Promover Evento</p>
+            <?php
+            }else{?>
+                <p>Publicar</p>
+            <?php
+            }
+        ?>            
     </button>
     <button onclick="location.href ='../../perfil/perfil.php';">     
     <?php        
