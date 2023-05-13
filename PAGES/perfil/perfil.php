@@ -72,7 +72,17 @@
     </div>
 
     <div id="app">
-        <img onclick="location.href= '../home/home.php'" src="../../ASSETS/Logo.png" alt="Logo go it" id="logo-header" style="cursor: pointer;">
+        <img src="../../ASSETS/Logo.png" alt="Logo go it" id="logo-header" 
+        <?php
+            if($_SESSION['TIPOUSUARIO'] == 4){?>
+                onclick="location.href='./perfil.php'"            
+            <?php
+            }else{?>
+                onclick="location.href='../home/home.php'" 
+            <?php
+            }
+        ?>      
+        style="cursor: pointer;">
         <!--Carrega imagem e apelido do perfil-->
         <center>
             <div id="info-perfil" style="margin-top: 4rem;">
@@ -137,14 +147,13 @@
         </header>
     
         <main>
-            <!--
+
             <div class="search-wrapper flex">
                 <ion-icon name="search-outline"></ion-icon>
-                <input type="text" id="search-input" placeholder="Search">
-            </div>
-            -->            
+                <input type="text" id="search-input" placeholder="Search" onclick="searchDesenvolvimento()">
+            </div>           
 
-            <section class="eventsAndGroups flex" style="margin-top: -0.3rem;">
+            <section class="eventsAndGroups flex" style="margin-top: 1.6rem;">
                 <?php
                 //Imprime Atividades ao Ar Livre         
                 $atividades = "SELECT * FROM TABATV WHERE TABUSU_Codigo = ". $_SESSION['CODIGO']. " ORDER BY TABATV_Data ASC";                    
@@ -152,7 +161,15 @@
                 $postagem = 0;?>
 
                 <div class="title-wrapper">
-                    <h2>Minhas Atividades ao Ar Livre(<?php echo $queryAtividades->num_rows;?>)</h2>
+                    <?php
+                        if($_SESSION['TIPOUSUARIO'] == 4){?>
+                            <h2>Meus Eventos:(<?php echo $queryAtividades->num_rows;?>)</h2>                            
+                        <?php
+                        }else{?>
+                            <h2>Minhas Atividades ao Ar Livre(<?php echo $queryAtividades->num_rows;?>)</h2>
+                        <?php
+                        }
+                    ?>                    
                 </div>
 
                 <?php
@@ -232,41 +249,43 @@
                                 Saiba mais                                        
                             </a>
 
-                            <?php                               
-                                $sqlCriador = "SELECT * FROM TABATV WHERE TABATV_Codigo = ". $atividade['TABATV_Codigo']." AND TABUSU_Codigo = ". $_SESSION['CODIGO']. ";";
-                                $querySqlCriador = $mysqli->query($sqlCriador) or die(mysql_error());
-                                if($querySqlCriador->num_rows == 1){?>
-                                    <a onclick="alert('Como criador, para se desinscrever, apague a atividade!');">
-                                        Inscrito
-                                    </a>
-                                <?php
-                                }else{
-                                    $sqlInscrito = "SELECT * FROM PARATV WHERE TABATV_Codigo = ". $atividade['TABATV_Codigo']." AND TABUSU_Codigo = ". $_SESSION['CODIGO']. ";";
-                                    $querySqlInscrito = $mysqli->query($sqlInscrito) or die(mysql_error());
-                                    if($querySqlInscrito->num_rows == 1){
-                                    ?>
-                                        <a onclick="cancelarInscricao('<?php echo $atividade['TABATV_Titulo']?>', <?php echo $atividade['TABATV_Codigo']?>);">
-                                            Cancelar Inscrição
+                            <?php                            
+                                if($_SESSION['TIPOUSUARIO'] != 4){
+                                    $sqlCriador = "SELECT * FROM TABATV WHERE TABATV_Codigo = ". $atividade['TABATV_Codigo']." AND TABUSU_Codigo = ". $_SESSION['CODIGO']. ";";
+                                    $querySqlCriador = $mysqli->query($sqlCriador) or die(mysql_error());
+                                    if($querySqlCriador->num_rows == 1){?>
+                                        <a onclick="alert('Como criador, para se desinscrever, apague a atividade!');">
+                                            Inscrito
                                         </a>
                                     <?php
                                     }else{
-                                        if($numeroInscritos == $maximoInscritos){?>
-                                            <a onclick="alert('Número máximo de inscritos atingido nesta atividade ao ar livre!')">
-                                                Número máximo de inscritos atingido!
+                                        $sqlInscrito = "SELECT * FROM PARATV WHERE TABATV_Codigo = ". $atividade['TABATV_Codigo']." AND TABUSU_Codigo = ". $_SESSION['CODIGO']. ";";
+                                        $querySqlInscrito = $mysqli->query($sqlInscrito) or die(mysql_error());
+                                        if($querySqlInscrito->num_rows == 1){
+                                        ?>
+                                            <a onclick="cancelarInscricao('<?php echo $atividade['TABATV_Titulo']?>', <?php echo $atividade['TABATV_Codigo']?>);">
+                                                Cancelar Inscrição
                                             </a>
                                         <?php
-                                        }else{?>
-                                            <a href="participar_atividadePHP.php?atividade=<?php echo $atividade['TABATV_Codigo']?>">
-                                                Inscrever-Se
-                                            </a>
+                                        }else{
+                                            if($numeroInscritos == $maximoInscritos){?>
+                                                <a onclick="alert('Número máximo de inscritos atingido nesta atividade ao ar livre!')">
+                                                    Número máximo de inscritos atingido!
+                                                </a>
+                                            <?php
+                                            }else{?>
+                                                <a href="participar_atividadePHP.php?atividade=<?php echo $atividade['TABATV_Codigo']?>">
+                                                    Inscrever-Se
+                                                </a>
+                                            <?php
+                                            }
+                                            ?>
+                                            
                                         <?php
                                         }
-                                        ?>
-                                        
-                                    <?php
-                                    }
-                                }                            
-                            ?>                            
+                                    }                      
+                                }                                      
+                            ?>                                  
 
                             <?php
                             if($_SESSION['CODIGO'] == $atividade['TABUSU_Codigo']){?>                            
@@ -280,11 +299,14 @@
                                           
                         </div><?php               
                     }                       
-                }else{ ?>
-            
-                    <h3>Sem Atividades Ao Ar Livre Cadastradas!</h3>
-       
-                <?php 
+                }else{ 
+                    if($_SESSION['TIPOUSUARIO'] == 4){?>
+                        <h3>Sem Eventos Patrocinados!</h3>
+                    <?php
+                    }else{?>
+                        <h3>Sem Atividades Ao Ar Livre Cadastradas!</h3>                                                                                                
+                    <?php 
+                    }
                 }
                 ?>
             </section>
@@ -368,6 +390,10 @@
                     modalPost.setAttribute("style", "display: none;")
                 }
             }); 
+        }
+
+        function searchDesenvolvimento(){
+            document.getElementById('search-input').placeholder = "Esta funcionalidade segue em desenvolvimento";
         }
     </script>
 </body>

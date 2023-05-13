@@ -73,7 +73,7 @@
                         $lojista_data = mysqli_fetch_array($queryLojista);
                         $_SESSION['Apelido'] = $lojista_data['TABLOJ_Fantasia'];                                               
                         
-                        header("Location: ../../PAGES/home/home.php");
+                        header("Location: ../../PAGES/perfil/perfil.php");
                     } else{
                         if($negado == 1){
                             header("Location: ../../index.php?error=005&codigousuario=".$codigoUsuario."&tipo=".$tipoUsuario);

@@ -18,7 +18,7 @@
             $codigo = $atividade_data['TABATV_Codigo'];
             $titulo = $atividade_data['TABATV_Titulo'];
             $descricao = $atividade_data['TABATV_Descricao'];            
-            $categoria = $atividade_data['CATRIS_Codigo'];
+            $categoria = $atividade_data['CATATV_Codigo'];
             $localizacao = $atividade_data['TABATV_Localizacao'];
             $referencia = $atividade_data['TABATV_Referencia'];
             $inscritos = $atividade_data['TABATV_Inscritos'];

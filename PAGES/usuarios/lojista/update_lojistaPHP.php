@@ -84,7 +84,9 @@
                             $queryUpdateUsr = $mysqli->query($updateUsr) or die("Falha na execução do código sql" . $mysqli->error);           
                             $updateLojista = "UPDATE TABLOJ SET TABLOJ_Fantasia='$fantasia' WHERE TABUSU_Codigo = $codigo";        
                             $queryUpdateInstrutor = $mysqli->query($updateLojista) or die("Falha na execução do código sql" . $mysqli->error); 
-                        }                              
+                        }     
+                        
+                        $_SESSION['Apelido'] = $fantasia;
                         ?>
                         <script>
                             //Redireciona para o login
