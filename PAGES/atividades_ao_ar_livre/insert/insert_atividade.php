@@ -40,7 +40,7 @@
         </header>
         
         <!--Formulário-->    
-        <form id="formInsertAtividade" name="formInsertAtividade" action="insert_atividadePHP.php" method="POST" enctype="multipart/form-data" onsubmit="return formInsertAtividadeOnSubmit();">
+        <form id="formInsertAtividade" name="formInsertAtividade" action="insert_atividadePHP.php" method="POST" enctype="multipart/form-data" onsubmit="return validaHora();">
             <div class="type-publi">
                     <!--<h3>Grupo</h3>
 
@@ -157,11 +157,12 @@
             </div>
 
             <div class="input-wrapper">
-                <label for="">Horário*</label>
+                <label id="lblHorario" for="">Horário*</label>
                 <div class="time-input-wrapper">
                     <input type="time" id="horaAtividade" name="horaAtividade" placeholder="--:--" >
-                    <ion-icon name="time-outline"></ion-icon>
+                    <ion-icon name="time-outline"></ion-icon>                    
                 </div>
+                <small id="errorTime" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>
             </div>
                         
             <button id="submitButton" type="submit">Publicar</button>
@@ -234,6 +235,38 @@
             } else{
                 document.getElementById('imagemSelecionada').setAttribute('src', '#');
             }
+        }
+
+        function validaHora(){
+            var now = new Date(); 
+            var dd = now.getDate();
+            var mm = now.getMonth() + 1; //Janeiro é 0!
+            var yyyy = now.getFullYear();
+
+            if (dd < 10) {
+            dd = '0' + dd;
+            }
+
+            if (mm < 10) {
+            mm = '0' + mm;
+            } 
+            
+            var nowDateTime = yyyy + '-' + mm + '-' + dd + " " + now.getTime();           
+            var date = document.getElementById('dataAtividade');
+            var time = document.getElementById('horaAtividade');
+            var lblHorario = document.getElementById('lblHorario');
+            var timeInput = document.querySelector('.time-input-wrapper');
+            var datetime = date.value + " " + time.value+":00";
+
+            if(datetime < nowDateTime){
+                timeInput.style.border = "1px solid #DB5A5A";  
+                lblHorario.style.color = "#DB5A5A";
+                errorTime.style.color = "#DB5A5A";                          
+                errorTime.innerHTML = "Horário precisa ser maior que o atual";                                                                       
+                time.focus();
+                return false;
+            }            
+            return true;
         }
     </script>   
     
