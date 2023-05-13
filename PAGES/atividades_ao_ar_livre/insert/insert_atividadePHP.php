@@ -10,7 +10,7 @@
     //Cria variáveis
     $usuario     = $_SESSION['CODIGO'];
     $titulo      = $_POST['txtTitulo'];
-    $descricao   = $_POST['txtDescricao'];
+    $descricao   = nl2br($_POST['txtDescricao']);
     $categoria   = $_POST['categoriaAtividade'];
     $localizacao = $_POST['txtLocalizacao'];
     $referencia  = $_POST['txtReferencia'];
