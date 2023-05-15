@@ -77,6 +77,8 @@
 
     <div id="app">
         <img onclick="location.href= './home.php'" src="../../ASSETS/Logo.png" alt="Logo go it" id="logo-header" style="cursor: pointer;">
+        <h1 id="page-title">Home page</h1>
+
 
         <!-- //Imprime as Categorias para Filtrar a Aplicação -->
         <header class="activities-list flex">

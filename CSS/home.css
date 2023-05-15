@@ -61,6 +61,12 @@ main {
     margin: 0 auto;
 }
 
+#page-title {
+    display: grid;
+    margin: 0 auto 2.4rem;
+    text-align: center;
+}
+
 
 .activities-list {
     overflow-x: hidden;
@@ -457,6 +463,10 @@ section.eventsAndGroups {
     
     #logo-header {
         display: none;
+    }
+
+    #page-title {
+        margin: 3.2rem auto;
     }
 
     .background-blur{
