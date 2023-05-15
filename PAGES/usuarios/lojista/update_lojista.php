@@ -145,7 +145,7 @@
         <footer>
                 <?php 
                     $assets_path = '../../../ASSETS';
-                    include '../../templates/footers/navBarPerfil.php'  
+                    include '../../templates/footers/navBarPerfilUpd.php'  
                 ?>
         </footer>
 
