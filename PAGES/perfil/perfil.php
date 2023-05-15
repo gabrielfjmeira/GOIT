@@ -91,7 +91,7 @@
                     $querySqlUser = $mysqli->query($sqlUser) or die("Falha na execução do código sql" . $mysqli->error);
                     $userData = mysqli_fetch_array($querySqlUser);
                     if(is_null($userData['TABUSU_Icon'])){?>
-                        <img src="../../ASSETS/buttonPerfil.svg" alt="">
+                        <img src="../../ASSETS/buttonPerfil.svg" style="border-radius: 50%; width: 15rem; height: 15rem;" alt="">
                         
                     <?php
                     }else{

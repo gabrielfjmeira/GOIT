@@ -64,7 +64,7 @@
                     ?>
                     <script>
                         //Redireciona para o login
-                        alert("Cadastro evniado para análise!")
+                        alert("Cadastro enviado para análise!")
                         location.href = "../../../index.php";
                     </script>
                     <?php                
