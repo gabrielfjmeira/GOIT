@@ -20,7 +20,7 @@
             $nome = $instrutor_data['TABINS_Nome'];
             $apelido = $instrutor_data['TABINS_Apelido'];
             $dataNascimento = $instrutor_data['TABINS_DataNascimento'];
-            $categoria = $instrutor_data['TABINS_Categoria'];
+            $categoria = $instrutor_data['CATATV_Codigo'];
         }else{
             header ("Location: ../../perfil/perfil.php");    
         }
@@ -105,15 +105,7 @@
                         }
                     ?>                                                          
                 </select>            
-            </div>            
-
-            <div class="input-wrapper">
-                <label>Email*</label>
-                <input type="text" id="txtEmail" name="txtEmail" placeholder="email@email.com" class="title-input-wrapper" value="<?php echo $email;?>"
-                pattern="^[\w*\.]+@([\w-]+\.)+[\w-]{2,4}$" 
-                title="Digite um email válido! Exemplo: email@email.com" required/>
-                <small id="errorEmail" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>
-            </div>    
+            </div>                        
 
         <!--Imprime Erros se Houver-->
         <?php
@@ -132,20 +124,7 @@
                             txtApelido.focus();                                                                        
                         </script>
                         <?php
-                        break;
-                    case 002:?>
-                        <script type="text/javascript">
-                            //Cria Variáveis
-                            let txtEmail = document.getElementById('txtEmail');                            
-                            let errorEmail = document.getElementById('errorEmail');                                                                                                                  
-                            
-                            txtEmail.style.border = "1px solid #DB5A5A"; 
-                            errorEmail.style.color = "#DB5A5A";                           
-                            errorEmail.innerHTML = "Email já cadastrado!";   
-                            txtEmail.focus();                                                                        
-                        </script>
-                        <?php
-                        break; 
+                        break;                    
                 }
             }
         ?>
