@@ -25,12 +25,22 @@
     <!--Cabeçalho-->
     <div id="app">
         <header>
-            <button style="cursor: pointer;" onclick="window.history.back();"><img src="../../../ASSETS/backButtonDark.svg" alt="back-button"></button>
-            <img src="../../../ASSETS/Logo.png" alt="logo" class="logo">
+            <button style="cursor: pointer;" onclick="window.history.back()"><img src="../../../ASSETS/backButtonDark.svg" alt="back-button"></button>
+            <img src="../../../ASSETS/Logo.png" alt="logo" class="logo" 
+            <?php
+                if($_SESSION['TIPOUSUARIO'] == 4){?>
+                    onclick="location.href='../../perfil/perfil.php'" 
+                <?php
+                }else{?>
+                    onclick="location.href='../../home/home.php'" 
+                <?php
+                }            
+            ?>   
+            style="cursor: pointer;">  
         </header>
         
         <!--Formulário-->    
-        <form id="formInsertAtividade" name="formInsertAtividade" action="insert_atividadePHP.php" method="POST" enctype="multipart/form-data" onsubmit="return formInsertAtividadeOnSubmit();">
+        <form id="formInsertAtividade" name="formInsertAtividade" action="insert_atividadePHP.php" method="POST" enctype="multipart/form-data" onsubmit="return validaHora();">
             <div class="type-publi">
                     <!--<h3>Grupo</h3>
 
@@ -38,8 +48,15 @@
                         <button></button>
                         <span></span>
                     </div>-->
-
-                    <h3 class="selected">Criar Atividade Ao Ar Livre</h3>
+                    <?php
+                        if($_SESSION['TIPOUSUARIO'] == 4){?>
+                            <h3 class="selected">Promover Evento</h3>
+                        <?php                            
+                        }else{?>
+                            <h3 class="selected">Criar Atividade Ao Ar Livre</h3>
+                        <?php
+                        }                        
+                    ?>                    
             </div>
 
             <div class="input-wrapper">
@@ -53,7 +70,15 @@
             </div>
 
             <div class="input-wrapper">
-                <label for="categoria">Categoria da atividade do evento*</label>
+                <?php
+                    if($_SESSION['TIPOUSUARIO'] == 4){?>
+                        <label for="categoria">Categoria do evento*</label>
+                    <?php                            
+                    }else{?>
+                        <label for="categoria">Categoria da atividade ao ar livre*</label>
+                    <?php
+                    }     
+                ?>                
                 <select id="categoriaAtividade" name="categoriaAtividade" required>        
                     <option selected disabled="disabled" hidden>Escolha uma opção</option>
                     <?php          
@@ -79,7 +104,15 @@
             </div>
 
             <div class="input-wrapper">
-                <label for="">Upload da Imagem do evento</label>
+                <?php
+                    if($_SESSION['TIPOUSUARIO'] == 4){?>
+                        <label for="">Upload da imagem do evento</label>
+                    <?php                            
+                    }else{?>
+                        <label for="">Upload da imagem da atividade ao ar livre</label>
+                    <?php
+                    }                        
+                ?>                
                 <label for="imgAtividade" class="uploadImage-input-wrapper">                        
                     <img id="imagemSelecionada" src="../../../ASSETS/uploadIcon.svg" style="max-width: 8rem; max-height: 8rem;" class="uploadIcon">                    
                     <input type="file" id="imgAtividade" name="imgAtividade" accept="image/*" onchange="validaImagem(this);"> 
@@ -124,11 +157,12 @@
             </div>
 
             <div class="input-wrapper">
-                <label for="">Horário*</label>
+                <label id="lblHorario" for="">Horário*</label>
                 <div class="time-input-wrapper">
                     <input type="time" id="horaAtividade" name="horaAtividade" placeholder="--:--" >
-                    <ion-icon name="time-outline"></ion-icon>
+                    <ion-icon name="time-outline"></ion-icon>                    
                 </div>
+                <small id="errorTime" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>
             </div>
                         
             <button id="submitButton" type="submit">Publicar</button>
@@ -201,6 +235,38 @@
             } else{
                 document.getElementById('imagemSelecionada').setAttribute('src', '#');
             }
+        }
+
+        function validaHora(){
+            var now = new Date(); 
+            var dd = now.getDate();
+            var mm = now.getMonth() + 1; //Janeiro é 0!
+            var yyyy = now.getFullYear();
+
+            if (dd < 10) {
+            dd = '0' + dd;
+            }
+
+            if (mm < 10) {
+            mm = '0' + mm;
+            } 
+            
+            var nowDateTime = yyyy + '-' + mm + '-' + dd + " " + now.getTime();           
+            var date = document.getElementById('dataAtividade');
+            var time = document.getElementById('horaAtividade');
+            var lblHorario = document.getElementById('lblHorario');
+            var timeInput = document.querySelector('.time-input-wrapper');
+            var datetime = date.value + " " + time.value+":00";
+
+            if(datetime < nowDateTime){
+                timeInput.style.border = "1px solid #DB5A5A";  
+                lblHorario.style.color = "#DB5A5A";
+                errorTime.style.color = "#DB5A5A";                          
+                errorTime.innerHTML = "Horário precisa ser maior que o atual";                                                                       
+                time.focus();
+                return false;
+            }            
+            return true;
         }
     </script>   
     

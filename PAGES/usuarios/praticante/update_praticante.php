@@ -47,7 +47,7 @@
     <div id="app">
         <header>
             <button style="cursor: pointer;" onclick="window.history.back();"><img src="../../../ASSETS/backButtonDark.svg" alt="back-button"></button>
-            <img src="../../../ASSETS/Logo.png" alt="logo" class="logo">
+            <img src="../../../ASSETS/Logo.png" alt="logo" onclick="location.href='../../home/home.php'" class="logo" style="cursor: pointer;">
         </header>
         
         <!--Formulário-->    
@@ -154,17 +154,19 @@
             
             <button type="submit" id="submitButton">Confirmar Alterações</button>
 
-            <div id="apagar-perfil">
-                <button type="button" onclick="apagarPerfil();" style="padding: .4rem .8rem; background: red; color: var(--white); border: none; border-radius: .4rem">Apagar Perfil</button>               
-            </div>
+            <center>
+                <div id="apagar-perfil">
+                    <button type="button" onclick="apagarPerfil();" style="padding: .4rem .8rem; background: red; color: var(--white); border: none; border-radius: .4rem">Apagar Perfil</button>               
+                </div>
+            </center>
             
         </form>
 
         <footer>
-                <?php 
-                    $assets_path = '../../../ASSETS';
-                    include '../../templates/footers/navBarPerfilUpd.php'  
-                ?>
+            <?php 
+                $assets_path = '../../../ASSETS';
+                include '../../templates/footers/navBarPerfilUpd.php'  
+            ?>
         </footer>        
 
     </div>

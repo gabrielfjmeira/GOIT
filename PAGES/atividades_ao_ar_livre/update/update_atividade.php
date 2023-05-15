@@ -18,7 +18,7 @@
             $codigo = $atividade_data['TABATV_Codigo'];
             $titulo = $atividade_data['TABATV_Titulo'];
             $descricao = $atividade_data['TABATV_Descricao'];            
-            $categoria = $atividade_data['CATRIS_Codigo'];
+            $categoria = $atividade_data['CATATV_Codigo'];
             $localizacao = $atividade_data['TABATV_Localizacao'];
             $referencia = $atividade_data['TABATV_Referencia'];
             $inscritos = $atividade_data['TABATV_Inscritos'];
@@ -56,7 +56,7 @@
         </header>
         
         <!--Formulário-->    
-        <form id="formInsertAtividade" name="formInsertAtividade" action="update_atividadePHP.php" method="POST" enctype="multipart/form-data" onsubmit="return formInsertAtividadeOnSubmit();">
+        <form id="formInsertAtividade" name="formInsertAtividade" action="update_atividadePHP.php" method="POST" enctype="multipart/form-data" onsubmit="return validaHora();">
             <input type="number" id="nbrCodigo" name="nbrCodigo" value="<?php echo $codigo;?>" hidden>  
             <div class="type-publi">
                     <!--<h3>Grupo</h3>
@@ -104,7 +104,7 @@
                 <label for="">Descrição*</label>
                 <div class="desc-input-wrapper">
                     <textarea id="txtDescricao" name="txtDescricao" placeholder="Ex: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eget ligula aliquet, iaculis est eu, ornare velit. Cras vestibulum venenatis blandit." required>
-                        <?php echo $descricao;?>
+                        <?php echo str_replace("<br />", "", $descricao);?>
                     </textarea>
                     <p>0/600</p>
                 </div>
@@ -170,11 +170,12 @@
             </div>
 
             <div class="input-wrapper">
-                <label for="">Horário</label>
+                <label id="lblHorario" for="">Horário*</label>
                 <div class="time-input-wrapper">
                     <input type="time" id="horaAtividade" name="horaAtividade" placeholder="--:--" value="<?php echo $hora;?>">
                     <ion-icon name="time-outline"></ion-icon>
                 </div>
+                <small id="errorTime" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>
             </div>
                         
             <button id="submitButton" type="submit">Confirmar Alterações</button>
@@ -191,8 +192,25 @@
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>   
     <script>
-         //Validação de Imagem
-         function validaImagem(input) {
+        //Limite de data Mínima para Criação de Atividade ao Ar Livre
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //Janeiro é 0!
+        var yyyy = today.getFullYear();
+
+        if (dd < 10) {
+        dd = '0' + dd;
+        }
+
+        if (mm < 10) {
+        mm = '0' + mm;
+        } 
+            
+        today = yyyy + '-' + mm + '-' + dd;
+        document.getElementById("dataAtividade").setAttribute("min", today);
+        
+        //Validação de Imagem
+        function validaImagem(input) {
             var caminho = input.value;
 
             if (caminho) {
@@ -230,6 +248,38 @@
             } else{
                 document.getElementById('imagemSelecionada').setAttribute('src', '#');
             }
+        }
+
+        function validaHora(){
+            var now = new Date(); 
+            var dd = now.getDate();
+            var mm = now.getMonth() + 1; //Janeiro é 0!
+            var yyyy = now.getFullYear();
+
+            if (dd < 10) {
+            dd = '0' + dd;
+            }
+
+            if (mm < 10) {
+            mm = '0' + mm;
+            } 
+            
+            var nowDateTime = yyyy + '-' + mm + '-' + dd + " " + now.getTime();           
+            var date = document.getElementById('dataAtividade');
+            var time = document.getElementById('horaAtividade');
+            var lblHorario = document.getElementById('lblHorario');
+            var timeInput = document.querySelector('.time-input-wrapper');
+            var datetime = date.value + " " + time.value+":00";
+
+            if(datetime < nowDateTime){
+                timeInput.style.border = "1px solid #DB5A5A";  
+                lblHorario.style.color = "#DB5A5A";
+                errorTime.style.color = "#DB5A5A";                          
+                errorTime.innerHTML = "Horário precisa ser maior que o atual";                                                                       
+                time.focus();
+                return false;
+            }            
+            return true;
         }
     </script>
 </body>

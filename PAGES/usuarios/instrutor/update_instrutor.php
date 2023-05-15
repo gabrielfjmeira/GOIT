@@ -39,7 +39,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../CSS/publicarPostagem.css">
     
-
     <!--Título da Página-->
     <title>GO🐐IT | A Social Adventure</title>
 </head>
@@ -48,7 +47,7 @@
     <div id="app">
         <header>
             <button style="cursor: pointer;" onclick="window.history.back();"><img src="../../../ASSETS/backButtonDark.svg" alt="back-button"></button>
-            <img src="../../../ASSETS/Logo.png" alt="logo" class="logo">
+            <img src="../../../ASSETS/Logo.png" alt="logo" onclick="location.href='../../perfil/perfil.php'" class="logo" style="cursor: pointer;">
         </header>
         
         <!--Formulário-->    
@@ -173,18 +172,20 @@
             </div>
             
             <button type="submit">Confirmar Alterações</button>
-
-            <div id="apagar-perfil">
-                <button type="button" onclick="apagarPerfil();">Apagar Perfil</button>               
-            </div>
+                        
+            <center>
+                <div id="apagar-perfil">
+                    <button type="button" onclick="apagarPerfil();">Apagar Perfil</button>               
+                </div>
+            </center>
 
         </form>
         
         <footer>
-                <?php 
-                    $assets_path = '../../../ASSETS';
-                    include '../../templates/footers/navBarPerfilUpd.php'  
-                ?>
+            <?php 
+                $assets_path = '../../../ASSETS';
+                include '../../templates/footers/navBarPerfilUpd.php'  
+            ?>
         </footer>
 
     </div>

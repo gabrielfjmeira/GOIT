@@ -34,8 +34,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../CSS/publicarPostagem.css">
-    
+    <link rel="stylesheet" href="../../../CSS/publicarPostagem.css">    
 
     <!--Título da Página-->
     <title>GO🐐IT | A Social Adventure</title>
@@ -45,7 +44,7 @@
     <div id="app">
         <header>
             <button style="cursor: pointer;" onclick="window.history.back();"><img src="../../../ASSETS/backButtonDark.svg" alt="back-button"></button>
-            <img src="../../../ASSETS/Logo.png" alt="logo" class="logo">
+            <img src="../../../ASSETS/Logo.png" alt="logo" onclick="location.href='../../home/home.php'" class="logo" style="cursor: pointer;">
         </header>
         
         <!--Formulário-->    
@@ -136,17 +135,19 @@
             
             <button type="submit">Confirmar Alterações</button>
 
-            <div id="apagar-perfil">
-                <button type="button" onclick="apagarPerfil();">Apagar Perfil</button>               
-            </div>
+            <center>
+                <div id="apagar-perfil">
+                    <button type="button" onclick="apagarPerfil();">Apagar Perfil</button>               
+                </div>
+            </center>
 
         </form>        
 
-        <footer>
-                <?php 
-                    $assets_path = '../../../ASSETS';
-                    include '../../templates/footers/navBarPerfilUpd.php'  
-                ?>
+        <footer>    
+            <?php 
+                $assets_path = '../../../ASSETS';
+                include '../../templates/footers/navBarPerfilUpd.php'  
+            ?>
         </footer>
 
     </div>
