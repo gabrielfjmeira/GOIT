@@ -455,6 +455,10 @@ section.eventsAndGroups {
 
 @media (min-width: 600px) {
     
+    #logo-header {
+        display: none;
+    }
+
     .background-blur{
     
         padding: 9.2rem 10rem 12.6rem;

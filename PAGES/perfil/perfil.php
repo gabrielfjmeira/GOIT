@@ -148,10 +148,10 @@
     
         <main>
 
-            <div class="search-wrapper flex">
+            <!-- <div class="search-wrapper flex">
                 <ion-icon name="search-outline"></ion-icon>
                 <input type="text" id="search-input" placeholder="Search" onclick="searchDesenvolvimento()">
-            </div>           
+            </div>            -->
 
             <section class="eventsAndGroups flex" style="margin-top: 1.6rem;">
                 <?php
