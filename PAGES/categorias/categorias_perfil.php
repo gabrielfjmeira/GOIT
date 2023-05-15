@@ -99,7 +99,7 @@
                             $nomeImagem = substr($userData['TABUSU_Icon'], -18);
                         };  
                         ?>
-                        <img src="../perfil/arquivos/<?php echo $nomeImagem;?>" style="border-radius: 50%; width: 15rem; height: 15rem; border: 1.5px solid var(--dark-brown)" alt="">                        
+                        <img src="../perfil/arquivos/<?php echo $nomeImagem;?>" style="border-radius: 50%; width: 11.2rem; height: 11.2rem; border: 1.5px solid var(--dark-brown)" alt="">                        
                     <?php
                     }    
                     
