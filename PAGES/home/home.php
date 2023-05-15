@@ -86,12 +86,12 @@
             ?>
         </header>
     
-        <main>
-            
-            <!-- <div class="search-wrapper flex" >
+        <main>            
+
+            <div class="search-wrapper flex" style="cursor: pointer;">
                 <ion-icon name="search-outline"></ion-icon>
-                <input disabled type="text" id="search-input" placeholder="Esta funcionalidade segue em desenvolvimento">
-            </div> -->
+                <input type="text" id="search-input" placeholder="Search" onclick="searchDesenvolvimento()">
+            </div>
                        
 
             <section class="eventsAndGroups flex">
@@ -335,6 +335,9 @@
             }); 
         }
 
+        function searchDesenvolvimento(){
+            document.getElementById('search-input').placeholder = "Esta funcionalidade segue em desenvolvimento";
+        }
     </script>
 </body>
 </html>
