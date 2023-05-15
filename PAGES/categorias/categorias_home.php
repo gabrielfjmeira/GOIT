@@ -83,25 +83,28 @@
         <h1 id="page-title">Home page</h1>
 
 
-        <?php
-            //Imprime as Categorias para Filtrar a Aplicação
-            $categorias = "SELECT * FROM CATATV ORDER BY CATATV_Descricao ASC"; 
-            $queryCategorias = $mysqli->query($categorias) or die(mysql_error());?>    
-            <button onclick="location.href ='../home/home.php';" style="cursor: pointer;">Todas</button> 
+        <!-- //Imprime as Categorias para Filtrar a Aplicação -->
+        <header class="activities-list flex">
             <?php
-            while($categoria = mysqli_fetch_array($queryCategorias)){
-                
-                $catatv_codigo = $categoria['CATATV_Codigo'];
-                $catatv_descricao = $categoria['CATATV_Descricao'];?>
-                <?php if($catatv_codigo == $categoriafiltrada){?>
-                    <button class="onPage" onclick="location.href ='../categorias/categorias_home.php?categoriafiltrada=<?php echo $catatv_codigo;?>';" style="cursor: pointer;"><?php echo $catatv_descricao;?></button>                                                                                        
+                //Imprime as Categorias para Filtrar a Aplicação
+                $categorias = "SELECT * FROM CATATV ORDER BY CATATV_Descricao ASC"; 
+                $queryCategorias = $mysqli->query($categorias) or die(mysql_error());?>    
+                <button onclick="location.href ='../home/home.php';" style="cursor: pointer;">Todas</button> 
                 <?php
-                }else{?>
-                    <button onclick="location.href ='../categorias/categorias_home.php?categoriafiltrada=<?php echo $catatv_codigo;?>';" style="cursor: pointer;"><?php echo $catatv_descricao;?></button>                                                                                        
-                <?php   
-                }               
-            }
-        ?>
+                while($categoria = mysqli_fetch_array($queryCategorias)){
+                    
+                    $catatv_codigo = $categoria['CATATV_Codigo'];
+                    $catatv_descricao = $categoria['CATATV_Descricao'];?>
+                    <?php if($catatv_codigo == $categoriafiltrada){?>
+                        <button class="onPage" onclick="location.href ='../categorias/categorias_home.php?categoriafiltrada=<?php echo $catatv_codigo;?>';" style="cursor: pointer;"><?php echo $catatv_descricao;?></button>                                                                                        
+                    <?php
+                    }else{?>
+                        <button onclick="location.href ='../categorias/categorias_home.php?categoriafiltrada=<?php echo $catatv_codigo;?>';" style="cursor: pointer;"><?php echo $catatv_descricao;?></button>                                                                                        
+                    <?php   
+                    }               
+                }
+            ?>
+        </header>
             
         <main>            
 
