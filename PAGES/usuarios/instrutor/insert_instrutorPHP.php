@@ -42,7 +42,7 @@
 
                     //Cria variáveis            
                     $senha          = $_POST['txtSenha'];
-                    $nome           = $_POST['txtNome'];            
+                    $nome           = strtoupper($_POST['txtNome']);            
                     $dataNascimento = $_POST['dataNascimento'];
                     $catInstrutor   = $_POST['catInstrutor'];
                     $sexo           = $_POST['sexo'];
@@ -64,7 +64,7 @@
                     ?>
                     <script>
                         //Redireciona para o login
-                        alert("Cadastro evniado para análise!")
+                        alert("Cadastro enviado para análise!")
                         location.href = "../../../index.php";
                     </script>
                     <?php                

@@ -20,9 +20,9 @@
     <!--Configurações-->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">      
     <link rel="stylesheet" href="../../CSS/home.css">
+    <link rel="icon" href="../../ASSETS/icon.ico"/>
 
     <!--Título da Página-->
     <title>GO🐐IT | A Social Adventure</title>
@@ -67,7 +67,7 @@
             <div class="instructor-wrapper wrapper">
                 <h2>Responsável <ion-icon name="man"></ion-icon> </h2>
                 <div class="instructor">
-                    <img src="./assets/bibo.png" alt="instrutor image">
+                    <img src="../../assets/bibo.png" alt="instrutor image">
                     <a href="#" class="user">Gabriel Felipe Jess Meira</a>
                 </div>
             </div>
@@ -78,45 +78,44 @@
     </div>
 
     <div id="app">
+      
         <img onclick="location.href= '../home/home.php'" src="../../ASSETS/Logo.png" alt="Logo go it" id="logo-header" style="cursor: pointer;">
         <h1 id="page-title">Home page</h1>
 
 
-        <!-- //Imprime as Categorias para Filtrar a Aplicação -->
-        <header class="activities-list flex">
         <?php
             //Imprime as Categorias para Filtrar a Aplicação
             $categorias = "SELECT * FROM CATATV ORDER BY CATATV_Descricao ASC"; 
             $queryCategorias = $mysqli->query($categorias) or die(mysql_error());?>    
-            <button onclick="location.href ='../home/home.php';">Todas</button> 
+            <button onclick="location.href ='../home/home.php';" style="cursor: pointer;">Todas</button> 
             <?php
             while($categoria = mysqli_fetch_array($queryCategorias)){
                 
                 $catatv_codigo = $categoria['CATATV_Codigo'];
                 $catatv_descricao = $categoria['CATATV_Descricao'];?>
                 <?php if($catatv_codigo == $categoriafiltrada){?>
-                    <button class="onPage" onclick="location.href ='../categorias/categorias_home.php?categoriafiltrada=<?php echo $catatv_codigo;?>';"><?php echo $catatv_descricao;?></button>                                                                                        
+                    <button class="onPage" onclick="location.href ='../categorias/categorias_home.php?categoriafiltrada=<?php echo $catatv_codigo;?>';" style="cursor: pointer;"><?php echo $catatv_descricao;?></button>                                                                                        
                 <?php
                 }else{?>
-                    <button onclick="location.href ='../categorias/categorias_home.php?categoriafiltrada=<?php echo $catatv_codigo;?>';"><?php echo $catatv_descricao;?></button>                                                                                        
+                    <button onclick="location.href ='../categorias/categorias_home.php?categoriafiltrada=<?php echo $catatv_codigo;?>';" style="cursor: pointer;"><?php echo $catatv_descricao;?></button>                                                                                        
                 <?php   
                 }               
             }
         ?>
-        </header>
-    
-        <main>
+            
+        <main>            
 
-            <!-- <div class="search-wrapper flex">
-                <ion-icon name="search-outline"></ion-icon>
-                <input type="text" id="search-input" placeholder="Esta funcionalidade segue em desenvolvimento">
-            </div> -->
+            <div class="search-wrapper flex" style="cursor: pointer;">
+                <ion-icon name="search-outline"></ion-icon>               
+                <input type="text" id="search-input" placeholder="Search" onclick="searchDesenvolvimento()">
+            </div>                      
 
             <section class="eventsAndGroups flex">
 
-                <?php
+                <?php              
+                
                 //Imprime Atividades ao Ar Livre         
-                $atividades = "SELECT * FROM TABATV WHERE CATATV_Codigo = $categoriafiltrada ORDER BY TABATV_Data ASC";                    
+                $atividades = "SELECT * FROM TABATV WHERE CATATV_Codigo = ".$categoriafiltrada." ORDER BY TABATV_Data ASC";                    
                 $queryAtividades = $mysqli->query($atividades) or die(mysql_error());
                 $postagem = 0;?>
 
@@ -141,6 +140,12 @@
                                 $queryRegistroUsuario = $mysqli->query($registroUsuario) or die(mysql_error());
                                 $usuario_data = mysqli_fetch_array($queryRegistroUsuario);
                                 $tipousuario = $usuario_data['TIPUSU_Codigo'];
+
+                                if(substr($usuario_data['TABUSU_Icon'], -4) == ".jpg" || substr($usuario_data['TABUSU_Icon'], -4) == ".png" ){
+                                    $nomeIcon = substr($usuario_data['TABUSU_Icon'], -17);
+                                }else{
+                                    $nomeIcon = substr($usuario_data['TABUSU_Icon'], -18);
+                                }; 
             
                                 switch($tipousuario){
                                     //Administrador
@@ -194,10 +199,13 @@
                                     $nomeImagem = substr($atividade['TABATV_Imagem'], -17);
                                 }else{
                                     $nomeImagem = substr($atividade['TABATV_Imagem'], -18);
-                                };                                                                                            
+                                };
+
+                                $descricao_bd = str_replace("\n", '', $atividade['TABATV_Descricao']);                                
+                                $descricao_sm = str_replace("\r", '', $descricao_bd);                                
                             ?>
 
-                            <a class="sm" style="cursor: pointer;" onclick="modalPostView('<?php echo $atividade['TABATV_Titulo']; ?>','<?php echo $nomeImagem;?>', '<?php echo $atividade['TABATV_Descricao']; ?>','<?php echo $atividade['TABATV_Data']; ?>', '<?php echo $atividade['TABATV_Hora']; ?>', '<?php echo $atividade['TABATV_Localizacao']?>', <?php echo $postagem;?>,'<?php echo $apelido?>');" style="cursor: pointer;">                            
+                            <a class="sm" style="cursor: pointer;" onclick="modalPostView('<?php echo $atividade['TABATV_Titulo']; ?>','<?php echo $nomeImagem;?>', '<?php echo $descricao_sm; ?>','<?php echo $atividade['TABATV_Data']; ?>', '<?php echo $atividade['TABATV_Hora']; ?>', '<?php echo $atividade['TABATV_Localizacao']?>', <?php echo $postagem;?>, '<?php echo $nomeIcon;?>','<?php echo $apelido?>');" style="cursor: pointer;">                            
                                 Saiba mais                                        
                             </a>
 
@@ -237,14 +245,14 @@
                                         }
                                     }                      
                                 }                                      
-                            ?>                                
+                            ?>                            
 
                             <?php
                             if($_SESSION['CODIGO'] == $atividade['TABUSU_Codigo']){?>                            
                                 
                                 <a href="../atividades_ao_ar_livre/update/update_atividade.php?codigo=<?php echo $atividade['TABATV_Codigo'];?>" style="cursor: pointer;">Editar Atividade</a>
                                 
-                                <a href="../atividades_ao_ar_livre/delete/delete_atividadePHP.php?codigo=<?php echo $atividade['TABATV_Codigo'];?>" style="cursor: pointer;">Excluir Atividade</a>
+                                <a onclick="apagarAtividade('<?php echo $atividade['TABATV_Titulo']?>', <?php echo $atividade['TABATV_Codigo']?>)" style="cursor: pointer;">Excluir Atividade</a>
                             <?php
                             }
                             ?>
@@ -253,7 +261,7 @@
                     }                       
                 }else{ ?>
             
-                    <h3>Sem atividades ao ar livre cadastradas nesta categoria!</h3>
+                    <h3>Sem Atividades Ao Ar Livre Cadastradas!</h3>
        
                 <?php 
                 }
@@ -273,8 +281,18 @@
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>        
     <script>
 
-        function submitform() {
-                document.saibamais.submit();
+        function cancelarInscricao(titulo, codigo){
+            let text = "Confirma cancelar a incrição em " + titulo + "?";
+            if (confirm(text) == true) {
+                window.location.href = "./sair_atividadePHP.php?atividade="+codigo; 
+            }   
+        }
+
+        function apagarAtividade(titulo, codigo){
+            let text = "Confirma apagar a atividade " + titulo + "?";
+            if (confirm(text) == true) {
+                window.location.href = "../atividades_ao_ar_livre/delete/delete_atividadePHP.php?codigo="+codigo; 
+            }  
         }
 
         bgblur = document.querySelector(".background-blur")
@@ -286,14 +304,14 @@
             modalProduct.setAttribute("style" , "display: ")
         }        
 
-        function modalPostView(titulo, imagem, descricao, data, hora, local, postagem, usuario) {
+        function modalPostView(titulo, imagem, descricao, data, hora, local, postagem, imgIcon, usuario) {
             var title = document.querySelector(".title-post h3")
             title.innerHTML = titulo    
             var image = document.querySelector(".modal-post img")
             if (imagem != ''){
                 image.setAttribute("src", "../atividades_ao_ar_livre/arquivos/"+imagem)
             }else{
-                image.setAttribute("src", "../../ASSETS/paisagem.png")
+                image.setAttribute("src", "../atividades_ao_ar_livre/arquivos/default.png")
             }           
             var description = document.querySelector(".desc-wrapper p")
             description.innerHTML = descricao
@@ -303,11 +321,17 @@
             time.innerHTML = hora
             var localization = document.querySelector(".localization-wrapper p")
             localization.innerHTML = local                                                                                                                                                         
-            var numberRegistereds = document.querySelector(".numeroInscritos"+postagem).value;            
-            var maxRegistereds = document.querySelector(".maxInscritos"+postagem).value; 
+            var numberRegistereds = document.querySelector(".numeroInscritos"+postagem).value
+            var maxRegistereds = document.querySelector(".maxInscritos"+postagem).value
             var registered = document.querySelector(".registered-wrapper p")
             registered.innerHTML = numberRegistereds + "/" + maxRegistereds
-            var user = document.querySelector(".user")
+            var icon = document.querySelector(".instructor-wrapper img")
+            if (imgIcon != ''){
+                icon.setAttribute("src", "../perfil/arquivos/"+imgIcon)
+            }else{
+                icon.setAttribute("src", "../../ASSETS/buttonPerfil.svg")
+            } 
+            var user = document.querySelector(".user")            
             user.innerHTML = usuario          
             bgblur.setAttribute("style" , "display: ")
             modalPost.setAttribute("style" , "display: ")
@@ -326,7 +350,11 @@
                 }
             }); 
         }
-        
-      </script>
+
+        function searchDesenvolvimento(){
+            document.getElementById('search-input').placeholder = "Esta funcionalidade segue em desenvolvimento";
+        }
+    </script>
+
 </body>
 </html>

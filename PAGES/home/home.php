@@ -18,9 +18,9 @@
     <!--Configurações-->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">      
     <link rel="stylesheet" href="../../CSS/home.css">
+    <link rel="icon" href="../../ASSETS/icon.ico"/>
 
     <!--Título da Página-->
     <title>GO🐐IT | A Social Adventure</title>
@@ -86,12 +86,12 @@
             ?>
         </header>
     
-        <main>
-            
-            <!-- <div class="search-wrapper flex" >
+        <main>            
+
+            <div class="search-wrapper flex" style="cursor: pointer;">
                 <ion-icon name="search-outline"></ion-icon>
-                <input disabled type="text" id="search-input" placeholder="Esta funcionalidade segue em desenvolvimento">
-            </div> -->
+                <input type="text" id="search-input" placeholder="Search" onclick="searchDesenvolvimento()">
+            </div>
                        
 
             <section class="eventsAndGroups flex">
@@ -335,6 +335,9 @@
             }); 
         }
 
+        function searchDesenvolvimento(){
+            document.getElementById('search-input').placeholder = "Esta funcionalidade segue em desenvolvimento";
+        }
     </script>
 </body>
 </html>

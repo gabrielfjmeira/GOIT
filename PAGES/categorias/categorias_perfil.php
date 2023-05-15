@@ -21,9 +21,9 @@
     <!--Configurações-->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
     <link rel="stylesheet" href="../../CSS/home.css">
+    <link rel="icon" href="../../ASSETS/icon.ico"/>
 
     <!--Título da Página-->
     <title>GO🐐IT | A Social Adventure</title>
@@ -80,6 +80,7 @@
 
     <div id="app">
         <img onclick="location.href= '../home/home.php'" src="../../ASSETS/Logo.png" alt="Logo go it" id="logo-header" style="cursor: pointer;">
+        <h1 id="page-title">Perfil</h1>
        <!--Carrega imagem e apelido do perfil-->
        <center>
             <div id="info-perfil" style="margin-top: 4rem;">
@@ -88,7 +89,7 @@
                     $querySqlUser = $mysqli->query($sqlUser) or die("Falha na execução do código sql" . $mysqli->error);
                     $userData = mysqli_fetch_array($querySqlUser);
                     if(is_null($userData['TABUSU_Icon'])){?>
-                        <img src="../../ASSETS/buttonPerfil.svg" alt="">
+                        <img src="../../ASSETS/buttonPerfil.svg" style="border-radius: 50%; width: 15rem; height: 15rem;" alt="">
                         
                     <?php
                     }else{
@@ -128,7 +129,7 @@
                 <br>    
                 <?php
                 if($_SESSION['TIPOUSUARIO'] != 1){?>
-                    <button onclick="location.href = './update/update_perfil.php'" class="button-edit-profile">
+                    <button onclick="location.href = '../perfil/update/update_perfil.php'" class="button-edit-profile" style="cursor: pointer;">
                         Editar Perfil
                     </button>
                 <?php
@@ -143,17 +144,17 @@
                 //Imprime as Categorias para Filtrar a Aplicação
                 $categorias = "SELECT * FROM CATATV ORDER BY CATATV_Descricao ASC"; 
                 $queryCategorias = $mysqli->query($categorias) or die(mysql_error());?>    
-                <button onclick="location.href ='../perfil/perfil.php';">Todas</button> 
+                <button onclick="location.href ='../perfil/perfil.php';" style="cursor: pointer;">Todas</button> 
                 <?php
                 while($categoria = mysqli_fetch_array($queryCategorias)){
                     
                     $catatv_codigo = $categoria['CATATV_Codigo'];
                     $catatv_descricao = $categoria['CATATV_Descricao'];?>
                     <?php if($catatv_codigo == $categoriafiltrada){?>
-                        <button class="onPage" onclick="location.href ='../categorias/categorias_perfil.php?categoriafiltrada=<?php echo $catatv_codigo;?>&codperfil=<?php echo $_SESSION['CODIGO'];?>';"><?php echo $catatv_descricao;?></button>                                                                                        
+                        <button class="onPage" onclick="location.href ='../categorias/categorias_perfil.php?categoriafiltrada=<?php echo $catatv_codigo;?>&codperfil=<?php echo $_SESSION['CODIGO'];?>';" style="cursor: pointer;"><?php echo $catatv_descricao;?></button>                                                                                        
                     <?php
                     }else{?>
-                        <button onclick="location.href ='../categorias/categorias_perfil.php?categoriafiltrada=<?php echo $catatv_codigo;?>&codperfil=<?php echo $_SESSION['CODIGO'];?>';"><?php echo $catatv_descricao;?></button>                                                                                        
+                        <button onclick="location.href ='../categorias/categorias_perfil.php?categoriafiltrada=<?php echo $catatv_codigo;?>&codperfil=<?php echo $_SESSION['CODIGO'];?>';" style="cursor: pointer;"><?php echo $catatv_descricao;?></button>                                                                                        
                     <?php   
                     }               
                 }
@@ -162,7 +163,7 @@
     
         <main>
 
-            <div class="search-wrapper flex">
+            <div class="search-wrapper flex" style="cursor: pointer;">
                 <ion-icon name="search-outline"></ion-icon>
                 <input type="text" id="search-input" placeholder="Search" onclick="searchDesenvolvimento()">
             </div>           
@@ -203,6 +204,12 @@
                                 $queryRegistroUsuario = $mysqli->query($registroUsuario) or die(mysql_error());
                                 $usuario_data = mysqli_fetch_array($queryRegistroUsuario);
                                 $tipousuario = $usuario_data['TIPUSU_Codigo'];
+
+                                if(substr($usuario_data['TABUSU_Icon'], -4) == ".jpg" || substr($usuario_data['TABUSU_Icon'], -4) == ".png" ){
+                                    $nomeIcon = substr($usuario_data['TABUSU_Icon'], -17);
+                                }else{
+                                    $nomeIcon = substr($usuario_data['TABUSU_Icon'], -18);
+                                };
             
                                 switch($tipousuario){
                                     //Administrador
@@ -256,10 +263,13 @@
                                     $nomeImagem = substr($atividade['TABATV_Imagem'], -17);
                                 }else{
                                     $nomeImagem = substr($atividade['TABATV_Imagem'], -18);
-                                };                                                                                            
+                                };
+
+                                $descricao_bd = str_replace("\n", '', $atividade['TABATV_Descricao']);                                
+                                $descricao_sm = str_replace("\r", '', $descricao_bd);                                
                             ?>
 
-                            <a class="sm" style="cursor: pointer;" onclick="modalPostView('<?php echo $atividade['TABATV_Titulo']; ?>','<?php echo $nomeImagem;?>', '<?php echo $atividade['TABATV_Descricao']; ?>','<?php echo $atividade['TABATV_Data']; ?>', '<?php echo $atividade['TABATV_Hora']; ?>', '<?php echo $atividade['TABATV_Localizacao']?>', <?php echo $postagem;?>,'<?php echo $apelido?>');" style="cursor: pointer;">                            
+                            <a class="sm" style="cursor: pointer;" onclick="modalPostView('<?php echo $atividade['TABATV_Titulo']; ?>','<?php echo $nomeImagem;?>', '<?php echo $descricao_sm; ?>','<?php echo $atividade['TABATV_Data']; ?>', '<?php echo $atividade['TABATV_Hora']; ?>', '<?php echo $atividade['TABATV_Localizacao']?>', <?php echo $postagem;?>, '<?php echo $nomeIcon;?>','<?php echo $apelido?>');" style="cursor: pointer;">                            
                                 Saiba mais                                        
                             </a>
 
@@ -364,7 +374,7 @@
             modalProduct.setAttribute("style" , "display: ")
         }        
 
-        function modalPostView(titulo, imagem, descricao, data, hora, local, postagem, usuario) {
+        function modalPostView(titulo, imagem, descricao, data, hora, local, postagem, imgIcon, usuario) {
             var title = document.querySelector(".title-post h3")
             title.innerHTML = titulo    
             var image = document.querySelector(".modal-post img")
@@ -381,15 +391,21 @@
             time.innerHTML = hora
             var localization = document.querySelector(".localization-wrapper p")
             localization.innerHTML = local                                                                                                                                                         
-            var numberRegistereds = document.querySelector(".numeroInscritos"+postagem).value;            
-            var maxRegistereds = document.querySelector(".maxInscritos"+postagem).value; 
+            var numberRegistereds = document.querySelector(".numeroInscritos"+postagem).value
+            var maxRegistereds = document.querySelector(".maxInscritos"+postagem).value
             var registered = document.querySelector(".registered-wrapper p")
             registered.innerHTML = numberRegistereds + "/" + maxRegistereds
-            var user = document.querySelector(".user")
+            var icon = document.querySelector(".instructor-wrapper img")
+            if (imgIcon != ''){
+                icon.setAttribute("src", "../perfil/arquivos/"+imgIcon)
+            }else{
+                icon.setAttribute("src", "../../ASSETS/buttonPerfil.svg")
+            } 
+            var user = document.querySelector(".user")            
             user.innerHTML = usuario          
             bgblur.setAttribute("style" , "display: ")
             modalPost.setAttribute("style" , "display: ")
-        }    
+        }
 
         function exitModal(){
             bgblur.addEventListener("click", function(event){
