@@ -20,14 +20,14 @@
     ?>    
     style="cursor:pointer">
 
-    <button onclick="location.href= '../../../CONFIG/login/logout.php' ">
+    <button onclick="location.href= '../../../CONFIG/login/logout.php' " style="cursor:pointer">
         <img src="<?php echo $assets_path ?>/logOut.svg" alt="" >
         <p>LogOut</p>
     </button>
     <?php 
     //Verifica se é um Admin
     if ($_SESSION['TIPOUSUARIO'] == 1){?>
-        <button onclick="location.href= '../../admin/admin.php' ">
+        <button onclick="location.href= '../../admin/admin.php' " style="cursor:pointer">
             <img src="<?php echo $assets_path ?>/admin.svg" alt="" >
             <p>Painel do administrador</p>
         </button>   
@@ -36,19 +36,11 @@
         <button style="display: none;"></button>
     <?php
     }?>                 
-    <button onclick="limparFormulario()">
+    <button onclick="limparFormulario()" style="cursor:pointer">
         <img src="<?php echo $assets_path ?>/buttonNewPubliFilled.svg" alt="">
-        <?php
-            if($_SESSION['TIPOUSUARIO'] == 4){?>
-                <p>Promover Evento</p>
-            <?php
-            }else{?>
-                <p>Publicar</p>
-            <?php
-            }
-        ?>            
+        <p>Limpar Formulário?</p>            
     </button>
-    <button onclick="location.href ='../../perfil/perfil.php';">     
+    <button onclick="location.href ='../../perfil/perfil.php';" style="cursor:pointer">     
     <?php        
         $sqlUser = "SELECT * FROM TABUSU WHERE TABUSU_Codigo = " . $_SESSION['CODIGO'];            
         $querySqlUser = $mysqli->query($sqlUser) or die("Falha na execução do código sql" . $mysqli->error);
