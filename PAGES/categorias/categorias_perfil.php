@@ -248,9 +248,17 @@
                                 $sqlNumeroInscritos = "SELECT * FROM PARATV WHERE TABATV_Codigo = " . $atividade['TABATV_Codigo'] . ";";
                                 $querySqlNumeroInscritos = $mysqli->query($sqlNumeroInscritos) or die(mysql_error());                                
                                 if($querySqlNumeroInscritos->num_rows > 0){
-                                    $numeroInscritos = $querySqlNumeroInscritos->num_rows + 1;
+                                    if($_SESSION['TIPOUSUARIO'] == 4){
+                                        $numeroInscritos = $querySqlNumeroInscritos->num_rows;
+                                    }else{
+                                        $numeroInscritos = $querySqlNumeroInscritos->num_rows + 1;
+                                    }                                    
                                 }else{
-                                    $numeroInscritos = 1;
+                                    if($_SESSION['TIPOUSUARIO'] == 4){
+                                        $numeroInscritos = 0;
+                                    }else{
+                                        $numeroInscritos = 1;
+                                    }                                     
                                 }?>                                
                                 <input type="number" class="numeroInscritos<?php echo $postagem?>" value=<?php echo $numeroInscritos?> hidden/>
                                 <?php                                
@@ -338,7 +346,7 @@
         <footer>
             <?php 
                 $assets_path = '../../ASSETS';
-                include '../templates/footers/navBarPerfil.php';                
+                include '../templates/footers/navBarCategoriaPerfil.php';                
             ?>
         </footer>
     </div>
