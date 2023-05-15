@@ -83,15 +83,7 @@
                 <label>Data de Nascimento*</label>
                 <input type="date" id="dataNascimento" name="dataNascimento" placeholder="dd/mm/aaaa" class="title-input-wrapper" 
                 title="dd/mm/aaaa" value="<?php echo $dataNascimento;?>" required/>
-            </div>
-            
-            <div class="input-wrapper">
-                <label>Email*</label>
-                <input type="text" id="txtEmail" name="txtEmail" placeholder="email@email.com" class="title-input-wrapper" value="<?php echo $email;?>"
-                pattern="^[\w*\.]+@([\w-]+\.)+[\w-]{2,4}$" 
-                title="Digite um email válido! Exemplo: email@email.com" required/>
-                <small id="errorEmail" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>
-            </div>    
+            </div>                         
 
         <!--Imprime Erros se Houver-->
         <?php
@@ -110,20 +102,7 @@
                             txtApelido.focus();                                                                        
                         </script>
                         <?php
-                        break;
-                    case 002:?>
-                        <script type="text/javascript">
-                            //Cria Variáveis
-                            let txtEmail = document.getElementById('txtEmail');                            
-                            let errorEmail = document.getElementById('errorEmail');                                                                                                                  
-                            
-                            txtEmail.style.border = "1px solid #DB5A5A"; 
-                            errorEmail.style.color = "#DB5A5A";                           
-                            errorEmail.innerHTML = "Email já cadastrado!";   
-                            txtEmail.focus();                                                                        
-                        </script>
-                        <?php
-                        break; 
+                        break;                    
                 }
             }
         ?>
