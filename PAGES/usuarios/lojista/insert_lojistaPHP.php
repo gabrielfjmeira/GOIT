@@ -39,7 +39,7 @@
 
                 //Cria variáveis                
                 $senha       = $_POST['txtSenha'];
-                $razaoSocial = $_POST['txtRazaoSocial'];                            
+                $razaoSocial = strtoupper($_POST['txtRazaoSocial']);                            
                                 
                 //Criptografa a senha para popular no banco de dados
                 $senhaCriptografada = password_hash($senha, PASSWORD_DEFAULT);

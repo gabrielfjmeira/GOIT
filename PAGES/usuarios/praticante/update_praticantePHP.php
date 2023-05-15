@@ -44,7 +44,7 @@
 
                 //Cria variáveis                         
                 $email          = $_POST['txtEmail'];               
-                $nome           = $_POST['txtNome'];            
+                $nome           = strtoupper($_POST['txtNome']);            
                 $dataNascimento = $_POST['dataNascimento'];                
 
                 if($emailCadastrado != $email){
@@ -168,7 +168,7 @@
 
             //Cria variáveis                         
             $email          = $_POST['txtEmail'];               
-            $nome           = $_POST['txtNome'];            
+            $nome           = strtoupper($_POST['txtNome']);                     
             $dataNascimento = $_POST['dataNascimento'];            
 
             if($emailCadastrado != $email){      
