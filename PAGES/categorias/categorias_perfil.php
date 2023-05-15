@@ -151,7 +151,7 @@
                     $catatv_codigo = $categoria['CATATV_Codigo'];
                     $catatv_descricao = $categoria['CATATV_Descricao'];?>
                     <?php if($catatv_codigo == $categoriafiltrada){?>
-                        <button class="onPage" onclick="location.href ='../categorias/categorias_perfil.php?categoriafiltrada=<?php echo $catatv_codigo;?>&codperfil=<?php echo $_SESSION['CODIGO'];?>';" style="cursor: pointer;"><?php echo $catatv_descricao;?></button>                                                                                        
+                        <button class="onPage" onclick="location.href ='../categorias/categorias_perfil.php?categoriafiltrada=<?php echo $catatv_codigo;?>&codperfil=<?php echo $_SESSION['CODIGO'];?>'; mudarEstiloButtonTodas();" style="cursor: pointer;"><?php echo $catatv_descricao;?></button>                                                                                        
                     <?php
                     }else{?>
                         <button onclick="location.href ='../categorias/categorias_perfil.php?categoriafiltrada=<?php echo $catatv_codigo;?>&codperfil=<?php echo $_SESSION['CODIGO'];?>';" style="cursor: pointer;"><?php echo $catatv_descricao;?></button>                                                                                        
