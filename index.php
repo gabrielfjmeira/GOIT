@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="./CSS/style.css">
     <link rel="stylesheet" href="./CSS/loginCadastro.css">
     <link rel="stylesheet" href="./CSS/login.css">
+    <link rel="icon" href="./ASSETS/icon.ico"/>
 
     <!--Título da Página-->
     <title>GO🐐IT | A Social Adventure</title>

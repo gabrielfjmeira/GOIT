@@ -37,7 +37,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../CSS/publicarPostagem.css">
-    
+    <link rel="icon" href="../../../ASSETS/icon.ico"/>
 
     <!--Título da Página-->
     <title>GO🐐IT | A Social Adventure</title>
