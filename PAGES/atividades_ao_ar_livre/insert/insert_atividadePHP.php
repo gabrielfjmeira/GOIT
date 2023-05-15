@@ -71,7 +71,7 @@
             $sqlInstutor = "SELECT * FROM TABINS WHERE TABUSU_Codigo = $usuario";
             $querySqlInstutor = $mysqli->query($sqlInstutor) or die("Falha na execução do código sql" . $mysqli->error);           
             $instrutorData = mysqli_fetch_array($querySqlInstutor);  
-            $categoriaInstrutor = $instrutorData('CATATV_Codigo');
+            $categoriaInstrutor = $instrutorData['CATATV_Codigo'];
             if($categoriaInstrutor == $categoria){?>
                 <!--Redireciona para a Página anterior-->
                 <script>

@@ -31,7 +31,7 @@
         if($qtdEmailResultado < 1){
             //Cria variáveis        
             $senha          = $_POST['txtSenha'];
-            $nome           = $_POST['txtNome'];            
+            $nome           = strtoupper($_POST['txtNome']);            
             $dataNascimento = $_POST['dataNascimento'];
             $sexo           = $_POST['sexo'];
 

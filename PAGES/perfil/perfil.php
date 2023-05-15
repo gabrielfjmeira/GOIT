@@ -72,7 +72,7 @@
     </div>
 
     <div id="app">
-        <img src="../../ASSETS/Logo.png" alt="Logo go it" id="logo-header" 
+        <img src="../../ASSETS/Logo.png" alt="Logo go it" id="logo-header"
         <?php
             if($_SESSION['TIPOUSUARIO'] == 4){?>
                 onclick="location.href='./perfil.php'"            
@@ -148,10 +148,10 @@
     
         <main>
 
-            <!-- <div class="search-wrapper flex">
+            <div class="search-wrapper flex">                
                 <ion-icon name="search-outline"></ion-icon>
                 <input type="text" id="search-input" placeholder="Search" onclick="searchDesenvolvimento()">
-            </div>            -->
+            </div>           
 
             <section class="eventsAndGroups flex" style="margin-top: 1.6rem;">
                 <?php
