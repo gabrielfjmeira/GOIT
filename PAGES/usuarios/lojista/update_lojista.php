@@ -133,11 +133,11 @@
                 </label>
             </div>
             
-            <button type="submit">Confirmar Alterações</button>
+            <button type="submit" id="submitButton">Confirmar Alterações</button>
 
             <center>
                 <div id="apagar-perfil">
-                    <button type="button" onclick="apagarPerfil();">Apagar Perfil</button>               
+                    <button type="button" onclick="apagarPerfil();" style="padding: .4rem .8rem; background: red; color: var(--white); border: none; border-radius: .4rem">Apagar Perfil</button>               
                 </div>
             </center>
 

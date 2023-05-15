@@ -85,7 +85,7 @@
         style="cursor: pointer;">
         <!--Carrega imagem e apelido do perfil-->
         <center>
-            <div id="info-perfil" style="margin-top: 4rem;">
+            <div id="info-perfil" style="margin-top: 1.6rem;">
                 <?php
                     $sqlUser = "SELECT * FROM TABUSU WHERE TABUSU_Codigo = " . $_SESSION['CODIGO'];            
                     $querySqlUser = $mysqli->query($sqlUser) or die("Falha na execução do código sql" . $mysqli->error);
@@ -101,7 +101,7 @@
                             $nomeImagem = substr($userData['TABUSU_Icon'], -18);
                         };  
                         ?>
-                        <img src="./arquivos/<?php echo $nomeImagem;?>" style="border-radius: 50%; width: 15rem; height: 15rem; border: 1.5px solid black" alt="">                        
+                        <img src="./arquivos/<?php echo $nomeImagem;?>" style="border-radius: 50%; width: 11.2rem; height: 11.2rem; border: 1.5px solid black" alt="">                        
                     <?php
                     }    
                     
@@ -148,10 +148,10 @@
     
         <main>
 
-            <div class="search-wrapper flex">
+            <!-- <div class="search-wrapper flex">
                 <ion-icon name="search-outline"></ion-icon>
                 <input type="text" id="search-input" placeholder="Search" onclick="searchDesenvolvimento()">
-            </div>           
+            </div>            -->
 
             <section class="eventsAndGroups flex" style="margin-top: 1.6rem;">
                 <?php
