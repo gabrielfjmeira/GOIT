@@ -79,6 +79,8 @@
 
     <div id="app">
         <img onclick="location.href= '../home/home.php'" src="../../ASSETS/Logo.png" alt="Logo go it" id="logo-header" style="cursor: pointer;">
+        <h1 id="page-title">Home page</h1>
+
 
         <!-- //Imprime as Categorias para Filtrar a Aplicação -->
         <header class="activities-list flex">
@@ -105,10 +107,10 @@
     
         <main>
 
-            <div class="search-wrapper flex">
+            <!-- <div class="search-wrapper flex">
                 <ion-icon name="search-outline"></ion-icon>
-                <input type="text" id="search-input" placeholder="Search" onclick="searchDesenvolvimento()">
-            </div>
+                <input type="text" id="search-input" placeholder="Esta funcionalidade segue em desenvolvimento">
+            </div> -->
 
             <section class="eventsAndGroups flex">
 
@@ -325,9 +327,6 @@
             }); 
         }
         
-        function searchDesenvolvimento(){
-            document.getElementById('search-input').placeholder = "Esta funcionalidade segue em desenvolvimento";
-        }
-    </script>
+      </script>
 </body>
 </html>
