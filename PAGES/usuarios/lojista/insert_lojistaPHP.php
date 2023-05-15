@@ -58,7 +58,7 @@
                 ?>
                 <script>
                     //Redireciona para o login
-                    alert("Cadastro realizado com sucesso!")
+                    alert("Cadastro enviado para análise!")
                     location.href = "../../../index.php";
                 </script>
                 <?php    
