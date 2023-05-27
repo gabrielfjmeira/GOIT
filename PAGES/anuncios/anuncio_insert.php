@@ -1,10 +1,10 @@
 <?php
     //Incluí Conexão
-    include('../../../CONNECTIONS/connection.php');
+    include('../../CONNECTIONS/connection.php');
 
     //Verifica Login
     if (!$_SESSION['LOGGED']){
-        header ("Location: ../../../index.php?error=4");
+        header ("Location: ../../index.php?error=4");
     }   
 ?>
 
@@ -15,8 +15,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../CSS/publicarPostagem.css">
-    <link rel="icon" href="../../../ASSETS/icon.ico"/>    
+    <link rel="stylesheet" href="../../CSS/publicarPostagem.css">
+    <link rel="icon" href="../../ASSETS/icon.ico"/>    
 
     <!--Título da Página-->
     <title>GO🐐IT | A Social Adventure</title>
@@ -25,8 +25,8 @@
     <!--Cabeçalho-->
     <div id="app">
         <header>
-            <button style="cursor: pointer;" onclick="window.history.back()"><img src="../../../ASSETS/backButtonDark.svg" alt="back-button"></button>
-            <img src="../../../ASSETS/Logo.png" alt="logo" class="logo" 
+            <button style="cursor: pointer;" onclick="window.history.back()"><img src="../../ASSETS/backButtonDark.svg" alt="back-button"></button>
+            <img src="../../ASSETS/Logo.png" alt="logo" class="logo" 
             <?php
                 if($_SESSION['TIPOUSUARIO'] == 4){?>
                     onclick="location.href='../../perfil/perfil.php'" 
@@ -82,7 +82,7 @@
             <div class="input-wrapper">
                 <label for="">Upload da imagem do produto</label>
                 <label for="imgProduto" class="uploadImage-input-wrapper">                        
-                    <img id="imagemSelecionada" src="../../../ASSETS/uploadIcon.svg" style="max-width: 8rem; max-height: 8rem;" class="uploadIcon">                    
+                    <img id="imagemSelecionada" src="../../ASSETS/uploadIcon.svg" style="max-width: 8rem; max-height: 8rem;" class="uploadIcon">                    
                     <input type="file" id="imgProduto" name="imgProduto" accept="image/*" onchange="validaImagem(this);" required/> 
                 </label>
             </div>
@@ -99,8 +99,8 @@
 
         <footer>
             <?php 
-                $assets_path = '../../../ASSETS';
-                include '../../templates/footers/navBarAddPub.php' 
+                $assets_path = '../../ASSETS';
+                include '../templates/footers/navBarAddPub.php' 
             ?>
         </footer>
     </div>
