@@ -145,7 +145,7 @@
             <div class="input-wrapper">
                 <label for="">Referência</label>
                 <div class="local-input-wrapper">
-                    <input type="text" name="" id="" placeholder="Ex: Próximo ao supermercado Condor" value="<?php echo $referencia;?>"
+                    <input type="text" name="txtReferencia" id="txtReferencia" placeholder="Ex: Próximo ao supermercado Condor" value="<?php echo $referencia;?>"
                     pattern="^.{, 50}$" 
                     title="Referência deve possuir no máximo 50 caracteres!"/>
                     <ion-icon name="pin-outline"></ion-icon>
