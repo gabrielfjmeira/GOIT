@@ -225,15 +225,15 @@
                 //Imprime Atividades ao Ar Livre         
                 if(isset($_POST['searchTXT']) && $conteudoPesquisado <> ""){
                     if(isset($_GET['categoriafiltrada'])){
-                        $atividades = "SELECT * FROM TABATV WHERE CATATV_Codigo = $categoriafiltrada AND TABUSU_Codigo = $codPerfil AND TABATV_Titulo LIKE '%$conteudoPesquisado%' ORDER BY TABATV_Data ASC";
+                        $atividades = "SELECT * FROM TABATV WHERE CATATV_Codigo = $categoriafiltrada AND TABATV_Cancelada = 0 AND TABUSU_Codigo = $codPerfil AND TABATV_Titulo LIKE '%$conteudoPesquisado%' AND TABATV_Data >= now() ORDER BY TABATV_Data ASC";
                     }else{
-                        $atividades = "SELECT * FROM TABATV WHERE TABUSU_Codigo = $codPerfil AND TABATV_Titulo LIKE '%$conteudoPesquisado%' ORDER BY TABATV_Data ASC";
+                        $atividades = "SELECT * FROM TABATV WHERE TABATV_Cancelada = 0 TABUSU_Codigo = $codPerfil AND TABATV_Titulo LIKE '%$conteudoPesquisado%' AND TABATV_Data >= now() ORDER BY TABATV_Data ASC";
                     }                    
                 }else{
                     if(isset($_GET['categoriafiltrada'])){
-                        $atividades = "SELECT * FROM TABATV WHERE CATATV_Codigo = $categoriafiltrada AND TABUSU_Codigo = $codPerfil ORDER BY TABATV_Data ASC";
+                        $atividades = "SELECT * FROM TABATV WHERE CATATV_Codigo = $categoriafiltrada AND TABATV_Cancelada = 0 AND TABUSU_Codigo = $codPerfil AND TABATV_Data >= now() ORDER BY TABATV_Data ASC";
                     }else{
-                        $atividades = "SELECT * FROM TABATV WHERE TABUSU_Codigo = $codPerfil ORDER BY TABATV_Data ASC";                    
+                        $atividades = "SELECT * FROM TABATV WHERE TABATV_Cancelada = 0 AND TABUSU_Codigo = $codPerfil AND TABATV_Data >= now() ORDER BY TABATV_Data ASC";                    
                     }                    
                 }                
                 $queryAtividades = $mysqli->query($atividades) or die(mysql_error());
@@ -394,13 +394,15 @@
                             ?>                                  
 
                             <?php
-                            if($_SESSION['CODIGO'] == $atividade['TABUSU_Codigo']){?>                            
-                                
-                                <a href="../atividades_ao_ar_livre/update/update_atividade.php?codigo=<?php echo $atividade['TABATV_Codigo'];?>" style="cursor: pointer;">Editar Atividade</a>
-                                
-                                <a onclick="apagarAtividade('<?php echo $atividade['TABATV_Titulo']?>', <?php echo $atividade['TABATV_Codigo']?>)" style="cursor: pointer;">Excluir Atividade</a>
-                            <?php
-                            }
+                                if($_SESSION['CODIGO'] == $atividade['TABUSU_Codigo']){?>                            
+                                    
+                                    <a href="../atividades_ao_ar_livre/update/update_atividade.php?codigo=<?php echo $atividade['TABATV_Codigo'];?>" style="cursor: pointer;">Editar Atividade</a>
+
+                                    <a onclick="cancelarAtividade('<?php echo $atividade['TABATV_Titulo']?>', <?php echo $atividade['TABATV_Codigo']?>)" style="cursor: pointer;">Cancelar Atividade</a>
+                                    
+                                    <!--<a onclick="apagarAtividade('<?php //echo $atividade['TABATV_Titulo']?>', <?php //echo $atividade['TABATV_Codigo']?>)" style="cursor: pointer;">Excluir Atividade</a>-->
+                                <?php
+                                }
                             ?>
                                           
                         </div><?php               
@@ -444,9 +446,12 @@
             }  
         }
 
-        function submitform() {
-                document.saibamais.submit();
-        }
+        function cancelarAtividade(titulo, codigo){
+            let text = "Confirma o cancelamento da atividade " + titulo + ", esta ação é irreversível!";
+            if (confirm(text) == true) {
+                window.location.href = "../home/cancelar_atividade.php?atividade="+codigo;
+            }
+        }        
 
         bgblur = document.querySelector(".background-blur")
         modalProduct = document.querySelector(".modal-product")

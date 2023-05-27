@@ -21,6 +21,28 @@
         $categoriafiltrada = $_GET['categoriafiltrada'];        
     }
     
+    //Alerta o usuário se o mesmo está inscrito em uma atividade que foi cancelada
+    $atividadesParticipadas = "SELECT * FROM PARATV WHERE TABUSU_Codigo = " . $_SESSION['CODIGO'] . ";";
+    $queryAtividadesParticipadas = $mysqli->query($atividadesParticipadas) or die(mysql_error());
+    if($queryAtividadesParticipadas->num_rows > 0){
+        while($atividadesParticipadasData = mysqli_fetch_array($queryAtividadesParticipadas)){
+            //Verifica se a atividade inscrita foi cancelada
+            $verificacaoAtividade = "SELECT * FROM TABATV WHERE TABATV_Codigo = " . $atividadesParticipadasData['TABATV_Codigo'] . ";";
+            $queryVerificacaoAtividade = $mysqli->query($verificacaoAtividade) or die(mysql_error());
+            $verificacaoAtividadeData = mysqli_fetch_array($queryVerificacaoAtividade);
+
+            if($verificacaoAtividadeData['TABATV_Cancelada'] == 1){?>
+                <script>
+                    alert('A atividade <?php echo $verificacaoAtividadeData['TABATV_Titulo'];?>, que ocorreria no dia <?php echo $verificacaoAtividadeData['TABATV_Data'];?> as <?php echo $verificacaoAtividadeData['TABATV_Hora'];?> \nEm que você se inscreveu foi cancelada! Por isso não ocorrerá mais!');                     
+                </script>
+                <?php
+                $deleteParticipacaoAtv = "DELETE FROM PARATV WHERE TABATV_Codigo = " . $atividadesParticipadasData['TABATV_Codigo']. " AND TABUSU_Codigo = " . $_SESSION['CODIGO'] . ";";
+                $queryDeleteParticipacaoAtv = $mysqli->query($deleteParticipacaoAtv) or die(mysql_error());               
+            }
+        }
+    }   
+    
+
 ?>
 
 <!DOCTYPE html>
@@ -135,15 +157,15 @@
                 //Imprime Atividades ao Ar Livre         
                 if(isset($_POST['searchTXT']) && $conteudoPesquisado <> ""){
                     if(isset($_GET['categoriafiltrada'])){
-                        $atividades = "SELECT * FROM TABATV WHERE CATATV_Codigo = $categoriafiltrada AND TABATV_Titulo LIKE '%$conteudoPesquisado%' ORDER BY TABATV_Data ASC";
+                        $atividades = "SELECT * FROM TABATV WHERE CATATV_Codigo = $categoriafiltrada AND TABATV_Cancelada = 0 AND TABATV_Titulo LIKE '%$conteudoPesquisado%' AND TABATV_Data >= now() ORDER BY TABATV_Data ASC";
                     }else{
-                        $atividades = "SELECT * FROM TABATV WHERE TABATV_Titulo LIKE '%$conteudoPesquisado%' ORDER BY TABATV_Data ASC";
+                        $atividades = "SELECT * FROM TABATV WHERE TABATV_Cancelada = 0 AND TABATV_Titulo LIKE '%$conteudoPesquisado%' AND TABATV_Data >= now() ORDER BY TABATV_Data ASC";
                     }                    
                 }else{
                     if(isset($_GET['categoriafiltrada'])){
-                        $atividades = "SELECT * FROM TABATV WHERE CATATV_Codigo = $categoriafiltrada ORDER BY TABATV_Data ASC";
+                        $atividades = "SELECT * FROM TABATV WHERE CATATV_Codigo = $categoriafiltrada AND TABATV_Cancelada = 0 AND TABATV_Data >= now() ORDER BY TABATV_Data ASC";
                     }else{
-                        $atividades = "SELECT * FROM TABATV ORDER BY TABATV_Data ASC";                    
+                        $atividades = "SELECT * FROM TABATV WHERE TABATV_Cancelada = 0 AND TABATV_Data >= now() ORDER BY TABATV_Data ASC";                    
                     }                    
                 }
                 
@@ -159,7 +181,7 @@
                     while($atividade = mysqli_fetch_array($queryAtividades)){?>
                         <div class="event">
                             <p class="date-event"><?php echo $atividade['TABATV_Data'];?></p>
-                            <div class="title-post">
+                            <div class="title-post">                                
                                 <h5><?php echo $atividade['TABATV_Titulo'];?></h5>
                                 <ion-icon name="calendar-clear"></ion-icon>
                             </div>
@@ -250,7 +272,7 @@
                             </a>
 
                             <?php                            
-                                if($_SESSION['TIPOUSUARIO'] != 4){
+                                if($_SESSION['TIPOUSUARIO'] != 4 || $_SESSION['TIPOUSUARIO'] != 1){
                                     $sqlCriador = "SELECT * FROM TABATV WHERE TABATV_Codigo = ". $atividade['TABATV_Codigo']." AND TABUSU_Codigo = ". $_SESSION['CODIGO']. ";";
                                     $querySqlCriador = $mysqli->query($sqlCriador) or die(mysql_error());
                                     if($querySqlCriador->num_rows == 1){?>
@@ -291,8 +313,10 @@
                             if($_SESSION['CODIGO'] == $atividade['TABUSU_Codigo']){?>                            
                                 
                                 <a href="../atividades_ao_ar_livre/update/update_atividade.php?codigo=<?php echo $atividade['TABATV_Codigo'];?>" style="cursor: pointer;">Editar Atividade</a>
+
+                                <a onclick="cancelarAtividade('<?php echo $atividade['TABATV_Titulo']?>', <?php echo $atividade['TABATV_Codigo']?>)" style="cursor: pointer;">Cancelar Atividade</a>
                                 
-                                <a onclick="apagarAtividade('<?php echo $atividade['TABATV_Titulo']?>', <?php echo $atividade['TABATV_Codigo']?>)" style="cursor: pointer;">Excluir Atividade</a>
+                                <!--<a onclick="apagarAtividade('<?php //echo $atividade['TABATV_Titulo']?>', <?php //echo $atividade['TABATV_Codigo']?>)" style="cursor: pointer;">Excluir Atividade</a>-->
                             <?php
                             }
                             ?>
@@ -333,6 +357,13 @@
             if (confirm(text) == true) {
                 window.location.href = "../atividades_ao_ar_livre/delete/delete_atividadePHP.php?codigo="+codigo; 
             }  
+        }
+
+        function cancelarAtividade(titulo, codigo){
+            let text = "Confirma o cancelamento da atividade " + titulo + ", esta ação é irreversível!";
+            if (confirm(text) == true) {
+                window.location.href = "./cancelar_atividade.php?atividade="+codigo;
+            }
         }
 
         bgblur = document.querySelector(".background-blur")
