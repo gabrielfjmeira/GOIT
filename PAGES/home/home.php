@@ -66,6 +66,11 @@
                 <p>Rua José da Silva Guedes 345, Atuba, Curitiba</p>
             </div>
 
+            <div class="reference-wrapper wrapper">
+                <h2>Referência <ion-icon name="location-sharp"></ion-icon> </h2>
+                <p>Nenhuma Referência Foi Informada!</p>
+            </div>
+
             <div class="registered-wrapper wrapper">
                 <h2>Inscritos</h2>                
                 <p>
@@ -240,7 +245,7 @@
                                 $descricao_sm = str_replace("\r", '', $descricao_bd);                                
                             ?>
 
-                            <a class="sm" style="cursor: pointer;" onclick="modalPostView('<?php echo $atividade['TABATV_Titulo']; ?>','<?php echo $nomeImagem;?>', '<?php echo $descricao_sm; ?>','<?php echo $atividade['TABATV_Data']; ?>', '<?php echo $atividade['TABATV_Hora']; ?>', '<?php echo $atividade['TABATV_Localizacao']?>', <?php echo $postagem;?>, '<?php echo $nomeIcon;?>','<?php echo $apelido?>');" style="cursor: pointer;">                            
+                            <a class="sm" style="cursor: pointer;" onclick="modalPostView('<?php echo $atividade['TABATV_Titulo']; ?>','<?php echo $nomeImagem;?>', '<?php echo $descricao_sm; ?>','<?php echo $atividade['TABATV_Data']; ?>', '<?php echo $atividade['TABATV_Hora']; ?>', '<?php echo $atividade['TABATV_Localizacao']?>', '<?php echo $atividade['TABATV_Referencia']?>', <?php echo $postagem;?>, '<?php echo $nomeIcon;?>', <?php echo $atividade['TABUSU_Codigo']?>,'<?php echo $apelido?>');" style="cursor: pointer;">                            
                                 Saiba mais                                        
                             </a>
 
@@ -339,7 +344,7 @@
             modalProduct.setAttribute("style" , "display: ")
         }        
 
-        function modalPostView(titulo, imagem, descricao, data, hora, local, postagem, imgIcon, usuario) {
+        function modalPostView(titulo, imagem, descricao, data, hora, local, referencia, postagem, imgIcon, perfil, usuario) {
             var title = document.querySelector(".title-post h3")
             title.innerHTML = titulo    
             var image = document.querySelector(".modal-post img")
@@ -355,7 +360,11 @@
             var time = document.querySelector(".time-wrapper p")
             time.innerHTML = hora
             var localization = document.querySelector(".localization-wrapper p")
-            localization.innerHTML = local                                                                                                                                                         
+            localization.innerHTML = local                 
+            var reference = document.querySelector(".reference-wrapper p")
+            if(referencia != ""){
+                reference.innerHTML = referencia
+            }                                                                                                                   
             var numberRegistereds = document.querySelector(".numeroInscritos"+postagem).value
             var maxRegistereds = document.querySelector(".maxInscritos"+postagem).value
             var registered = document.querySelector(".registered-wrapper p")
@@ -366,11 +375,12 @@
             }else{
                 icon.setAttribute("src", "../../ASSETS/buttonPerfil.svg")
             } 
-            var user = document.querySelector(".user")            
+            var user = document.querySelector(".user")   
+            user.setAttribute("onclick", "location.href='../perfil/perfil.php?perfil=" + perfil + "';")         
             user.innerHTML = usuario          
             bgblur.setAttribute("style" , "display: ")
             modalPost.setAttribute("style" , "display: ")
-        }    
+        }   
 
         function exitModal(){
             bgblur.addEventListener("click", function(event){

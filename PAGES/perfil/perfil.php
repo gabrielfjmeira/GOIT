@@ -68,6 +68,11 @@
                 <p>Rua José da Silva Guedes 345, Atuba, Curitiba</p>
             </div>
 
+            <div class="reference-wrapper wrapper">
+                <h2>Referência <ion-icon name="location-sharp"></ion-icon> </h2>
+                <p>Nenhuma Referência Foi Informada!</p>
+            </div>
+
             <div class="registered-wrapper wrapper">
                 <h2>Inscritos</h2>                
                 <p>
@@ -121,9 +126,9 @@
                         ?>
                         <img src="./arquivos/<?php echo $nomeImagem;?>" style="border-radius: 50%; width: 11.2rem; height: 11.2rem; border: 1.5px solid black" alt="">                        
                     <?php
-                    }    
+                    }                        
                     
-                    switch($_SESSION['TIPOUSUARIO']){
+                    switch($userData['TIPUSU_Codigo']){
                         //Administrador
                         case 1:
                             $tipoUserDescricao = "Admin";
@@ -151,7 +156,7 @@
                             $lojista = "SELECT * FROM TABLOJ WHERE TABUSU_Codigo = $codPerfil";
                             $queryLojista = $mysqli->query($lojista) or die(mysql_error());
                             $lojistaData = mysqli_fetch_array($queryLojista);
-                            $apelido = $instrutorData['TABLOJ_Fantasia'];
+                            $apelido = $lojistaData['TABLOJ_Fantasia'];
                             break;                        
                     }
 
@@ -236,13 +241,23 @@
 
                 <div class="title-wrapper">
                     <?php
-                        if($_SESSION['TIPOUSUARIO'] == 4){?>
-                            <h2>Meus Eventos:(<?php echo $queryAtividades->num_rows;?>)</h2>                            
-                        <?php
-                        }else{?>
-                            <h2>Minhas Atividades ao Ar Livre(<?php echo $queryAtividades->num_rows;?>)</h2>
-                        <?php
-                        }
+                        if($codPerfil == $_SESSION['CODIGO']){
+                            if($userData['TIPUSU_Codigo'] == 4){?>
+                                <h2>Meus Eventos:(<?php echo $queryAtividades->num_rows;?>)</h2>                            
+                            <?php
+                            }else{?>
+                                <h2>Minhas Atividades ao Ar Livre(<?php echo $queryAtividades->num_rows;?>)</h2>
+                            <?php
+                            }
+                        }else{
+                            if($userData['TIPUSU_Codigo'] == 4){?>
+                                <h2>Eventos(<?php echo $queryAtividades->num_rows;?>)</h2>
+                                <?php
+                            }else{?>
+                                <h2>Atividades ao Ar Livre(<?php echo $queryAtividades->num_rows;?>)</h2>
+                                <?php
+                            }
+                        }                        
                     ?>                    
                 </div>
 
@@ -336,7 +351,7 @@
                                 $descricao_sm = str_replace("\r", '', $descricao_bd);                                
                             ?>
 
-                            <a class="sm" style="cursor: pointer;" onclick="modalPostView('<?php echo $atividade['TABATV_Titulo']; ?>','<?php echo $nomeImagem;?>', '<?php echo $descricao_sm; ?>','<?php echo $atividade['TABATV_Data']; ?>', '<?php echo $atividade['TABATV_Hora']; ?>', '<?php echo $atividade['TABATV_Localizacao']?>', <?php echo $postagem;?>, '<?php echo $nomeIcon;?>','<?php echo $apelido?>');" style="cursor: pointer;">                            
+                            <a class="sm" style="cursor: pointer;" onclick="modalPostView('<?php echo $atividade['TABATV_Titulo']; ?>','<?php echo $nomeImagem;?>', '<?php echo $descricao_sm; ?>','<?php echo $atividade['TABATV_Data']; ?>', '<?php echo $atividade['TABATV_Hora']; ?>', '<?php echo $atividade['TABATV_Localizacao']?>', '<?php echo $atividade['TABATV_Referencia']?>', <?php echo $postagem;?>, '<?php echo $nomeIcon;?>', <?php echo $atividade['TABUSU_Codigo']?>,'<?php echo $apelido?>');" style="cursor: pointer;">                            
                                 Saiba mais                                        
                             </a>
 
@@ -365,7 +380,7 @@
                                                 </a>
                                             <?php
                                             }else{?>
-                                                <a href="participar_atividadePHP.php?atividade=<?php echo $atividade['TABATV_Codigo']?>">
+                                                <a href="../home/participar_atividadePHP.php?atividade=<?php echo $atividade['TABATV_Codigo']?>">
                                                     Inscrever-Se
                                                 </a>
                                             <?php
@@ -418,7 +433,7 @@
         function cancelarInscricao(titulo, codigo){
             let text = "Confirma cancelar a incrição em " + titulo + "?";
             if (confirm(text) == true) {
-                window.location.href = "./sair_atividadePHP.php?atividade="+codigo; 
+                window.location.href = "../home/sair_atividadePHP.php?atividade="+codigo; 
             }   
         }
 
@@ -442,7 +457,7 @@
             modalProduct.setAttribute("style" , "display: ")
         }        
 
-        function modalPostView(titulo, imagem, descricao, data, hora, local, postagem, imgIcon, usuario) {
+        function modalPostView(titulo, imagem, descricao, data, hora, local, referencia, postagem, imgIcon, perfil, usuario) {
             var title = document.querySelector(".title-post h3")
             title.innerHTML = titulo    
             var image = document.querySelector(".modal-post img")
@@ -458,22 +473,27 @@
             var time = document.querySelector(".time-wrapper p")
             time.innerHTML = hora
             var localization = document.querySelector(".localization-wrapper p")
-            localization.innerHTML = local                                                                                                                                                         
+            localization.innerHTML = local      
+            var reference = document.querySelector(".reference-wrapper p")
+            if(referencia != ""){
+                reference.innerHTML = referencia
+            }                                                                                                                                                                     
             var numberRegistereds = document.querySelector(".numeroInscritos"+postagem).value
             var maxRegistereds = document.querySelector(".maxInscritos"+postagem).value
             var registered = document.querySelector(".registered-wrapper p")
             registered.innerHTML = numberRegistereds + "/" + maxRegistereds
             var icon = document.querySelector(".instructor-wrapper img")
             if (imgIcon != ''){
-                icon.setAttribute("src", "./arquivos/"+imgIcon)
+                icon.setAttribute("src", "../perfil/arquivos/"+imgIcon)
             }else{
                 icon.setAttribute("src", "../../ASSETS/buttonPerfil.svg")
             } 
-            var user = document.querySelector(".user")            
+            var user = document.querySelector(".user")   
+            user.setAttribute("onclick", "location.href='../perfil/perfil.php?perfil=" + perfil + "';")         
             user.innerHTML = usuario          
             bgblur.setAttribute("style" , "display: ")
             modalPost.setAttribute("style" , "display: ")
-        }    
+        }       
 
         function exitModal(){
             bgblur.addEventListener("click", function(event){
