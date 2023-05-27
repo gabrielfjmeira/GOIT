@@ -23,19 +23,6 @@ CREATE TABLE TABUSU(
     FOREIGN KEY(TIPUSU_Codigo) REFERENCES TIPUSU(TIPUSU_Codigo)
 );
 
-
-
-/*Criação da Tabela de Riscos de Atividades*/
-CREATE TABLE TABRIS(
-	TABRIS_Codigo INT(3) NOT NULL AUTO_INCREMENT,
-    TABRIS_Descricao VARCHAR(30) NOT NULL,
-    TABRIS_Minimo INT(2) NOT NULL,
-    TABRIS_Maximo INT(2) NOT NULL,
-    TABRIS_Instrutor BOOLEAN NOT NULL,
-    
-    PRIMARY KEY(TABRIS_Codigo)
-);
-
 /*Criação da Tabela de Categorias de Atividades ao Ar Livre*/
 CREATE TABLE CATATV(
 	CATATV_Codigo INT(3) NOT NULL AUTO_INCREMENT,
@@ -44,53 +31,6 @@ CREATE TABLE CATATV(
     
     PRIMARY KEY(CATATV_Codigo),
     FOREIGN KEY(TABRIS_Codigo) REFERENCES TABRIS(TABRIS_Codigo)
-);
-
-/*Criação da Tabela de Atividades ao Ar Livre*/
-CREATE TABLE TABATV(
-	TABATV_Codigo INT(3) NOT NULL AUTO_INCREMENT,
-    TABUSU_Codigo INT(3) NOT NULL,
-    TABATV_Titulo VARCHAR(50) NOT NULL,
-    TABATV_Descricao TEXT NOT NULL,
-    TABATV_Imagem VARCHAR(100) NULL,
-    CATATV_Codigo INT(3) NOT NULL,
-    TABATV_Localizacao VARCHAR(100) NOT NULL,
-    TABATV_Referencia VARCHAR(50) NULL,
-    TABATV_Inscritos INT(3) NOT NULL,    
-    TABATV_Data DATE NOT NULL,
-    TABATV_Hora TIME NOT NULL,
-    TABATV_Cancelada BOOLEAN NOT NULL,    
-    TABATV_Created DATETIME NOT NULL,
-    
-    PRIMARY KEY(TABATV_Codigo),
-    FOREIGN KEY(TABUSU_Codigo) REFERENCES TABUSU(TABUSU_Codigo),
-    FOREIGN KEY(CATATV_Codigo) REFERENCES CATATV(CATATV_Codigo)
-);
-
-/*Criação da Tabela de Participação de Usuários com Atividades ao Ar Livre*/
-CREATE TABLE PARATV(
-	TABATV_Codigo INT(3) NOT NULL,
-    TABUSU_Codigo INT(3) NOT NULL,
-    PARATV_Created DATETIME NOT NULL,
-    
-    PRIMARY KEY(TABATV_Codigo, TABUSU_Codigo),
-  	FOREIGN KEY(TABATV_Codigo) REFERENCES TABATV(TABATV_Codigo),
-    FOREIGN KEY(TABUSU_Codigo) REFERENCES TABUSU(TABUSU_Codigo)
-);
-
-/*Criação da Tabela de Produtos de Lojistas*/
-CREATE TABLE TABPRO(
-    TABPRO_Codigo INT(3) NOT NULL,
-    TABUSU_Codigo INT(3) NOT NULL,
-    TABPRO_Nome VARCHAR(50) NOT NULL,
-    TABPRO_Descricao TEXT NOT NULL,
-    TABPRO_Imagem VARCHAR(100) NOT NULL,
-    TABPRO_Url TEXT NOT NULL,
-    CATATV_Codigo INT(3) NOT NULL,
-
-    PRIMARY KEY(TABPRO_Codigo, TABUSU_Codigo),
-    FOREIGN KEY(TABUSU_Codigo) REFERENCES TABUSU(TABUSU_Codigo),
-    FOREIGN KEY(CATATV_Codigo) REFERENCES CATATV(CATATV_Codigo)
 );
 
 /*Criação da Tabela de Praticantes*/
@@ -133,6 +73,64 @@ CREATE TABLE TABLOJ(
     
     PRIMARY KEY(TABUSU_Codigo),
     FOREIGN KEY(TABUSU_Codigo) REFERENCES TABUSU(TABUSU_Codigo)
+);
+
+/*Criação da Tabela de Riscos de Atividades*/
+CREATE TABLE TABRIS(
+	TABRIS_Codigo INT(3) NOT NULL AUTO_INCREMENT,
+    TABRIS_Descricao VARCHAR(30) NOT NULL,
+    TABRIS_Minimo INT(2) NOT NULL,
+    TABRIS_Maximo INT(2) NOT NULL,
+    TABRIS_Instrutor BOOLEAN NOT NULL,
+    
+    PRIMARY KEY(TABRIS_Codigo)
+);
+
+/*Criação da Tabela de Atividades ao Ar Livre*/
+CREATE TABLE TABATV(
+	TABATV_Codigo INT(3) NOT NULL AUTO_INCREMENT,
+    TABUSU_Codigo INT(3) NOT NULL,
+    TABATV_Titulo VARCHAR(50) NOT NULL,
+    TABATV_Descricao TEXT NOT NULL,
+    TABATV_Imagem VARCHAR(100) NULL,
+    CATATV_Codigo INT(3) NOT NULL,
+    TABATV_Localizacao VARCHAR(100) NOT NULL,
+    TABATV_Referencia VARCHAR(50) NULL,
+    TABATV_Inscritos INT(3) NOT NULL,    
+    TABATV_Data DATE NOT NULL,
+    TABATV_Hora TIME NOT NULL,
+    TABATV_Cancelada BOOLEAN NOT NULL,    
+    TABATV_Created DATETIME NOT NULL,
+    
+    PRIMARY KEY(TABATV_Codigo),
+    FOREIGN KEY(TABUSU_Codigo) REFERENCES TABUSU(TABUSU_Codigo),
+    FOREIGN KEY(CATATV_Codigo) REFERENCES CATATV(CATATV_Codigo)
+);
+
+/*Criação da Tabela de Participação de Usuários com Atividades ao Ar Livre*/
+CREATE TABLE PARATV(
+	TABATV_Codigo INT(3) NOT NULL,
+    TABUSU_Codigo INT(3) NOT NULL,
+    PARATV_Created DATETIME NOT NULL,
+    
+    PRIMARY KEY(TABATV_Codigo, TABUSU_Codigo),
+  	FOREIGN KEY(TABATV_Codigo) REFERENCES TABATV(TABATV_Codigo),
+    FOREIGN KEY(TABUSU_Codigo) REFERENCES TABUSU(TABUSU_Codigo)
+);
+
+/*Criação da Tabela de Produtos de Lojistas*/
+CREATE TABLE TABPRO(
+    TABPRO_Codigo INT(3) NOT NULL AUTO_INCREMENT,
+    TABUSU_Codigo INT(3) NOT NULL,
+    TABPRO_Nome VARCHAR(50) NOT NULL,
+    TABPRO_Descricao TEXT NOT NULL,
+    TABPRO_Imagem VARCHAR(100) NOT NULL,
+    TABPRO_Url TEXT NOT NULL,
+    CATATV_Codigo INT(3) NOT NULL,
+
+    PRIMARY KEY(TABPRO_Codigo, TABUSU_Codigo),
+    FOREIGN KEY(TABUSU_Codigo) REFERENCES TABUSU(TABUSU_Codigo),
+    FOREIGN KEY(CATATV_Codigo) REFERENCES CATATV(CATATV_Codigo)
 );
 
 /*Inserção de Tipos de Usuários*/
