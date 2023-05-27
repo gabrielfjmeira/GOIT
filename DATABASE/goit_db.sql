@@ -118,6 +118,21 @@ CREATE TABLE PARATV(
     FOREIGN KEY(TABUSU_Codigo) REFERENCES TABUSU(TABUSU_Codigo)
 );
 
+/*Criação da Tabela de Produtos de Lojistas*/
+CREATE TABLE TABPRO(
+    TABPRO_Codigo INT(3) NOT NULL,
+    TABUSU_Codigo INT(3) NOT NULL,
+    TABPRO_Nome VARCHAR(50) NOT NULL,
+    TABPRO_Descricao TEXT NOT NULL,
+    TABPRO_Imagem VARCHAR(100) NOT NULL,
+    TABPRO_Url TEXT NOT NULL,
+    CATATV_Codigo INT(3) NOT NULL,
+
+    PRIMARY KEY(TABPRO_Codigo, TABUSU_Codigo),
+    FOREIGN KEY(TABUSU_Codigo) REFERENCES TABUSU(TABUSU_Codigo),
+    FOREIGN KEY(CATATV_Codigo) REFERENCES CATATV(CATATV_Codigo)
+);
+
 /*Inserção de Tipos de Usuários*/
 INSERT INTO TIPUSU (TIPUSU_Codigo, TIPUSU_Descricao, TIPUSU_Administrador) VALUES (NULL, 'Administrador', 1);
 INSERT INTO TIPUSU (TIPUSU_Codigo, TIPUSU_Descricao, TIPUSU_Administrador) VALUES (NULL, 'Praticante', 0);
