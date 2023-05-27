@@ -120,7 +120,7 @@ CREATE TABLE PARATV(
 
 /*Criação da Tabela de Produtos de Lojistas*/
 CREATE TABLE TABPRO(
-    TABPRO_Codigo INT(3) NOT NULL,
+    TABPRO_Codigo INT(3) NOT NULL AUTO_INCREMENT,
     TABUSU_Codigo INT(3) NOT NULL,
     TABPRO_Nome VARCHAR(50) NOT NULL,
     TABPRO_Descricao TEXT NOT NULL,

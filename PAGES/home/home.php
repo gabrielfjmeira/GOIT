@@ -63,8 +63,7 @@
     
     <div class="background-blur" style="display: none;" onclick="exitModal();">
         
-        <div class="modal-post" style="display: none;">
-            <form action="participar.php" medthod="POST"></form>
+        <div class="modal-post" style="display: none;">            
             <div class="title-post">                
                 <ion-icon name="calendar-clear"></ion-icon>
                 <h3>Escalada no pico pão de Loth, localizado  em Quatro Barras</h3>
