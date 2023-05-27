@@ -6,6 +6,16 @@
     if (!$_SESSION['LOGGED']){
         header ("Location: ../../index.php?error=4");
     }   
+
+    //Conteúdo Pesquisado
+    if(isset($_POST['searchTXT'])){
+        $conteudoPesquisado = $_POST['searchTXT'];
+    }
+
+    //Categoria Filtrada
+    if(isset($_GET['categoriafiltrada'])){
+        $categoriafiltrada = $_GET['categoriafiltrada'];        
+    }
 ?>
 
 <!DOCTYPE html>
@@ -149,15 +159,46 @@
     
         <main>
 
-            <div class="search-wrapper flex" style="cursor: pointer;">                
-                <ion-icon name="search-outline"></ion-icon>
-                <input type="text" id="search-input" placeholder="Search" onclick="searchDesenvolvimento()">
-            </div>           
+            <!--Barra de Pesquisa-->            
+            <form id="barraPesquisa" class = "form" name="barraPesquisa" <?php 
+                if(isset($_GET['categoriafiltrada'])){?>
+                    action="./perfil.php?categoriafiltrada=<?php echo $categoriafiltrada;?>" 
+                    <?php
+                }else{?>
+                    action="./perfil.php"
+                    <?php
+                }
+            ?> method="POST">
+                <div class="search-wrapper flex" style="cursor: pointer;">
+                    <ion-icon name="search-outline"></ion-icon>
+                    <?php 
+                    if(isset($_POST['searchTXT']) && $conteudoPesquisado <> ""){?>
+                        <input type="text" id="search-input" name="searchTXT" value="<?php echo $conteudoPesquisado;?>">
+                        <?php 
+                    }else{?>
+                        <input type="text" id="search-input" name="searchTXT" placeholder="Pesquisar">
+                        <?php
+                    }?>
+                    <button type="Submit"> Buscar </button>
+                </div>
+            </form>          
 
             <section class="eventsAndGroups flex" style="margin-top: 1.6rem;">
                 <?php
                 //Imprime Atividades ao Ar Livre         
-                $atividades = "SELECT * FROM TABATV WHERE TABUSU_Codigo = ". $_SESSION['CODIGO']. " ORDER BY TABATV_Data ASC";                    
+                if(isset($_POST['searchTXT']) && $conteudoPesquisado <> ""){
+                    if(isset($_GET['categoriafiltrada'])){
+                        $atividades = "SELECT * FROM TABATV WHERE CATATV_Codigo = $categoriafiltrada AND TABUSU_Codigo = ". $_SESSION['CODIGO']. " AND TABATV_Titulo LIKE '%$conteudoPesquisado%' ORDER BY TABATV_Data ASC";
+                    }else{
+                        $atividades = "SELECT * FROM TABATV WHERE TABUSU_Codigo = ". $_SESSION['CODIGO']. " AND TABATV_Titulo LIKE '%$conteudoPesquisado%' ORDER BY TABATV_Data ASC";
+                    }                    
+                }else{
+                    if(isset($_GET['categoriafiltrada'])){
+                        $atividades = "SELECT * FROM TABATV WHERE CATATV_Codigo = $categoriafiltrada AND TABUSU_Codigo = ". $_SESSION['CODIGO']. " ORDER BY TABATV_Data ASC";
+                    }else{
+                        $atividades = "SELECT * FROM TABATV WHERE TABUSU_Codigo = ". $_SESSION['CODIGO']. " ORDER BY TABATV_Data ASC";                    
+                    }                    
+                }                
                 $queryAtividades = $mysqli->query($atividades) or die(mysql_error());
                 $postagem = 0;?>
 
