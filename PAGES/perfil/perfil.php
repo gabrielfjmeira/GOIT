@@ -16,6 +16,13 @@
     if(isset($_GET['categoriafiltrada'])){
         $categoriafiltrada = $_GET['categoriafiltrada'];        
     }
+
+    //Perfil Filtrado
+    if(isset($_GET['perfil'])){
+        $codPerfil = $_GET['perfil'];        
+    }else{
+        $codPerfil = $_SESSION['CODIGO'];        
+    }
 ?>
 
 <!DOCTYPE html>
@@ -98,7 +105,7 @@
         <center>
             <div id="info-perfil" style="margin-top: 1.6rem;">
                 <?php
-                    $sqlUser = "SELECT * FROM TABUSU WHERE TABUSU_Codigo = " . $_SESSION['CODIGO'];            
+                    $sqlUser = "SELECT * FROM TABUSU WHERE TABUSU_Codigo = $codPerfil";            
                     $querySqlUser = $mysqli->query($sqlUser) or die("Falha na execução do código sql" . $mysqli->error);
                     $userData = mysqli_fetch_array($querySqlUser);
                     if(is_null($userData['TABUSU_Icon'])){?>
@@ -120,32 +127,47 @@
                         //Administrador
                         case 1:
                             $tipoUserDescricao = "Admin";
+                            $apelido = "Admin";
                             break;                        
                         //Praticante
                         case 2:
                             $tipoUserDescricao = "Praticante";
+                            $praticante = "SELECT * FROM TABPRA WHERE TABUSU_Codigo = $codPerfil";
+                            $queryPraticante = $mysqli->query($praticante) or die(mysql_error());
+                            $praticanteData = mysqli_fetch_array($queryPraticante);
+                            $apelido = $praticanteData['TABPRA_Apelido'];
                             break;                        
                         //Instrutor                        
                         case 3:
                             $tipoUserDescricao = "Instrutor";
+                            $instrutor = "SELECT * FROM TABINS WHERE TABUSU_Codigo = $codPerfil";
+                            $queryInstrutor = $mysqli->query($instrutor) or die(mysql_error());
+                            $instrutorData = mysqli_fetch_array($queryInstrutor);
+                            $apelido = $instrutorData['TABINS_Apelido'];
                             break;                        
                         //Lojista
                         case 4:
                             $tipoUserDescricao = "Lojista";
+                            $lojista = "SELECT * FROM TABLOJ WHERE TABUSU_Codigo = $codPerfil";
+                            $queryLojista = $mysqli->query($lojista) or die(mysql_error());
+                            $lojistaData = mysqli_fetch_array($queryLojista);
+                            $apelido = $instrutorData['TABLOJ_Fantasia'];
                             break;                        
                     }
 
                 ?>              
-                <p><?php echo $_SESSION['Apelido'];?></p> 
+                <p><?php echo $apelido;?></p> 
 
                 <small><?php echo $tipoUserDescricao;?></small>   
                 <br>    
                 <?php
-                if($_SESSION['TIPOUSUARIO'] != 1){?>
-                    <button onclick="location.href = './update/update_perfil.php'" class="button-edit-profile" style="cursor: pointer;">
-                        Editar Perfil
-                    </button>
-                <?php
+                if($_SESSION['TIPOUSUARIO'] != 1){
+                    if($codPerfil == $_SESSION['CODIGO']){?>
+                        <button onclick="location.href = './update/update_perfil.php'" class="button-edit-profile" style="cursor: pointer;">
+                            Editar Perfil
+                        </button>
+                    <?php
+                    }
                 }                
                 ?>                                            
             </div>
@@ -161,12 +183,22 @@
 
             <!--Barra de Pesquisa-->            
             <form id="barraPesquisa" class = "form" name="barraPesquisa" <?php 
-                if(isset($_GET['categoriafiltrada'])){?>
-                    action="./perfil.php?categoriafiltrada=<?php echo $categoriafiltrada;?>" 
-                    <?php
-                }else{?>
-                    action="./perfil.php"
-                    <?php
+                if(isset($_GET['categoriafiltrada'])){
+                    if(isset($_GET['perfil'])){?>
+                        action="./perfil.php?categoriafiltrada=<?php echo $categoriafiltrada;?>&perfil=<?php echo $codPerfil;?>" 
+                        <?php
+                    }else{?>
+                        action="./perfil.php?categoriafiltrada=<?php echo $categoriafiltrada;?>" 
+                        <?php
+                    }
+                }else{
+                    if(isset($_GET['perfil'])){?>
+                        action="./perfil.php?perfil=<?php echo $codPerfil;?>"
+                        <?php
+                    }else{?>
+                        action="./perfil.php"
+                        <?php
+                    }
                 }
             ?> method="POST">
                 <div class="search-wrapper flex" style="cursor: pointer;">
@@ -188,15 +220,15 @@
                 //Imprime Atividades ao Ar Livre         
                 if(isset($_POST['searchTXT']) && $conteudoPesquisado <> ""){
                     if(isset($_GET['categoriafiltrada'])){
-                        $atividades = "SELECT * FROM TABATV WHERE CATATV_Codigo = $categoriafiltrada AND TABUSU_Codigo = ". $_SESSION['CODIGO']. " AND TABATV_Titulo LIKE '%$conteudoPesquisado%' ORDER BY TABATV_Data ASC";
+                        $atividades = "SELECT * FROM TABATV WHERE CATATV_Codigo = $categoriafiltrada AND TABUSU_Codigo = $codPerfil AND TABATV_Titulo LIKE '%$conteudoPesquisado%' ORDER BY TABATV_Data ASC";
                     }else{
-                        $atividades = "SELECT * FROM TABATV WHERE TABUSU_Codigo = ". $_SESSION['CODIGO']. " AND TABATV_Titulo LIKE '%$conteudoPesquisado%' ORDER BY TABATV_Data ASC";
+                        $atividades = "SELECT * FROM TABATV WHERE TABUSU_Codigo = $codPerfil AND TABATV_Titulo LIKE '%$conteudoPesquisado%' ORDER BY TABATV_Data ASC";
                     }                    
                 }else{
                     if(isset($_GET['categoriafiltrada'])){
-                        $atividades = "SELECT * FROM TABATV WHERE CATATV_Codigo = $categoriafiltrada AND TABUSU_Codigo = ". $_SESSION['CODIGO']. " ORDER BY TABATV_Data ASC";
+                        $atividades = "SELECT * FROM TABATV WHERE CATATV_Codigo = $categoriafiltrada AND TABUSU_Codigo = $codPerfil ORDER BY TABATV_Data ASC";
                     }else{
-                        $atividades = "SELECT * FROM TABATV WHERE TABUSU_Codigo = ". $_SESSION['CODIGO']. " ORDER BY TABATV_Data ASC";                    
+                        $atividades = "SELECT * FROM TABATV WHERE TABUSU_Codigo = $codPerfil ORDER BY TABATV_Data ASC";                    
                     }                    
                 }                
                 $queryAtividades = $mysqli->query($atividades) or die(mysql_error());
