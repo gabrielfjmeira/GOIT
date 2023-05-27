@@ -27,7 +27,7 @@
 
         if($arquivo['error']){
             //insere no banco de dados
-            $insertAtividade = "INSERT INTO TABATV (TABATV_Codigo, TABUSU_Codigo, TABATV_Titulo, TABATV_Descricao, CATATV_Codigo, TABATV_Localizacao, TABATV_Referencia, TABATV_Inscritos, TABATV_Data, TABATV_Hora, TABATV_Created) VALUES (NULL, $usuario, '$titulo', '$descricao', $categoria, '$localizacao', '$referencia', $inscritos, '$data', '$hora', now())";
+            $insertAtividade = "INSERT INTO TABATV (TABATV_Codigo, TABUSU_Codigo, TABATV_Titulo, TABATV_Descricao, CATATV_Codigo, TABATV_Localizacao, TABATV_Referencia, TABATV_Inscritos, TABATV_Data, TABATV_Hora, TABATV_Cancelada, TABATV_Created) VALUES (NULL, $usuario, '$titulo', '$descricao', $categoria, '$localizacao', '$referencia', $inscritos, '$data', '$hora', 0, now())";
             $queryInsertAtividade = $mysqli->query($insertAtividade) or die("Falha na execução do código sql" . $mysqli->error);
         }
 
@@ -39,13 +39,13 @@
         $deucerto = move_uploaded_file($arquivo["tmp_name"], $path);
         if($deucerto){
             //insere no banco de dados
-            $insertAtividade = "INSERT INTO TABATV (TABATV_Codigo, TABUSU_Codigo, TABATV_Titulo, TABATV_Descricao, TABATV_Imagem, CATATV_Codigo, TABATV_Localizacao, TABATV_Referencia, TABATV_Inscritos, TABATV_Data, TABATV_Hora, TABATV_Created) VALUES (NULL, $usuario, '$titulo', '$descricao', '$path', $categoria, '$localizacao', '$referencia', $inscritos, '$data', '$hora', now())";
+            $insertAtividade = "INSERT INTO TABATV (TABATV_Codigo, TABUSU_Codigo, TABATV_Titulo, TABATV_Descricao, TABATV_Imagem, CATATV_Codigo, TABATV_Localizacao, TABATV_Referencia, TABATV_Inscritos, TABATV_Data, TABATV_Hora, TABATV_Cancelada, TABATV_Created) VALUES (NULL, $usuario, '$titulo', '$descricao', '$path', $categoria, '$localizacao', '$referencia', $inscritos, '$data', '$hora', 0, now())";
             $queryInsertAtividade = $mysqli->query($insertAtividade) or die("Falha na execução do código sql" . $mysqli->error);
         }       
         
     }else{
         //insere no banco de dados
-        $insertAtividade = "INSERT INTO TABATV (TABATV_Codigo, TABUSU_Codigo, TABATV_Titulo, TABATV_Descricao, CATATV_Codigo, TABATV_Localizacao, TABATV_Referencia, TABATV_Inscritos, TABATV_Data, TABATV_Hora, TABATV_Created) VALUES (NULL, $usuario, '$titulo', '$descricao', $categoria, '$localizacao', '$referencia', $inscritos, '$data', '$hora', now())";
+        $insertAtividade = "INSERT INTO TABATV (TABATV_Codigo, TABUSU_Codigo, TABATV_Titulo, TABATV_Descricao, CATATV_Codigo, TABATV_Localizacao, TABATV_Referencia, TABATV_Inscritos, TABATV_Data, TABATV_Hora, TABATV_Cancelada, TABATV_Created) VALUES (NULL, $usuario, '$titulo', '$descricao', $categoria, '$localizacao', '$referencia', $inscritos, '$data', '$hora', 0, now())";
         $queryInsertAtividade = $mysqli->query($insertAtividade) or die("Falha na execução do código sql" . $mysqli->error);    
     }         
 
