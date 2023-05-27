@@ -43,7 +43,7 @@
                 <h3>Nome do Produto</h3>
             </div>
 
-            <img src="../../ASSETS/paisagem.png" alt="post-image">
+            <img src="../../ASSETS/paisagem.png" alt="post-image" style="cursor:pointer"/>
 
             <div class="desc-wrapper wrapper">
                 <h2>Descrição</h2>
@@ -58,7 +58,7 @@
                 </div>
             </div>
 
-            <button type="button" onclick="location.reload();">Fechar</button>      
+            <button type="button" onclick="location.reload();" style="cursor:pointer">Fechar</button>      
         </div>
 
     </div>
@@ -121,7 +121,7 @@
                 $postagem = 0;?>
                 
                 <br>
-                <a href="./anuncio_insert.php">Publicar Anúncio</a>
+                <button onclick= "location.href='./anuncio_insert.php'">Publicar Anúncio</button>
                 <br>
 
                 <div class="title-wrapper">
@@ -133,13 +133,12 @@
                     while($produto = mysqli_fetch_array($queryProdutos)){?>
                         <div class="event">
                             <div class="title-post">                                
-                                <h5><?php echo $produtos['TABPRO_Nome'];?></h5>
-                                <ion-icon name="calendar-clear"></ion-icon>
+                                <h5><?php echo $produto['TABPRO_Nome'];?></h5>
                             </div>
                 
                             <?php                                
-                                //Carrega o apelido/fantasia do Criador da Atividade ao Ar Livre
-                                $usuario = $atividade['TABUSU_Codigo'];
+                                //Carrega o apelido/fantasia do Criador do Anúncio
+                                $usuario = $produto['TABUSU_Codigo'];
                                 $registroUsuario = "SELECT * FROM TABUSU WHERE TABUSU_Codigo = $usuario";                       
                                 $queryRegistroUsuario = $mysqli->query($registroUsuario) or die(mysql_error());
                                 $usuario_data = mysqli_fetch_array($queryRegistroUsuario);
@@ -167,7 +166,7 @@
                                 $descricao_sm = str_replace("\r", '', $descricao_bd);                                
                             ?>
 
-                            <a class="sm" style="cursor: pointer;" onclick="modalPostView('<?php echo $produto['TABPRO_Nome']; ?>','<?php echo $nomeImagem;?>', '<?php echo $descricao_sm; ?>', '<?php echo $nomeIcon;?>', <?php echo $produto['TABUSU_Codigo']?>,'<?php echo $apelido?>');" style="cursor: pointer;">                            
+                            <a class="sm" style="cursor: pointer;" onclick="modalPostView('<?php echo $produto['TABPRO_Nome']; ?>','<?php echo $nomeImagem;?>', '<?php echo $descricao_sm; ?>', '<?php echo $nomeIcon;?>', <?php echo $produto['TABUSU_Codigo']?>,'<?php echo $apelido?>', '<?php echo $produto['TABPRO_Url'] ?>');" style="cursor: pointer;">                            
                                 Saiba mais                                        
                             </a>
                             
@@ -175,7 +174,7 @@
                             <?php
                             if($_SESSION['CODIGO'] == $produto['TABUSU_Codigo']){?>                            
                                 
-                                <a href="../atividades_ao_ar_livre/update/update_atividade.php?codigo=<?php echo $atividade['TABATV_Codigo'];?>" style="cursor: pointer;">Editar Anúncio</a>
+                                <a href="./anuncio_update.php?codigo=<?php echo $produto['TABPRO_Codigo'];?>" style="cursor: pointer;">Editar Anúncio</a>
 
                                 
                                 <a onclick="apagarProduto('<?php echo $produto['TABPRO_Nome']?>', <?php echo $produto['TABPRO_Codigo']?>)" style="cursor: pointer;">Excluir Anúncio</a>
@@ -210,7 +209,7 @@
         function apagarProduto(nome, codigo){
             let text = "Confirma apagar o anúncio " + nome + "?";
             if (confirm(text) == true) {
-                window.location.href = "../atividades_ao_ar_livre/delete/delete_atividadePHP.php?codigo="+codigo; 
+                window.location.href = "./anuncio_delete.php?codigo="+codigo; 
             }  
         }
 
@@ -223,10 +222,11 @@
             modalProduct.setAttribute("style" , "display: ")
         }        
 
-        function modalPostView(nome, imagem, descricao, imgIcon, perfil, usuario) {
+        function modalPostView(nome, imagem, descricao, imgIcon, perfil, usuario, url) {
             var title = document.querySelector(".title-post h3")
             title.innerHTML = nome    
             var image = document.querySelector(".modal-post img")
+            image.setAttribute("onclick", "location.href='"+ url + "';")
             image.setAttribute("src", "./arquivos/"+imagem)          
             var description = document.querySelector(".desc-wrapper p")
             description.innerHTML = descricao                                                                                                                   
