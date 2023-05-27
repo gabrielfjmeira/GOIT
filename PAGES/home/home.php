@@ -10,6 +10,17 @@
     if($_SESSION['TIPOUSUARIO'] == 4){
         header ("Location: ../perfil/perfil.php");
     }
+
+    //Conteúdo Pesquisado
+    if(isset($_POST['searchTXT'])){
+        $conteudoPesquisado = $_POST['searchTXT'];
+    }
+
+    //Categoria Filtrada
+    if(isset($_GET['categoriafiltrada'])){
+        $categoriafiltrada = $_GET['categoriafiltrada'];        
+    }
+    
 ?>
 
 <!DOCTYPE html>
@@ -87,19 +98,50 @@
         </header>
     
         <main>            
-
-            <div class="search-wrapper flex" style="cursor: pointer;">
-                <ion-icon name="search-outline"></ion-icon>
-                <input type="text" id="search-input" placeholder="Search" onclick="searchDesenvolvimento()">
-            </div>
-                       
+            
+            <!--Barra de Pesquisa-->            
+            <form id="barraPesquisa" class = "form" name="barraPesquisa" <?php 
+                if(isset($_GET['categoriafiltrada'])){?>
+                    action="./home.php?categoriafiltrada=<?php echo $categoriafiltrada;?>" 
+                    <?php
+                }else{?>
+                    action="./home.php"
+                    <?php
+                }
+            ?> method="POST">
+                <div class="search-wrapper flex" style="cursor: pointer;">
+                    <ion-icon name="search-outline"></ion-icon>
+                    <?php 
+                    if(isset($_POST['searchTXT']) && $conteudoPesquisado <> ""){?>
+                        <input type="text" id="search-input" name="searchTXT" value="<?php echo $conteudoPesquisado;?>">
+                        <?php 
+                    }else{?>
+                        <input type="text" id="search-input" name="searchTXT" placeholder="Pesquisar">
+                        <?php
+                    }?>
+                    <button type="Submit"> Buscar </button>
+                </div>
+            </form>                                   
 
             <section class="eventsAndGroups flex">
 
                 <?php              
                 
                 //Imprime Atividades ao Ar Livre         
-                $atividades = "SELECT * FROM TABATV ORDER BY TABATV_Data ASC";                    
+                if(isset($_POST['searchTXT']) && $conteudoPesquisado <> ""){
+                    if(isset($_GET['categoriafiltrada'])){
+                        $atividades = "SELECT * FROM TABATV WHERE CATATV_Codigo = $categoriafiltrada AND TABATV_Titulo LIKE '%$conteudoPesquisado%' ORDER BY TABATV_Data ASC";
+                    }else{
+                        $atividades = "SELECT * FROM TABATV WHERE TABATV_Titulo LIKE '%$conteudoPesquisado%' ORDER BY TABATV_Data ASC";
+                    }                    
+                }else{
+                    if(isset($_GET['categoriafiltrada'])){
+                        $atividades = "SELECT * FROM TABATV WHERE CATATV_Codigo = $categoriafiltrada ORDER BY TABATV_Data ASC";
+                    }else{
+                        $atividades = "SELECT * FROM TABATV ORDER BY TABATV_Data ASC";                    
+                    }                    
+                }
+                
                 $queryAtividades = $mysqli->query($atividades) or die(mysql_error());
                 $postagem = 0;?>
 
@@ -343,10 +385,7 @@
                 }
             }); 
         }
-
-        function searchDesenvolvimento(){
-            document.getElementById('search-input').placeholder = "Esta funcionalidade segue em desenvolvimento";
-        }
+       
     </script>
 </body>
 </html>
