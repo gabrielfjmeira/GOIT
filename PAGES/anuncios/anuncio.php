@@ -37,26 +37,30 @@
     
     <div class="background-blur" style="display: none;" onclick="exitModal();">
         
-        <div class="modal-post" style="display: none;">
-            <div class="title-post">                
-                <ion-icon name="calendar-clear"></ion-icon>
-                <h3>Nome do Produto</h3>
-            </div>
+        <div class="modal-product" style="display: none;">
 
-            <img src="../../ASSETS/paisagem.png" alt="post-image" style="cursor:pointer"/>
-
-            <div class="desc-wrapper wrapper">
-                <h2>Descrição</h2>
-                <p>Descrição do Produto</p>
-            </div>
-
-            <div class="instructor-wrapper wrapper">
-                <h2>Anunciante <ion-icon name="man"></ion-icon> </h2>
+            <div class="product-wrapper wrapper">                
                 <div class="instructor">
-                    <img src="../../assets/bibo.png" alt="instrutor image">
+                    <img src="../../assets/bibo.png" alt="instrutor image" style="cursor:pointer"/>
                     <a href="#" class="user">Loja</a>
                 </div>
             </div>
+
+            <div class="product-wrapper wrapper">                
+                <ion-icon name="pricetag-outline"></ion-icon>
+                <h3>Nome do Produto</h3>
+            </div>
+
+            <div class="img-wrapper wrapper">
+                <img src="../../ASSETS/paisagem.png" alt="post-image" style="cursor:pointer"/>
+            </div>
+            
+            <div class="desc-wrapper wrapper">
+                <h2>Valor</h2>
+                <p>Valor do Produto</p>
+            </div>                        
+
+            <button id="btnSite" type="button" onclick="" style="cursor:pointer">Visitar Anúncio</button>
 
             <button type="button" onclick="location.reload();" style="cursor:pointer">Fechar</button>      
         </div>
@@ -68,7 +72,7 @@
 
         <!-- //Imprime as Categorias para Filtrar a Aplicação -->
         <header class="activities-list flex">
-            <?php include('../templates/categorias.php');
+            <?php include('../templates/categorias_anuncio.php');
             ?>
         </header>
     
@@ -77,10 +81,10 @@
             <!--Barra de Pesquisa-->            
             <form id="barraPesquisa" class = "form" name="barraPesquisa" <?php 
                 if(isset($_GET['categoriafiltrada'])){?>
-                    action="./home.php?categoriafiltrada=<?php echo $categoriafiltrada;?>" 
+                    action="./anuncio.php?categoriafiltrada=<?php echo $categoriafiltrada;?>" 
                     <?php
                 }else{?>
-                    action="./home.php"
+                    action="./anuncio.php"
                     <?php
                 }
             ?> method="POST">
@@ -99,7 +103,6 @@
             </form>                                   
 
             <section class="eventsAndGroups flex">
-
                 <?php              
                 
                 //Imprime Meus Anúncios        
@@ -131,11 +134,7 @@
                 <?php
                 if ($queryProdutos->num_rows > 0){
                     while($produto = mysqli_fetch_array($queryProdutos)){?>
-                        <div class="event">
-                            <div class="title-post">                                
-                                <h5><?php echo $produto['TABPRO_Nome'];?></h5>
-                            </div>
-                
+                        <div class="event">                                            
                             <?php                                
                                 //Carrega o apelido/fantasia do Criador do Anúncio
                                 $usuario = $produto['TABUSU_Codigo'];
@@ -155,18 +154,15 @@
                                 $lojista_data = mysqli_fetch_array($queryLojista);
                                 $apelido = $lojista_data['TABLOJ_Fantasia'];
                                 $postagem += 1; 
-
-                                if(substr($produto['TABPRO_Imagem'], -4) == ".jpg" || substr($produto['TABPRO_Imagem'], -4) == ".png" ){
-                                    $nomeImagem = substr($produto['TABPRO_Imagem'], -17);
-                                }else{
-                                    $nomeImagem = substr($produto['TABPRO_Imagem'], -18);
-                                };
-
-                                $descricao_bd = str_replace("\n", '', $produto['TABPRO_Descricao']);                                
-                                $descricao_sm = str_replace("\r", '', $descricao_bd);                                
+                                                                                              
                             ?>
 
-                            <a class="sm" style="cursor: pointer;" onclick="modalPostView('<?php echo $produto['TABPRO_Nome']; ?>','<?php echo $nomeImagem;?>', '<?php echo $descricao_sm; ?>', '<?php echo $nomeIcon;?>', <?php echo $produto['TABUSU_Codigo']?>,'<?php echo $apelido?>', '<?php echo $produto['TABPRO_Url'] ?>');" style="cursor: pointer;">                            
+                            <div class="produto-post">                                
+                                <img src="<?php echo $produto['TABPRO_Imagem'];?>" 
+                                onclick="modalProductView('<?php echo $produto['TABPRO_Nome']; ?>','<?php echo $produto['TABPRO_Imagem']?>', <?php echo $produto['TABPRO_Valor']; ?>, '<?php echo $nomeIcon;?>', <?php echo $produto['TABUSU_Codigo']?>,'<?php echo $apelido?>', '<?php echo $produto['TABPRO_Url'] ?>');" style="cursor: pointer;"/>
+                            </div>
+
+                            <a class="sm" style="cursor: pointer;" onclick="modalProductView('<?php echo $produto['TABPRO_Nome']; ?>','<?php echo $produto['TABPRO_Imagem']?>', <?php echo $produto['TABPRO_Valor']; ?>, '<?php echo $nomeIcon;?>', <?php echo $produto['TABUSU_Codigo']?>,'<?php echo $apelido?>', '<?php echo $produto['TABPRO_Url'] ?>');" style="cursor: pointer;">                            
                                 Saiba mais                                        
                             </a>
                             
@@ -215,21 +211,18 @@
 
         bgblur = document.querySelector(".background-blur")
         modalProduct = document.querySelector(".modal-product")
-        modalPost = document.querySelector(".modal-post")
+        modalPost = document.querySelector(".modal-post")               
 
-        function modalProductView() {
-            bgblur.setAttribute("style" , "display: ")
-            modalProduct.setAttribute("style" , "display: ")
-        }        
-
-        function modalPostView(nome, imagem, descricao, imgIcon, perfil, usuario, url) {
+        function modalProductView(nome, imagem, valor, imgIcon, perfil, usuario, url) {
             var title = document.querySelector(".title-post h3")
             title.innerHTML = nome    
-            var image = document.querySelector(".modal-post img")
+            var btnShop = document.querySelector("#btnSite")
+            btnShop.setAttribute("onclick", "location.href='"+ url + "';")
+            var image = document.querySelector(".img-wrapper img")
             image.setAttribute("onclick", "location.href='"+ url + "';")
-            image.setAttribute("src", "./arquivos/"+imagem)          
-            var description = document.querySelector(".desc-wrapper p")
-            description.innerHTML = descricao                                                                                                                   
+            image.setAttribute("src", imagem)          
+            var value = document.querySelector(".desc-wrapper p")
+            value.innerHTML = "R$" + valor                                                                                                                   
             var icon = document.querySelector(".instructor-wrapper img")
             if (imgIcon != ''){
                 icon.setAttribute("src", "../perfil/arquivos/"+imgIcon)
@@ -237,6 +230,7 @@
                 icon.setAttribute("src", "../../ASSETS/buttonPerfil.svg")
             } 
             var user = document.querySelector(".user")   
+            icon.setAttribute("onclick", "location.href='../perfil/perfil.php?perfil=" + perfil + "';")
             user.setAttribute("onclick", "location.href='../perfil/perfil.php?perfil=" + perfil + "';")         
             user.innerHTML = usuario          
             bgblur.setAttribute("style" , "display: ")

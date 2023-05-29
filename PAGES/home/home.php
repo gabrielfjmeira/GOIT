@@ -108,9 +108,7 @@
             </div>
 
             <button type="button" onclick="location.reload();">Fechar</button>      
-        </div>
-
-    </div>
+        </div>       
 
     <div id="app">
         <img onclick="location.href= './home.php'" src="../../ASSETS/Logo.png" alt="Logo go it" id="logo-header" style="cursor: pointer;">
@@ -328,8 +326,8 @@
        
                 <?php 
                 }
-                ?>
-            </section>
+                ?>                
+            </section>            
         </main>
         
         <footer>
@@ -367,12 +365,7 @@
 
         bgblur = document.querySelector(".background-blur")
         modalProduct = document.querySelector(".modal-product")
-        modalPost = document.querySelector(".modal-post")
-
-        function modalProductView() {
-            bgblur.setAttribute("style" , "display: ")
-            modalProduct.setAttribute("style" , "display: ")
-        }        
+        modalPost = document.querySelector(".modal-post")              
 
         function modalPostView(titulo, imagem, descricao, data, hora, local, referencia, postagem, imgIcon, perfil, usuario) {
             var title = document.querySelector(".title-post h3")
@@ -411,6 +404,8 @@
             bgblur.setAttribute("style" , "display: ")
             modalPost.setAttribute("style" , "display: ")
         }   
+
+
 
         function exitModal(){
             bgblur.addEventListener("click", function(event){

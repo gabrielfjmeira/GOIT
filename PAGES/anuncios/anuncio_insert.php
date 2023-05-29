@@ -40,7 +40,7 @@
         </header>
         
         <!--Formulário-->    
-        <form id="formInsertAtividade" name="formInsertAtividade" action="anuncio_insertPHP.php" method="POST" enctype="multipart/form-data">
+        <form id="formInsertAnuncio" name="formInsertAnuncio" action="anuncio_insertPHP.php" method="POST" enctype="multipart/form-data" onsubmit="return formInsertAnuncioOnSubmit();">
             <div class="type-publi">
                 <h3 class="selected">Publicar Anúncio</h3>
             </div>
@@ -70,14 +70,7 @@
                         }
                     ?>                                                           
                 </select>
-            </div>
-
-            <div class="input-wrapper">
-                <label for="">Descrição*</label>
-                <div class="desc-input-wrapper">
-                    <textarea id="txtDescricao" name="txtDescricao" placeholder="Ex: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eget ligula aliquet, iaculis est eu, ornare velit. Cras vestibulum venenatis blandit." required></textarea>
-                </div>
-            </div>
+            </div>            
 
             <div class="input-wrapper">
                 <label for="">Upload da imagem do produto</label>
@@ -85,6 +78,14 @@
                     <img id="imagemSelecionada" src="../../ASSETS/uploadIcon.svg" style="max-width: 8rem; max-height: 8rem;" class="uploadIcon">                    
                     <input type="file" id="imgProduto" name="imgProduto" accept="image/*" onchange="validaImagem(this);" required/> 
                 </label>
+            </div>
+
+            <div class="input-wrapper">
+                <label for="">Valor*</label>
+                <div class="title-input-wrapper">
+                    <input type="number" id="nbrValor" name="nbrValor" step="any" min="1" max="99999.99" placeholder="Ex: 49.99" required/>                    
+                    <small id="errorValor" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>
+                </div>
             </div>
 
             <div class="input-wrapper">
@@ -147,6 +148,23 @@
             } else{
                 document.getElementById('imagemSelecionada').setAttribute('src', '#');
             }
+        }
+
+        function formInsertAnuncioOnSubmit(){
+            //Cria Variáveis
+            let nbrValor = document.getElementById('nbrValor');
+            let errorValor = document.getElementById('errorValor');           
+            
+            if (nbrValor.value <= 0){
+                nbrValor.style.border = "1px solid #DB5A5A";
+                errorValor.innerHTML = "Valor deve ser um número positivo superior a 0!";
+                nbrValor.focus();
+                return false;
+            }else{
+                errorValor.innerHTML = "";
+            }                                                       
+                        
+            return true;
         }
 
     </script>   
