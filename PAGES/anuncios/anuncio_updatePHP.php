@@ -8,11 +8,11 @@
     } 
 
     //Definição de Variáveis
-    $codigo = $_POST['codProduto'];
-    $nome = $_POST['txtNome'];
-    $descricao = nl2br($_POST['txtDescricao']);    
+    $codigo    = $_POST['codProduto'];
+    $nome      = $_POST['txtNome'];
+    $valor     = $_POST['nbrValor'];    
     $categoria = $_POST['categoriaProduto'];
-    $url = $_POST['txtURL'];
+    $url       = $_POST['txtURL'];
 
     if (isset($_FILES['imgProduto']) && count($_FILES) > 0){        
         $arquivo = $_FILES['imgProduto'];                    
@@ -23,7 +23,7 @@
 
         if($arquivo['error']){
             //Update no banco de dados
-            $updateProduto = "UPDATE TABPRO SET TABPRO_Nome='$nome', TABPRO_Descricao='$descricao', CATATV_Codigo = $categoria, TABPRO_Url='$url' WHERE TABPRO_Codigo = $codigo";        
+            $updateProduto = "UPDATE TABPRO SET TABPRO_Nome='$nome', TABPRO_Valor=$valor, CATATV_Codigo = $categoria, TABPRO_Url='$url' WHERE TABPRO_Codigo = $codigo";        
             $queryUpdateProduto = $mysqli->query($updateProduto) or die("Falha na execução do código sql" . $mysqli->error);           
         }                   
 
@@ -35,12 +35,12 @@
         $deucerto = move_uploaded_file($arquivo["tmp_name"], $path);
         if($deucerto){
             //Update no banco de dados
-            $updateProduto = "UPDATE TABPRO SET TABPRO_Nome='$nome', TABPRO_Descricao='$descricao', TABPRO_Imagem = '$path', CATATV_Codigo = $categoria, TABPRO_Url='$url' WHERE TABPRO_Codigo = $codigo";        
+            $updateProduto = "UPDATE TABPRO SET TABPRO_Nome='$nome', TABPRO_Valor=$valor, TABPRO_Imagem = '$path', CATATV_Codigo = $categoria, TABPRO_Url='$url' WHERE TABPRO_Codigo = $codigo";        
             $queryUpdateProduto = $mysqli->query($updateProduto) or die("Falha na execução do código sql" . $mysqli->error);      
         }
     }else{  
         //Update no banco de dados
-        $updateProduto = "UPDATE TABPRO SET TABPRO_Nome='$nome', TABPRO_Descricao='$descricao', CATATV_Codigo = $categoria, TABPRO_Url='$url' WHERE TABPRO_Codigo = $codigo";        
+        $updateProduto = "UPDATE TABPRO SET TABPRO_Nome='$nome', TABPRO_Valor=$valor, CATATV_Codigo = $categoria, TABPRO_Url='$url' WHERE TABPRO_Codigo = $codigo";        
         $queryUpdateProduto = $mysqli->query($updateProduto) or die("Falha na execução do código sql" . $mysqli->error);    
     }
 ?>                         
