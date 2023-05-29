@@ -121,12 +121,8 @@
                 }
                 
                 $queryProdutos = $mysqli->query($produtos) or die(mysql_error());
-                $postagem = 0;?>
+                $postagem = 0;?>               
                 
-                <br>
-                <button onclick= "location.href='./anuncio_insert.php'">Publicar Anúncio</button>
-                <br>
-
                 <div class="title-wrapper">
                     <h2>Anúncios(<?php echo $queryProdutos->num_rows;?>)</h2>
                 </div>
@@ -193,7 +189,7 @@
         <footer>
             <?php 
                 $assets_path = '../../ASSETS';
-                include '../templates/footers/navBar.php';                
+                include '../templates/footers/navBarAnuncio.php';                
             ?>
         </footer>
     </div>
