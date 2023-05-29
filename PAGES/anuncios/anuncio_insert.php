@@ -29,10 +29,10 @@
             <img src="../../ASSETS/Logo.png" alt="logo" class="logo" 
             <?php
                 if($_SESSION['TIPOUSUARIO'] == 4){?>
-                    onclick="location.href='../../perfil/perfil.php'" 
+                    onclick="location.href='../perfil/perfil.php'" 
                 <?php
                 }else{?>
-                    onclick="location.href='../../home/home.php'" 
+                    onclick="location.href='../home/home.php'" 
                 <?php
                 }            
             ?>   
@@ -101,7 +101,7 @@
         <footer>
             <?php 
                 $assets_path = '../../ASSETS';
-                include '../templates/footers/navBarAddPub.php' 
+                include '../templates/footers/navBarAddAnuncio.php' 
             ?>
         </footer>
     </div>

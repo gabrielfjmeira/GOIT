@@ -126,7 +126,7 @@
         <footer>
             <?php 
                 $assets_path = '../../ASSETS';
-                include '../templates/footers/navBarAddPub.php' 
+                include '../templates/footers/navBarAddAnuncio.php' 
             ?>
         </footer>
     </div>
