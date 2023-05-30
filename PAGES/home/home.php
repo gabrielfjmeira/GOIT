@@ -108,7 +108,8 @@
             </div>
 
             <button type="button" onclick="location.reload();">Fechar</button>      
-        </div>       
+        </div>  
+    </div>     
 
     <div id="app">
         <img onclick="location.href= './home.php'" src="../../ASSETS/Logo.png" alt="Logo go it" id="logo-header" style="cursor: pointer;">
@@ -316,8 +317,7 @@
                                 <!--<a onclick="apagarAtividade('<?php //echo $atividade['TABATV_Titulo']?>', <?php //echo $atividade['TABATV_Codigo']?>)" style="cursor: pointer;">Excluir Atividade</a>-->
                             <?php
                             }
-                            ?>
-                                          
+                            ?>                                          
                         </div><?php               
                     }                       
                 }else{ ?>
@@ -404,8 +404,6 @@
             bgblur.setAttribute("style" , "display: ")
             modalPost.setAttribute("style" , "display: ")
         }   
-
-
 
         function exitModal(){
             bgblur.addEventListener("click", function(event){
