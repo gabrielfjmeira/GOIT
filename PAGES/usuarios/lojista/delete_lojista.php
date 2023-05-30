@@ -10,13 +10,13 @@
     //Excluí a o perfil se Receber seu Código    
     $codigo = $_SESSION['CODIGO'];               
 
-    //Verifica se é inscrito em uma atividade ao ar livre
-    $inscrito = "SELECT * FROM PARATV WHERE TABUSU_Codigo = $codigo";
-    $queryInscrito = $mysqli->query($inscrito) or die("Falha na execução do código sql" . $mysqli->error);
+    //Excluí os anúncios do lojista
+    $anuncio = "SELECT * FROM TABPRO WHERE TABUSU_Codigo = $codigo";
+    $queryAnuncio = $mysqli->query($anuncio) or die("Falha na execução do código sql" . $mysqli->error);
 
-    if($queryInscrito->num_rows > 0){                                      
-        $deleteParticipacao = "DELETE FROM PARATV WHERE TABUSU_Codigo = $codigo";
-        $queryDeleteParticipacao = $mysqli->query($deleteParticipacao) or die("Falha na execução do código sql" . $mysqli->error);           
+    if($queryAnuncio->num_rows > 0){                                      
+        $deleteAnuncio = "DELETE FROM TABPRO WHERE TABUSU_Codigo = $codigo";
+        $queryDeleteAnuncio = $mysqli->query($deleteAnuncio) or die("Falha na execução do código sql" . $mysqli->error);           
     }
 
     //Verifica se o usuário tem atividades ao ar livre criadas
