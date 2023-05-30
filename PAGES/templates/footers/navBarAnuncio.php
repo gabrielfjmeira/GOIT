@@ -36,9 +36,9 @@
         <button style="display: none;"></button>
     <?php
     }?>                 
-    <button onclick="location.href = './anuncio_insert.php'" style="cursor:pointer">
+      <button onclick="location.href = '../publicar/publicar.php'" style="cursor:pointer">
         <img src="<?php echo $assets_path ?>/buttonNewPubli.svg" alt="">
-        <p>Publicar Anúncio</p>
+        <p>Publicar</p>
     </button>
     <?php 
     //Verifica se é um Lojista
