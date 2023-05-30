@@ -128,9 +128,7 @@ main {
     margin-top: 2.4rem;
 
     display: grid;
-    grid-template-areas: 
-                "a b"
-                "a c";
+    grid-template-columns: 1fr;
     row-gap: 1.6rem;
     column-gap: 3.2rem;
 }
@@ -143,23 +141,36 @@ main {
     flex-direction: column;
     background: var(--white-gray-bg-boxes);
     border-radius: 1.5rem;
-    font-weight: 600;
-    font-size: 1.2rem;
+    font-weight: 500;
+    font-size: 1.4rem;
 }
 
 .product-principal {
-    grid-area: a;
 
-    padding: .8rem 4rem 1.2rem;
+    padding: 2.4rem 4rem;
+
+}
+
+.product-principal .image-enterprise-wrapper {
+    width: 6.4rem;
+    height: 5.6rem;
+
+    margin: 0 auto 1.6rem;
 
 }
 
 .product-principal .enterprise-logo {
-    width: 8.8rem;
+    border-radius: 50%;
+    object-fit: cover;
+    width: 5.6rem;
 }
 
 .product-principal .product-image {
-    width: 12rem;
+    width: 16rem;
+}
+
+.product-principal a {
+    margin-top: 1.6rem;
 }
 
 .product-second img,
@@ -174,7 +185,6 @@ main {
 }
 
 .product-third {
-    grid-area: c;
 
     padding: .8rem 1.6rem;
 }

@@ -63,6 +63,20 @@
     
     <div class="background-blur" style="display: none;" onclick="exitModal();">
         
+        <div class="modal-product" style="display: none;">
+            <img src="./assets/centauro-logo.png" alt="logo-centauro">
+
+            <div class="product-wrapper">
+                <img src="./assets/shoe-nike.png" alt="product image">
+                <div class="price">
+                    <p>Até 6x sem juros</p>
+                    <h3>R$ 139,00</h3>
+                </div>
+            </div>
+
+            <button onclick="modalProductView();" href ="">Visitar site</button>
+        </div>
+
         <div class="modal-post" style="display: none;">            
             <div class="title-post">                
                 <ion-icon name="calendar-clear"></ion-icon>
@@ -404,6 +418,11 @@
             bgblur.setAttribute("style" , "display: ")
             modalPost.setAttribute("style" , "display: ")
         }   
+
+        function modalProductView() {
+            bgblur.setAttribute("style" , "display: ")
+            modalProduct.setAttribute("style" , "display: ")
+        }
 
         function exitModal(){
             bgblur.addEventListener("click", function(event){
