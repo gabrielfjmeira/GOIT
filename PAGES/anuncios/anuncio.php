@@ -7,6 +7,11 @@
         header ("Location: ../../index.php?error=4");
     }   
 
+    //Verifica Se é Lojista
+    if ($_SESSION['TIPOUSUARIO'] !=4){
+        header ("Location: ../home/home.php");
+    } 
+
     //Conteúdo Pesquisado
     if(isset($_POST['searchTXT'])){
         $conteudoPesquisado = $_POST['searchTXT'];
