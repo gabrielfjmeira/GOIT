@@ -29,18 +29,7 @@
         <img src="<?php echo $assets_path ?>/buttonNewPubli.svg" alt="">
         <p>Publicar</p>
     </button>
-    <!-- //Verifica se é um Lojista -->
-    <?php
-    if ($_SESSION['TIPOUSUARIO'] == 4){?>
-        <button onclick="location.href= '../anuncios/anuncio.php' " style="cursor:pointer">
-            <img src="<?php echo $assets_path ?>/admin.svg" alt="" >
-            <p>Meus Anúncios</p>
-        </button>   
-    <?php 
-    }else{?>
-        <button style="display: none;"></button>
-    <?php
-    }?> 
+   
     <button onclick="location.href ='../perfil/perfil.php';" style="cursor:pointer">     
     <?php        
         $sqlUser = "SELECT * FROM TABUSU WHERE TABUSU_Codigo = " . $_SESSION['CODIGO'];            

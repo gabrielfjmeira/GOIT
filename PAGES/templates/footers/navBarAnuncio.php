@@ -11,7 +11,7 @@
     <img src="<?php echo $assets_path ?>/logoBlack.png" alt="Go It logotipo" 
     <?php
         if($_SESSION['TIPOUSUARIO'] == 4){?>
-            onclick="location.href='./perfil.php'"            
+            onclick="location.href='../perfil/perfil.php'"            
         <?php
         }else{?>
             onclick="location.href='../home/home.php'" 
