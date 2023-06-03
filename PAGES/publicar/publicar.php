@@ -47,17 +47,10 @@
 
             <div class="input-wrapper">
                 <label>Escolha o que Deseja Publicar</label>
-                    <div class = "input-pub">
-                        <div class="input-radio">
-                            <input type="radio" id="pub_p" name="tipo_pub" value="0" required>
-                            <label>Evento</label>
-                        </div>
-
-                        <div class="input-radio">
-                            <input type="radio" id="pub_a" name="tipo_pub" value="1" required>
-                            <label>Anúncio</label>
-                        </div>                    
-                    </div>
+                <select name="tipo_pub" id="">
+                    <option value="0"  id="pub_p" required>Evento</option>
+                    <option value="1"  id="pub_a" required>Anúncio</option>
+                </select>
             </div>
 
             <button id="submitButton" type="submit">Continuar</button>
