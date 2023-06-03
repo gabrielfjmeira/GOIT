@@ -150,17 +150,6 @@
                 </div>
             </form>                                   
 
-            <section class="products" style="display: none;">
-                <div class="product-principal">
-                    <img src="./assets/centauro-logo.png" alt="logo-enterprise" class="enterprise-logo">
-                    <img src="./assets/shoe-nike.png" alt="nike-shoe" class="product-image">
-                    <a href="#" onclick="modalProductView();">Visualizar o produto</a>
-
-                </div>
-
-            </section>
-
-
             <section class="products-wrapper">
                 <?php              
                 
@@ -190,7 +179,7 @@
                     <?php
                     if ($queryProdutos->num_rows > 0){
                         while($produto = mysqli_fetch_array($queryProdutos)){?>
-                            <div class="product-principal">                                            
+                            <div class="product-wrapper">                                            
                                 <?php                                
                                     //Carrega o apelido/fantasia do Criador do Anúncio
                                     $usuario = $produto['TABUSU_Codigo'];
@@ -213,9 +202,9 @@
                                                                                                 
                                 ?>
 
-                                <div class="image-enterprise-wrapper">
-                                    <img class="enterprise-logo" src="../perfil/arquivos/<?php echo $nomeIcon;?>" alt="logo-enterprise">
-                                </div>
+                                
+                                <img class="enterprise-logo" src="../perfil/arquivos/<?php echo $nomeIcon;?>" alt="logo-enterprise">
+                                
                                             
                                 <img class="product-image" src="<?php echo $produto['TABPRO_Imagem'];?>" 
                                 onclick="modalProductView('<?php echo $produto['TABPRO_Nome']; ?>','<?php echo $produto['TABPRO_Imagem']?>', <?php echo $produto['TABPRO_Valor']; ?>, '<?php echo $nomeIcon;?>', <?php echo $produto['TABUSU_Codigo']?>,'<?php echo $apelido?>', '<?php echo $produto['TABPRO_Url'] ?>');" style="cursor: pointer;"/>
