@@ -43,11 +43,7 @@
             margin-top: 2.4rem;
         }
 
-        .modal-product .img-wrapper img {
-            
-        }
-
-        .modal-product .product-wrapper {
+        .modal-product .product-wrapper-modal {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -55,13 +51,13 @@
             text-align: center;
         }
 
-        .modal-product .product-wrapper .price {
+        .modal-product .product-wrapper-modal .price {
             display: grid;
             gap: .8rem;
 
         }
 
-        .modal-product .product-wrapper .price p {
+        .modal-product .product-wrapper-modal .price p {
             font-weight: 300;
 
             font-size: 1.2rem;
@@ -70,7 +66,7 @@
 
         }
 
-        .modal-product .product-wrapper .price h3 {
+        .modal-product .product-wrapper-modal .price h3 {
             font-weight: 300;
             letter-spacing: 0.015em;
 
@@ -82,11 +78,6 @@
             margin-top: 1.6rem;
         }
 
-        .modal-product button.close-button {
-
-            background: var(--white);
-            color: var(--blue);
-        }
     </style>
     <link rel="icon" href="../../ASSETS/icon.ico"/>
 
@@ -100,7 +91,7 @@
         
         <div class="modal-product" style="display: none;">
                       
-            <div class="product-wrapper wrapper">
+            <div class="product-wrapper-modal wrapper">
                 <img class="enterprise-logo" src="../../assets/bibo.png" alt="loja image" style="cursor:pointer"/>
                 <p>Loja</p>
             </div>            
@@ -109,19 +100,17 @@
                 <ion-icon name="pricetag-outline"></ion-icon>
                 <h3>Nome do Produto</h3>
             </div>
-
             
             <img class="img-wrapper" src="../../ASSETS/paisagem.png" alt="post-image" style="cursor:pointer"/>
-            
             
             <div class="price-wrapper wrapper">
                 <h2>Valor</h2>
                 <p>Valor do Produto</p>
             </div>                        
 
-            <button id="btnSite" type="button" onclick="" style="cursor:pointer">Visitar Anúncio</button>
+            <button id="btnSite" type="button" onclick="">Visitar Anúncio</button>
 
-            <button class="close-button" type="button" onclick="location.reload();" style="cursor:pointer">Fechar</button>      
+            <button class="close-button-modal-product" type="button" onclick="location.reload();">Fechar</button>      
         </div>
 
     </div>
@@ -136,23 +125,6 @@
         </header>
     
         <main>            
-            
-        <div class="modal-product" style="display: none;">
-            <img class="enterprise-logo" src="./assets/centauro-logo.png" alt="logo-centauro" title="Centauro">
-            <p class="enterprise-name">Centauro</p>
-
-
-            <div class="product-wrapper">
-                <p class="title">Tenis</p>
-                <img src="./assets/shoe-nike.png" alt="product image">
-                <div class="price">
-                    <h3>R$ 139,00</h3>
-                </div>
-            </div>
-
-            <button id="btnSite" onclick="">Visitar site</button>
-            <button class="close-product">Fechar</button>
-        </div>
 
             <!--Barra de Pesquisa-->            
             <form id="barraPesquisa" class = "form" name="barraPesquisa" <?php 
@@ -211,7 +183,7 @@
                 $postagem = 0;?>               
                 
                 <div class="title-wrapper" style="margin-top: 2.4rem;">
-                    <h2>Anúncios(<?php echo $queryProdutos->num_rows;?>)</h2>
+                    <h2>Anúncios (<?php echo $queryProdutos->num_rows;?>) </h2>
                 </div>
 
                 <div class="products">
@@ -311,13 +283,13 @@
             image.setAttribute("src", imagem)          
             var value = document.querySelector(".modal-product .price-wrapper p")
             value.innerHTML = "R$" + valor                                                                                                                   
-            var icon = document.querySelector(".modal-product .product-wrapper img")
+            var icon = document.querySelector(".modal-product .product-wrapper-modal img")
             if (imgIcon != ''){
                 icon.setAttribute("src", "../perfil/arquivos/"+imgIcon)
             }else{
                 icon.setAttribute("src", "../../ASSETS/buttonPerfil.svg")
             } 
-            var user = document.querySelector(".modal-product .product-wrapper p")   
+            var user = document.querySelector(".modal-product .product-wrapper-modal p")   
             icon.setAttribute("onclick", "location.href='../perfil/perfil.php?perfil=" + perfil + "';")
             user.setAttribute("onclick", "location.href='../perfil/perfil.php?perfil=" + perfil + "';")         
             user.innerHTML = usuario          

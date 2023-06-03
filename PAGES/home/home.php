@@ -64,17 +64,21 @@
     <div class="background-blur" style="display: none;" onclick="exitModal();">
         
         <div class="modal-product" style="display: none;">
-            <img src="./assets/centauro-logo.png" alt="logo-centauro">
+            <img src="" alt="logo-centauro">
 
-            <div class="product-wrapper">
+            <div class="product-wrapper-modal">
                 <img src="./assets/shoe-nike.png" alt="product image">
-                <div class="price">
-                    <p>Até 6x sem juros</p>
-                    <h3>R$ 139,00</h3>
+                <div class="title-price">
+                    <p class="title"></p>
+                    <h3 class="price"></h3>
                 </div>
             </div>
 
-            <button onclick="modalProductView();" href ="">Visitar site</button>
+            <div>
+                <button onclick="" id="btnSite">Visitar site</button>
+                <button onclick="location.reload();" class="close-button-modal-product">Fechar</button>
+            </div>
+            
         </div>
 
         <div class="modal-post" style="display: none;">            
@@ -161,6 +165,86 @@
                     <button type="Submit"> Buscar </button>
                 </div>
             </form>                                   
+
+            <section class="products-section">
+                <?php              
+                
+                //Imprime Meus Anúncios        
+                if(isset($_POST['searchTXT']) && $conteudoPesquisado <> ""){
+                    if(isset($_GET['categoriafiltrada'])){
+                        $produtos= "SELECT * FROM TABPRO WHERE CATATV_Codigo = $categoriafiltrada  AND TABPRO_Nome LIKE '%$conteudoPesquisado%' ORDER BY TABPRO_Nome ASC LIMIT 2";
+                    }else{
+                        $produtos= "SELECT * FROM TABPRO WHERE TABPRO_Nome LIKE '%$conteudoPesquisado%' ORDER BY TABPRO_Nome ASC LIMIT 2";
+                    }                    
+                }else{
+                    if(isset($_GET['categoriafiltrada'])){
+                        $produtos= "SELECT * FROM TABPRO WHERE CATATV_Codigo = $categoriafiltrada ORDER BY TABPRO_Nome ASC LIMIT 2";
+                    }else{
+                        $produtos= "SELECT * FROM TABPRO ORDER BY TABPRO_Nome ASC LIMIT 2";                   
+                    }                    
+                }
+                
+                $queryProdutos = $mysqli->query($produtos) or die(mysql_error());
+                $postagem = 0;?>               
+
+                <div class="products">
+                    <?php
+                    if ($queryProdutos->num_rows > 0){
+                        while($produto = mysqli_fetch_array($queryProdutos)){?>
+                            <div class="product-wrapper">                                            
+                                <?php                                
+                                    //Carrega o apelido/fantasia do Criador do Anúncio
+                                    $usuario = $produto['TABUSU_Codigo'];
+                                    $registroUsuario = "SELECT * FROM TABUSU WHERE TABUSU_Codigo = $usuario";                       
+                                    $queryRegistroUsuario = $mysqli->query($registroUsuario) or die(mysql_error());
+                                    $usuario_data = mysqli_fetch_array($queryRegistroUsuario);
+                                    $tipousuario = $usuario_data['TIPUSU_Codigo'];
+
+                                    if(substr($usuario_data['TABUSU_Icon'], -4) == ".jpg" || substr($usuario_data['TABUSU_Icon'], -4) == ".png" ){
+                                        $nomeIcon = substr($usuario_data['TABUSU_Icon'], -17);
+                                    }else{
+                                        $nomeIcon = substr($usuario_data['TABUSU_Icon'], -18);
+                                    }; 
+
+                                    $lojista = "SELECT * FROM TABLOJ WHERE TABUSU_Codigo = $usuario";
+                                    $queryLojista = $mysqli->query($lojista) or die(mysql_error());
+                                    $lojista_data = mysqli_fetch_array($queryLojista);
+                                    $apelido = $lojista_data['TABLOJ_Fantasia'];
+                                                                                                
+                                ?>
+
+                                
+                                <img class="enterprise-logo" src="../perfil/arquivos/<?php echo $nomeIcon;?>" alt="logo-enterprise">
+                                
+                                            
+                                <img class="product-image" src="<?php echo $produto['TABPRO_Imagem'];?>" 
+                                onclick="modalProductView('<?php echo $produto['TABPRO_Nome']; ?>','<?php echo $produto['TABPRO_Imagem']?>', <?php echo $produto['TABPRO_Valor']; ?>, '<?php echo $nomeIcon;?>', <?php echo $produto['TABUSU_Codigo']?>,'<?php echo $apelido?>', '<?php echo $produto['TABPRO_Url'] ?>');" style="cursor: pointer;"/>
+                            
+
+                                <a class="sm" style="cursor: pointer;" onclick="modalProductView('<?php echo $produto['TABPRO_Nome']; ?>','<?php echo $produto['TABPRO_Imagem']?>', <?php echo $produto['TABPRO_Valor']; ?>, '<?php echo $nomeIcon;?>', <?php echo $produto['TABUSU_Codigo']?>,'<?php echo $apelido?>', '<?php echo $produto['TABPRO_Url'] ?>');" style="cursor: pointer;">                            
+                                    Visualizar produto                                      
+                                </a>
+                                
+                                
+                            </div><?php               
+                        }                       
+                    }
+                    else{ ?>
+                
+                        <h3>Sem Anúncios Cadastrados!</h3>
+
+                    <?php 
+                    }
+                    ?>
+                    <div class="product-wrapper">
+                        <img src="" alt="Logo da empresa">
+                        <img src="" alt="Imagem do produto">
+                        <a onclick="modalProductView('<?php echo $produto['TABPRO_Nome']; ?>','<?php echo $produto['TABPRO_Imagem']?>', <?php echo $produto['TABPRO_Valor']; ?>, '<?php echo $nomeIcon;?>', <?php echo $produto['TABUSU_Codigo']?>,'<?php echo $apelido?>', '<?php echo $produto['TABPRO_Url'] ?>');">Visualizar produto</a>
+                    </div>
+                </div>
+
+                <a href="" class="viewMoreProducts">Visualizar mais produtos</a>
+            </section>
 
             <section class="eventsAndGroups flex">
 
@@ -419,9 +503,30 @@
             modalPost.setAttribute("style" , "display: ")
         }   
 
-        function modalProductView() {
+        function modalProductView(titulo, imagem, valor, imgIcon, perfil, usuario, url) {
             bgblur.setAttribute("style" , "display: ")
             modalProduct.setAttribute("style" , "display: ")
+
+            var btnShop = document.querySelector("#btnSite")
+            btnShop.setAttribute("onclick", "location.href='"+ url + "';")
+            var image = document.querySelector(".modal-product .product-wrapper-modal img")
+            image.setAttribute("onclick", "location.href='"+ url + "';")
+            image.setAttribute("src", imagem)     
+            var title = document.querySelector(".modal-product .title")
+            title.innerHTML = titulo         
+            var value = document.querySelector(".modal-product .product-wrapper-modal .price")
+            value.innerHTML = "R$" + valor                                                                                                                   
+            var icon = document.querySelector(".modal-product .product-wrapper-modal img")
+            if (imgIcon != ''){
+                icon.setAttribute("src", "../perfil/arquivos/"+imgIcon)
+            }else{
+                icon.setAttribute("src", "../../ASSETS/buttonPerfil.svg")
+            } 
+            var user = document.querySelector(".modal-product .product-wrapper-modal p")   
+            icon.setAttribute("onclick", "location.href='../perfil/perfil.php?perfil=" + perfil + "';")
+            user.setAttribute("onclick", "location.href='../perfil/perfil.php?perfil=" + perfil + "';")         
+            user.innerHTML = usuario   
+
         }
 
         function exitModal(){
