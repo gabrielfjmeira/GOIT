@@ -43,6 +43,29 @@
     
     <div class="background-blur" style="display: none;" onclick="exitModal();">
         
+        <div class="modal-product" style="display: none;">
+            <div class="product-wrapper-modal wrapper">
+                <img class="enterprise-logo" src="../../assets/bibo.png" alt="loja image" style="cursor:pointer; border-radius:50%;"/>
+                <p style="cursor:pointer; color: var(--blue); margin-top: 0.5rem;">Loja</p>
+            </div>            
+
+            <div class="title" style="margin-top: 1.5rem; margin-bottom: 1.5rem;">                
+                <ion-icon name="pricetag-outline"></ion-icon>
+                <h3>Nome do Produto</h3>
+            </div>
+            
+            <img class="img-wrapper" src="../../ASSETS/paisagem.png" alt="post-image" style="cursor:pointer"/>
+            
+            <div class="price-wrapper wrapper" style="margin-top: 1.5rem">
+                <h2>Valor</h2>
+                <p>Valor do Produto</p>
+            </div>                        
+
+            <button id="btnSite" type="button" onclick="">Visitar Anúncio</button>
+
+            <button class="close-button-modal-product" type="button" onclick="location.reload();">Fechar</button>            
+        </div>
+
         <div class="modal-post" style="display: none;">
             <form action="participar.php" medthod="POST"></form>
             <div class="title-post">                
@@ -83,7 +106,7 @@
             <div class="instructor-wrapper wrapper">
                 <h2>Responsável <ion-icon name="man"></ion-icon> </h2>
                 <div class="instructor">
-                    <img src="../../assets/bibo.png" alt="instrutor image">
+                    <img src="../../assets/bibo.png" alt="instrutor image" style="cursor:pointer;">
                     <a href="#" class="user">Gabriel Felipe Jess Meira</a>
                 </div>
             </div>
@@ -213,12 +236,95 @@
                         <input type="text" id="search-input" name="searchTXT" value="<?php echo $conteudoPesquisado;?>">
                         <?php 
                     }else{?>
-                        <input type="text" id="search-input" name="searchTXT" placeholder="Pesquisar">
+                        <input type="text" id="search-input" name="searchTXT" placeholder="Pesquisar por eventos">
                         <?php
                     }?>
                     <button type="Submit"> Buscar </button>
                 </div>
             </form>          
+            
+            <?php
+                if($userData['TIPUSU_Codigo'] == 4){?>
+                    <section class="products-section">
+                        <?php                                      
+                        //Imprime os Anúncios                       
+                        if(isset($_GET['categoriafiltrada'])){
+                            $produtos= "SELECT * FROM TABPRO WHERE CATATV_Codigo = $categoriafiltrada AND TABUSU_Codigo = " . $codPerfil . " ORDER BY TABPRO_Nome ASC LIMIT 2";
+                        }else{
+                            $produtos= "SELECT * FROM TABPRO WHERE TABUSU_Codigo = " . $codPerfil . " ORDER BY TABPRO_Nome ASC LIMIT 2";                   
+                        }                    
+                                        
+                        $queryProdutos = $mysqli->query($produtos) or die(mysql_error());
+                        $postagem = 0;?>
+
+                        <div class="title-wrapper">
+                            <h2 style="margin-top: 2.4rem;">Produtos(<?php echo $queryProdutos->num_rows;?>)</h2>
+                        </div>
+
+                        <div class="products">
+                        <?php
+                            if ($queryProdutos->num_rows > 0){
+                                while($produto = mysqli_fetch_array($queryProdutos)){?>
+                                    <div class="product-wrapper">                                            
+                                        <?php                                
+                                            //Carrega o apelido/fantasia do Criador do Anúncio
+                                            $usuario = $produto['TABUSU_Codigo'];
+                                            $registroUsuario = "SELECT * FROM TABUSU WHERE TABUSU_Codigo = $usuario";                       
+                                            $queryRegistroUsuario = $mysqli->query($registroUsuario) or die(mysql_error());
+                                            $usuario_data = mysqli_fetch_array($queryRegistroUsuario);
+                                            $tipousuario = $usuario_data['TIPUSU_Codigo'];
+
+                                            if(substr($usuario_data['TABUSU_Icon'], -4) == ".jpg" || substr($usuario_data['TABUSU_Icon'], -4) == ".png" ){
+                                                $nomeIconLoja = substr($usuario_data['TABUSU_Icon'], -17);
+                                            }else{
+                                                $nomeIconLoja = substr($usuario_data['TABUSU_Icon'], -18);
+                                            }; 
+
+                                            $lojista = "SELECT * FROM TABLOJ WHERE TABUSU_Codigo = $usuario";
+                                            $queryLojista = $mysqli->query($lojista) or die(mysql_error());
+                                            $lojista_data = mysqli_fetch_array($queryLojista);
+                                            $apelido = $lojista_data['TABLOJ_Fantasia'];
+
+                                            if(substr($produto['TABPRO_Imagem'], -4) == ".jpg" || substr($produto['TABPRO_Imagem'], -4) == ".png" ){
+                                                $nomeImagemProduto = substr($produto['TABPRO_Imagem'], -17);
+                                            }else{
+                                                $nomeImagemProduto = substr($produto['TABPRO_Imagem'], -18);
+                                            };   
+
+
+                                                                                                        
+                                        ?>
+                                        
+                                        <img class="enterprise-logo" src="../perfil/arquivos/<?php echo $nomeIconLoja;?>" onclick="location.href='../perfil/perfil.php?perfil=<?php echo $produto['TABUSU_Codigo']?>'" alt="logo-enterprise" style="cursor:pointer">
+                                                                                            
+                                        <img class="product-image" src="../anuncios/arquivos/<?php echo $nomeImagemProduto;?>" 
+                                        onclick="modalProductView('<?php echo $produto['TABPRO_Nome']; ?>','<?php echo $nomeImagemProduto;?>', <?php echo $produto['TABPRO_Valor']; ?>, '<?php echo $nomeIconLoja;?>', <?php echo $produto['TABUSU_Codigo']?>,'<?php echo $apelido?>', '<?php echo $produto['TABPRO_Url'] ?>');" style="cursor: pointer;"/>
+                                    
+                                        <a class="sm" style="cursor: pointer;" onclick="modalProductView('<?php echo $produto['TABPRO_Nome']; ?>','<?php echo $nomeImagemProduto?>', <?php echo $produto['TABPRO_Valor']; ?>, '<?php echo $nomeIconLoja;?>', <?php echo $produto['TABUSU_Codigo']?>,'<?php echo $apelido?>', '<?php echo $produto['TABPRO_Url'] ?>');" style="cursor: pointer;">                            
+                                            Visualizar produto                                      
+                                        </a>
+                                        
+                                        
+                                    </div><?php               
+                                }                       
+                            }                    
+                            ?>
+                            
+                        </div>
+
+                        <?php
+                            if(isset($categoriafiltrada)){?>
+                                <a href="../anuncios/produtos.php?categoriafiltrada=<?php echo $categoriafiltrada;?>&perfil=<?php echo $codPerfil;?>" class="viewMoreProducts">Visualizar produtos de <?php echo $apelido;?></a>
+                                <?php
+                            }else{?>
+                                <a href="../anuncios/produtos.php?perfil=<?php echo $codPerfil;?>" class="viewMoreProducts">Visualizar produtos de <?php echo $apelido;?></a>
+                                <?php
+                            }                
+                        ?>                
+                    </section><?php
+                }
+            ?>
+            
 
             <section class="eventsAndGroups flex" style="margin-top: 1.6rem;">
                 <?php
@@ -239,7 +345,7 @@
                 $queryAtividades = $mysqli->query($atividades) or die(mysql_error());
                 $postagem = 0;?>
 
-                <div class="title-wrapper">
+                <div class="title-wrapper" style="margin-top: 2.4rem;">
                     <?php
                         if($codPerfil == $_SESSION['CODIGO']){
                             if($userData['TIPUSU_Codigo'] == 4){?>
@@ -457,7 +563,26 @@
         modalProduct = document.querySelector(".modal-product")
         modalPost = document.querySelector(".modal-post")
 
-        function modalProductView() {
+        function modalProductView(nome, imagem, valor, imgIcon, perfil, usuario, url) {
+            var title = document.querySelector(".modal-product .title")
+            title.innerHTML = nome    
+            var btnShop = document.querySelector("#btnSite")
+            btnShop.setAttribute("onclick", "location.href='"+ url + "';")
+            var image = document.querySelector(".modal-product .img-wrapper")
+            image.setAttribute("onclick", "location.href='"+ url + "';")
+            image.setAttribute("src", "../anuncios/arquivos/"+imagem)          
+            var value = document.querySelector(".modal-product .price-wrapper p")
+            value.innerHTML = "R$" + valor                                                                                                                   
+            var icon = document.querySelector(".modal-product .product-wrapper-modal img")
+            if (imgIcon != ''){
+                icon.setAttribute("src", "../perfil/arquivos/"+imgIcon)
+            }else{
+                icon.setAttribute("src", "../../ASSETS/buttonPerfil.svg")
+            } 
+            var user = document.querySelector(".modal-product .product-wrapper-modal p")   
+            icon.setAttribute("onclick", "location.href='../perfil/perfil.php?perfil=" + perfil + "';")
+            user.setAttribute("onclick", "location.href='../perfil/perfil.php?perfil=" + perfil + "';")         
+            user.innerHTML = usuario          
             bgblur.setAttribute("style" , "display: ")
             modalProduct.setAttribute("style" , "display: ")
         }        
@@ -492,8 +617,9 @@
                 icon.setAttribute("src", "../perfil/arquivos/"+imgIcon)
             }else{
                 icon.setAttribute("src", "../../ASSETS/buttonPerfil.svg")
-            } 
+            }            
             var user = document.querySelector(".user")   
+            icon.setAttribute("onclick", "location.href='../perfil/perfil.php?perfil=" + perfil + "';")
             user.setAttribute("onclick", "location.href='../perfil/perfil.php?perfil=" + perfil + "';")         
             user.innerHTML = usuario          
             bgblur.setAttribute("style" , "display: ")
