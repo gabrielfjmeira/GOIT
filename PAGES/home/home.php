@@ -63,21 +63,26 @@
     
     <div class="background-blur" style="display: none;" onclick="exitModal();">
         
-        <div class="modal-product" style="display: none;">
-            <img src="" alt="logo-centauro">
+        <div class="modal-product" style="display: none;"><div class="product-wrapper-modal wrapper">
+            <img class="enterprise-logo" src="../../assets/bibo.png" alt="loja image" style="cursor:pointer; border-radius:50%;"/>
+            <p style="cursor:pointer; color: var(--blue); margin-top: 0.5rem;">Loja</p>
+        </div>            
 
-            <div class="product-wrapper-modal">
-                <img src="./assets/shoe-nike.png" alt="product image">
-                <div class="title-price">
-                    <p class="title"></p>
-                    <h3 class="price"></h3>
-                </div>
-            </div>
+        <div class="title" style="margin-top: 1.5rem; margin-bottom: 1.5rem;">                
+            <ion-icon name="pricetag-outline"></ion-icon>
+            <h3>Nome do Produto</h3>
+        </div>
+        
+        <img class="img-wrapper" src="../../ASSETS/paisagem.png" alt="post-image" style="cursor:pointer"/>
+        
+        <div class="price-wrapper wrapper" style="margin-top: 1.5rem">
+            <h2>Valor</h2>
+            <p>Valor do Produto</p>
+        </div>                        
 
-            <div>
-                <button onclick="" id="btnSite">Visitar site</button>
-                <button onclick="location.reload();" class="close-button-modal-product">Fechar</button>
-            </div>
+        <button id="btnSite" type="button" onclick="">Visitar Anúncio</button>
+
+        <button class="close-button-modal-product" type="button" onclick="location.reload();">Fechar</button>
             
         </div>
 
@@ -169,21 +174,13 @@
             <section class="products-section">
                 <?php              
                 
-                //Imprime Meus Anúncios        
-                if(isset($_POST['searchTXT']) && $conteudoPesquisado <> ""){
-                    if(isset($_GET['categoriafiltrada'])){
-                        $produtos= "SELECT * FROM TABPRO WHERE CATATV_Codigo = $categoriafiltrada  AND TABPRO_Nome LIKE '%$conteudoPesquisado%' ORDER BY TABPRO_Nome ASC LIMIT 2";
-                    }else{
-                        $produtos= "SELECT * FROM TABPRO WHERE TABPRO_Nome LIKE '%$conteudoPesquisado%' ORDER BY TABPRO_Nome ASC LIMIT 2";
-                    }                    
+                //Imprime os Anúncios                       
+                if(isset($_GET['categoriafiltrada'])){
+                    $produtos= "SELECT * FROM TABPRO WHERE CATATV_Codigo = $categoriafiltrada ORDER BY TABPRO_Nome ASC LIMIT 2";
                 }else{
-                    if(isset($_GET['categoriafiltrada'])){
-                        $produtos= "SELECT * FROM TABPRO WHERE CATATV_Codigo = $categoriafiltrada ORDER BY TABPRO_Nome ASC LIMIT 2";
-                    }else{
-                        $produtos= "SELECT * FROM TABPRO ORDER BY TABPRO_Nome ASC LIMIT 2";                   
-                    }                    
-                }
-                
+                    $produtos= "SELECT * FROM TABPRO ORDER BY TABPRO_Nome ASC LIMIT 2";                   
+                }                    
+                                
                 $queryProdutos = $mysqli->query($produtos) or die(mysql_error());
                 $postagem = 0;?>               
 
@@ -201,27 +198,35 @@
                                     $tipousuario = $usuario_data['TIPUSU_Codigo'];
 
                                     if(substr($usuario_data['TABUSU_Icon'], -4) == ".jpg" || substr($usuario_data['TABUSU_Icon'], -4) == ".png" ){
-                                        $nomeIcon = substr($usuario_data['TABUSU_Icon'], -17);
+                                        $nomeIconLoja = substr($usuario_data['TABUSU_Icon'], -17);
                                     }else{
-                                        $nomeIcon = substr($usuario_data['TABUSU_Icon'], -18);
+                                        $nomeIconLoja = substr($usuario_data['TABUSU_Icon'], -18);
                                     }; 
 
                                     $lojista = "SELECT * FROM TABLOJ WHERE TABUSU_Codigo = $usuario";
                                     $queryLojista = $mysqli->query($lojista) or die(mysql_error());
                                     $lojista_data = mysqli_fetch_array($queryLojista);
                                     $apelido = $lojista_data['TABLOJ_Fantasia'];
+
+                                    if(substr($produto['TABPRO_Imagem'], -4) == ".jpg" || substr($produto['TABPRO_Imagem'], -4) == ".png" ){
+                                        $nomeImagemProduto = substr($produto['TABPRO_Imagem'], -17);
+                                    }else{
+                                        $nomeImagemProduto = substr($produto['TABPRO_Imagem'], -18);
+                                    };   
+
+
                                                                                                 
                                 ?>
 
                                 
-                                <img class="enterprise-logo" src="../perfil/arquivos/<?php echo $nomeIcon;?>" alt="logo-enterprise">
+                                <img class="enterprise-logo" src="../perfil/arquivos/<?php echo $nomeIconLoja;?>" alt="logo-enterprise">
                                 
                                             
-                                <img class="product-image" src="<?php echo $produto['TABPRO_Imagem'];?>" 
-                                onclick="modalProductView('<?php echo $produto['TABPRO_Nome']; ?>','<?php echo $produto['TABPRO_Imagem']?>', <?php echo $produto['TABPRO_Valor']; ?>, '<?php echo $nomeIcon;?>', <?php echo $produto['TABUSU_Codigo']?>,'<?php echo $apelido?>', '<?php echo $produto['TABPRO_Url'] ?>');" style="cursor: pointer;"/>
+                                <img class="product-image" src="../anuncios/arquivos/<?php echo $nomeImagemProduto;?>" 
+                                onclick="modalProductView('<?php echo $produto['TABPRO_Nome']; ?>','<?php echo $nomeImagemProduto;?>', <?php echo $produto['TABPRO_Valor']; ?>, '<?php echo $nomeIconLoja;?>', <?php echo $produto['TABUSU_Codigo']?>,'<?php echo $apelido?>', '<?php echo $produto['TABPRO_Url'] ?>');" style="cursor: pointer;"/>
                             
 
-                                <a class="sm" style="cursor: pointer;" onclick="modalProductView('<?php echo $produto['TABPRO_Nome']; ?>','<?php echo $produto['TABPRO_Imagem']?>', <?php echo $produto['TABPRO_Valor']; ?>, '<?php echo $nomeIcon;?>', <?php echo $produto['TABUSU_Codigo']?>,'<?php echo $apelido?>', '<?php echo $produto['TABPRO_Url'] ?>');" style="cursor: pointer;">                            
+                                <a class="sm" style="cursor: pointer;" onclick="modalProductView('<?php echo $produto['TABPRO_Nome']; ?>','<?php echo $nomeImagemProduto?>', <?php echo $produto['TABPRO_Valor']; ?>, '<?php echo $nomeIconLoja;?>', <?php echo $produto['TABUSU_Codigo']?>,'<?php echo $apelido?>', '<?php echo $produto['TABPRO_Url'] ?>');" style="cursor: pointer;">                            
                                     Visualizar produto                                      
                                 </a>
                                 
@@ -350,7 +355,7 @@
                                 <?php                                
                                 $maximoInscritos = $atividade['TABATV_Inscritos'];?>
                                 
-                                <input type="number" class="maxInscritos<?php echo $postagem?>" value=<?php echo $maximoInscritos?> hidden/>                               
+                                <input type="number" class="maxInscritos<?php echo $postagem?>" value=<?php echo $maximoInscritos?> hidden/>
 
                             <?php
                                 if(substr($atividade['TABATV_Imagem'], -4) == ".jpg" || substr($atividade['TABATV_Imagem'], -4) == ".png" ){
@@ -503,18 +508,15 @@
             modalPost.setAttribute("style" , "display: ")
         }   
 
-        function modalProductView(titulo, imagem, valor, imgIcon, perfil, usuario, url) {
-            bgblur.setAttribute("style" , "display: ")
-            modalProduct.setAttribute("style" , "display: ")
-
+        function modalProductView(nome, imagem, valor, imgIcon, perfil, usuario, url) {
+            var title = document.querySelector(".modal-product .title")
+            title.innerHTML = nome    
             var btnShop = document.querySelector("#btnSite")
             btnShop.setAttribute("onclick", "location.href='"+ url + "';")
-            var image = document.querySelector(".modal-product .product-wrapper-modal img")
+            var image = document.querySelector(".modal-product .img-wrapper")
             image.setAttribute("onclick", "location.href='"+ url + "';")
-            image.setAttribute("src", imagem)     
-            var title = document.querySelector(".modal-product .title")
-            title.innerHTML = titulo         
-            var value = document.querySelector(".modal-product .product-wrapper-modal .price")
+            image.setAttribute("src", "../anuncios/arquivos/"+imagem)          
+            var value = document.querySelector(".modal-product .price-wrapper p")
             value.innerHTML = "R$" + valor                                                                                                                   
             var icon = document.querySelector(".modal-product .product-wrapper-modal img")
             if (imgIcon != ''){
@@ -525,8 +527,9 @@
             var user = document.querySelector(".modal-product .product-wrapper-modal p")   
             icon.setAttribute("onclick", "location.href='../perfil/perfil.php?perfil=" + perfil + "';")
             user.setAttribute("onclick", "location.href='../perfil/perfil.php?perfil=" + perfil + "';")         
-            user.innerHTML = usuario   
-
+            user.innerHTML = usuario          
+            bgblur.setAttribute("style" , "display: ")
+            modalProduct.setAttribute("style" , "display: ")
         }
 
         function exitModal(){
