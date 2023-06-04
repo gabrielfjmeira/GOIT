@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="../../../CSS/loginCadastro.css">
     <link rel="stylesheet" href="../../../CSS/cadastro.css">
     <link rel="icon" href="../../../ASSETS/icon.ico"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
     <!--Título da Página-->
     <title>GO🐐IT | A Social Adventure</title>
@@ -48,10 +49,10 @@
 
         <div class="input-wrapper">
             <label>Apelido*</label>
-            <input type="text" id="txtApelido" name="txtApelido" placeholder="Apelido" class="input" 
-            pattern="^[A-z]\w{3,29}$"
+            <input type="text" id="txtApelido" name="txtApelido" placeholder="Apelido" class="input" onchange="verificaApelido();"
+            pattern="^[A-z]\w{3,29}$"            
             title="Apelido deve começar com uma letra e não pode conter símbolos, deve possuir no mínimo 4 caracteres e no máximo 30 caracteres!" required/> 
-            <small id="errorApelido" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>           
+            <small id="errorApelido" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>                                             
         </div>
 
         <div class="input-wrapper">
@@ -83,7 +84,7 @@
 
         <div class="input-wrapper">
             <label>Email*</label>
-            <input type="text" id="txtEmail" name="txtEmail" placeholder="Email" class="input" 
+            <input type="text" id="txtEmail" name="txtEmail" placeholder="Email" class="input" onchange="verificaEmail();"
             pattern="^[\w*\.]+@([\w-]+\.)+[\w-]{2,4}$" 
             title="Digite um email válido! Exemplo: email@email.com" required/> 
             <small id="errorEmail" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>
@@ -137,13 +138,13 @@
             title="Deve conter ao menos um número, uma letra maiúscula, uma letra minúscula, um caracter especial, e possuir no mínimo 8 caracteres e no máximo 20 caracteres" required/>
             <small id="errorSenhas" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>
         </div>
-
+        
         <div class = "show-password">
             <label>Mostrar senha</label>                
             <input type="checkbox" onclick="mostrarSenha();">
         </div>
 
-        <button type="submit"> Cadastrar </button>
+        <button type="submit" id="btnCadastrar"> Cadastrar </button>
 
         <div class="wrapper-cadastrar-login">
             <p>Já possui cadastro?</p>
@@ -152,8 +153,74 @@
 
     </form>
 
-        <!--Script-->        
-        <script type="text/javascript" src="../../../JAVASCRIPT/functions.js"></script>
+    <!--Script-->
+    <script type="text/javascript" src="../../../JAVASCRIPT/functions.js"></script>
+    
+    <script type="text/javascript">     
+    
+        const erroemail = 0;
+        const erroapelido = 0;
+
+        function verificaApelido(){
+            var txtApelido = document.getElementById("txtApelido");
+            var errorApelido = document.getElementById("errorApelido");            
+            var apelidoInserido = document.getElementById("txtApelido").value;               
+            var botao = document.getElementById("btnCadastrar");
+            
+            $.ajax({                
+                url: '../../verificacoes/validaApelido.php?apelido='+apelidoInserido,
+                method: 'get',
+                dataType: 'text',
+                data: apelidoInserido,                
+            }).done(function(data){
+                console.log(data);                
+                $("#errorApelido").html(data)                 
+                if($.trim(data) != ""){                    
+                    $('#btnCadastrar').attr('disabled', 'disabled');
+                    //$('#btnCadastrar').hide();         
+                    console.log("Tem conteúdo");
+                    erroapelido = 0;                                  
+                }else{
+                    $('#btnCadastrar').removeAttr('disabled');
+                    //$('#btnCadastrar').show();
+                    console.log("Sem conteúdo"); 
+                    erroapelido = 1;                    
+                }
+            });           
+
+            console.log("Erro Apelido = " + erroapelido);
+        }      
+        
+        function verificaEmail(){
+            var txtEmail = document.getElementById("txtEmail");
+            var errorEmail = document.getElementById("errorEmail");            
+            var emailInserido = document.getElementById("txtEmail").value;   
+            var botao = document.getElementById("btnCadastrar");      
+
+            $.ajax({                
+                url: '../../verificacoes/validaEmail.php?email='+emailInserido,
+                method: 'get',
+                dataType: 'text',
+                data: emailInserido,                
+            }).done(function(data){
+                console.log(data);                
+                $("#errorEmail").html(data)                                                               
+                if($.trim(data) != ""){                    
+                    $('#btnCadastrar').attr('disabled', 'disabled');
+                    //$('#btnCadastrar').hide();         
+                    console.log("Tem conteúdo");  
+                    erroemail = 0;                         
+                }else{
+                    $('#btnCadastrar').removeAttr('disabled');
+                    //$('#btnCadastrar').show();
+                    console.log("Sem conteúdo");    
+                    erroemail = 1;                    
+                }
+            });  
+            
+            console.log("Erro Email = " + erroemail); 
+        }                                    
+    </script>   
         
 </body>
 </html>

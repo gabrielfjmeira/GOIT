@@ -44,11 +44,15 @@ function mostrarSenhaLogin(){
 function formCadastroPraticanteOnSubmit(){                   
     //Cria Variáveis
     let txtNome = document.getElementById('txtNome');
-    let errorNome = document.getElementById('errorNome');
+    let errorNome = document.getElementById('errorNome');    
     let txtSenha = document.getElementById('txtSenha');
     let txtSenhaConfirmada = document.getElementById('txtSenhaConfirmada');      
-    let errorSenhas = document.getElementById('errorSenhas');                                          
+    let errorSenhas = document.getElementById('errorSenhas');                                                 
     
+    if(ERROAPELIDO == 0 || ERROEMAIL == 0){
+        return false
+    }
+
     if (txtNome.value.length > 100){
         txtNome.style.border = "1px solid #DB5A5A";
         errorNome.innerHTML = "Nome excede 100 caracteres!";
@@ -66,7 +70,7 @@ function formCadastroPraticanteOnSubmit(){
     }else{
         errorSenhas.value = "";
     }
-    
+ 
     return true;
 }
 
