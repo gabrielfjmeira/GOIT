@@ -164,7 +164,7 @@
                         <input type="text" id="search-input" name="searchTXT" value="<?php echo $conteudoPesquisado;?>">
                         <?php 
                     }else{?>
-                        <input type="text" id="search-input" name="searchTXT" placeholder="Pesquisar">
+                        <input type="text" id="search-input" name="searchTXT" placeholder="Pesquisar atividades ao ar livre">
                         <?php
                     }?>
                     <button type="Submit"> Buscar </button>
