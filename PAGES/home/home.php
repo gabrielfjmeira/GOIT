@@ -240,10 +240,10 @@
 
                 <?php
                     if(isset($categoriafiltrada)){?>
-                        <a href="../anuncios/produtos.php?categoriafiltrada=<?php echo $categoriafiltrada;?>" class="viewMoreProducts">Visualizar mais produtos</a>
+                        <a href="../anuncios/produtos.php?categoriafiltrada=<?php echo $categoriafiltrada;?>" class="viewMoreProducts">Visualizar produtos</a>
                         <?php
                     }else{?>
-                        <a href="../anuncios/produtos.php" class="viewMoreProducts">Visualizar mais produtos</a>
+                        <a href="../anuncios/produtos.php" class="viewMoreProducts">Visualizar produtos</a>
                         <?php
                     }                
                 ?>                
