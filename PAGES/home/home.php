@@ -63,27 +63,27 @@
     
     <div class="background-blur" style="display: none;" onclick="exitModal();">
         
-        <div class="modal-product" style="display: none;"><div class="product-wrapper-modal wrapper">
-            <img class="enterprise-logo" src="../../assets/bibo.png" alt="loja image" style="cursor:pointer; border-radius:50%;"/>
-            <p style="cursor:pointer; color: var(--blue); margin-top: 0.5rem;">Loja</p>
-        </div>            
+        <div class="modal-product" style="display: none;">
+            <div class="product-wrapper-modal wrapper">
+                <img class="enterprise-logo" src="../../assets/bibo.png" alt="loja image" style="cursor:pointer; border-radius:50%;"/>
+                <p style="cursor:pointer; color: var(--blue); margin-top: 0.5rem;">Loja</p>
+            </div>            
 
-        <div class="title" style="margin-top: 1.5rem; margin-bottom: 1.5rem;">                
-            <ion-icon name="pricetag-outline"></ion-icon>
-            <h3>Nome do Produto</h3>
-        </div>
-        
-        <img class="img-wrapper" src="../../ASSETS/paisagem.png" alt="post-image" style="cursor:pointer"/>
-        
-        <div class="price-wrapper wrapper" style="margin-top: 1.5rem">
-            <h2>Valor</h2>
-            <p>Valor do Produto</p>
-        </div>                        
-
-        <button id="btnSite" type="button" onclick="">Visitar Anúncio</button>
-
-        <button class="close-button-modal-product" type="button" onclick="location.reload();">Fechar</button>
+            <div class="title" style="margin-top: 1.5rem; margin-bottom: 1.5rem;">                
+                <ion-icon name="pricetag-outline"></ion-icon>
+                <h3>Nome do Produto</h3>
+            </div>
             
+            <img class="img-wrapper" src="../../ASSETS/paisagem.png" alt="post-image" style="cursor:pointer"/>
+            
+            <div class="price-wrapper wrapper" style="margin-top: 1.5rem">
+                <h2>Valor</h2>
+                <p>Valor do Produto</p>
+            </div>                        
+
+            <button id="btnSite" type="button" onclick="">Visitar Anúncio</button>
+
+            <button class="close-button-modal-product" type="button" onclick="location.reload();">Fechar</button>            
         </div>
 
         <div class="modal-post" style="display: none;">            
@@ -233,22 +233,20 @@
                                 
                             </div><?php               
                         }                       
-                    }
-                    else{ ?>
-                
-                        <h3>Sem Anúncios Cadastrados!</h3>
-
-                    <?php 
-                    }
+                    }                    
                     ?>
-                    <div class="product-wrapper">
-                        <img src="" alt="Logo da empresa">
-                        <img src="" alt="Imagem do produto">
-                        <a onclick="modalProductView('<?php echo $produto['TABPRO_Nome']; ?>','<?php echo $produto['TABPRO_Imagem']?>', <?php echo $produto['TABPRO_Valor']; ?>, '<?php echo $nomeIcon;?>', <?php echo $produto['TABUSU_Codigo']?>,'<?php echo $apelido?>', '<?php echo $produto['TABPRO_Url'] ?>');">Visualizar produto</a>
-                    </div>
+                    
                 </div>
 
-                <a href="" class="viewMoreProducts">Visualizar mais produtos</a>
+                <?php
+                    if(isset($categoriafiltrada)){?>
+                        <a href="../anuncios/produtos.php?categoriafiltrada=<?php echo $categoriafiltrada;?>" class="viewMoreProducts">Visualizar mais produtos</a>
+                        <?php
+                    }else{?>
+                        <a href="../anuncios/produtos.php" class="viewMoreProducts">Visualizar mais produtos</a>
+                        <?php
+                    }                
+                ?>                
             </section>
 
             <section class="eventsAndGroups flex">

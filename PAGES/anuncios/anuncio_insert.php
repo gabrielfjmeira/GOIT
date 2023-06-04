@@ -70,7 +70,29 @@
                         }
                     ?>                                                           
                 </select>
+                <small id="errorCategoriaProduto" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>
             </div>            
+
+            <!--Imprime Erros se Houver-->
+            <?php
+                if(isset($_GET['error'])){
+                    $error = $_GET['error'];
+                    switch ($error){
+                        case 001:?>
+                            <script type="text/javascript">
+                                //Cria Variáveis
+                                let categoriaProduto = document.getElementById('categoriaProduto');                            
+                                let errorCategoriaProduto = document.getElementById('errorCategoriaProduto');                                                                                                                  
+                                
+                                categoriaProduto.style.border = "1px solid #DB5A5A";                            
+                                errorCategoriaProduto.innerHTML = "Selecione uma categoria!";   
+                                categoriaProduto.focus();                                                                        
+                            </script>
+                            <?php
+                            break;
+                    }
+                }
+            ?>
 
             <div class="input-wrapper">
                 <label for="">Upload da imagem do produto</label>

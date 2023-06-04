@@ -6,12 +6,7 @@
     if (!$_SESSION['LOGGED']){
         header ("Location: ../../index.php?error=4");
     }   
-
-    //Verifica Se é Lojista
-    if ($_SESSION['TIPOUSUARIO'] !=4){
-        header ("Location: ../home/home.php");
-    } 
-
+    
     //Conteúdo Pesquisado
     if(isset($_POST['searchTXT'])){
         $conteudoPesquisado = $_POST['searchTXT'];
@@ -116,11 +111,12 @@
     </div>
 
     <div id="app">
-        <h1 id="page-title">Meus Anúncios</h1>
-
+        <h1 id="page-title">Produtos</h1>               
+                
         <!-- //Imprime as Categorias para Filtrar a Aplicação -->
-        <header class="activities-list flex">
-            <?php include('../templates/categorias_anuncio.php');
+        <header class="activities-list flex">            
+                <button style="cursor: pointer;" onclick="location.href='../home/home.php'"><img src="../../ASSETS/backButtonDark.svg" alt="back-button"></button>
+            <?php include('../templates/categorias_produtos.php');
             ?>
         </header>
     
@@ -129,10 +125,10 @@
             <!--Barra de Pesquisa-->            
             <form id="barraPesquisa" class = "form" name="barraPesquisa" <?php 
                 if(isset($_GET['categoriafiltrada'])){?>
-                    action="./anuncio.php?categoriafiltrada=<?php echo $categoriafiltrada;?>" 
+                    action="./produtos.php?categoriafiltrada=<?php echo $categoriafiltrada;?>" 
                     <?php
                 }else{?>
-                    action="./anuncio.php"
+                    action="./produtos.php"
                     <?php
                 }
             ?> method="POST">
@@ -156,15 +152,15 @@
                 //Imprime Meus Anúncios        
                 if(isset($_POST['searchTXT']) && $conteudoPesquisado <> ""){
                     if(isset($_GET['categoriafiltrada'])){
-                        $produtos= "SELECT * FROM TABPRO WHERE CATATV_Codigo = $categoriafiltrada  AND TABPRO_Nome LIKE '%$conteudoPesquisado%' AND TABUSU_Codigo = ".$_SESSION['CODIGO']. " ORDER BY TABPRO_Nome ASC";
+                        $produtos= "SELECT * FROM TABPRO WHERE CATATV_Codigo = $categoriafiltrada  AND TABPRO_Nome LIKE '%$conteudoPesquisado%' ORDER BY TABPRO_Nome ASC";
                     }else{
-                        $produtos= "SELECT * FROM TABPRO WHERE TABPRO_Nome LIKE '%$conteudoPesquisado%' AND TABUSU_Codigo = ".$_SESSION['CODIGO']. " ORDER BY TABPRO_Nome ASC";
+                        $produtos= "SELECT * FROM TABPRO WHERE TABPRO_Nome LIKE '%$conteudoPesquisado%' ORDER BY TABPRO_Nome ASC";
                     }                    
                 }else{
                     if(isset($_GET['categoriafiltrada'])){
-                        $produtos= "SELECT * FROM TABPRO WHERE CATATV_Codigo = $categoriafiltrada AND TABUSU_Codigo = ".$_SESSION['CODIGO']. " ORDER BY TABPRO_Nome ASC";
+                        $produtos= "SELECT * FROM TABPRO WHERE CATATV_Codigo = $categoriafiltrada ORDER BY TABPRO_Nome ASC";
                     }else{
-                        $produtos= "SELECT * FROM TABPRO WHERE TABUSU_Codigo = ".$_SESSION['CODIGO']. " ORDER BY TABPRO_Nome ASC";                   
+                        $produtos= "SELECT * FROM TABPRO ORDER BY TABPRO_Nome ASC";                   
                     }                    
                 }
                 
@@ -201,7 +197,6 @@
                                     $postagem += 1; 
                                                                                                 
                                 ?>
-
                                 
                                 <img class="enterprise-logo" src="../perfil/arquivos/<?php echo $nomeIcon;?>" alt="logo-enterprise">
                                 
@@ -209,22 +204,9 @@
                                 <img class="product-image" src="<?php echo $produto['TABPRO_Imagem'];?>" 
                                 onclick="modalProductView('<?php echo $produto['TABPRO_Nome']; ?>','<?php echo $produto['TABPRO_Imagem']?>', <?php echo $produto['TABPRO_Valor']; ?>, '<?php echo $nomeIcon;?>', <?php echo $produto['TABUSU_Codigo']?>,'<?php echo $apelido?>', '<?php echo $produto['TABPRO_Url'] ?>');" style="cursor: pointer;"/>
                             
-
                                 <a class="sm" style="cursor: pointer;" onclick="modalProductView('<?php echo $produto['TABPRO_Nome']; ?>','<?php echo $produto['TABPRO_Imagem']?>', <?php echo $produto['TABPRO_Valor']; ?>, '<?php echo $nomeIcon;?>', <?php echo $produto['TABUSU_Codigo']?>,'<?php echo $apelido?>', '<?php echo $produto['TABPRO_Url'] ?>');" style="cursor: pointer;">                            
-                                    Saiba mais                                        
-                                </a>
-                                    
-
-                                <?php
-                                if($_SESSION['CODIGO'] == $produto['TABUSU_Codigo']){?>                            
-                                    
-                                    <a href="./anuncio_update.php?codigo=<?php echo $produto['TABPRO_Codigo'];?>" style="cursor: pointer;">Editar Anúncio</a>
-
-                                    
-                                    <a onclick="apagarProduto('<?php echo $produto['TABPRO_Nome']?>', <?php echo $produto['TABPRO_Codigo']?>)" style="cursor: pointer;">Excluir Anúncio</a>
-                                <?php
-                                }
-                                ?>
+                                    Visualizar produto                                     
+                                </a>                                                                    
                                 
                             </div><?php               
                         }                       
