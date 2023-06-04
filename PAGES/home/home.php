@@ -125,7 +125,7 @@
             <div class="instructor-wrapper wrapper">
                 <h2>Responsável <ion-icon name="man"></ion-icon> </h2>
                 <div class="instructor">
-                    <img src="../../assets/bibo.png" alt="instrutor image">
+                    <img src="../../assets/bibo.png" alt="instrutor image" style="cursor:pointer;">
                     <a href="#" class="user">Gabriel Felipe Jess Meira</a>
                 </div>
             </div>
@@ -137,7 +137,6 @@
     <div id="app">
         <img onclick="location.href= './home.php'" src="../../ASSETS/Logo.png" alt="Logo go it" id="logo-header" style="cursor: pointer;">
         <h1 id="page-title">Home page</h1>
-
 
         <!-- //Imprime as Categorias para Filtrar a Aplicação -->
         <header class="activities-list flex">
@@ -182,7 +181,11 @@
                 }                    
                                 
                 $queryProdutos = $mysqli->query($produtos) or die(mysql_error());
-                $postagem = 0;?>               
+                $postagem = 0;?>
+
+                <div class="title-wrapper">
+                    <h2 style="margin-top: 2.4rem;">Produtos(<?php echo $queryProdutos->num_rows;?>)</h2>
+                </div>
 
                 <div class="products">
                     <?php
@@ -212,19 +215,13 @@
                                         $nomeImagemProduto = substr($produto['TABPRO_Imagem'], -17);
                                     }else{
                                         $nomeImagemProduto = substr($produto['TABPRO_Imagem'], -18);
-                                    };   
-
-
-                                                                                                
+                                    };                                                                                                
                                 ?>
-
                                 
-                                <img class="enterprise-logo" src="../perfil/arquivos/<?php echo $nomeIconLoja;?>" alt="logo-enterprise">
-                                
+                                <img class="enterprise-logo" src="../perfil/arquivos/<?php echo $nomeIconLoja;?>" onclick="location.href='../perfil/perfil.php?perfil=<?php echo $produto['TABUSU_Codigo']?>'" alt="logo-enterprise" style="cursor:pointer">                                
                                             
                                 <img class="product-image" src="../anuncios/arquivos/<?php echo $nomeImagemProduto;?>" 
-                                onclick="modalProductView('<?php echo $produto['TABPRO_Nome']; ?>','<?php echo $nomeImagemProduto;?>', <?php echo $produto['TABPRO_Valor']; ?>, '<?php echo $nomeIconLoja;?>', <?php echo $produto['TABUSU_Codigo']?>,'<?php echo $apelido?>', '<?php echo $produto['TABPRO_Url'] ?>');" style="cursor: pointer;"/>
-                            
+                                onclick="modalProductView('<?php echo $produto['TABPRO_Nome']; ?>','<?php echo $nomeImagemProduto;?>', <?php echo $produto['TABPRO_Valor']; ?>, '<?php echo $nomeIconLoja;?>', <?php echo $produto['TABUSU_Codigo']?>,'<?php echo $apelido?>', '<?php echo $produto['TABPRO_Url'] ?>');" style="cursor: pointer;"/>                            
 
                                 <a class="sm" style="cursor: pointer;" onclick="modalProductView('<?php echo $produto['TABPRO_Nome']; ?>','<?php echo $nomeImagemProduto?>', <?php echo $produto['TABPRO_Valor']; ?>, '<?php echo $nomeIconLoja;?>', <?php echo $produto['TABUSU_Codigo']?>,'<?php echo $apelido?>', '<?php echo $produto['TABPRO_Url'] ?>');" style="cursor: pointer;">                            
                                     Visualizar produto                                      
@@ -499,7 +496,8 @@
             }else{
                 icon.setAttribute("src", "../../ASSETS/buttonPerfil.svg")
             } 
-            var user = document.querySelector(".user")   
+            var user = document.querySelector(".user")
+            icon.setAttribute("onclick", "location.href='../perfil/perfil.php?perfil=" + perfil + "';")
             user.setAttribute("onclick", "location.href='../perfil/perfil.php?perfil=" + perfil + "';")         
             user.innerHTML = usuario          
             bgblur.setAttribute("style" , "display: ")

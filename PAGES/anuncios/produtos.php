@@ -17,6 +17,17 @@
         $categoriafiltrada = $_GET['categoriafiltrada'];        
     }
 
+    //Produtos de um lojista em específico
+    if(isset($_GET['perfil'])){
+        $codPerfil = $_GET['perfil'];     
+
+        //Carrega dados necessários do lojista
+        $lojistas = "SELECT * FROM TABLOJ WHERE TABUSU_Codigo = " . $codPerfil . ";";
+        $queryLojistas = $mysqli->query($lojistas) or die(mysql_error());
+        $lojista = mysqli_fetch_array($queryLojistas);
+        $apelidoLojista = $lojista['TABLOJ_Fantasia'];
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -111,11 +122,29 @@
     </div>
 
     <div id="app">
-        <h1 id="page-title">Produtos</h1>               
+        <?php         
+            //Verifica se os produtos são de todos os lojistas ou de um em específico
+            if(isset($_GET['perfil'])){?>
+                <h1 id="page-title">Produtos de <?php echo $apelidoLojista;?></h1>
+                <?php
+            }else{?>
+                <h1 id="page-title">Produtos</h1>
+                <?php
+            }
+        ?>
+        
                 
         <!-- //Imprime as Categorias para Filtrar a Aplicação -->
         <header class="activities-list flex">            
-                <button style="cursor: pointer;" onclick="location.href='../home/home.php'"><img src="../../ASSETS/backButtonDark.svg" alt="back-button"></button>
+            <?php 
+                if(isset($_GET['perfil'])){?>
+                    <button style="cursor: pointer;" onclick="location.href='../perfil/perfil.php?perfil=<?php echo $codPerfil;?>'"><img src="../../ASSETS/backButtonDark.svg" alt="back-button"></button>
+                    <?php
+                }else{?>
+                    <button style="cursor: pointer;" onclick="location.href='../home/home.php'"><img src="../../ASSETS/backButtonDark.svg" alt="back-button"></button>
+                    <?php
+                }
+            ?>
             <?php include('../templates/categorias_produtos.php');
             ?>
         </header>
@@ -149,18 +178,35 @@
             <section class="products-wrapper">
                 <?php              
                 
-                //Imprime Meus Anúncios        
+                //Imprime Anúncios        
                 if(isset($_POST['searchTXT']) && $conteudoPesquisado <> ""){
                     if(isset($_GET['categoriafiltrada'])){
-                        $produtos= "SELECT * FROM TABPRO WHERE CATATV_Codigo = $categoriafiltrada  AND TABPRO_Nome LIKE '%$conteudoPesquisado%' ORDER BY TABPRO_Nome ASC";
+                        if(isset($_GET['perfil'])){
+                            $produtos= "SELECT * FROM TABPRO WHERE CATATV_Codigo = $categoriafiltrada  AND TABPRO_Nome LIKE '%$conteudoPesquisado%' AND TABUSU_Codigo = " . $codPerfil .  " ORDER BY TABPRO_Nome ASC;";
+                        }else{
+                            $produtos= "SELECT * FROM TABPRO WHERE CATATV_Codigo = $categoriafiltrada  AND TABPRO_Nome LIKE '%$conteudoPesquisado%' ORDER BY TABPRO_Nome ASC;";
+                        }
+                        
                     }else{
-                        $produtos= "SELECT * FROM TABPRO WHERE TABPRO_Nome LIKE '%$conteudoPesquisado%' ORDER BY TABPRO_Nome ASC";
+                        if(isset($_GET['perfil'])){
+                            $produtos= "SELECT * FROM TABPRO WHERE TABPRO_Nome LIKE '%$conteudoPesquisado%' AND TABUSU_Codigo = " . $codPerfil . " ORDER BY TABPRO_Nome ASC;";
+                        }else{
+                            $produtos= "SELECT * FROM TABPRO WHERE TABPRO_Nome LIKE '%$conteudoPesquisado%' ORDER BY TABPRO_Nome ASC;";
+                        }                        
                     }                    
                 }else{
                     if(isset($_GET['categoriafiltrada'])){
-                        $produtos= "SELECT * FROM TABPRO WHERE CATATV_Codigo = $categoriafiltrada ORDER BY TABPRO_Nome ASC";
+                        if(isset($_GET['perfil'])){
+                            $produtos= "SELECT * FROM TABPRO WHERE CATATV_Codigo = $categoriafiltrada AND TABUSU_Codigo = " . $codPerfil .  " ORDER BY TABPRO_Nome ASC;";
+                        }else{
+                            $produtos= "SELECT * FROM TABPRO WHERE CATATV_Codigo = $categoriafiltrada ORDER BY TABPRO_Nome ASC;";
+                        }                        
                     }else{
-                        $produtos= "SELECT * FROM TABPRO ORDER BY TABPRO_Nome ASC";                   
+                        if(isset($_GET['perfil'])){
+                            $produtos= "SELECT * FROM TABPRO WHERE TABUSU_Codigo = " . $codPerfil . " ORDER BY TABPRO_Nome ASC;";                   
+                        }else{
+                            $produtos= "SELECT * FROM TABPRO ORDER BY TABPRO_Nome ASC;";                   
+                        }                        
                     }                    
                 }
                 
@@ -168,7 +214,7 @@
                 $postagem = 0;?>               
                 
                 <div class="title-wrapper" style="margin-top: 2.4rem;">
-                    <h2>Anúncios (<?php echo $queryProdutos->num_rows;?>) </h2>
+                    <h2>Produtos (<?php echo $queryProdutos->num_rows;?>) </h2>
                 </div>
 
                 <div class="products">
