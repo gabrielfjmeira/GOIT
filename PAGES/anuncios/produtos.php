@@ -302,7 +302,7 @@
             image.setAttribute("onclick", "location.href='"+ url + "';")
             image.setAttribute("src", imagem)          
             var value = document.querySelector(".modal-product .price-wrapper p")
-            value.innerHTML = "R$" + valor                                                                                                                   
+            value.innerHTML = "R$" + parseFloat(valor).toFixed(2);                                                                                                                 
             var icon = document.querySelector(".modal-product .product-wrapper-modal img")
             if (imgIcon != ''){
                 icon.setAttribute("src", "../perfil/arquivos/"+imgIcon)
