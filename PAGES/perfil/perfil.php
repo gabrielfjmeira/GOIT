@@ -341,7 +341,7 @@
                     if(isset($_GET['categoriafiltrada'])){
                         $atividades = "SELECT * FROM TABATV WHERE CATATV_Codigo = $categoriafiltrada AND TABATV_Cancelada = 0 AND TABUSU_Codigo = $codPerfil AND TABATV_Titulo LIKE '%$conteudoPesquisado%' AND TABATV_Data >= now() ORDER BY TABATV_Data ASC";
                     }else{
-                        $atividades = "SELECT * FROM TABATV WHERE TABATV_Cancelada = 0 TABUSU_Codigo = $codPerfil AND TABATV_Titulo LIKE '%$conteudoPesquisado%' AND TABATV_Data >= now() ORDER BY TABATV_Data ASC";
+                        $atividades = "SELECT * FROM TABATV WHERE TABATV_Cancelada = 0 AND TABUSU_Codigo = $codPerfil AND TABATV_Titulo LIKE '%$conteudoPesquisado%' AND TABATV_Data >= now() ORDER BY TABATV_Data ASC";
                     }                    
                 }else{
                     if(isset($_GET['categoriafiltrada'])){
