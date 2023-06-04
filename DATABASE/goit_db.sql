@@ -23,6 +23,17 @@ CREATE TABLE TABUSU(
     FOREIGN KEY(TIPUSU_Codigo) REFERENCES TIPUSU(TIPUSU_Codigo)
 );
 
+/*Criação da Tabela de Riscos de Atividades*/
+CREATE TABLE TABRIS(
+	TABRIS_Codigo INT(3) NOT NULL AUTO_INCREMENT,
+    TABRIS_Descricao VARCHAR(30) NOT NULL,
+    TABRIS_Minimo INT(2) NOT NULL,
+    TABRIS_Maximo INT(2) NOT NULL,
+    TABRIS_Instrutor BOOLEAN NOT NULL,
+    
+    PRIMARY KEY(TABRIS_Codigo)
+);
+
 /*Criação da Tabela de Categorias de Atividades ao Ar Livre*/
 CREATE TABLE CATATV(
 	CATATV_Codigo INT(3) NOT NULL AUTO_INCREMENT,
@@ -73,17 +84,6 @@ CREATE TABLE TABLOJ(
     
     PRIMARY KEY(TABUSU_Codigo),
     FOREIGN KEY(TABUSU_Codigo) REFERENCES TABUSU(TABUSU_Codigo)
-);
-
-/*Criação da Tabela de Riscos de Atividades*/
-CREATE TABLE TABRIS(
-	TABRIS_Codigo INT(3) NOT NULL AUTO_INCREMENT,
-    TABRIS_Descricao VARCHAR(30) NOT NULL,
-    TABRIS_Minimo INT(2) NOT NULL,
-    TABRIS_Maximo INT(2) NOT NULL,
-    TABRIS_Instrutor BOOLEAN NOT NULL,
-    
-    PRIMARY KEY(TABRIS_Codigo)
 );
 
 /*Criação da Tabela de Atividades ao Ar Livre*/
