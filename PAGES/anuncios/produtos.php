@@ -256,12 +256,15 @@
                                 
                             </div><?php               
                         }                       
-                    }else{ ?>
-                
-                        <h3>Sem Anúncios Cadastrados!</h3>
-
-                    <?php 
-                    }
+                    }else{                        
+                        if(isset($categoriafiltrada)){?>
+                            <h3>Sem Produtos Cadastrados Nesta Categoria!</h3>
+                            <?php
+                        }else{?>
+                            <h3>Sem Produtos Cadastrados!</h3>
+                            <?php
+                        }
+                    }         
                     ?>
                 </div>
                 
