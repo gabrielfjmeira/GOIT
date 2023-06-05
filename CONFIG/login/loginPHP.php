@@ -46,9 +46,9 @@
                         header("Location: ../../PAGES/home/home.php");
                     } else{
                         if($negado == 1){
-                            header("Location: ../../index.php?error=005&codigousuario=".$codigoUsuario."&tipo=".$tipoUsuario);
+                            header("Location: ../../index.php?error=005&codigousuario=".$codigoUsuario."&tipo=".$tipoUsuario."&email=".$email."&senha=".$senha);
                         }else{
-                            header("Location: ../../index.php?error=003");
+                            header("Location: ../../index.php?error=003&email=".$email."&senha=".$senha);
                         }                                                
                     }
                     
@@ -76,9 +76,9 @@
                         header("Location: ../../PAGES/perfil/perfil.php");
                     } else{
                         if($negado == 1){
-                            header("Location: ../../index.php?error=005&codigousuario=".$codigoUsuario."&tipo=".$tipoUsuario);
+                            header("Location: ../../index.php?error=005&codigousuario=".$codigoUsuario."&tipo=".$tipoUsuario."&email=".$email."&senha=".$senha);
                         }else{
-                            header("Location: ../../index.php?error=003");
+                            header("Location: ../../index.php?error=003&email=".$email."&senha=".$senha);
                         }                        
                     }
 
@@ -101,11 +101,11 @@
                 }
                 
             }else{
-                header("Location: ../../index.php?error=002");                
+                header("Location: ../../index.php?error=002&email=".$email."&senha=".$senha);               
             }       
             
         }else{
-            header("Location: ../../index.php?error=001");            
+            header("Location: ../../index.php?error=001&email=".$email."&senha=".$senha);            
         }               
     
     }   

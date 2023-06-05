@@ -38,7 +38,13 @@
         
             <div class="input-wrapper">
                 <label>E-mail</label>         
-                <input type="text"     name="txtEmail" id="txtEmail" placeholder="E-Mail" class="input" 
+                <input type="text" name="txtEmail" id="txtEmail" placeholder="E-Mail" class="input" onclick="limpaBordas();"
+                    <?php 
+                        if(isset($_GET['email'])){?>
+                            value="<?php echo $_GET['email'];?>"
+                            <?php
+                        }       
+                    ?>
                 pattern="^[\w*\.]+@([\w-]+\.)+[\w-]{2,4}$" 
                 title="Digite um email válido! Exemplo: email@email.com" required/>
                 <small id="errorEmail" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>
@@ -46,7 +52,13 @@
 
             <div class="input-wrapper">
                 <label>Senha</label>
-                <input type="password" name="txtSenha" id="txtSenha" placeholder="Senha" class="input"
+                <input type="password" name="txtSenha" id="txtSenha" placeholder="Senha" class="input" onclick="limpaBordas();"
+                    <?php 
+                        if(isset($_GET['senha'])){?>
+                            value="<?php echo $_GET['senha'];?>"
+                            <?php
+                        }       
+                    ?>
                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}" 
                 title="Deve conter ao menos um número, uma letra maiúscula, uma letra minúscula, um caracter especial, e possuir no mínimo 8 caracteres e no máximo 20 caracteres" required/>
                 <small id="errorSenha" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>
@@ -136,7 +148,22 @@
     </section>     
     
     <!--Script-->
-    <script type="text/javascript" src="./JAVASCRIPT/functions.js"></script>    
-   
+    <script type="text/javascript" src="./JAVASCRIPT/functions.js"></script> 
+    <script>
+        function limpaBordas(){
+            //Cria Variáveis
+            let txtEmail = document.getElementById('txtEmail');   
+            let errorEmail = document.getElementById('errorEmail');
+            let txtSenha = document.getElementById('txtSenha');                            
+            let errorSenha = document.getElementById('errorSenha');                                                                                                                 
+            
+            txtEmail.style.border = "1px solid white";
+            errorEmail.style.color = "white";
+            errorEmail.innerHTML = "";
+            txtSenha.style.border = "1px solid white";  
+            errorSenha.style.color = "var(--white)";
+            errorSenha.innerHTML = "";            
+        }
+    </script>      
 </body>
 </html>
