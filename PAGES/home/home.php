@@ -65,7 +65,7 @@
         
         <div class="modal-product" style="display: none;">
             <div class="product-wrapper-modal wrapper">
-                <img class="enterprise-logo" src="../../assets/bibo.png" alt="loja image" style="cursor:pointer; border-radius:50%;"/>
+                <img class="enterprise-logo" src="../../ASSETS/buttonPerfil.svg" alt="loja image" style="cursor:pointer; border-radius:50%;"/>
                 <p style="cursor:pointer; color: var(--blue); margin-top: 0.5rem;">Loja</p>
             </div>            
 
