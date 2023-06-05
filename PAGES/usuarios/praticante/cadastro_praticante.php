@@ -2,10 +2,10 @@
     //Incluí conexão
     include('../../../CONNECTIONS/connection.php');     
 
-    // //Verifica se o Usuário está Logado
-    // if ($_SESSION['LOGGED'] == True){
-    //     header ("Location: ../../home/home.php");
-    // }
+    //Verifica se o Usuário está Logado
+    if ($_SESSION['LOGGED'] == True){
+        header ("Location: ../../home/home.php");
+    }
 ?>
 
 <!DOCTYPE html>
@@ -19,13 +19,14 @@
     <link rel="stylesheet" href="../../../CSS/loginCadastro.css">
     <link rel="stylesheet" href="../../../CSS/cadastro.css">
     <link rel="icon" href="../../../ASSETS/icon.ico"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
     <!--Título da Página-->
     <title>GO🐐IT | A Social Adventure</title>
 </head>
 <body>
 
-    <button onclick="window.history.back()" id = "buttonBack">
+    <button onclick="location.href='../selecao_tipoUsuario.php'" id = "buttonBack">
         <img src="../../../ASSETS/backWhite.svg" alt="Back button" style="cursor: pointer;">
     </button> 
 
@@ -40,15 +41,27 @@
             
         <div class="input-wrapper">
             <label>Nome Completo*</label>
-            <input type="text" id="txtNome" name="txtNome" placeholder="Nome" class="input" 
-            pattern="^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]{8,100}$" 
+            <input type="text" id="txtNome" name="txtNome" placeholder="Nome" class="input"
+                <?php 
+                    if(isset($_GET['nome'])){?>
+                        value="<?php echo $_GET['nome'];?>"
+                        <?php
+                    }       
+                ?> 
+            pattern="^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]{8,100}$"
             title="Nome deve possuir no mínimo 8 caracteres e no máximo 100 caracteres!" required/>
             <small id="errorNome" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>
         </div>
 
         <div class="input-wrapper">
             <label>Apelido*</label>
-            <input type="text" id="txtApelido" name="txtApelido" placeholder="Apelido" class="input" 
+            <input type="text" id="txtApelido" name="txtApelido" placeholder="Apelido" class="input" onchange="verificaApelido();" 
+                <?php 
+                    if(isset($_GET['apelido'])){?>
+                        value="<?php echo $_GET['apelido'];?>"
+                        <?php
+                    }       
+                ?> 
             pattern="^[A-z]\w{3,29}$"
             title="Apelido deve começar com uma letra e não pode conter símbolos, deve possuir no mínimo 4 caracteres e no máximo 30 caracteres!" required/> 
             <small id="errorApelido" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>           
@@ -57,6 +70,12 @@
         <div class="input-wrapper">
             <label>Data de Nascimento*</label>
             <input type="date" id="dataNascimento" name="dataNascimento" placeholder="Data de Nascimento" class="input" 
+                <?php 
+                    if(isset($_GET['dataNascimento'])){?>
+                        value="<?php echo $_GET['dataNascimento'];?>"
+                        <?php
+                    }       
+                ?> 
             pattern="^[0-9]{2}-[0-9]{2}-[0-9]{4}$"
             title="dd/mm/aaaa" onchange=""  required />            
         </div>
@@ -65,17 +84,44 @@
             <label>Sexo*</label>
                 <div class = "input-sexo">
                     <div class="input-radio">
-                        <input type="radio" id="sexo_m" name="sexo" value="0" required>
+                        <input type="radio" id="sexo_m" name="sexo" value="0" 
+                            <?php 
+                                if(isset($_GET['sexo'])){
+                                    if($_GET['sexo'] == 0){?>
+                                        checked
+                                        <?php
+                                    }
+                                }       
+                            ?>
+                        required>
                         <label>Masculino</label>
                     </div>
 
                     <div class="input-radio">
-                        <input type="radio" id="sexo_f" name="sexo" value="1" required>
+                        <input type="radio" id="sexo_f" name="sexo" value="1" 
+                            <?php 
+                                if(isset($_GET['sexo'])){
+                                    if($_GET['sexo'] == 1){?>
+                                        checked
+                                        <?php
+                                    }
+                                }       
+                            ?>
+                        required>
                         <label>Feminino</label>
                     </div>
 
                     <div class="input-radio">
-                        <input type="radio" id="sexo_o" name="sexo" value="2" required>
+                        <input type="radio" id="sexo_o" name="sexo" value="2"
+                            <?php 
+                                if(isset($_GET['sexo'])){
+                                    if($_GET['sexo'] == 2){?>
+                                        checked
+                                        <?php
+                                    }
+                                }       
+                            ?>
+                        required>
                         <label>Outro</label>
                     </div>
                 </div>
@@ -83,7 +129,13 @@
 
         <div class="input-wrapper">
             <label>Email*</label>
-            <input type="text" id="txtEmail" name="txtEmail" placeholder="Email" class="input" 
+            <input type="text" id="txtEmail" name="txtEmail" placeholder="Email" class="input" onchange="verificaEmail();"
+                <?php 
+                    if(isset($_GET['email'])){?>
+                        value="<?php echo $_GET['email'];?>"
+                        <?php
+                    }       
+                ?>  
             pattern="^[\w*\.]+@([\w-]+\.)+[\w-]{2,4}$" 
             title="Digite um email válido! Exemplo: email@email.com" required/> 
             <small id="errorEmail" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>
@@ -102,7 +154,8 @@
                             
                             txtApelido.style.border = "1px solid #DB5A5A";                            
                             errorApelido.innerHTML = "Apelido já cadastrado!";   
-                            txtApelido.focus();                                                                        
+                            txtApelido.focus(); 
+                                                                      
                         </script>
                         <?php
                         break;                    
@@ -114,7 +167,8 @@
                             
                             txtEmail.style.border = "1px solid #DB5A5A";                            
                             errorEmail.innerHTML = "Email já cadastrado!";                                                                       
-                            txtEmail.focus();    
+                            txtEmail.focus();   
+                            
                         </script>
                         <?php
                         break;                            
@@ -154,6 +208,54 @@
 
         <!--Script-->        
         <script type="text/javascript" src="../../../JAVASCRIPT/functions.js"></script>
-        
+        <script>
+            function verificaApelido(){
+                var txtApelido = document.getElementById("txtApelido");
+                var errorApelido = document.getElementById("errorApelido");            
+                var apelidoInserido = document.getElementById("txtApelido").value;               
+                                
+                $.ajax({                
+                    url: '../../verificacoes/validaApelido.php?apelido='+apelidoInserido,
+                    method: 'get',
+                    dataType: 'text',
+                    data: apelidoInserido,                
+                }).done(function(data){
+                    console.log(data);      
+                    if($.trim(data) == ""){
+                        $("#errorApelido").html("Apelido disponível!"); 
+                        $('#txtApelido').css('border', '1px solid #90EE90');
+                        $('#errorApelido').css('color', '#90EE90');                        
+                    }else{
+                        $("#errorApelido").html(data); 
+                        $('#txtApelido').css('border', '1px solid #DB5A5A');
+                        $('#errorApelido').css('color', '#DB5A5A');
+                    } 
+                });
+            }
+
+            function verificaEmail(){
+                var txtEmail = document.getElementById("txtEmail");
+                var errorEmail = document.getElementById("errorEmail");            
+                var emailInserido = document.getElementById("txtEmail").value;     
+
+                $.ajax({                
+                    url: '../../verificacoes/validaEmail.php?email='+emailInserido,
+                    method: 'get',
+                    dataType: 'text',
+                    data: emailInserido,                
+                }).done(function(data){
+                    console.log(data);                
+                    if($.trim(data) == ""){
+                        $("#errorEmail").html("Email disponível!"); 
+                        $('#txtEmail').css('border', '1px solid #90EE90');
+                        $('#errorEmail').css('color', '#90EE90');                        
+                    }else{
+                        $("#errorEmail").html(data); 
+                        $('#txtEmail').css('border', '1px solid #DB5A5A');
+                        $('#errorEmail').css('color', '#DB5A5A');
+                    }
+                });
+            }
+        </script>
 </body>
 </html>

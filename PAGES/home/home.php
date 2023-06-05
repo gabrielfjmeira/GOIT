@@ -175,9 +175,9 @@
                 
                 //Imprime os Anúncios                       
                 if(isset($_GET['categoriafiltrada'])){
-                    $produtos= "SELECT * FROM TABPRO WHERE CATATV_Codigo = $categoriafiltrada ORDER BY TABPRO_Nome ASC LIMIT 2";
+                    $produtos= "SELECT * FROM TABPRO WHERE CATATV_Codigo = $categoriafiltrada ORDER BY RAND() LIMIT 2";
                 }else{
-                    $produtos= "SELECT * FROM TABPRO ORDER BY TABPRO_Nome ASC LIMIT 2";                   
+                    $produtos= "SELECT * FROM TABPRO ORDER BY RAND() LIMIT 2";                   
                 }                    
                                 
                 $queryProdutos = $mysqli->query($produtos) or die(mysql_error());
