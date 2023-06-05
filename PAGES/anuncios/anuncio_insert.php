@@ -57,7 +57,7 @@
             <div class="input-wrapper">
             <label for="categoria">Categoria do Produto*</label>
                 <select id="categoriaProduto" name="categoriaProduto" required>        
-                    <option selected disabled="disabled" hidden>Escolha uma opção</option>
+                    <option selected disabled="disabled" value="" hidden>Escolha uma opção</option>
                     <?php          
                         $categoriasAtividades = "SELECT * FROM CATATV ORDER BY CATATV_Descricao ASC";      
                         $queryCategoriasAtividades = $mysqli->query($categoriasAtividades) or die(mysql_error());

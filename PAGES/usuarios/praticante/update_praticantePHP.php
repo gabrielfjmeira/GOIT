@@ -5,10 +5,12 @@
     //Verifica Login
     if (!$_SESSION['LOGGED']){
         header ("Location: ../../../index.php?error=4");
-    }
-    
-    //Define variável de Apelido
-    $apelido = $_POST['txtApelido'];
+    }    
+        
+    //Cria variáveis                                     
+    $nome           = strtoupper($_POST['txtNome']);            
+    $apelido        = $_POST['txtApelido'];
+    $dataNascimento = $_POST['dataNascimento'];
 
     $apelidoAtual = "SELECT * FROM TABPRA WHERE TABUSU_Codigo = " . $_SESSION['CODIGO'];
     $queryApelidoAtual = $mysqli->query($apelidoAtual) or die("Falha na execução do código sql" . $mysqli->error);
@@ -34,11 +36,7 @@
         $qtdApelidos = $qtdPraticanteResultado + $qtdInstrutorResultado + $qtdLojaResultado;
 
         if($qtdApelidos < 1){                                   
-
-            //Cria variáveis                                     
-            $nome           = strtoupper($_POST['txtNome']);            
-            $dataNascimento = $_POST['dataNascimento'];               
-            
+                                       
             if (isset($_FILES['imgPerfil']) && count($_FILES) > 0){        
                 $arquivo = $_FILES['imgPerfil'];                    
                         
@@ -82,14 +80,9 @@
             <?php 
                                
         } else{        
-            header('Location: ./update_praticante.php?error=001');        
+            header('Location: ./update_praticante.php?error=001&nomeIns='.$nome.'&apelidoIns='.$apelido.'&dataNascimentoIns='.$dataNascimento);        
         }
-    }else{                    
-
-        //Cria variáveis                                 
-        $nome           = strtoupper($_POST['txtNome']);                     
-        $dataNascimento = $_POST['dataNascimento'];  
-        
+    }else{                            
         if (isset($_FILES['imgPerfil']) && count($_FILES) > 0){        
             $arquivo = $_FILES['imgPerfil'];                    
                     
