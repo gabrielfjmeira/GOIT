@@ -58,8 +58,7 @@
             <input type="text" id="txtApelido" name="txtApelido" placeholder="Apelido" class="input" onchange="verificaApelido();" 
                 <?php 
                     if(isset($_GET['apelido'])){?>
-                        value="<?php echo $_GET['apelido'];?>"
-                        onload="verificaApelido();"
+                        value="<?php echo $_GET['apelido'];?>"                        
                         <?php
                     }       
                 ?> 
@@ -133,8 +132,7 @@
             <input type="text" id="txtEmail" name="txtEmail" placeholder="Email" class="input" onload="verificaEmail();" onchange="verificaEmail();"
                 <?php 
                     if(isset($_GET['email'])){?>
-                        value="<?php echo $_GET['email'];?>"
-                        onload = "verificaEmail();"
+                        value="<?php echo $_GET['email'];?>"                        
                         <?php
                     }       
                 ?>  
@@ -142,9 +140,36 @@
             title="Digite um email válido! Exemplo: email@email.com" required/> 
             <small id="errorEmail" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>
         </div>
+         
+        <div class="input-wrapper">
+            <label>Senha*</label>
+            <input type="password" id="txtSenha" name="txtSenha" placeholder="Senha" class="input" 
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}" 
+            title="Deve conter ao menos um número, uma letra maiúscula, uma letra minúscula, um caracter especial, e possuir no mínimo 8 caracteres e no máximo 20 caracteres" required/>
+        </div>
 
-         <!--Imprime Erros se Houver-->
-         <?php
+        <div class="input-wrapper">
+            <label>Confirme sua Senha*</label>
+            <input type="password" id="txtSenhaConfirmada" name="txtSenhaConfirmada" placeholder="Confirme sua Senha" class="input" 
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}" 
+            title="Deve conter ao menos um número, uma letra maiúscula, uma letra minúscula, um caracter especial, e possuir no mínimo 8 caracteres e no máximo 20 caracteres" required/>
+            <small id="errorSenhas" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>
+        </div>
+
+        <div class = "show-password">
+            <label>Mostrar senha</label>                
+            <input type="checkbox" onclick="mostrarSenha();">
+        </div>
+
+        <button type="submit"> Cadastrar </button>
+
+        <div class="wrapper-cadastrar-login">
+            <p>Já possui cadastro?</p>
+            <a href="../../../index.php">Login aqui</a>
+        </div>
+
+        <!--Imprime Erros se Houver-->
+        <?php
             if(isset($_GET['error'])){
                 $error = $_GET['error'];
                 switch ($error){
@@ -208,33 +233,6 @@
                 }
             }
         ?>        
-
-        <div class="input-wrapper">
-            <label>Senha*</label>
-            <input type="password" id="txtSenha" name="txtSenha" placeholder="Senha" class="input" 
-            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}" 
-            title="Deve conter ao menos um número, uma letra maiúscula, uma letra minúscula, um caracter especial, e possuir no mínimo 8 caracteres e no máximo 20 caracteres" required/>
-        </div>
-
-        <div class="input-wrapper">
-            <label>Confirme sua Senha*</label>
-            <input type="password" id="txtSenhaConfirmada" name="txtSenhaConfirmada" placeholder="Confirme sua Senha" class="input" 
-            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}" 
-            title="Deve conter ao menos um número, uma letra maiúscula, uma letra minúscula, um caracter especial, e possuir no mínimo 8 caracteres e no máximo 20 caracteres" required/>
-            <small id="errorSenhas" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>
-        </div>
-
-        <div class = "show-password">
-            <label>Mostrar senha</label>                
-            <input type="checkbox" onclick="mostrarSenha();">
-        </div>
-
-        <button type="submit"> Cadastrar </button>
-
-        <div class="wrapper-cadastrar-login">
-            <p>Já possui cadastro?</p>
-            <a href="../../../index.php">Login aqui</a>
-        </div>
 
     </form>
 
