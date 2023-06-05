@@ -1,9 +1,14 @@
 <?php
     //Incluí Conexão
     include('../../../CONNECTIONS/connection.php');
-
-    //Define variável de Apelido
-    $apelido = $_POST['txtApelido'];
+    
+    //Cria variáveis
+    $nome           = $_POST['txtNome'];
+    $apelido        = $_POST['txtApelido'];
+    $dataNascimento = $_POST['dataNascimento'];
+    $sexo           = $_POST['sexo'];
+    $email          = $_POST['txtEmail'];
+    $senha          = $_POST['txtSenha'];           
     
     //Verifica se o Apelido ja Está Cadastrado
     $apelidoPraticante = "SELECT * FROM TABPRA WHERE TABPRA_Apelido = '$apelido'";
@@ -22,19 +27,13 @@
 
     if($qtdApelidos < 1){
         
-        //Verifica se o email já está cadastrado
-        $email = $_POST['txtEmail'];
+        //Verifica se o email já está cadastrado        
         $emailResultado = "SELECT * FROM TABUSU WHERE TABUSU_Email = '$email'";
         $queryEmailResultado = $mysqli->query($emailResultado) or die("Falha na execução do código sql" . $mysqli->error);
         $qtdEmailResultado = $queryEmailResultado->num_rows;
 
         if($qtdEmailResultado < 1){
-            //Cria variáveis        
-            $senha          = $_POST['txtSenha'];
-            $nome           = strtoupper($_POST['txtNome']);            
-            $dataNascimento = $_POST['dataNascimento'];
-            $sexo           = $_POST['sexo'];
-
+            
             //Criptografa a senha para popular no banco de dados
             $senhaCriptografada = password_hash($senha, PASSWORD_DEFAULT);
 
@@ -47,7 +46,7 @@
             $usuario = $querySelectUsuario->fetch_assoc();
             $codigoUsuario = $usuario['TABUSU_Codigo'];
 
-            $insertPraticante = "INSERT INTO TABPRA (TABUSU_Codigo, TABPRA_Nome, TABPRA_Apelido, TABPRA_DataNascimento, TABPRA_Sexo) VALUES ($codigoUsuario, '$nome', '$apelido', '$dataNascimento', $sexo)";
+            $insertPraticante = "INSERT INTO TABPRA (TABUSU_Codigo, TABPRA_Nome, TABPRA_Apelido, TABPRA_DataNascimento, TABPRA_Sexo) VALUES ($codigoUsuario, '" . strtoupper($nome). "', '$apelido', '$dataNascimento', $sexo)";
             $queryInsertPraticante = $mysqli->query($insertPraticante) or die("Falha na execução do código sql" . $mysqli->error);
             ?>
             <script>
@@ -58,11 +57,11 @@
             <?php
         }else{
             //Redireciona para o cadastramento de praticante com Erro
-            header('Location: ./cadastro_praticante.php?error=002'); 
+            header('Location: ./cadastro_praticante.php?error=002&nome='.$nome.'&apelido='.$apelido.'&dataNascimento='.$dataNascimento.'&sexo='.$sexo.'&email='.$email); 
         }        
     } else{
         //Redireciona para o cadastramento de praticante com Erro
-        header('Location: ./cadastro_praticante.php?error=001');        
+        header('Location: ./cadastro_praticante.php?error=001&nome='.$nome.'&apelido='.$apelido.'&dataNascimento='.$dataNascimento.'&sexo='.$sexo.'&email='.$email);        
     }
 
 ?>
