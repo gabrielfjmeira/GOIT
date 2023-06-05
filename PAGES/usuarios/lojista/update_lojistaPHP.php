@@ -76,7 +76,7 @@
             </script>
             <?php                
         }else{
-            header('Location: ./update_lojista.php?error=002');  
+            header('Location: ./update_lojista.php?error=002&fantasiaIns='.$fantasia);  
         }          
                               
     }else{                                       
@@ -114,7 +114,6 @@
         }         
              
         $_SESSION['APELIDO'] = $fantasia;
-
         ?>
         <script>                
             //Redireciona para o login
