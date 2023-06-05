@@ -137,12 +137,22 @@
         <!-- //Imprime as Categorias para Filtrar a Aplicação -->
         <header class="activities-list flex">            
             <?php 
-                if(isset($_GET['perfil'])){?>
-                    <button style="cursor: pointer;" onclick="location.href='../perfil/perfil.php?perfil=<?php echo $codPerfil;?>'"><img src="../../ASSETS/backButtonDark.svg" alt="back-button"></button>
-                    <?php
-                }else{?>
-                    <button style="cursor: pointer;" onclick="location.href='../home/home.php'"><img src="../../ASSETS/backButtonDark.svg" alt="back-button"></button>
-                    <?php
+                if(isset($_GET['perfil'])){
+                    if(isset($_GET['categoriafiltrada'])){?>
+                        <button style="cursor: pointer;" onclick="location.href='../perfil/perfil.php?perfil=<?php echo $codPerfil;?>&categoriafiltrada=<?php echo $categoriafiltrada;?>'"><img src="../../ASSETS/backButtonDark.svg" alt="back-button"></button>
+                        <?php
+                    }else{?>
+                        <button style="cursor: pointer;" onclick="location.href='../perfil/perfil.php?perfil=<?php echo $codPerfil;?>'"><img src="../../ASSETS/backButtonDark.svg" alt="back-button"></button>
+                        <?php
+                    }
+                }else{
+                    if(isset($_GET['categoriafiltrada'])){?>
+                        <button style="cursor: pointer;" onclick="location.href='../home/home.php?categoriafiltrada=<?php echo $categoriafiltrada;?>'"><img src="../../ASSETS/backButtonDark.svg" alt="back-button"></button>
+                        <?php
+                    }else{?>
+                        <button style="cursor: pointer;" onclick="location.href='../home/home.php'"><img src="../../ASSETS/backButtonDark.svg" alt="back-button"></button>
+                        <?php
+                    }
                 }
             ?>
             <?php include('../templates/categorias_produtos.php');
