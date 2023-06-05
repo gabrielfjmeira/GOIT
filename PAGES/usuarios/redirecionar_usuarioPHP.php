@@ -2,6 +2,11 @@
     //Incluí Conexão
     include('../../CONNECTIONS/connection.php');
 
+    //Verifica se o Usuário está Logado
+    if ($_SESSION['LOGGED'] == True){
+        header ("Location: ../PAGES/home/home.php");
+    }
+
     //Rediriciona o Usuário para sua Página de Cadastro
     if(!isset($_POST['tipusu_Codigo'])){
         $tipo_usuario    = $_POST['tipoUsuario'];        
