@@ -59,6 +59,7 @@
                 <?php 
                     if(isset($_GET['apelido'])){?>
                         value="<?php echo $_GET['apelido'];?>"
+                        onload="verificaApelido();"
                         <?php
                     }       
                 ?> 
@@ -129,10 +130,11 @@
 
         <div class="input-wrapper">
             <label>Email*</label>
-            <input type="text" id="txtEmail" name="txtEmail" placeholder="Email" class="input" onchange="verificaEmail();"
+            <input type="text" id="txtEmail" name="txtEmail" placeholder="Email" class="input" onload="verificaEmail();" onchange="verificaEmail();"
                 <?php 
                     if(isset($_GET['email'])){?>
                         value="<?php echo $_GET['email'];?>"
+                        onload = "verificaEmail();"
                         <?php
                     }       
                 ?>  
@@ -150,11 +152,17 @@
                         <script type="text/javascript">
                             //Cria Variáveis
                             let txtApelido = document.getElementById('txtApelido');                            
-                            let errorApelido = document.getElementById('errorApelido');                                                                                                                  
+                            let errorApelido = document.getElementById('errorApelido');
+                            let txtEmail = document.getElementById('txtEmail');                            
+                            let errorEmail = document.getElementById('errorEmail');                                                                                                                  
                             
-                            txtApelido.style.border = "1px solid #DB5A5A";                            
-                            errorApelido.innerHTML = "Apelido já cadastrado!";   
-                            txtApelido.focus(); 
+                            txtApelido.style.border = "1px solid #90EE90";    
+                            errorApelido.style.color = "#90EE90";                         
+                            errorApelido.innerHTML = "Apelido disponível!";
+                            txtEmail.style.border = "1px solid #DB5A5A";      
+                            errorEmail.style.color = "#DB5A5A";                      
+                            errorEmail.innerHTML = "Email já cadastrado!";                                                                       
+                            txtEmail.focus();  
                                                                       
                         </script>
                         <?php
@@ -162,16 +170,40 @@
                     case 002:?>
                         <script type="text/javascript">
                             //Cria Variáveis
+                            let txtApelido = document.getElementById('txtApelido');                            
+                            let errorApelido = document.getElementById('errorApelido');
                             let txtEmail = document.getElementById('txtEmail');                            
                             let errorEmail = document.getElementById('errorEmail');                                                                                                                  
                             
-                            txtEmail.style.border = "1px solid #DB5A5A";                            
-                            errorEmail.innerHTML = "Email já cadastrado!";                                                                       
-                            txtEmail.focus();   
+                            txtApelido.style.border = "1px solid #DB5A5A";    
+                            errorApelido.style.color = "#DB5A5A";                         
+                            errorApelido.innerHTML = "Apelido já cadastrado!";
+                            txtEmail.style.border = "1px solid #90EE90";      
+                            errorEmail.style.color = "#90EE90";                      
+                            errorEmail.innerHTML = "Email disponível!";                                                                       
+                            txtApelido.focus();   
                             
                         </script>
                         <?php
-                        break;                            
+                        break;   
+                    case 003:?>
+                        <script type="text/javascript">
+                            //Cria Variáveis
+                            let txtApelido = document.getElementById('txtApelido');                            
+                            let errorApelido = document.getElementById('errorApelido');                                                            
+                            let txtEmail = document.getElementById('txtEmail');                            
+                            let errorEmail = document.getElementById('errorEmail');                                   
+
+                            txtApelido.style.border = "1px solid #DB5A5A";   
+                            errorApelido.style.color = "#DB5A5A";                                                     
+                            errorApelido.innerHTML = "Apelido já cadastrado!";
+                            txtEmail.style.border = "1px solid #DB5A5A";                            
+                            errorEmail.innerHTML = "Email já cadastrado!";                                                                       
+
+                            txtApelido.focus();                            
+                        </script>
+                        <?php
+                        break;                         
                                     
                 }
             }
