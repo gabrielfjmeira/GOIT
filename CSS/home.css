@@ -513,10 +513,6 @@ section.eventsAndGroups {
         margin-bottom: 8rem;
     }
 
-    nav > :nth-child(5) {
-        margin-top: auto;
-    }
-
     nav .last-button-nav {
         margin-top: auto;
     }
