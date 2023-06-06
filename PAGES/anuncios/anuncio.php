@@ -203,7 +203,7 @@
                                 ?>
 
                                 
-                                <img class="enterprise-logo" src="../perfil/arquivos/<?php echo $nomeIcon;?>" alt="logo-enterprise">
+<img class="enterprise-logo" src="../perfil/arquivos/<?php echo $nomeIcon;?>" onclick="location.href='../perfil/perfil.php?perfil=<?php echo $produto['TABUSU_Codigo']?>'" alt="logo-enterprise" style="cursor:pointer">                                                                
                                 
                                             
                                 <img class="product-image" src="<?php echo $produto['TABPRO_Imagem'];?>" 
@@ -271,7 +271,7 @@
             image.setAttribute("onclick", "location.href='"+ url + "';")
             image.setAttribute("src", imagem)          
             var value = document.querySelector(".modal-product .price-wrapper p")
-            value.innerHTML = "R$" + valor                                                                                                                   
+            value.innerHTML = "R$" + parseFloat(valor).toFixed(2)                                                                                                                 
             var icon = document.querySelector(".modal-product .product-wrapper-modal img")
             if (imgIcon != ''){
                 icon.setAttribute("src", "../perfil/arquivos/"+imgIcon)
