@@ -236,7 +236,16 @@
                         <input type="text" id="search-input" name="searchTXT" value="<?php echo $conteudoPesquisado;?>">
                         <?php 
                     }else{?>
-                        <input type="text" id="search-input" name="searchTXT" placeholder="Pesquisar por eventos">
+                        <input type="text" id="search-input" name="searchTXT" 
+                            <?php 
+                            if($userData['TIPUSU_Codigo'] == 4){?>
+                                placeholder="Pesquisar por eventos"
+                                <?php
+                            }else{?>
+                                placeholder="Pesquisar por atividades ao ar livre"
+                                <?php
+                            }?>                        
+                        >
                         <?php
                     }?>
                     <button type="Submit"> Buscar </button>
@@ -289,10 +298,7 @@
                                                 $nomeImagemProduto = substr($produto['TABPRO_Imagem'], -17);
                                             }else{
                                                 $nomeImagemProduto = substr($produto['TABPRO_Imagem'], -18);
-                                            };   
-
-
-                                                                                                        
+                                            };                                                                                                           
                                         ?>
                                         
                                         <img class="enterprise-logo" src="../perfil/arquivos/<?php echo $nomeIconLoja;?>" onclick="location.href='../perfil/perfil.php?perfil=<?php echo $produto['TABUSU_Codigo']?>'" alt="logo-enterprise" style="cursor:pointer">
