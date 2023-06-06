@@ -159,7 +159,7 @@
             <div class="input-wrapper">
                 <label id="lblHorario" for="">Horário*</label>
                 <div class="time-input-wrapper">
-                    <input type="time" id="horaAtividade" name="horaAtividade" placeholder="--:--" >
+                    <input type="time" id="horaAtividade" name="horaAtividade" placeholder="--:--" required>
                     <ion-icon name="time-outline"></ion-icon>                    
                 </div>
                 <small id="errorTime" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>
