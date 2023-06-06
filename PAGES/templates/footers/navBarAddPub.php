@@ -52,7 +52,7 @@
         <button style="display: none;"></button>
     <?php
     }?> 
-    <button onclick="location.href ='../../perfil/perfil.php';" style="cursor:pointer">     
+    <button onclick="location.href ='../../perfil/perfil.php';" style="cursor:pointer" class="last-button-nav">     
     <?php        
         $sqlUser = "SELECT * FROM TABUSU WHERE TABUSU_Codigo = " . $_SESSION['CODIGO'];            
         $querySqlUser = $mysqli->query($sqlUser) or die("Falha na execução do código sql" . $mysqli->error);
