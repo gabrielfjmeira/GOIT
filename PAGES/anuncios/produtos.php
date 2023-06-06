@@ -192,14 +192,14 @@
                 if(isset($_POST['searchTXT']) && $conteudoPesquisado <> ""){
                     if(isset($_GET['categoriafiltrada'])){
                         if(isset($_GET['perfil'])){
-                            $produtos= "SELECT * FROM TABPRO WHERE CATATV_Codigo = $categoriafiltrada  AND TABPRO_Nome LIKE '%$conteudoPesquisado%' AND TABUSU_Codigo = " . $codPerfil .  " ORDER BY TABPRO_Nome ASC;";
+                            $produtos= "SELECT * FROM TABPRO WHERE CATATV_Codigo = $categoriafiltrada  AND TABPRO_Nome LIKE '%$conteudoPesquisado%' AND TABUSU_Codigo = " . $codPerfil .  " ORDER BY RAND();";
                         }else{
-                            $produtos= "SELECT * FROM TABPRO WHERE CATATV_Codigo = $categoriafiltrada  AND TABPRO_Nome LIKE '%$conteudoPesquisado%' ORDER BY TABPRO_Nome ASC;";
+                            $produtos= "SELECT * FROM TABPRO WHERE CATATV_Codigo = $categoriafiltrada  AND TABPRO_Nome LIKE '%$conteudoPesquisado%' ORDER BY RAND();";
                         }
                         
                     }else{
                         if(isset($_GET['perfil'])){
-                            $produtos= "SELECT * FROM TABPRO WHERE TABPRO_Nome LIKE '%$conteudoPesquisado%' AND TABUSU_Codigo = " . $codPerfil . " ORDER BY TABPRO_Nome ASC;";
+                            $produtos= "SELECT * FROM TABPRO WHERE TABPRO_Nome LIKE '%$conteudoPesquisado%' AND TABUSU_Codigo = " . $codPerfil . " ORDER BY RAND();";
                         }else{
                             $produtos= "SELECT * FROM TABPRO WHERE TABPRO_Nome LIKE '%$conteudoPesquisado%' ORDER BY TABPRO_Nome ASC;";
                         }                        
@@ -207,15 +207,15 @@
                 }else{
                     if(isset($_GET['categoriafiltrada'])){
                         if(isset($_GET['perfil'])){
-                            $produtos= "SELECT * FROM TABPRO WHERE CATATV_Codigo = $categoriafiltrada AND TABUSU_Codigo = " . $codPerfil .  " ORDER BY TABPRO_Nome ASC;";
+                            $produtos= "SELECT * FROM TABPRO WHERE CATATV_Codigo = $categoriafiltrada AND TABUSU_Codigo = " . $codPerfil .  " ORDER BY RAND();";
                         }else{
-                            $produtos= "SELECT * FROM TABPRO WHERE CATATV_Codigo = $categoriafiltrada ORDER BY TABPRO_Nome ASC;";
+                            $produtos= "SELECT * FROM TABPRO WHERE CATATV_Codigo = $categoriafiltrada ORDER BY RAND();";
                         }                        
                     }else{
                         if(isset($_GET['perfil'])){
-                            $produtos= "SELECT * FROM TABPRO WHERE TABUSU_Codigo = " . $codPerfil . " ORDER BY TABPRO_Nome ASC;";                   
+                            $produtos= "SELECT * FROM TABPRO WHERE TABUSU_Codigo = " . $codPerfil . " ORDER BY RAND();";                   
                         }else{
-                            $produtos= "SELECT * FROM TABPRO ORDER BY TABPRO_Nome ASC;";                   
+                            $produtos= "SELECT * FROM TABPRO ORDER BY RAND();";                   
                         }                        
                     }                    
                 }
@@ -254,9 +254,8 @@
                                                                                                 
                                 ?>
                                 
-                                <img class="enterprise-logo" src="../perfil/arquivos/<?php echo $nomeIcon;?>" alt="logo-enterprise">
-                                
-                                            
+                                <img class="enterprise-logo" src="../perfil/arquivos/<?php echo $nomeIcon;?>" onclick="location.href='../perfil/perfil.php?perfil=<?php echo $produto['TABUSU_Codigo']?>'" alt="logo-enterprise" style="cursor:pointer">                                                                
+                                                                            
                                 <img class="product-image" src="<?php echo $produto['TABPRO_Imagem'];?>" 
                                 onclick="modalProductView('<?php echo $produto['TABPRO_Nome']; ?>','<?php echo $produto['TABPRO_Imagem']?>', <?php echo $produto['TABPRO_Valor']; ?>, '<?php echo $nomeIcon;?>', <?php echo $produto['TABUSU_Codigo']?>,'<?php echo $apelido?>', '<?php echo $produto['TABPRO_Url'] ?>');" style="cursor: pointer;"/>
                             
