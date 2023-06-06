@@ -143,14 +143,14 @@ main {
     width: 100%;
     margin-top: 2.4rem;
 
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 
     gap: 2.4rem;
   
 }
 
 .product-wrapper{
-    flex: 1;
 
     height: 100%;
 
