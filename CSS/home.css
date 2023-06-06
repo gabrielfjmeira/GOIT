@@ -319,6 +319,11 @@ section.eventsAndGroups {
     width: 100%;
 }
 
+.modal-product .img-wrapper{
+    max-width: 24rem;
+}
+
+
 .modal-product .product-wrapper-modal img {
     
     width: 8rem;
