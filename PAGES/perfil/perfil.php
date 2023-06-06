@@ -436,13 +436,13 @@
                                 $sqlNumeroInscritos = "SELECT * FROM PARATV WHERE TABATV_Codigo = " . $atividade['TABATV_Codigo'] . ";";
                                 $querySqlNumeroInscritos = $mysqli->query($sqlNumeroInscritos) or die(mysql_error());                                
                                 if($querySqlNumeroInscritos->num_rows > 0){
-                                    if($_SESSION['TIPOUSUARIO'] == 4){
+                                    if($tipousuario == 4){
                                         $numeroInscritos = $querySqlNumeroInscritos->num_rows;
                                     }else{
                                         $numeroInscritos = $querySqlNumeroInscritos->num_rows + 1;
                                     }                                    
                                 }else{
-                                    if($_SESSION['TIPOUSUARIO'] == 4){
+                                    if($tipousuario == 4){
                                         $numeroInscritos = 0;
                                     }else{
                                         $numeroInscritos = 1;

@@ -74,7 +74,7 @@
                 <h3>Nome do Produto</h3>
             </div>
             
-            <img class="img-wrapper" src="../../ASSETS/paisagem.png" alt="post-image" style="cursor:pointer"/>
+            <img class="img-wrapper" src="../../ASSETS/paisagem.png" alt="post-image" style="cursor:pointer;"/>
             
             <div class="price-wrapper wrapper" style="margin-top: 1.5rem">
                 <h2>Valor</h2>
