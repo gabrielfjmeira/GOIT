@@ -10,6 +10,7 @@
     $cadastur       = $_POST['txtCadastur'];
     $email          = $_POST['txtEmail'];
     $senha          = $_POST['txtSenha'];
+    $instagram      = $_POST['txtInstagram']; 
 
     //Verifica se o Apelido ja Está Cadastrado
     $apelidoPraticante = "SELECT * FROM TABPRA WHERE TABPRA_Apelido = '$apelido'";
@@ -42,25 +43,25 @@
 
         if($qtdApelidos >= 1 && $qtdCadasturResultado >= 1 && $qtdEmailResultado >= 1){//Apelido - Cadastur - Email já cadastrados
             //Redireciona para o cadastramento de instrutor com Erro
-            header('Location: ./cadastro_instrutor.php?error=007&nome='.$nome.'&apelido='.$apelido.'&dataNascimento='.$dataNascimento.'&sexo='.$sexo.'&cadastur='.$cadastur.'&email='.$email.'&categoria='.$catInstrutor);
+            header('Location: ./cadastro_instrutor.php?error=007&nome='.$nome.'&apelido='.$apelido.'&dataNascimento='.$dataNascimento.'&sexo='.$sexo.'&cadastur='.$cadastur.'&email='.$email.'&categoria='.$catInstrutor.'&instagram='.$instagram);
         }else if($qtdApelidos >= 1 && $qtdCadasturResultado >= 1 && $qtdEmailResultado < 1){//Apelido - Cadastur já cadastrados
             //Redireciona para o cadastramento de instrutor com Erro
-            header('Location: ./cadastro_instrutor.php?error=006&nome='.$nome.'&apelido='.$apelido.'&dataNascimento='.$dataNascimento.'&sexo='.$sexo.'&cadastur='.$cadastur.'&email='.$email.'&categoria='.$catInstrutor);
+            header('Location: ./cadastro_instrutor.php?error=006&nome='.$nome.'&apelido='.$apelido.'&dataNascimento='.$dataNascimento.'&sexo='.$sexo.'&cadastur='.$cadastur.'&email='.$email.'&categoria='.$catInstrutor.'&instagram='.$instagram);
         }else if($qtdApelidos >= 1 && $qtdCadasturResultado < 1 && $qtdEmailResultado >= 1){//Apelido - Email já cadastrados
             //Redireciona para o cadastramento de instrutor com Erro
-            header('Location: ./cadastro_instrutor.php?error=005&nome='.$nome.'&apelido='.$apelido.'&dataNascimento='.$dataNascimento.'&sexo='.$sexo.'&cadastur='.$cadastur.'&email='.$email.'&categoria='.$catInstrutor);
+            header('Location: ./cadastro_instrutor.php?error=005&nome='.$nome.'&apelido='.$apelido.'&dataNascimento='.$dataNascimento.'&sexo='.$sexo.'&cadastur='.$cadastur.'&email='.$email.'&categoria='.$catInstrutor.'&instagram='.$instagram);
         }else if($qtdApelidos < 1 && $qtdCadasturResultado >= 1 && $qtdEmailResultado >= 1){//Cadastur - Email já cadastrados
             //Redireciona para o cadastramento de instrutor com Erro
-            header('Location: ./cadastro_instrutor.php?error=004&nome='.$nome.'&apelido='.$apelido.'&dataNascimento='.$dataNascimento.'&sexo='.$sexo.'&cadastur='.$cadastur.'&email='.$email.'&categoria='.$catInstrutor);
+            header('Location: ./cadastro_instrutor.php?error=004&nome='.$nome.'&apelido='.$apelido.'&dataNascimento='.$dataNascimento.'&sexo='.$sexo.'&cadastur='.$cadastur.'&email='.$email.'&categoria='.$catInstrutor.'&instagram='.$instagram);
         }else if($qtdApelidos < 1 && $qtdCadasturResultado >= 1 && $qtdEmailResultado < 1){//Cadastur já cadastrado
             //Redireciona para o cadastramento de instrutor com Erro
-            header('Location: ./cadastro_instrutor.php?error=003&nome='.$nome.'&apelido='.$apelido.'&dataNascimento='.$dataNascimento.'&sexo='.$sexo.'&cadastur='.$cadastur.'&email='.$email.'&categoria='.$catInstrutor);
+            header('Location: ./cadastro_instrutor.php?error=003&nome='.$nome.'&apelido='.$apelido.'&dataNascimento='.$dataNascimento.'&sexo='.$sexo.'&cadastur='.$cadastur.'&email='.$email.'&categoria='.$catInstrutor.'&instagram='.$instagram);
         }else if($qtdApelidos < 1 && $qtdCadasturResultado < 1 && $qtdEmailResultado >= 1){//Email já cadastrado
             //Redireciona para o cadastramento de instrutor com Erro
-            header('Location: ./cadastro_instrutor.php?error=002&nome='.$nome.'&apelido='.$apelido.'&dataNascimento='.$dataNascimento.'&sexo='.$sexo.'&cadastur='.$cadastur.'&email='.$email.'&categoria='.$catInstrutor);
+            header('Location: ./cadastro_instrutor.php?error=002&nome='.$nome.'&apelido='.$apelido.'&dataNascimento='.$dataNascimento.'&sexo='.$sexo.'&cadastur='.$cadastur.'&email='.$email.'&categoria='.$catInstrutor.'&instagram='.$instagram);
         }else if($qtdApelidos >= 1 && $qtdCadasturResultado < 1 && $qtdEmailResultado < 1){//Apelido já cadastrado
             //Redireciona para o cadastramento de instrutor com Erro
-            header('Location: ./cadastro_instrutor.php?error=001&nome='.$nome.'&apelido='.$apelido.'&dataNascimento='.$dataNascimento.'&sexo='.$sexo.'&cadastur='.$cadastur.'&email='.$email.'&categoria='.$catInstrutor);
+            header('Location: ./cadastro_instrutor.php?error=001&nome='.$nome.'&apelido='.$apelido.'&dataNascimento='.$dataNascimento.'&sexo='.$sexo.'&cadastur='.$cadastur.'&email='.$email.'&categoria='.$catInstrutor.'&instagram='.$instagram);
         }else{
             //Criptografa a senha para popular no banco de dados
             $senhaCriptografada = password_hash($senha, PASSWORD_DEFAULT);
@@ -74,7 +75,7 @@
             $usuario = $querySelectUsuario->fetch_assoc();
             $codigoUsuario = $usuario['TABUSU_Codigo'];
 
-            $insertInstrutor = "INSERT INTO TABINS (TABUSU_Codigo, TABINS_Nome, TABINS_Apelido, TABINS_DataNascimento, TABINS_Sexo, TABINS_Cadastur, CATATV_Codigo, TABINS_Verificado, TABINS_Negado) VALUES ($codigoUsuario, '" . strtoupper($nome) . "', '$apelido', '$dataNascimento', $sexo, '$cadastur', $catInstrutor, 0, 0)";
+            $insertInstrutor = "INSERT INTO TABINS (TABUSU_Codigo, TABINS_Nome, TABINS_Apelido, TABINS_DataNascimento, TABINS_Sexo, TABINS_Cadastur, CATATV_Codigo, TABINS_Verificado, TABINS_Negado, TABINS_Instagram) VALUES ($codigoUsuario, '" . strtoupper($nome) . "', '$apelido', '$dataNascimento', $sexo, '$cadastur', $catInstrutor, 0, 0, '$instagram')";
             $queryInsertInstrutor = $mysqli->query($insertInstrutor) or die("Falha na execução do código sql" . $mysqli->error);
             ?>
             <script>

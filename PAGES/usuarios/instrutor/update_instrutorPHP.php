@@ -12,6 +12,7 @@
     $apelido        = $_POST['txtApelido'];
     $dataNascimento = $_POST['dataNascimento'];
     $categoria      = $_POST['catInstrutor'];
+    $instagram      = $_POST['txtInstagram'];
 
     $apelidoAtual = "SELECT * FROM TABINS WHERE TABUSU_Codigo = " . $_SESSION['CODIGO'];
     $queryApelidoAtual = $mysqli->query($apelidoAtual) or die("Falha na execução do código sql" . $mysqli->error);
@@ -46,7 +47,7 @@
         
                 if($arquivo['error']){
                     //Update no banco de dados                                        
-                    $updateInstrutor = "UPDATE TABINS SET TABINS_Nome='$nome', TABINS_Apelido='$apelido', TABINS_DataNascimento='$dataNascimento', CATATV_Codigo = $categoria WHERE TABUSU_Codigo = $codigo";        
+                    $updateInstrutor = "UPDATE TABINS SET TABINS_Nome='$nome', TABINS_Apelido='$apelido', TABINS_DataNascimento='$dataNascimento', CATATV_Codigo = $categoria, TABINS_Instagram='$instagram' WHERE TABUSU_Codigo = $codigo";        
                     $queryUpdateInstrutor = $mysqli->query($updateInstrutor) or die("Falha na execução do código sql" . $mysqli->error);                                        
                 }                   
         
@@ -60,12 +61,12 @@
                     //Update no banco de dados                    
                     $updateUsr = "UPDATE TABUSU SET TABUSU_Icon='$path' WHERE TABUSU_Codigo = $codigo"; 
                     $queryUpdateUsr = $mysqli->query($updateUsr) or die("Falha na execução do código sql" . $mysqli->error);
-                    $updateInstrutor = "UPDATE TABINS SET TABINS_Nome='$nome', TABINS_Apelido='$apelido', TABINS_DataNascimento='$dataNascimento', CATATV_Codigo = $categoria WHERE TABUSU_Codigo = $codigo";        
+                    $updateInstrutor = "UPDATE TABINS SET TABINS_Nome='$nome', TABINS_Apelido='$apelido', TABINS_DataNascimento='$dataNascimento', CATATV_Codigo = $categoria, TABINS_Instagram='$instagram' WHERE TABUSU_Codigo = $codigo";        
                     $queryUpdateInstrutor = $mysqli->query($updateInstrutor) or die("Falha na execução do código sql" . $mysqli->error);                        
                 }
             }else{                    
                 //Update no banco de dados                
-                $updateInstrutor = "UPDATE TABINS SET TABINS_Nome='$nome', TABINS_Apelido='$apelido', TABINS_DataNascimento='$dataNascimento', CATATV_Codigo = $categoria WHERE TABUSU_Codigo = $codigo";        
+                $updateInstrutor = "UPDATE TABINS SET TABINS_Nome='$nome', TABINS_Apelido='$apelido', TABINS_DataNascimento='$dataNascimento', CATATV_Codigo = $categoria, TABINS_Instagram='$instagram' WHERE TABUSU_Codigo = $codigo";        
                 $queryUpdateInstrutor = $mysqli->query($updateInstrutor) or die("Falha na execução do código sql" . $mysqli->error);                 
             }     
 
@@ -80,7 +81,7 @@
             <?php
                                
         } else{        
-            header('Location: ./update_instrutor.php?error=001&nomeIns='.$nome.'&apelidoIns='.$apelido.'&dataNascimentoIns='.$dataNascimento.'&categoriaIns='.$categoria);
+            header('Location: ./update_instrutor.php?error=001&nomeIns='.$nome.'&apelidoIns='.$apelido.'&dataNascimentoIns='.$dataNascimento.'&categoriaIns='.$categoria.'&instagramIns='.$instagram);
         }
     }else{        
         if (isset($_FILES['imgPerfil']) && count($_FILES) > 0){        
@@ -92,7 +93,7 @@
     
             if($arquivo['error']){
                 //Update no banco de dados                       
-                $updateInstrutor = "UPDATE TABINS SET TABINS_Nome='$nome', TABINS_DataNascimento='$dataNascimento', CATATV_Codigo = $categoria WHERE TABUSU_Codigo = $codigo";        
+                $updateInstrutor = "UPDATE TABINS SET TABINS_Nome='$nome', TABINS_DataNascimento='$dataNascimento', CATATV_Codigo = $categoria, TABINS_Instagram='$instagram' WHERE TABUSU_Codigo = $codigo";        
                 $queryUpdateInstrutor = $mysqli->query($updateInstrutor) or die("Falha na execução do código sql" . $mysqli->error);                  
             }                   
     
@@ -106,12 +107,12 @@
                 //Update no banco de dados   
                 $updateUsr = "UPDATE TABUSU SET TABUSU_Icon='$path' WHERE TABUSU_Codigo = $codigo"; 
                 $queryUpdateUsr = $mysqli->query($updateUsr) or die("Falha na execução do código sql" . $mysqli->error);                   
-                $updateInstrutor = "UPDATE TABINS SET TABINS_Nome='$nome', TABINS_DataNascimento='$dataNascimento', CATATV_Codigo = $categoria WHERE TABUSU_Codigo = $codigo";        
+                $updateInstrutor = "UPDATE TABINS SET TABINS_Nome='$nome', TABINS_DataNascimento='$dataNascimento', CATATV_Codigo, TABINS_Instagram='$instagram' = $categoria WHERE TABUSU_Codigo = $codigo";        
                 $queryUpdateInstrutor = $mysqli->query($updateInstrutor) or die("Falha na execução do código sql" . $mysqli->error);                 
             }
         }else{                    
             //Update no banco de dados                      
-            $updateInstrutor = "UPDATE TABINS SET TABINS_Nome='$nome', TABINS_DataNascimento='$dataNascimento', CATATV_Codigo = $categoria WHERE TABUSU_Codigo = $codigo";        
+            $updateInstrutor = "UPDATE TABINS SET TABINS_Nome='$nome', TABINS_DataNascimento='$dataNascimento', CATATV_Codigo = $categoria, TABINS_Instagram='$instagram' WHERE TABUSU_Codigo = $codigo";        
             $queryUpdateInstrutor = $mysqli->query($updateInstrutor) or die("Falha na execução do código sql" . $mysqli->error);             
         }            
         

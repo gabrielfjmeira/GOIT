@@ -8,7 +8,8 @@
     $dataNascimento = $_POST['dataNascimento'];
     $sexo           = $_POST['sexo'];
     $email          = $_POST['txtEmail'];
-    $senha          = $_POST['txtSenha'];           
+    $senha          = $_POST['txtSenha'];     
+         
     
     //Verifica se o Apelido ja Está Cadastrado
     $apelidoPraticante = "SELECT * FROM TABPRA WHERE TABPRA_Apelido = '$apelido'";

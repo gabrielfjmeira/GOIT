@@ -19,6 +19,7 @@
             $instrutor_data = mysqli_fetch_assoc($querySqlInstrutor);
             $nome = $instrutor_data['TABINS_Nome'];
             $apelido = $instrutor_data['TABINS_Apelido'];
+            $instagram = $instrutor_data['TABINS_Instagram'];
             $dataNascimento = $instrutor_data['TABINS_DataNascimento'];
             $categoria = $instrutor_data['CATATV_Codigo'];
         }else{
@@ -98,7 +99,22 @@
                 pattern="^[A-z]\w{3,29}$" 
                 title="Apelido deve começar com uma letra e não pode conter símbolos, deve possuir no mínimo 4 caracteres e no máximo 30 caracteres!" required/>
                 <small id="errorApelido" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>
-            </div>         
+            </div>  
+            
+            <div class="input-wrapper">
+                <label>Instagram*</label>
+                <input type="text" id="txtInstagram" name="txtInstagram" placeholder="@Instagram" class="title-input-wrapper"
+                    <?php 
+                        if(isset($_GET['instagramIns'])){?>
+                            value="<?php echo $_GET['instagramIns'];?>"
+                            <?php
+                        }else{?>
+                            value="<?php echo $instagram;?>"
+                            <?php
+                        }                    
+                    ?>
+                required/>           
+            </div>
 
             <div class="input-wrapper">
                 <label>Data de Nascimento*</label>

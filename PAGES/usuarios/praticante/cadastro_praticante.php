@@ -140,7 +140,7 @@
             title="Digite um email válido! Exemplo: email@email.com" required/> 
             <small id="errorEmail" style="color: #DB5A5A; margin-left: 0.6rem; margin-top: 0.4rem;"></small>
         </div>
-         
+                        
         <div class="input-wrapper">
             <label>Senha*</label>
             <input type="password" id="txtSenha" name="txtSenha" placeholder="Senha" class="input" 

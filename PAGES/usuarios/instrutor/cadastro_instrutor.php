@@ -67,6 +67,18 @@
         </div>         
 
         <div class="input-wrapper">
+            <label>Instagram*</label>
+            <input type="text" id="txtInstagram" name="txtInstagram" placeholder="@Instagram" class="input"
+                <?php 
+                    if(isset($_GET['instagram'])){?>
+                        value="<?php echo $_GET['instagram'];?>"
+                        <?php
+                    }       
+                ?> 
+            required/>           
+        </div>
+
+        <div class="input-wrapper">
             <label>Data de Nascimento*</label>
             <input type="date" id="dataNascimento" name="dataNascimento" placeholder="dd/mm/aaaa" class="input" 
                 <?php 
