@@ -23,7 +23,15 @@
     $atividade = "SELECT * FROM TABATV WHERE TABUSU_Codigo = $codigo";
     $queryAtividade = $mysqli->query($atividade) or die("Falha na execução do código sql" . $mysqli->error);
 
-    if($queryAtividade->num_rows > 0){                                      
+    if($queryAtividade->num_rows > 0){
+        while($atvData = mysqli_fetch_array($queryAtividade)){            
+            $selectParticipacoesOutrosUsers = "SELECT * FROM PARATV WHERE TABATV_Codigo = " . $atvData['TABATV_Codigo'] . ";";
+            $queryParticipacoesOutrosUsers = $mysqli->query($selectParticipacoesOutrosUsers) or die("Falha na execução do código sql" . $mysqli->error);
+            if($queryParticipacoesOutrosUsers->num_rows > 0){
+                $deleteParticipacoesOutrosUsers = "DELETE FROM PARATV WHERE TABATV_Codigo = " . $atvData['TABATV_Codigo'] . ";";
+                $queryDeleteParticipacoesOutrosUsers = $mysqli->query($deleteParticipacoesOutrosUsers) or die("Falha na execução do código sql" . $mysqli->error);
+            }
+        }                                            
         $deleteAtividade = "DELETE FROM TABATV WHERE TABUSU_Codigo = $codigo";
         $queryDeleteAtividade = $mysqli->query($deleteAtividade) or die("Falha na execução do código sql" . $mysqli->error);           
     }
