@@ -147,10 +147,10 @@
                     }
                 }else{
                     if(isset($_GET['categoriafiltrada'])){?>
-                        <button style="cursor: pointer;" onclick="location.href='../home/home.php?categoriafiltrada=<?php echo $categoriafiltrada;?>'"><img src="../../ASSETS/backButtonDark.svg" alt="back-button"></button>
+                        <button style="cursor: pointer;" onclick="location.href='../home/home.php?categoriafiltrada=<?php echo $categoriafiltrada;?>'"><img src="../../ASSETS/backButtonDark.svg" alt="back-button" style ="width: 1rem; height: 1rem;"></button>
                         <?php
                     }else{?>
-                        <button style="cursor: pointer;" onclick="location.href='../home/home.php'"><img src="../../ASSETS/backButtonDark.svg" alt="back-button"></button>
+                        <button style="cursor: pointer;" onclick="location.href='../home/home.php'"><img src="../../ASSETS/backButtonDark.svg" alt="back-button" style ="width: 1.6rem;"></button>
                         <?php
                     }
                 }
