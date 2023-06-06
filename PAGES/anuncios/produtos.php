@@ -139,10 +139,10 @@
             <?php 
                 if(isset($_GET['perfil'])){
                     if(isset($_GET['categoriafiltrada'])){?>
-                        <button style="cursor: pointer;" onclick="location.href='../perfil/perfil.php?perfil=<?php echo $codPerfil;?>&categoriafiltrada=<?php echo $categoriafiltrada;?>'"><img src="../../ASSETS/backButtonDark.svg" alt="back-button"></button>
+                        <button style="cursor: pointer;" onclick="location.href='../perfil/perfil.php?perfil=<?php echo $codPerfil;?>&categoriafiltrada=<?php echo $categoriafiltrada;?>'"><img src="../../ASSETS/backButtonDark.svg" alt="back-button" style="width: 1.6rem;"></button>
                         <?php
                     }else{?>
-                        <button style="cursor: pointer;" onclick="location.href='../perfil/perfil.php?perfil=<?php echo $codPerfil;?>'"><img src="../../ASSETS/backButtonDark.svg" alt="back-button"></button>
+                        <button style="cursor: pointer;" onclick="location.href='../perfil/perfil.php?perfil=<?php echo $codPerfil;?>'"><img src="../../ASSETS/backButtonDark.svg" alt="back-button" style="width: 1.6rem;"></button>
                         <?php
                     }
                 }else{
