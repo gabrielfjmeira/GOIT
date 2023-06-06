@@ -517,6 +517,10 @@ section.eventsAndGroups {
         margin-top: auto;
     }
 
+    nav .last-button-nav {
+        margin-top: auto;
+    }
+
     nav button p {
         display: block;
     }
