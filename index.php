@@ -138,10 +138,10 @@
                 <input type="checkbox" onclick="mostrarSenhaLogin();"><br><br>
             </p> -->
             
-            <button type="submit"> Entrar </button>
+            <button id="btnEntrar" type="submit"> Entrar </button>
             <div class="wrapper-cadastrar-login">
                 <p> Não possui login ainda?</p>
-                <a href="./PAGES/usuarios/selecao_tipoUsuario.php">Cadastre-se aqui</a>
+                <a id="linkCadastro" href="./PAGES/usuarios/selecao_tipoUsuario.php">Cadastre-se aqui</a>
             </div>                      
         
         </form>

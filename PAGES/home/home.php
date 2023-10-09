@@ -189,7 +189,7 @@
 
                 <div class="products">
                     <?php
-                    if ($queryProdutos->num_rows > 0){
+                    if ($queryProdutos->num_rows > 0){                        
                         while($produto = mysqli_fetch_array($queryProdutos)){?>
                             <div class="product-wrapper">                                            
                                 <?php                                
@@ -282,8 +282,9 @@
 
                 <?php
                 if ($queryAtividades->num_rows > 0){
+                    $i = 1;
                     while($atividade = mysqli_fetch_array($queryAtividades)){?>
-                        <div class="event">
+                        <div id="atv<?php echo $i;?>" class="event">
                             <p class="date-event"><?php echo $atividade['TABATV_Data'];?></p>
                             <div class="title-post">                                
                                 <h5><?php echo $atividade['TABATV_Titulo'];?></h5>
@@ -380,7 +381,7 @@
                                     $sqlCriador = "SELECT * FROM TABATV WHERE TABATV_Codigo = ". $atividade['TABATV_Codigo']." AND TABUSU_Codigo = ". $_SESSION['CODIGO']. ";";
                                     $querySqlCriador = $mysqli->query($sqlCriador) or die(mysql_error());
                                     if($querySqlCriador->num_rows == 1){?>
-                                        <a onclick="alert('Como criador, para se desinscrever, apague a atividade!');">
+                                        <a id="linkInscricaoAtv<?php echo $i;?>" onclick="alert('Como criador, para se desinscrever, apague a atividade!');">
                                             Inscrito
                                         </a>
                                     <?php
@@ -389,18 +390,18 @@
                                         $querySqlInscrito = $mysqli->query($sqlInscrito) or die(mysql_error());
                                         if($querySqlInscrito->num_rows == 1){
                                         ?>
-                                            <a onclick="cancelarInscricao('<?php echo $atividade['TABATV_Titulo']?>', <?php echo $atividade['TABATV_Codigo']?>);">
+                                            <a id="linkInscricaoAtv<?php echo $i;?>" onclick="cancelarInscricao('<?php echo $atividade['TABATV_Titulo']?>', <?php echo $atividade['TABATV_Codigo']?>);">
                                                 Cancelar Inscrição
                                             </a>
                                         <?php
                                         }else{
                                             if($numeroInscritos == $maximoInscritos){?>
-                                                <a onclick="alert('Número máximo de inscritos atingido nesta atividade ao ar livre!')">
+                                                <a id="linkInscricaoAtv<?php echo $i;?>" onclick="alert('Número máximo de inscritos atingido nesta atividade ao ar livre!')">
                                                     Número máximo de inscritos atingido!
                                                 </a>
                                             <?php
                                             }else{?>
-                                                <a href="participar_atividadePHP.php?atividade=<?php echo $atividade['TABATV_Codigo']?>">
+                                                <a id="linkInscricaoAtv<?php echo $i;?>" href="participar_atividadePHP.php?atividade=<?php echo $atividade['TABATV_Codigo']?>">
                                                     Inscrever-Se
                                                 </a>
                                             <?php
@@ -424,7 +425,9 @@
                             <?php
                             }
                             ?>                                          
-                        </div><?php               
+                        </div><?php 
+                        
+                        $i = $i + 1;
                     }                       
                 }else{ ?>
             

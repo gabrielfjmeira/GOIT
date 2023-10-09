@@ -61,7 +61,7 @@
                 ?>                                                           
             </select>
         </div>
-        <button type="submit">Próximo</button>        
+        <button id="btnProximo" type="submit">Próximo</button>        
 
     </form>           
 </body>
