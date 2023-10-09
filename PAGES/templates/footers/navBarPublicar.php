@@ -36,7 +36,7 @@
         <button style="display: none;"></button>
     <?php
     }?>                 
-    <button <?php 
+    <button id="btnPublicacao" <?php 
         if($_SESSION['TIPOUSUARIO'] == 4){?>
             onclick="location.href = '../publicar/publicar.php'"
         <?php

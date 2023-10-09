@@ -161,7 +161,7 @@
             <input type="checkbox" onclick="mostrarSenha();">
         </div>
 
-        <button type="submit"> Cadastrar </button>
+        <button id="btnCadastrar" type="submit"> Cadastrar </button>
 
         <div class="wrapper-cadastrar-login">
             <p>Já possui cadastro?</p>

@@ -209,7 +209,7 @@
             <input type="checkbox" onclick="mostrarSenha();">
         </p>
 
-        <button type="submit">Cadastrar</button>
+        <button id="btnCadastrar" type="submit">Cadastrar</button>
 
         <div class="wrapper-cadastrar-login">
             <p>Já possuí cadastro?</p> 

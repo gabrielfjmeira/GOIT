@@ -36,7 +36,7 @@
         <button style="display: none;"></button>
     <?php
     }?>                 
-    <button onclick="limparFormulario()" style="cursor:pointer">
+    <button id="btnPublicacao" onclick="limparFormulario()" style="cursor:pointer">
         <img src="<?php echo $assets_path ?>/buttonNewPubliFilled.svg" alt="">
         <p>Limpar Formulário?</p>            
     </button>
